@@ -7,7 +7,13 @@
     "test:ui": "playwright test --project=ui-chromium",
     "test:api": "playwright test --project=api",
     "typecheck": "tsc --noEmit",
-    "report": "playwright show-report"
+    "report": "playwright show-report",
+    "lint": "eslint . --max-warnings 0",
+    "test:agent": "playwright test --project=agent-unit",
+    "test:agent-integration": "playwright test --project=agent-integration",
+    "agent": "tsx src/agent/cli.ts",
+    "eval": "tsx eval/run.ts",
+    "eval:live": "tsx eval/live.ts"
   },
   "repository": {
     "type": "git",
@@ -20,12 +26,21 @@
   },
   "homepage": "https://github.com/frankvutech/frankvu-ai-driven-playwright-framework#readme",
   "devDependencies": {
+    "@eslint/js": "^9.39.5",
     "@playwright/test": "^1.64.1",
     "@types/node": "^26.6.5",
-    "typescript": "^7.0.2"
+    "eslint": "^9.39.5",
+    "eslint-plugin-playwright": "^2.12.1",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.71.2"
   },
   "private": true,
   "engines": {
     "node": ">=20"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.135.0",
+    "zod": "^4.6.7"
   }
 }

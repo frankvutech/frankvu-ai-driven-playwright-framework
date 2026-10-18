@@ -1,0 +1,42 @@
+name: Live model evaluation
+
+# Calls a paid model API. Runs only when someone starts it by hand, in an
+# environment that holds the provider credential.
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: Model id
+        default: claude-opus-5-5
+      effort:
+        description: Effort level (low | medium | high | xhigh | max)
+        default: high
+
+permissions:
+  contents: read
+
+jobs:
+  live-eval:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: llm-eval
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Live evaluation (planning, generation, static validation; no execution)
+        run: npm run eval:live
+        env:
+          RELYNX_LIVE_EVAL: '1'
+          RELYNX_MODEL: ${{ inputs.model }}
+          RELYNX_EFFORT: ${{ inputs.effort }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: live-eval
+          path: eval-results/live.json
+          retention-days: 30

@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "generationArea": "generated",
+  "runsArea": ".relynx/runs",
+  "maxScenariosPerRun": 10,
+  "approvedTargets": [
+    {
+      "name": "saucedemo-public-demo",
+      "uiBaseUrl": "https://www.saucedemo.com",
+      "kind": "test"
+    }
+  ],
+  "blockedHostPatterns": ["prod", "production", "live"],
+  "execution": {
+    "maxDurationMs": 300000,
+    "testTimeoutMs": 30000,
+    "retries": 0,
+    "workers": 2
+  },
+  "envPassthrough": ["PATH", "HOME", "TMPDIR", "LANG", "CI", "PLAYWRIGHT_BROWSERS_PATH", "UI_BASE_URL", "SAUCE_PASSWORD"]
+}

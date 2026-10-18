@@ -27,6 +27,7 @@ UI automation uses the **Page Object Model**. Playwright Test fixtures provide t
 | Page Object Model | `src/pages/LoginPage.ts`, `InventoryPage.ts`, `CartPage.ts`, `CheckoutInformationPage.ts`, `CheckoutOverviewPage.ts`, `CheckoutCompletePage.ts` | Each page has its own URL and behavior. Page objects expose locators plus intention-revealing actions such as `login()`, `addToCart()`, `sortBy()`, `checkout()`, `submit()` and `finish()`. |
 | Component Object | `src/components/HeaderComponent.ts` | The cart link, cart badge and burger menu (logout) appear on every signed-in page. `InventoryPage` and `CartPage` compose it (`page.header`) instead of inheriting it. |
 | Playwright fixtures | `src/fixtures/test.ts` | Typed, **test-scoped** fixtures build page objects from each test's own `page`. This removes `new XPage(page)` boilerplate, adds no shared state, and fixtures are lazy, so unused pages cost nothing. |
+| Agent fixtures (Phase 2) | `src/fixtures/agent.ts` | Extends the fixtures above with an automatic network guard for generated tests. Same page objects, no parallel DI. |
 | Setup project + storage state | `tests/setup/auth.setup.ts`, `src/config/auth.ts`, `playwright.config.ts` | The site keeps the session in a cookie. The suite signs in once and every UI test starts from a fresh context loaded from that file. Login specs opt out with `SIGNED_OUT`. |
 
 ### Introduced deliberately: none of these
@@ -34,7 +35,7 @@ UI automation uses the **Page Object Model**. Playwright Test fixtures provide t
 - **BasePage**: none. The only behavior shared between pages is the header, and composition handles it.
 - **Factory / Strategy / Builder**: none. Object creation does not vary at runtime, and there is one data-provisioning approach. Test data is two small constant objects in `src/data/`; a builder would add nothing.
 - **API client**: none. Four API tests call `request.get/post` with a relative path, and `baseURL` comes from the `api` project. Add a client only when several specs share auth, headers or request construction.
-- **Adapter / AI-agent integration**: none in Phase 1.
+- **Adapter / AI-agent integration**: none in Phase 1. Phase 2 adds the AI Test Agent behind an LLM-provider adapter and an execution adapter over the Playwright CLI. See [PHASE2_AGENT.md](PHASE2_AGENT.md).
 - **Screenplay, custom runner, custom assertions, DI container, service locator, singletons**: none.
 
 ## Review gate checklist
@@ -45,7 +46,7 @@ UI automation uses the **Page Object Model**. Playwright Test fixtures provide t
 - [x] **Unnecessary abstractions removed.** During review, unused members were deleted: the header's `resetAppStateLink`, the cart's `continueShoppingButton` and `CartPage.goto()`, and an `InventoryPage.prices()` parser. The sort tests now assert expected values with auto-retrying `toHaveText`.
 - [x] **Assertions visible in tests.** Page objects contain no `expect`. The one assertion outside a spec is in `auth.setup.ts`: it confirms the login worked before saving state.
 - [x] **No cross-test leakage.** Fixtures are test-scoped. Each test gets a new browser context, so cookies and localStorage (where the cart lives) never carry over. The only shared artefact is the read-only storage-state file written by `setup`. Verified with `--repeat-each=3 --workers=6`: 46/46 passed.
-- [x] **Environment values isolated.** Only `src/config/env.ts` and `src/data/users.ts` read `process.env`. Page objects navigate with relative paths.
+- [x] **Environment values isolated.** In Phase 1, only `src/config/env.ts` and `src/data/users.ts` read `process.env`. Phase 2 agent configuration lives in `src/agent/config/llm.ts`. Page objects navigate with relative paths.
 - [x] **No fixed waits.** All waiting comes from locator auto-waiting and web-first assertions.
 
 ## AI-agent compatibility (future)

@@ -1,0 +1,11 @@
+{
+  "id": "REQ-101",
+  "title": "Sign in to the storefront",
+  "description": "Registered shoppers sign in with a username and password to reach the product catalogue. Locked accounts must not get in.",
+  "acceptanceCriteria": [
+    { "id": "AC-1", "text": "Given a valid standard account, when the shopper signs in, then the product list titled \"Products\" is shown." },
+    { "id": "AC-2", "text": "Given a locked-out account, when the shopper signs in, then the error \"Epic sadface: Sorry, this user has been locked out.\" is shown and the shopper stays on the login page." },
+    { "id": "AC-3", "text": "Given a wrong password, when the shopper signs in, then the error \"Epic sadface: Username and password do not match any user in this service\" is shown." }
+  ],
+  "source": "examples/requirements (synthetic example for the saucedemo.com demo target)"
+}

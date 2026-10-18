@@ -1,0 +1,85 @@
+{
+  "provenance": "Reports were produced by real Playwright runs against www.saucedemo.com on 2026-10-18 using deliberately constructed tests (see eval/README.md). Labels are the author's ground truth based on how each failure was constructed. Local paths are replaced with <repo>/<home>.",
+  "cases": [
+    {
+      "id": "F-01",
+      "report": "playwright-report.capture.json",
+      "title": "assertion-not-from-requirement",
+      "expectedStatus": "failed",
+      "expectedScenarioId": "CAP-1-SC-01",
+      "label": "assertion_logic",
+      "acceptanceCriteria": "Given a valid standard account, when the shopper signs in, then the product list titled \"Products\" is shown.",
+      "rationale": "The test expects \"Our Products\", which the criterion never states."
+    },
+    {
+      "id": "F-02",
+      "report": "playwright-report.capture.json",
+      "title": "product-defect-sort",
+      "expectedStatus": "failed",
+      "expectedScenarioId": "CAP-1-SC-02",
+      "label": "product_behavior",
+      "acceptanceCriteria": "Sorting by name Z to A lists \"Test.allTheThings() T-Shirt (Red)\" first.",
+      "rationale": "problem_user is an intentionally broken account on the demo site; its sorting does not work."
+    },
+    {
+      "id": "F-03",
+      "report": "playwright-report.capture.json",
+      "title": "locator-missing",
+      "expectedStatus": "failed",
+      "expectedScenarioId": "CAP-1-SC-03",
+      "label": "locator",
+      "acceptanceCriteria": "The product list is shown after sign-in.",
+      "rationale": "The test targets a data-test id that does not exist on the page."
+    },
+    {
+      "id": "F-04",
+      "report": "playwright-report.capture.json",
+      "title": "environment-unreachable",
+      "expectedStatus": "failed",
+      "expectedScenarioId": "CAP-1-SC-04",
+      "label": "environment",
+      "acceptanceCriteria": "",
+      "rationale": "Navigation to an unreachable address."
+    },
+    {
+      "id": "F-05",
+      "report": "playwright-report.capture.json",
+      "title": "slow-login",
+      "expectedStatus": "failed",
+      "expectedScenarioId": "CAP-1-SC-05",
+      "label": "timeout_sync",
+      "acceptanceCriteria": "Given a valid account, when the shopper signs in, then the product list titled \"Products\" is shown.",
+      "rationale": "performance_glitch_user delays sign-in by several seconds; the 1s assertion timeout is too short. The element exists later."
+    },
+    {
+      "id": "F-06",
+      "report": "playwright-report.setup-failure.json",
+      "title": "sign in as standard user",
+      "expectedStatus": "failed",
+      "expectedScenarioId": null,
+      "label": "test_data_setup",
+      "acceptanceCriteria": "",
+      "rationale": "The setup project ran with a wrong password, so authentication state could not be created."
+    },
+    {
+      "id": "P-01",
+      "report": "playwright-report.capture.json",
+      "title": "passes",
+      "expectedStatus": "passed",
+      "expectedScenarioId": "CAP-1-SC-06",
+      "label": null,
+      "acceptanceCriteria": "",
+      "rationale": "Control: a passing test."
+    },
+    {
+      "id": "P-02",
+      "report": "playwright-report.setup-failure.json",
+      "title": "passes",
+      "expectedStatus": "skipped",
+      "expectedScenarioId": "CAP-1-SC-06",
+      "label": null,
+      "acceptanceCriteria": "",
+      "rationale": "Did not run because its setup dependency failed; must not be reported as passed."
+    }
+  ]
+}

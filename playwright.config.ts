@@ -48,6 +48,18 @@ export default defineConfig({
       },
     },
     {
+      // Unit tests for the AI Test Agent (src/agent). No network; the catalog test opens about:blank.
+      name: 'agent-unit',
+      testDir: './tests/agent',
+    },
+    {
+      // Agent workflow against the real runner and the approved demo target.
+      name: 'agent-integration',
+      testDir: './tests/agent-integration',
+      timeout: 240_000,
+      fullyParallel: false,
+    },
+    {
       name: 'api',
       testDir: './tests/api',
       use: {

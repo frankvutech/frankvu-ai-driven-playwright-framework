@@ -1,0 +1,715 @@
+{
+ "config": {
+  "argv": [
+   "<home>/.local/share/mise/installs/node/22.23.2/bin/node",
+   "<repo>/node_modules/.bin/playwright",
+   "test",
+   "--config",
+   "playwright.agent.config.ts",
+   "--project",
+   "agent-generated",
+   "--workers",
+   "3"
+  ],
+  "configFile": "<repo>/playwright.agent.config.ts",
+  "rootDir": "<repo>/tests",
+  "failOnFlakyTests": false,
+  "forbidOnly": false,
+  "fullyParallel": true,
+  "globalSetup": null,
+  "globalTeardown": null,
+  "globalTimeout": 0,
+  "grep": {},
+  "grepInvert": null,
+  "maxFailures": 0,
+  "metadata": {
+   "actualWorkers": 3
+  },
+  "preserveOutput": "always",
+  "projects": [
+   {
+    "outputDir": "<repo>/.relynx/runs/capture/out",
+    "repeatEach": 1,
+    "retries": 0,
+    "metadata": {
+     "actualWorkers": 3
+    },
+    "id": "setup",
+    "name": "setup",
+    "testDir": "<repo>/tests/setup",
+    "testIgnore": [],
+    "testMatch": [
+     "/.*\\.setup\\.ts/"
+    ],
+    "timeout": 30000
+   },
+   {
+    "outputDir": "<repo>/.relynx/runs/capture/out",
+    "repeatEach": 1,
+    "retries": 0,
+    "metadata": {
+     "actualWorkers": 3
+    },
+    "id": "agent-generated",
+    "name": "agent-generated",
+    "testDir": "<repo>/generated",
+    "testIgnore": [],
+    "testMatch": [
+     "/^\\/Users\\/frankvu\\/Projects\\/frankvu-ai-driven-playwright-framework\\/generated\\/capture\\/capture\\.spec\\.ts$/"
+    ],
+    "timeout": 30000
+   }
+  ],
+  "filteredProjects": [
+   {
+    "grep": {},
+    "grepInvert": null,
+    "outputDir": "<repo>/.relynx/runs/capture/out",
+    "repeatEach": 1,
+    "retries": 0,
+    "metadata": {
+     "actualWorkers": 3
+    },
+    "name": "agent-generated",
+    "testDir": "<repo>/generated",
+    "snapshotDir": "<repo>/generated",
+    "testIgnore": [],
+    "testMatch": [
+     {}
+    ],
+    "timeout": 30000,
+    "use": {
+     "trace": "retain-on-failure",
+     "screenshot": "only-on-failure",
+     "video": "off",
+     "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+     "viewport": {
+      "width": 1280,
+      "height": 720
+     },
+     "screen": {
+      "width": 1920,
+      "height": 1080
+     },
+     "deviceScaleFactor": 1,
+     "isMobile": false,
+     "hasTouch": false,
+     "defaultBrowserType": "chromium",
+     "baseURL": "https://www.saucedemo.com",
+     "testIdAttribute": "data-test",
+     "storageState": ".auth/standard-user.json"
+    },
+    "dependencies": [
+     "setup"
+    ],
+    "ignoreSnapshots": false,
+    "__projectId": "agent-generated"
+   }
+  ],
+  "quiet": false,
+  "reporter": [
+   [
+    "json",
+    {
+     "outputFile": "<repo>/.relynx/runs/capture/report.json"
+    }
+   ]
+  ],
+  "reportSlowTests": {
+   "max": 5,
+   "threshold": 300000
+  },
+  "shard": null,
+  "tags": [],
+  "updateSnapshots": "default",
+  "updateSourceMethod": "patch",
+  "version": "1.64.1",
+  "workers": 3,
+  "webServer": null
+ },
+ "suites": [
+  {
+   "title": "setup/auth.setup.ts",
+   "file": "setup/auth.setup.ts",
+   "column": 0,
+   "line": 0,
+   "specs": [
+    {
+     "title": "sign in as standard user",
+     "ok": true,
+     "tags": [],
+     "tests": [
+      {
+       "timeout": 30000,
+       "annotations": [],
+       "expectedStatus": "passed",
+       "projectId": "setup",
+       "projectName": "setup",
+       "results": [
+        {
+         "workerIndex": 0,
+         "parallelIndex": 0,
+         "status": "passed",
+         "duration": 682,
+         "errors": [],
+         "stdout": [],
+         "stderr": [],
+         "retry": 0,
+         "startTime": "2026-10-18T21:03:04.417Z",
+         "annotations": [],
+         "attachments": []
+        }
+       ],
+       "status": "expected"
+      }
+     ],
+     "id": "17e3fe6f4d9d8bd79c6b-f43f24ffc46dc6fa6535",
+     "file": "setup/auth.setup.ts",
+     "line": 6,
+     "column": 6
+    }
+   ]
+  },
+  {
+   "title": "../generated/capture/capture.spec.ts",
+   "file": "../generated/capture/capture.spec.ts",
+   "column": 0,
+   "line": 0,
+   "specs": [
+    {
+     "title": "assertion-not-from-requirement",
+     "ok": false,
+     "tags": [],
+     "tests": [
+      {
+       "timeout": 30000,
+       "annotations": [
+        {
+         "type": "scenario",
+         "description": "CAP-1-SC-01",
+         "location": {
+          "file": "<repo>/generated/capture/capture.spec.ts",
+          "line": 13,
+          "column": 5
+         }
+        }
+       ],
+       "expectedStatus": "passed",
+       "projectId": "agent-generated",
+       "projectName": "agent-generated",
+       "results": [
+        {
+         "workerIndex": 1,
+         "parallelIndex": 0,
+         "status": "failed",
+         "duration": 5587,
+         "error": {
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('title')\nExpected: \u001b[32m\"\u001b[7mOur \u001b[27mProducts\"\u001b[39m\nReceived: \u001b[31m\"Products\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('title') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('title')\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <span class=\"title\" data-test=\"title\">Products</span>\u001b[22m\n\u001b[2m       - unexpected value \"Products\"\u001b[22m\n",
+          "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('title')\nExpected: \u001b[32m\"\u001b[7mOur \u001b[27mProducts\"\u001b[39m\nReceived: \u001b[31m\"Products\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('title') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('title')\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <span class=\"title\" data-test=\"title\">Products</span>\u001b[22m\n\u001b[2m       - unexpected value \"Products\"\u001b[22m\n\n    at <repo>/generated/capture/capture.spec.ts:15:43",
+          "location": {
+           "file": "<repo>/generated/capture/capture.spec.ts",
+           "column": 43,
+           "line": 15
+          },
+          "snippet": "  13 | test('assertion-not-from-requirement', { annotation: [{ type: 'scenario', description: 'CAP-1-SC-01' }] }, async ({ page }) => {\n  14 |   await signIn(page, 'standard_user');\n> 15 |   await expect(page.getByTestId('title')).toHaveText('Our Products');\n     |                                           ^\n  16 | });\n  17 |\n  18 | test('product-defect-sort', { annotation: [{ type: 'scenario', description: 'CAP-1-SC-02' }] }, async ({ page }) => {"
+         },
+         "errors": [
+          {
+           "location": {
+            "file": "<repo>/generated/capture/capture.spec.ts",
+            "column": 43,
+            "line": 15
+           },
+           "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('title')\nExpected: \u001b[32m\"\u001b[7mOur \u001b[27mProducts\"\u001b[39m\nReceived: \u001b[31m\"Products\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('title') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('title')\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <span class=\"title\" data-test=\"title\">Products</span>\u001b[22m\n\u001b[2m       - unexpected value \"Products\"\u001b[22m\n\n\n  13 | test('assertion-not-from-requirement', { annotation: [{ type: 'scenario', description: 'CAP-1-SC-01' }] }, async ({ page }) => {\n  14 |   await signIn(page, 'standard_user');\n> 15 |   await expect(page.getByTestId('title')).toHaveText('Our Products');\n     |                                           ^\n  16 | });\n  17 |\n  18 | test('product-defect-sort', { annotation: [{ type: 'scenario', description: 'CAP-1-SC-02' }] }, async ({ page }) => {\n    at <repo>/generated/capture/capture.spec.ts:15:43"
+          }
+         ],
+         "stdout": [],
+         "stderr": [],
+         "retry": 0,
+         "startTime": "2026-10-18T21:03:05.717Z",
+         "annotations": [
+          {
+           "type": "scenario",
+           "description": "CAP-1-SC-01",
+           "location": {
+            "file": "<repo>/generated/capture/capture.spec.ts",
+            "line": 13,
+            "column": 5
+           }
+          }
+         ],
+         "attachments": [
+          {
+           "name": "screenshot",
+           "contentType": "image/png",
+           "path": "<repo>/.relynx/runs/capture/out/capture-capture-assertion-not-from-requirement-agent-generated/test-failed-1.png"
+          },
+          {
+           "name": "error-context",
+           "contentType": "text/markdown",
+           "path": "<repo>/.relynx/runs/capture/out/capture-capture-assertion-not-from-requirement-agent-generated/error-context.md"
+          },
+          {
+           "name": "trace",
+           "contentType": "application/zip",
+           "path": "<repo>/.relynx/runs/capture/out/capture-capture-assertion-not-from-requirement-agent-generated/trace.zip"
+          }
+         ],
+         "errorLocation": {
+          "file": "<repo>/generated/capture/capture.spec.ts",
+          "column": 43,
+          "line": 15
+         }
+        }
+       ],
+       "status": "unexpected"
+      }
+     ],
+     "id": "20722148680fdb2778fa-e31c60a180ddea9595ca",
+     "file": "../generated/capture/capture.spec.ts",
+     "line": 13,
+     "column": 5
+    },
+    {
+     "title": "product-defect-sort",
+     "ok": false,
+     "tags": [],
+     "tests": [
+      {
+       "timeout": 30000,
+       "annotations": [
+        {
+         "type": "scenario",
+         "description": "CAP-1-SC-02",
+         "location": {
+          "file": "<repo>/generated/capture/capture.spec.ts",
+          "line": 18,
+          "column": 5
+         }
+        }
+       ],
+       "expectedStatus": "passed",
+       "projectId": "agent-generated",
+       "projectName": "agent-generated",
+       "results": [
+        {
+         "workerIndex": 2,
+         "parallelIndex": 1,
+         "status": "failed",
+         "duration": 5817,
+         "error": {
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('inventory-item-name').first()\nExpected: \u001b[32m\"Test.allTheThings() T-Shirt (Red)\"\u001b[39m\nReceived: \u001b[31m\"Sauce Labs Backpack\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('inventory-item-name').first() with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('inventory-item-name').first()\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <div class=\"inventory_item_name \" data-test=\"inventory-item-name\">Sauce Labs Backpack</div>\u001b[22m\n\u001b[2m       - unexpected value \"Sauce Labs Backpack\"\u001b[22m\n",
+          "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('inventory-item-name').first()\nExpected: \u001b[32m\"Test.allTheThings() T-Shirt (Red)\"\u001b[39m\nReceived: \u001b[31m\"Sauce Labs Backpack\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('inventory-item-name').first() with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('inventory-item-name').first()\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <div class=\"inventory_item_name \" data-test=\"inventory-item-name\">Sauce Labs Backpack</div>\u001b[22m\n\u001b[2m       - unexpected value \"Sauce Labs Backpack\"\u001b[22m\n\n    at <repo>/generated/capture/capture.spec.ts:21:65",
+          "location": {
+           "file": "<repo>/generated/capture/capture.spec.ts",
+           "column": 65,
+           "line": 21
+          },
+          "snippet": "  19 |   await signIn(page, 'problem_user');\n  20 |   await page.getByTestId('product-sort-container').selectOption('za');\n> 21 |   await expect(page.getByTestId('inventory-item-name').first()).toHaveText('Test.allTheThings() T-Shirt (Red)');\n     |                                                                 ^\n  22 | });\n  23 |\n  24 | test('locator-missing', { annotation: [{ type: 'scenario', description: 'CAP-1-SC-03' }] }, async ({ page }) => {"
+         },
+         "errors": [
+          {
+           "location": {
+            "file": "<repo>/generated/capture/capture.spec.ts",
+            "column": 65,
+            "line": 21
+           },
+           "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('inventory-item-name').first()\nExpected: \u001b[32m\"Test.allTheThings() T-Shirt (Red)\"\u001b[39m\nReceived: \u001b[31m\"Sauce Labs Backpack\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('inventory-item-name').first() with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('inventory-item-name').first()\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <div class=\"inventory_item_name \" data-test=\"inventory-item-name\">Sauce Labs Backpack</div>\u001b[22m\n\u001b[2m       - unexpected value \"Sauce Labs Backpack\"\u001b[22m\n\n\n  19 |   await signIn(page, 'problem_user');\n  20 |   await page.getByTestId('product-sort-container').selectOption('za');\n> 21 |   await expect(page.getByTestId('inventory-item-name').first()).toHaveText('Test.allTheThings() T-Shirt (Red)');\n     |                                                                 ^\n  22 | });\n  23 |\n  24 | test('locator-missing', { annotation: [{ type: 'scenario', description: 'CAP-1-SC-03' }] }, async ({ page }) => {\n    at <repo>/generated/capture/capture.spec.ts:21:65"
+          }
+         ],
+         "stdout": [],
+         "stderr": [],
+         "retry": 0,
+         "startTime": "2026-10-18T21:03:05.710Z",
+         "annotations": [
+          {
+           "type": "scenario",
+           "description": "CAP-1-SC-02",
+           "location": {
+            "file": "<repo>/generated/capture/capture.spec.ts",
+            "line": 18,
+            "column": 5
+           }
+          }
+         ],
+         "attachments": [
+          {
+           "name": "screenshot",
+           "contentType": "image/png",
+           "path": "<repo>/.relynx/runs/capture/out/capture-capture-product-defect-sort-agent-generated/test-failed-1.png"
+          },
+          {
+           "name": "error-context",
+           "contentType": "text/markdown",
+           "path": "<repo>/.relynx/runs/capture/out/capture-capture-product-defect-sort-agent-generated/error-context.md"
+          },
+          {
+           "name": "trace",
+           "contentType": "application/zip",
+           "path": "<repo>/.relynx/runs/capture/out/capture-capture-product-defect-sort-agent-generated/trace.zip"
+          }
+         ],
+         "errorLocation": {
+          "file": "<repo>/generated/capture/capture.spec.ts",
+          "column": 65,
+          "line": 21
+         }
+        }
+       ],
+       "status": "unexpected"
+      }
+     ],
+     "id": "20722148680fdb2778fa-787a6ad8413b2211fbfa",
+     "file": "../generated/capture/capture.spec.ts",
+     "line": 18,
+     "column": 5
+    },
+    {
+     "title": "locator-missing",
+     "ok": false,
+     "tags": [],
+     "tests": [
+      {
+       "timeout": 30000,
+       "annotations": [
+        {
+         "type": "scenario",
+         "description": "CAP-1-SC-03",
+         "location": {
+          "file": "<repo>/generated/capture/capture.spec.ts",
+          "line": 24,
+          "column": 5
+         }
+        }
+       ],
+       "expectedStatus": "passed",
+       "projectId": "agent-generated",
+       "projectName": "agent-generated",
+       "results": [
+        {
+         "workerIndex": 3,
+         "parallelIndex": 2,
+         "status": "failed",
+         "duration": 5586,
+         "error": {
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('promo-banner')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByTestId('promo-banner') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('promo-banner')\u001b[22m\n",
+          "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('promo-banner')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByTestId('promo-banner') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('promo-banner')\u001b[22m\n\n    at <repo>/generated/capture/capture.spec.ts:26:50",
+          "location": {
+           "file": "<repo>/generated/capture/capture.spec.ts",
+           "column": 50,
+           "line": 26
+          },
+          "snippet": "  24 | test('locator-missing', { annotation: [{ type: 'scenario', description: 'CAP-1-SC-03' }] }, async ({ page }) => {\n  25 |   await signIn(page, 'standard_user');\n> 26 |   await expect(page.getByTestId('promo-banner')).toBeVisible();\n     |                                                  ^\n  27 | });\n  28 |\n  29 | test('environment-unreachable', { annotation: [{ type: 'scenario', description: 'CAP-1-SC-04' }] }, async ({ page }) => {"
+         },
+         "errors": [
+          {
+           "location": {
+            "file": "<repo>/generated/capture/capture.spec.ts",
+            "column": 50,
+            "line": 26
+           },
+           "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('promo-banner')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByTestId('promo-banner') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('promo-banner')\u001b[22m\n\n\n  24 | test('locator-missing', { annotation: [{ type: 'scenario', description: 'CAP-1-SC-03' }] }, async ({ page }) => {\n  25 |   await signIn(page, 'standard_user');\n> 26 |   await expect(page.getByTestId('promo-banner')).toBeVisible();\n     |                                                  ^\n  27 | });\n  28 |\n  29 | test('environment-unreachable', { annotation: [{ type: 'scenario', description: 'CAP-1-SC-04' }] }, async ({ page }) => {\n    at <repo>/generated/capture/capture.spec.ts:26:50"
+          }
+         ],
+         "stdout": [],
+         "stderr": [],
+         "retry": 0,
+         "startTime": "2026-10-18T21:03:05.716Z",
+         "annotations": [
+          {
+           "type": "scenario",
+           "description": "CAP-1-SC-03",
+           "location": {
+            "file": "<repo>/generated/capture/capture.spec.ts",
+            "line": 24,
+            "column": 5
+           }
+          }
+         ],
+         "attachments": [
+          {
+           "name": "screenshot",
+           "contentType": "image/png",
+           "path": "<repo>/.relynx/runs/capture/out/capture-capture-locator-missing-agent-generated/test-failed-1.png"
+          },
+          {
+           "name": "error-context",
+           "contentType": "text/markdown",
+           "path": "<repo>/.relynx/runs/capture/out/capture-capture-locator-missing-agent-generated/error-context.md"
+          },
+          {
+           "name": "trace",
+           "contentType": "application/zip",
+           "path": "<repo>/.relynx/runs/capture/out/capture-capture-locator-missing-agent-generated/trace.zip"
+          }
+         ],
+         "errorLocation": {
+          "file": "<repo>/generated/capture/capture.spec.ts",
+          "column": 50,
+          "line": 26
+         }
+        }
+       ],
+       "status": "unexpected"
+      }
+     ],
+     "id": "20722148680fdb2778fa-8479f6c2e5bd0a800e6a",
+     "file": "../generated/capture/capture.spec.ts",
+     "line": 24,
+     "column": 5
+    },
+    {
+     "title": "environment-unreachable",
+     "ok": false,
+     "tags": [],
+     "tests": [
+      {
+       "timeout": 30000,
+       "annotations": [
+        {
+         "type": "scenario",
+         "description": "CAP-1-SC-04",
+         "location": {
+          "file": "<repo>/generated/capture/capture.spec.ts",
+          "line": 29,
+          "column": 5
+         }
+        }
+       ],
+       "expectedStatus": "passed",
+       "projectId": "agent-generated",
+       "projectName": "agent-generated",
+       "results": [
+        {
+         "workerIndex": 4,
+         "parallelIndex": 0,
+         "status": "failed",
+         "duration": 203,
+         "error": {
+          "message": "Error: page.goto: net::ERR_UNSAFE_PORT at http://127.0.0.1:9/\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:9/\", waiting until \"load\"\u001b[22m\n",
+          "stack": "Error: page.goto: net::ERR_UNSAFE_PORT at http://127.0.0.1:9/\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:9/\", waiting until \"load\"\u001b[22m\n\n    at <repo>/generated/capture/capture.spec.ts:30:14",
+          "location": {
+           "file": "<repo>/generated/capture/capture.spec.ts",
+           "column": 14,
+           "line": 30
+          },
+          "snippet": "  28 |\n  29 | test('environment-unreachable', { annotation: [{ type: 'scenario', description: 'CAP-1-SC-04' }] }, async ({ page }) => {\n> 30 |   await page.goto('http://127.0.0.1:9/');\n     |              ^\n  31 | });\n  32 |\n  33 | test('slow-login', { annotation: [{ type: 'scenario', description: 'CAP-1-SC-05' }] }, async ({ page }) => {"
+         },
+         "errors": [
+          {
+           "location": {
+            "file": "<repo>/generated/capture/capture.spec.ts",
+            "column": 14,
+            "line": 30
+           },
+           "message": "Error: page.goto: net::ERR_UNSAFE_PORT at http://127.0.0.1:9/\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:9/\", waiting until \"load\"\u001b[22m\n\n\n  28 |\n  29 | test('environment-unreachable', { annotation: [{ type: 'scenario', description: 'CAP-1-SC-04' }] }, async ({ page }) => {\n> 30 |   await page.goto('http://127.0.0.1:9/');\n     |              ^\n  31 | });\n  32 |\n  33 | test('slow-login', { annotation: [{ type: 'scenario', description: 'CAP-1-SC-05' }] }, async ({ page }) => {\n    at <repo>/generated/capture/capture.spec.ts:30:14"
+          }
+         ],
+         "stdout": [],
+         "stderr": [],
+         "retry": 0,
+         "startTime": "2026-10-18T21:03:11.888Z",
+         "annotations": [
+          {
+           "type": "scenario",
+           "description": "CAP-1-SC-04",
+           "location": {
+            "file": "<repo>/generated/capture/capture.spec.ts",
+            "line": 29,
+            "column": 5
+           }
+          }
+         ],
+         "attachments": [
+          {
+           "name": "screenshot",
+           "contentType": "image/png",
+           "path": "<repo>/.relynx/runs/capture/out/capture-capture-environment-unreachable-agent-generated/test-failed-1.png"
+          },
+          {
+           "name": "error-context",
+           "contentType": "text/markdown",
+           "path": "<repo>/.relynx/runs/capture/out/capture-capture-environment-unreachable-agent-generated/error-context.md"
+          },
+          {
+           "name": "trace",
+           "contentType": "application/zip",
+           "path": "<repo>/.relynx/runs/capture/out/capture-capture-environment-unreachable-agent-generated/trace.zip"
+          }
+         ],
+         "errorLocation": {
+          "file": "<repo>/generated/capture/capture.spec.ts",
+          "column": 14,
+          "line": 30
+         }
+        }
+       ],
+       "status": "unexpected"
+      }
+     ],
+     "id": "20722148680fdb2778fa-7969a066e3fd1abebf88",
+     "file": "../generated/capture/capture.spec.ts",
+     "line": 29,
+     "column": 5
+    },
+    {
+     "title": "slow-login",
+     "ok": false,
+     "tags": [],
+     "tests": [
+      {
+       "timeout": 30000,
+       "annotations": [
+        {
+         "type": "scenario",
+         "description": "CAP-1-SC-05",
+         "location": {
+          "file": "<repo>/generated/capture/capture.spec.ts",
+          "line": 33,
+          "column": 5
+         }
+        }
+       ],
+       "expectedStatus": "passed",
+       "projectId": "agent-generated",
+       "projectName": "agent-generated",
+       "results": [
+        {
+         "workerIndex": 5,
+         "parallelIndex": 2,
+         "status": "failed",
+         "duration": 5530,
+         "error": {
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('title')\nExpected: \u001b[32m\"Products\"\u001b[39m\nTimeout: 1000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('title') with timeout 1000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('title')\u001b[22m\n",
+          "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('title')\nExpected: \u001b[32m\"Products\"\u001b[39m\nTimeout: 1000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('title') with timeout 1000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('title')\u001b[22m\n\n    at <repo>/generated/capture/capture.spec.ts:35:43",
+          "location": {
+           "file": "<repo>/generated/capture/capture.spec.ts",
+           "column": 43,
+           "line": 35
+          },
+          "snippet": "  33 | test('slow-login', { annotation: [{ type: 'scenario', description: 'CAP-1-SC-05' }] }, async ({ page }) => {\n  34 |   await signIn(page, 'performance_glitch_user');\n> 35 |   await expect(page.getByTestId('title')).toHaveText('Products', { timeout: 1000 });\n     |                                           ^\n  36 | });\n  37 |\n  38 | test('passes', { annotation: [{ type: 'scenario', description: 'CAP-1-SC-06' }] }, async ({ page }) => {"
+         },
+         "errors": [
+          {
+           "location": {
+            "file": "<repo>/generated/capture/capture.spec.ts",
+            "column": 43,
+            "line": 35
+           },
+           "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('title')\nExpected: \u001b[32m\"Products\"\u001b[39m\nTimeout: 1000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('title') with timeout 1000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('title')\u001b[22m\n\n\n  33 | test('slow-login', { annotation: [{ type: 'scenario', description: 'CAP-1-SC-05' }] }, async ({ page }) => {\n  34 |   await signIn(page, 'performance_glitch_user');\n> 35 |   await expect(page.getByTestId('title')).toHaveText('Products', { timeout: 1000 });\n     |                                           ^\n  36 | });\n  37 |\n  38 | test('passes', { annotation: [{ type: 'scenario', description: 'CAP-1-SC-06' }] }, async ({ page }) => {\n    at <repo>/generated/capture/capture.spec.ts:35:43"
+          }
+         ],
+         "stdout": [],
+         "stderr": [],
+         "retry": 0,
+         "startTime": "2026-10-18T21:03:11.887Z",
+         "annotations": [
+          {
+           "type": "scenario",
+           "description": "CAP-1-SC-05",
+           "location": {
+            "file": "<repo>/generated/capture/capture.spec.ts",
+            "line": 33,
+            "column": 5
+           }
+          }
+         ],
+         "attachments": [
+          {
+           "name": "screenshot",
+           "contentType": "image/png",
+           "path": "<repo>/.relynx/runs/capture/out/capture-capture-slow-login-agent-generated/test-failed-1.png"
+          },
+          {
+           "name": "error-context",
+           "contentType": "text/markdown",
+           "path": "<repo>/.relynx/runs/capture/out/capture-capture-slow-login-agent-generated/error-context.md"
+          },
+          {
+           "name": "trace",
+           "contentType": "application/zip",
+           "path": "<repo>/.relynx/runs/capture/out/capture-capture-slow-login-agent-generated/trace.zip"
+          }
+         ],
+         "errorLocation": {
+          "file": "<repo>/generated/capture/capture.spec.ts",
+          "column": 43,
+          "line": 35
+         }
+        }
+       ],
+       "status": "unexpected"
+      }
+     ],
+     "id": "20722148680fdb2778fa-c66e5813278bcce0ab74",
+     "file": "../generated/capture/capture.spec.ts",
+     "line": 33,
+     "column": 5
+    },
+    {
+     "title": "passes",
+     "ok": true,
+     "tags": [],
+     "tests": [
+      {
+       "timeout": 30000,
+       "annotations": [
+        {
+         "type": "scenario",
+         "description": "CAP-1-SC-06",
+         "location": {
+          "file": "<repo>/generated/capture/capture.spec.ts",
+          "line": 38,
+          "column": 5
+         }
+        }
+       ],
+       "expectedStatus": "passed",
+       "projectId": "agent-generated",
+       "projectName": "agent-generated",
+       "results": [
+        {
+         "workerIndex": 6,
+         "parallelIndex": 1,
+         "status": "passed",
+         "duration": 455,
+         "errors": [],
+         "stdout": [],
+         "stderr": [],
+         "retry": 0,
+         "startTime": "2026-10-18T21:03:12.211Z",
+         "annotations": [
+          {
+           "type": "scenario",
+           "description": "CAP-1-SC-06",
+           "location": {
+            "file": "<repo>/generated/capture/capture.spec.ts",
+            "line": 38,
+            "column": 5
+           }
+          }
+         ],
+         "attachments": []
+        }
+       ],
+       "status": "expected"
+      }
+     ],
+     "id": "20722148680fdb2778fa-26ec8b1c68ac14c33700",
+     "file": "../generated/capture/capture.spec.ts",
+     "line": 38,
+     "column": 5
+    }
+   ]
+  }
+ ],
+ "errors": [],
+ "stats": {
+  "startTime": "2026-10-18T21:03:04.147Z",
+  "duration": 13490.733,
+  "expected": 2,
+  "skipped": 0,
+  "unexpected": 5,
+  "flaky": 0
+ }
+}
