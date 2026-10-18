@@ -12,8 +12,12 @@
     "test:agent": "playwright test --project=agent-unit",
     "test:agent-integration": "playwright test --project=agent-integration",
     "agent": "tsx src/agent/cli.ts",
-    "eval": "tsx eval/run.ts",
-    "eval:live": "tsx eval/live.ts"
+    "eval": "tsx eval/run.ts --mode deterministic --baseline eval/baselines/deterministic.json",
+    "eval:live": "tsx eval/run.ts --mode live",
+    "test:eval": "playwright test --project=eval-unit",
+    "eval:functional": "tsx eval/run.ts --mode functional --baseline eval/baselines/functional.json",
+    "eval:compare": "tsx eval/run.ts --compare",
+    "eval:probe-defects": "tsx eval/probes/seeded-defects.ts"
   },
   "repository": {
     "type": "git",

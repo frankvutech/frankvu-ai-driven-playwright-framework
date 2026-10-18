@@ -1,0 +1,12 @@
+{
+  "effectiveDate": "2026-10-06",
+  "currency": "USD",
+  "source": "Anthropic first-party API list prices per million tokens, from the model table cached in the claude-api skill on 2026-10-06. Verify against https://www.anthropic.com/pricing before relying on these figures.",
+  "excludes": "Prompt-caching discounts and cache-write premiums, batch discounts, fallback-model repricing, and long-context surcharges (Haiku 5.5 prices apply to prompts up to 100K tokens).",
+  "models": {
+    "claude-opus-5-5": { "inputPerMTok": 4, "outputPerMTok": 20 },
+    "claude-sonnet-5-5": { "inputPerMTok": 2, "outputPerMTok": 10 },
+    "claude-haiku-5-5": { "inputPerMTok": 0.1, "outputPerMTok": 0.5 },
+    "claude-fable-5-1": { "inputPerMTok": 10, "outputPerMTok": 50 }
+  }
+}

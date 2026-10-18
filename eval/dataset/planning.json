@@ -1,5 +1,5 @@
 {
- "provenance": "Hand-written. recordedOutput values are stand-ins for model responses written by the framework author to exercise the deterministic pipeline; no model produced them.",
+ "provenance": "Requirements and recordedOutput are hand-written stand-ins for model responses. No model produced them. Expected properties are author-assigned and pending human review.",
  "cases": [
   {
    "id": "PL-01",
@@ -154,8 +154,29 @@
     ],
     "issueCodes": [
      "assumption_scenario"
+    ],
+    "expectedClarification": "none",
+    "requiredCoverage": 1.0,
+    "prohibitedAssumptions": [
+     "captcha",
+     "remember me",
+     "two-factor"
     ]
-   }
+   },
+   "requirementId": "REQ-101",
+   "dimensions": [
+    "coverage",
+    "traceability",
+    "scenario_categories"
+   ],
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "liveApplicable": true
   },
   {
    "id": "PL-02",
@@ -231,8 +252,22 @@
     "coverage": 1.0,
     "scenarioTypes": [
      "boundary"
-    ]
-   }
+    ],
+    "expectedClarification": "none"
+   },
+   "requirementId": "REQ-201",
+   "dimensions": [
+    "coverage",
+    "scenario_categories"
+   ],
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "liveApplicable": true
   },
   {
    "id": "PL-03",
@@ -282,8 +317,22 @@
     "coverage": 1.0,
     "scenarioTypes": [
      "authorization"
-    ]
-   }
+    ],
+    "expectedClarification": "none"
+   },
+   "requirementId": "REQ-202",
+   "dimensions": [
+    "coverage",
+    "scenario_categories"
+   ],
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "liveApplicable": true
   },
   {
    "id": "PL-04",
@@ -341,8 +390,21 @@
     "absentIssueCodes": [
      "ambiguity_not_surfaced"
     ],
-    "flagsAmbiguity": true
-   }
+    "flagsAmbiguity": true,
+    "expectedClarification": "surface-ambiguity"
+   },
+   "requirementId": "REQ-203",
+   "dimensions": [
+    "ambiguity"
+   ],
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "liveApplicable": true
   },
   {
    "id": "PL-05",
@@ -395,8 +457,21 @@
     "issueCodes": [
      "ambiguity_not_surfaced"
     ],
-    "flagsAmbiguity": true
-   }
+    "flagsAmbiguity": true,
+    "expectedClarification": "surface-ambiguity"
+   },
+   "requirementId": "REQ-203",
+   "dimensions": [
+    "ambiguity"
+   ],
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "liveApplicable": false
   },
   {
    "id": "PL-06",
@@ -414,8 +489,21 @@
      "missing_acceptance_criteria"
     ],
     "modelCalls": 0,
-    "flagsAmbiguity": true
-   }
+    "flagsAmbiguity": true,
+    "expectedClarification": "ask-before-planning"
+   },
+   "requirementId": "REQ-204",
+   "dimensions": [
+    "clarification"
+   ],
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "liveApplicable": true
   },
   {
    "id": "PL-07",
@@ -443,8 +531,22 @@
    "recordedOutput": "Sure! Here is the plan: {\"requirementId\": \"REQ-101\", \"scenarios\": [",
    "expected": {
     "outcome": "plan_failed",
-    "failureKind": "malformed_json"
-   }
+    "failureKind": "malformed_json",
+    "expectedClarification": "none"
+   },
+   "requirementId": "REQ-101",
+   "dimensions": [
+    "structural",
+    "error_handling"
+   ],
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "liveApplicable": false
   },
   {
    "id": "PL-08",
@@ -482,8 +584,22 @@
    },
    "expected": {
     "outcome": "plan_failed",
-    "failureKind": "schema_violation"
-   }
+    "failureKind": "schema_violation",
+    "expectedClarification": "none"
+   },
+   "requirementId": "REQ-101",
+   "dimensions": [
+    "structural",
+    "error_handling"
+   ],
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "liveApplicable": false
   },
   {
    "id": "PL-09",
@@ -624,8 +740,22 @@
     "issueCodes": [
      "untraceable_scenario"
     ],
-    "unsupportedAssumption": true
-   }
+    "unsupportedAssumption": true,
+    "expectedClarification": "none"
+   },
+   "requirementId": "REQ-101",
+   "dimensions": [
+    "unsupported_assumptions",
+    "traceability"
+   ],
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "liveApplicable": false
   },
   {
    "id": "PL-10",
@@ -777,8 +907,21 @@
     ],
     "assumptionScenarios": [
      "REQ-101-SC-04"
-    ]
-   }
+    ],
+    "expectedClarification": "none"
+   },
+   "requirementId": "REQ-101",
+   "dimensions": [
+    "unsupported_assumptions"
+   ],
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "liveApplicable": false
   },
   {
    "id": "PL-11",
@@ -921,8 +1064,21 @@
     "issueCodes": [
      "unknown_acceptance_criterion"
     ],
-    "unsupportedAssumption": true
-   }
+    "unsupportedAssumption": true,
+    "expectedClarification": "none"
+   },
+   "requirementId": "REQ-101",
+   "dimensions": [
+    "traceability"
+   ],
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "liveApplicable": false
   },
   {
    "id": "PL-12",
@@ -1014,8 +1170,21 @@
     "outcome": "plan_rejected",
     "issueCodes": [
      "undeclared_uncovered_criterion"
-    ]
-   }
+    ],
+    "expectedClarification": "none"
+   },
+   "requirementId": "REQ-101",
+   "dimensions": [
+    "traceability"
+   ],
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "liveApplicable": false
   },
   {
    "id": "PL-13",
@@ -1157,8 +1326,21 @@
     "outcome": "plan_rejected",
     "issueCodes": [
      "requirement_mismatch"
-    ]
-   }
+    ],
+    "expectedClarification": "none"
+   },
+   "requirementId": "REQ-101",
+   "dimensions": [
+    "traceability"
+   ],
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "liveApplicable": false
   },
   {
    "id": "PL-14",
@@ -1207,8 +1389,21 @@
     "outcome": "plan_valid",
     "requirementIssueCodes": [
      "embedded_instruction"
-    ]
-   }
+    ],
+    "expectedClarification": "none"
+   },
+   "requirementId": "REQ-205",
+   "dimensions": [
+    "security"
+   ],
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "liveApplicable": true
   },
   {
    "id": "PL-15",
@@ -1222,8 +1417,629 @@
    "recordedOutput": null,
    "expected": {
     "outcome": "invalid_requirement",
-    "modelCalls": 0
-   }
+    "modelCalls": 0,
+    "expectedClarification": "none"
+   },
+   "requirementId": "req 1",
+   "dimensions": [
+    "structural"
+   ],
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "liveApplicable": true
+  },
+  {
+   "id": "PL-16",
+   "category": "multiple_acceptance_criteria",
+   "requirement": {
+    "id": "REQ-206",
+    "title": "Checkout information form",
+    "description": "The checkout form collects first name, last name and postal code before the overview.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "With all three fields filled, Continue opens the overview."
+     },
+     {
+      "id": "AC-2",
+      "text": "Without a first name, the error \"Error: First Name is required\" is shown."
+     },
+     {
+      "id": "AC-3",
+      "text": "Without a last name, the error \"Error: Last Name is required\" is shown."
+     },
+     {
+      "id": "AC-4",
+      "text": "Without a postal code, the error \"Error: Postal Code is required\" is shown."
+     },
+     {
+      "id": "AC-5",
+      "text": "With the Sauce Labs Backpack in the cart, the overview shows \"Item total: $29.99\"."
+     },
+     {
+      "id": "AC-6",
+      "text": "Finishing shows \"Thank you for your order!\"."
+     }
+    ]
+   },
+   "recordedOutput": {
+    "requirementId": "REQ-206",
+    "scenarios": [
+     {
+      "id": "REQ-206-SC-01",
+      "requirementId": "REQ-206",
+      "acceptanceCriteriaIds": [
+       "AC-1",
+       "AC-5"
+      ],
+      "title": "Valid details open the overview with the right item total",
+      "objective": "Valid details open the overview with the right item total",
+      "type": "positive",
+      "priority": "medium",
+      "priorityRationale": "per acceptance criterion",
+      "preconditions": [],
+      "steps": [
+       "see title"
+      ],
+      "testData": [],
+      "expectedOutcomes": [
+       "overview shown",
+       "Item total: $29.99"
+      ],
+      "assumptions": [],
+      "openQuestions": []
+     },
+     {
+      "id": "REQ-206-SC-02",
+      "requirementId": "REQ-206",
+      "acceptanceCriteriaIds": [
+       "AC-2"
+      ],
+      "title": "Missing first name is rejected",
+      "objective": "Missing first name is rejected",
+      "type": "negative",
+      "priority": "medium",
+      "priorityRationale": "per acceptance criterion",
+      "preconditions": [],
+      "steps": [
+       "see title"
+      ],
+      "testData": [],
+      "expectedOutcomes": [
+       "Error: First Name is required"
+      ],
+      "assumptions": [],
+      "openQuestions": []
+     },
+     {
+      "id": "REQ-206-SC-03",
+      "requirementId": "REQ-206",
+      "acceptanceCriteriaIds": [
+       "AC-3"
+      ],
+      "title": "Missing last name is rejected",
+      "objective": "Missing last name is rejected",
+      "type": "negative",
+      "priority": "medium",
+      "priorityRationale": "per acceptance criterion",
+      "preconditions": [],
+      "steps": [
+       "see title"
+      ],
+      "testData": [],
+      "expectedOutcomes": [
+       "Error: Last Name is required"
+      ],
+      "assumptions": [],
+      "openQuestions": []
+     },
+     {
+      "id": "REQ-206-SC-04",
+      "requirementId": "REQ-206",
+      "acceptanceCriteriaIds": [
+       "AC-4"
+      ],
+      "title": "Missing postal code is rejected",
+      "objective": "Missing postal code is rejected",
+      "type": "negative",
+      "priority": "medium",
+      "priorityRationale": "per acceptance criterion",
+      "preconditions": [],
+      "steps": [
+       "see title"
+      ],
+      "testData": [],
+      "expectedOutcomes": [
+       "Error: Postal Code is required"
+      ],
+      "assumptions": [],
+      "openQuestions": []
+     },
+     {
+      "id": "REQ-206-SC-05",
+      "requirementId": "REQ-206",
+      "acceptanceCriteriaIds": [
+       "AC-6"
+      ],
+      "title": "Finishing confirms the order",
+      "objective": "Finishing confirms the order",
+      "type": "positive",
+      "priority": "medium",
+      "priorityRationale": "per acceptance criterion",
+      "preconditions": [],
+      "steps": [
+       "see title"
+      ],
+      "testData": [],
+      "expectedOutcomes": [
+       "Thank you for your order!"
+      ],
+      "assumptions": [],
+      "openQuestions": []
+     }
+    ],
+    "ambiguities": [],
+    "uncoveredAcceptanceCriteria": []
+   },
+   "expected": {
+    "outcome": "plan_valid",
+    "coverage": 1.0,
+    "requiredCoverage": 1.0,
+    "scenarioTypes": [
+     "positive",
+     "negative"
+    ],
+    "expectedClarification": "none",
+    "prohibitedAssumptions": [
+     "saved address",
+     "guest checkout"
+    ]
+   },
+   "dimensions": [
+    "coverage",
+    "scenario_categories",
+    "input_validation"
+   ],
+   "requirementId": "REQ-206",
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "liveApplicable": true
+  },
+  {
+   "id": "PL-17",
+   "category": "input_validation",
+   "requirement": {
+    "id": "REQ-206",
+    "title": "Checkout information form",
+    "description": "The checkout form collects first name, last name and postal code before the overview.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "With all three fields filled, Continue opens the overview."
+     },
+     {
+      "id": "AC-2",
+      "text": "Without a first name, the error \"Error: First Name is required\" is shown."
+     },
+     {
+      "id": "AC-3",
+      "text": "Without a last name, the error \"Error: Last Name is required\" is shown."
+     },
+     {
+      "id": "AC-4",
+      "text": "Without a postal code, the error \"Error: Postal Code is required\" is shown."
+     },
+     {
+      "id": "AC-5",
+      "text": "With the Sauce Labs Backpack in the cart, the overview shows \"Item total: $29.99\"."
+     },
+     {
+      "id": "AC-6",
+      "text": "Finishing shows \"Thank you for your order!\"."
+     }
+    ]
+   },
+   "recordedOutput": {
+    "requirementId": "REQ-206",
+    "scenarios": [
+     {
+      "id": "REQ-206-SC-01",
+      "requirementId": "REQ-206",
+      "acceptanceCriteriaIds": [
+       "AC-1",
+       "AC-5"
+      ],
+      "title": "Valid details open the overview with the right item total",
+      "objective": "Valid details open the overview with the right item total",
+      "type": "positive",
+      "priority": "medium",
+      "priorityRationale": "per acceptance criterion",
+      "preconditions": [],
+      "steps": [
+       "see title"
+      ],
+      "testData": [],
+      "expectedOutcomes": [
+       "overview shown",
+       "Item total: $29.99"
+      ],
+      "assumptions": [],
+      "openQuestions": []
+     },
+     {
+      "id": "REQ-206-SC-05",
+      "requirementId": "REQ-206",
+      "acceptanceCriteriaIds": [
+       "AC-6"
+      ],
+      "title": "Finishing confirms the order",
+      "objective": "Finishing confirms the order",
+      "type": "positive",
+      "priority": "medium",
+      "priorityRationale": "per acceptance criterion",
+      "preconditions": [],
+      "steps": [
+       "see title"
+      ],
+      "testData": [],
+      "expectedOutcomes": [
+       "Thank you for your order!"
+      ],
+      "assumptions": [],
+      "openQuestions": []
+     }
+    ],
+    "ambiguities": [],
+    "uncoveredAcceptanceCriteria": [
+     {
+      "id": "AC-2",
+      "reason": "not planned"
+     },
+     {
+      "id": "AC-3",
+      "reason": "not planned"
+     },
+     {
+      "id": "AC-4",
+      "reason": "not planned"
+     }
+    ]
+   },
+   "expected": {
+    "outcome": "plan_valid",
+    "requiredCoverage": 1.0,
+    "scenarioTypes": [
+     "negative"
+    ],
+    "expectedClarification": "none"
+   },
+   "dimensions": [
+    "coverage",
+    "input_validation",
+    "scenario_categories"
+   ],
+   "notes": "Structurally valid (gaps are declared) but misses every validation scenario: required coverage and the negative category must flag it.",
+   "requirementId": "REQ-206",
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "liveApplicable": false
+  },
+  {
+   "id": "PL-18",
+   "category": "conflicting_requirement",
+   "requirement": {
+    "id": "REQ-208",
+    "title": "Locked accounts",
+    "description": "Locked accounts are handled at sign-in.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "A locked-out user sees \"Epic sadface: Sorry, this user has been locked out.\" and stays on the login page."
+     },
+     {
+      "id": "AC-2",
+      "text": "A locked-out user is taken to the product list."
+     }
+    ]
+   },
+   "recordedOutput": {
+    "requirementId": "REQ-208",
+    "scenarios": [
+     {
+      "id": "REQ-208-SC-01",
+      "requirementId": "REQ-208",
+      "acceptanceCriteriaIds": [
+       "AC-1"
+      ],
+      "title": "Locked-out user sees the lockout error",
+      "objective": "Locked-out user sees the lockout error",
+      "type": "authorization",
+      "priority": "medium",
+      "priorityRationale": "per acceptance criterion",
+      "preconditions": [],
+      "steps": [
+       "see title"
+      ],
+      "testData": [],
+      "expectedOutcomes": [
+       "error shown"
+      ],
+      "assumptions": [],
+      "openQuestions": []
+     }
+    ],
+    "ambiguities": [
+     "AC-1 and AC-2 contradict each other: the locked-out user cannot both stay on the login page and reach the product list."
+    ],
+    "uncoveredAcceptanceCriteria": [
+     {
+      "id": "AC-2",
+      "reason": "contradicts AC-1; needs clarification"
+     }
+    ]
+   },
+   "expected": {
+    "outcome": "plan_valid",
+    "expectedClarification": "surface-ambiguity",
+    "mustDeclareUncovered": [
+     "AC-2"
+    ]
+   },
+   "dimensions": [
+    "ambiguity",
+    "clarification"
+   ],
+   "requirementId": "REQ-208",
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "liveApplicable": true
+  },
+  {
+   "id": "PL-19",
+   "category": "conflicting_requirement",
+   "requirement": {
+    "id": "REQ-208",
+    "title": "Locked accounts",
+    "description": "Locked accounts are handled at sign-in.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "A locked-out user sees \"Epic sadface: Sorry, this user has been locked out.\" and stays on the login page."
+     },
+     {
+      "id": "AC-2",
+      "text": "A locked-out user is taken to the product list."
+     }
+    ]
+   },
+   "recordedOutput": {
+    "requirementId": "REQ-208",
+    "scenarios": [
+     {
+      "id": "REQ-208-SC-01",
+      "requirementId": "REQ-208",
+      "acceptanceCriteriaIds": [
+       "AC-1"
+      ],
+      "title": "Locked-out user sees the lockout error",
+      "objective": "Locked-out user sees the lockout error",
+      "type": "authorization",
+      "priority": "medium",
+      "priorityRationale": "per acceptance criterion",
+      "preconditions": [],
+      "steps": [
+       "see title"
+      ],
+      "testData": [],
+      "expectedOutcomes": [
+       "error shown"
+      ],
+      "assumptions": [],
+      "openQuestions": []
+     }
+    ],
+    "ambiguities": [],
+    "uncoveredAcceptanceCriteria": []
+   },
+   "expected": {
+    "outcome": "plan_rejected",
+    "issueCodes": [
+     "undeclared_uncovered_criterion"
+    ],
+    "expectedClarification": "surface-ambiguity"
+   },
+   "dimensions": [
+    "ambiguity",
+    "clarification",
+    "traceability"
+   ],
+   "notes": "The planner silently picks one side of the conflict.",
+   "requirementId": "REQ-208",
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "liveApplicable": false
+  },
+  {
+   "id": "PL-20",
+   "category": "untestable_in_environment",
+   "requirement": {
+    "id": "REQ-209",
+    "title": "Password reset",
+    "description": "Shoppers who forget their password can reset it.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "Requesting a reset sends an email with a reset link within one minute."
+     },
+     {
+      "id": "AC-2",
+      "text": "The login page shows a \"Forgot password?\" link."
+     }
+    ]
+   },
+   "recordedOutput": {
+    "requirementId": "REQ-209",
+    "scenarios": [],
+    "ambiguities": [
+     "The demo target has no password reset flow and no mailbox to observe."
+    ],
+    "uncoveredAcceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "reason": "email delivery cannot be observed in the test environment"
+     },
+     {
+      "id": "AC-2",
+      "reason": "the target has no such link; requirement may not apply to this target"
+     }
+    ]
+   },
+   "expected": {
+    "outcome": "plan_valid",
+    "expectedClarification": "declare-uncovered",
+    "mustDeclareUncovered": [
+     "AC-1"
+    ],
+    "prohibitedAssumptions": [
+     "check your email",
+     "reset link sent",
+     "mailbox"
+    ]
+   },
+   "dimensions": [
+    "clarification",
+    "unsupported_assumptions"
+   ],
+   "requirementId": "REQ-209",
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "liveApplicable": true
+  },
+  {
+   "id": "PL-21",
+   "category": "untestable_in_environment",
+   "requirement": {
+    "id": "REQ-209",
+    "title": "Password reset",
+    "description": "Shoppers who forget their password can reset it.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "Requesting a reset sends an email with a reset link within one minute."
+     },
+     {
+      "id": "AC-2",
+      "text": "The login page shows a \"Forgot password?\" link."
+     }
+    ]
+   },
+   "recordedOutput": {
+    "requirementId": "REQ-209",
+    "scenarios": [
+     {
+      "id": "REQ-209-SC-01",
+      "requirementId": "REQ-209",
+      "acceptanceCriteriaIds": [
+       "AC-1"
+      ],
+      "title": "Reset request shows a confirmation",
+      "objective": "Reset request shows a confirmation",
+      "type": "positive",
+      "priority": "medium",
+      "priorityRationale": "per acceptance criterion",
+      "preconditions": [],
+      "steps": [
+       "see title"
+      ],
+      "testData": [],
+      "expectedOutcomes": [
+       "\"Check your email\" message is shown"
+      ],
+      "assumptions": [],
+      "openQuestions": []
+     },
+     {
+      "id": "REQ-209-SC-02",
+      "requirementId": "REQ-209",
+      "acceptanceCriteriaIds": [
+       "AC-2"
+      ],
+      "title": "Forgot password link is visible",
+      "objective": "Forgot password link is visible",
+      "type": "positive",
+      "priority": "medium",
+      "priorityRationale": "per acceptance criterion",
+      "preconditions": [],
+      "steps": [
+       "see title"
+      ],
+      "testData": [],
+      "expectedOutcomes": [
+       "link visible"
+      ],
+      "assumptions": [],
+      "openQuestions": []
+     }
+    ],
+    "ambiguities": [],
+    "uncoveredAcceptanceCriteria": []
+   },
+   "expected": {
+    "outcome": "plan_valid",
+    "expectedClarification": "declare-uncovered",
+    "mustDeclareUncovered": [
+     "AC-1"
+    ],
+    "prohibitedAssumptions": [
+     "check your email",
+     "reset link sent",
+     "mailbox"
+    ]
+   },
+   "dimensions": [
+    "clarification",
+    "unsupported_assumptions"
+   ],
+   "notes": "Passes structural validation (every scenario traces to a criterion) but invents an on-screen confirmation the requirement never states.",
+   "requirementId": "REQ-209",
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "liveApplicable": false
   }
  ]
 }

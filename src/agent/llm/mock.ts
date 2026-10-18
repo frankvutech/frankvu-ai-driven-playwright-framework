@@ -32,6 +32,7 @@ export class MockProvider implements LlmProvider {
     if (next === undefined) throw new Error(`MockProvider: no reply queued for use case "${request.useCase}"`);
     const value = typeof next === 'function' ? await next(request) : next;
     if (value instanceof Error) throw value;
-    return { text: value, model: this.model, stopReason: 'end_turn', usage: { inputTokens: 0, outputTokens: 0 } };
+    // No usage: a mock has no real token counts, and reporting zeros would look like data.
+    return { text: value, model: this.model, stopReason: 'end_turn' };
   }
 }

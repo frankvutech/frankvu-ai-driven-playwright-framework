@@ -1,0 +1,1588 @@
+{
+ "config": {
+  "argv": [
+   "<home>/.local/share/mise/installs/node/22.23.2/bin/node",
+   "<repo>/node_modules/.bin/playwright",
+   "test",
+   "--config",
+   "playwright.agent.config.ts",
+   "--project",
+   "agent-generated",
+   "--workers",
+   "4",
+   "--retries",
+   "1"
+  ],
+  "configFile": "<repo>/playwright.agent.config.ts",
+  "rootDir": "<repo>/tests",
+  "failOnFlakyTests": false,
+  "forbidOnly": false,
+  "fullyParallel": true,
+  "globalSetup": null,
+  "globalTeardown": null,
+  "globalTimeout": 0,
+  "grep": {},
+  "grepInvert": null,
+  "maxFailures": 0,
+  "metadata": {
+   "actualWorkers": 4
+  },
+  "preserveOutput": "always",
+  "projects": [
+   {
+    "outputDir": "<repo>/.relynx/runs/capture2/out",
+    "repeatEach": 1,
+    "retries": 1,
+    "metadata": {
+     "actualWorkers": 4
+    },
+    "id": "agent-setup",
+    "name": "agent-setup",
+    "testDir": "<repo>/tests/setup",
+    "testIgnore": [],
+    "testMatch": [
+     "/session\\.agent-setup\\.ts$/"
+    ],
+    "timeout": 30000
+   },
+   {
+    "outputDir": "<repo>/.relynx/runs/capture2/out",
+    "repeatEach": 1,
+    "retries": 1,
+    "metadata": {
+     "actualWorkers": 4
+    },
+    "id": "agent-generated",
+    "name": "agent-generated",
+    "testDir": "<repo>/generated",
+    "testIgnore": [],
+    "testMatch": [
+     "/^\\/Users\\/frankvu\\/Projects\\/frankvu-ai-driven-playwright-framework\\/generated\\/capture2\\/capture\\.spec\\.ts$/"
+    ],
+    "timeout": 30000
+   }
+  ],
+  "filteredProjects": [
+   {
+    "grep": {},
+    "grepInvert": null,
+    "outputDir": "<repo>/.relynx/runs/capture2/out",
+    "repeatEach": 1,
+    "retries": 1,
+    "metadata": {
+     "actualWorkers": 4
+    },
+    "name": "agent-generated",
+    "testDir": "<repo>/generated",
+    "snapshotDir": "<repo>/generated",
+    "testIgnore": [],
+    "testMatch": [
+     {}
+    ],
+    "timeout": 30000,
+    "use": {
+     "trace": "retain-on-failure",
+     "screenshot": "only-on-failure",
+     "video": "off",
+     "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+     "viewport": {
+      "width": 1280,
+      "height": 720
+     },
+     "screen": {
+      "width": 1920,
+      "height": 1080
+     },
+     "deviceScaleFactor": 1,
+     "isMobile": false,
+     "hasTouch": false,
+     "defaultBrowserType": "chromium",
+     "baseURL": "https://www.saucedemo.com",
+     "testIdAttribute": "data-test",
+     "storageState": "<repo>/.relynx/runs/capture2/session-state.json"
+    },
+    "dependencies": [
+     "agent-setup"
+    ],
+    "ignoreSnapshots": false,
+    "__projectId": "agent-generated"
+   }
+  ],
+  "quiet": false,
+  "reporter": [
+   [
+    "json",
+    {
+     "outputFile": "<repo>/.relynx/runs/capture2/report.json"
+    }
+   ]
+  ],
+  "reportSlowTests": {
+   "max": 5,
+   "threshold": 300000
+  },
+  "shard": null,
+  "tags": [],
+  "updateSnapshots": "default",
+  "updateSourceMethod": "patch",
+  "version": "1.64.1",
+  "workers": 4,
+  "webServer": null
+ },
+ "suites": [
+  {
+   "title": "setup/session.agent-setup.ts",
+   "file": "setup/session.agent-setup.ts",
+   "column": 0,
+   "line": 0,
+   "specs": [
+    {
+     "title": "sign in as standard session user",
+     "ok": true,
+     "tags": [],
+     "tests": [
+      {
+       "timeout": 30000,
+       "annotations": [],
+       "expectedStatus": "passed",
+       "projectId": "agent-setup",
+       "projectName": "agent-setup",
+       "results": [
+        {
+         "workerIndex": 0,
+         "parallelIndex": 0,
+         "status": "passed",
+         "duration": 402,
+         "errors": [],
+         "stdout": [],
+         "stderr": [],
+         "retry": 0,
+         "startTime": "2026-10-18T21:34:22.799Z",
+         "annotations": [],
+         "attachments": []
+        }
+       ],
+       "status": "expected"
+      }
+     ],
+     "id": "9c81aea236b27177769b-dd3995accf35b91aba6e",
+     "file": "setup/session.agent-setup.ts",
+     "line": 14,
+     "column": 6
+    }
+   ]
+  },
+  {
+   "title": "../generated/capture2/capture.spec.ts",
+   "file": "../generated/capture2/capture.spec.ts",
+   "column": 0,
+   "line": 0,
+   "specs": [
+    {
+     "title": "regression-add-to-cart",
+     "ok": false,
+     "tags": [],
+     "tests": [
+      {
+       "timeout": 30000,
+       "annotations": [
+        {
+         "type": "scenario",
+         "description": "CAP-2-SC-01",
+         "location": {
+          "file": "<repo>/generated/capture2/capture.spec.ts",
+          "line": 11,
+          "column": 5
+         }
+        }
+       ],
+       "expectedStatus": "passed",
+       "projectId": "agent-generated",
+       "projectName": "agent-generated",
+       "results": [
+        {
+         "workerIndex": 1,
+         "parallelIndex": 0,
+         "status": "failed",
+         "duration": 5675,
+         "error": {
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('shopping-cart-badge')\nExpected: \u001b[32m\"1\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('shopping-cart-badge') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('shopping-cart-badge')\u001b[22m\n",
+          "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('shopping-cart-badge')\nExpected: \u001b[32m\"1\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('shopping-cart-badge') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('shopping-cart-badge')\u001b[22m\n\n    at <repo>/generated/capture2/capture.spec.ts:14:57",
+          "location": {
+           "file": "<repo>/generated/capture2/capture.spec.ts",
+           "column": 57,
+           "line": 14
+          },
+          "snippet": "  12 |   await signIn(page, 'problem_user');\n  13 |   await page.getByTestId('add-to-cart-sauce-labs-bolt-t-shirt').click();\n> 14 |   await expect(page.getByTestId('shopping-cart-badge')).toHaveText('1');\n     |                                                         ^\n  15 | });\n  16 | test('regression-finish', ann('CAP-2-SC-02'), async ({ page }) => {\n  17 |   test.setTimeout(15_000);"
+         },
+         "errors": [
+          {
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "column": 57,
+            "line": 14
+           },
+           "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('shopping-cart-badge')\nExpected: \u001b[32m\"1\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('shopping-cart-badge') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('shopping-cart-badge')\u001b[22m\n\n\n  12 |   await signIn(page, 'problem_user');\n  13 |   await page.getByTestId('add-to-cart-sauce-labs-bolt-t-shirt').click();\n> 14 |   await expect(page.getByTestId('shopping-cart-badge')).toHaveText('1');\n     |                                                         ^\n  15 | });\n  16 | test('regression-finish', ann('CAP-2-SC-02'), async ({ page }) => {\n  17 |   test.setTimeout(15_000);\n    at <repo>/generated/capture2/capture.spec.ts:14:57"
+          }
+         ],
+         "stdout": [],
+         "stderr": [],
+         "retry": 0,
+         "startTime": "2026-10-18T21:34:23.610Z",
+         "annotations": [
+          {
+           "type": "scenario",
+           "description": "CAP-2-SC-01",
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "line": 11,
+            "column": 5
+           }
+          }
+         ],
+         "attachments": [
+          {
+           "name": "screenshot",
+           "contentType": "image/png",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-regression-add-to-cart-agent-generated/test-failed-1.png"
+          },
+          {
+           "name": "error-context",
+           "contentType": "text/markdown",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-regression-add-to-cart-agent-generated/error-context.md"
+          },
+          {
+           "name": "trace",
+           "contentType": "application/zip",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-regression-add-to-cart-agent-generated/trace.zip"
+          }
+         ],
+         "errorLocation": {
+          "file": "<repo>/generated/capture2/capture.spec.ts",
+          "column": 57,
+          "line": 14
+         }
+        },
+        {
+         "workerIndex": 6,
+         "parallelIndex": 0,
+         "status": "failed",
+         "duration": 5554,
+         "error": {
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('shopping-cart-badge')\nExpected: \u001b[32m\"1\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('shopping-cart-badge') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('shopping-cart-badge')\u001b[22m\n",
+          "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('shopping-cart-badge')\nExpected: \u001b[32m\"1\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('shopping-cart-badge') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('shopping-cart-badge')\u001b[22m\n\n    at <repo>/generated/capture2/capture.spec.ts:14:57",
+          "location": {
+           "file": "<repo>/generated/capture2/capture.spec.ts",
+           "column": 57,
+           "line": 14
+          },
+          "snippet": "  12 |   await signIn(page, 'problem_user');\n  13 |   await page.getByTestId('add-to-cart-sauce-labs-bolt-t-shirt').click();\n> 14 |   await expect(page.getByTestId('shopping-cart-badge')).toHaveText('1');\n     |                                                         ^\n  15 | });\n  16 | test('regression-finish', ann('CAP-2-SC-02'), async ({ page }) => {\n  17 |   test.setTimeout(15_000);"
+         },
+         "errors": [
+          {
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "column": 57,
+            "line": 14
+           },
+           "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByTestId('shopping-cart-badge')\nExpected: \u001b[32m\"1\"\u001b[39m\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('shopping-cart-badge') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('shopping-cart-badge')\u001b[22m\n\n\n  12 |   await signIn(page, 'problem_user');\n  13 |   await page.getByTestId('add-to-cart-sauce-labs-bolt-t-shirt').click();\n> 14 |   await expect(page.getByTestId('shopping-cart-badge')).toHaveText('1');\n     |                                                         ^\n  15 | });\n  16 | test('regression-finish', ann('CAP-2-SC-02'), async ({ page }) => {\n  17 |   test.setTimeout(15_000);\n    at <repo>/generated/capture2/capture.spec.ts:14:57"
+          }
+         ],
+         "stdout": [],
+         "stderr": [],
+         "retry": 1,
+         "startTime": "2026-10-18T21:34:29.767Z",
+         "annotations": [
+          {
+           "type": "scenario",
+           "description": "CAP-2-SC-01",
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "line": 11,
+            "column": 5
+           }
+          }
+         ],
+         "attachments": [
+          {
+           "name": "screenshot",
+           "contentType": "image/png",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-regression-add-to-cart-agent-generated-retry1/test-failed-1.png"
+          },
+          {
+           "name": "error-context",
+           "contentType": "text/markdown",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-regression-add-to-cart-agent-generated-retry1/error-context.md"
+          },
+          {
+           "name": "trace",
+           "contentType": "application/zip",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-regression-add-to-cart-agent-generated-retry1/trace.zip"
+          }
+         ],
+         "errorLocation": {
+          "file": "<repo>/generated/capture2/capture.spec.ts",
+          "column": 57,
+          "line": 14
+         }
+        }
+       ],
+       "status": "unexpected"
+      }
+     ],
+     "id": "1cf4d77ed79077317e86-609a365470bb02e774a1",
+     "file": "../generated/capture2/capture.spec.ts",
+     "line": 11,
+     "column": 5
+    },
+    {
+     "title": "regression-finish",
+     "ok": false,
+     "tags": [],
+     "tests": [
+      {
+       "timeout": 15000,
+       "annotations": [
+        {
+         "type": "scenario",
+         "description": "CAP-2-SC-02",
+         "location": {
+          "file": "<repo>/generated/capture2/capture.spec.ts",
+          "line": 16,
+          "column": 5
+         }
+        }
+       ],
+       "expectedStatus": "passed",
+       "projectId": "agent-generated",
+       "projectName": "agent-generated",
+       "results": [
+        {
+         "workerIndex": 2,
+         "parallelIndex": 1,
+         "status": "failed",
+         "duration": 5837,
+         "error": {
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Thank you for your order!' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: 'Thank you for your order!' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Thank you for your order!' })\u001b[22m\n",
+          "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Thank you for your order!' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: 'Thank you for your order!' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Thank you for your order!' })\u001b[22m\n\n    at <repo>/generated/capture2/capture.spec.ts:25:82",
+          "location": {
+           "file": "<repo>/generated/capture2/capture.spec.ts",
+           "column": 82,
+           "line": 25
+          },
+          "snippet": "  23 |   await page.getByRole('button', { name: 'Continue' }).click();\n  24 |   await page.getByRole('button', { name: 'Finish' }).click();\n> 25 |   await expect(page.getByRole('heading', { name: 'Thank you for your order!' })).toBeVisible();\n     |                                                                                  ^\n  26 | });\n  27 | test('incorrect-assertion-count', ann('CAP-2-SC-03'), async ({ page }) => {\n  28 |   await signIn(page, 'standard_user');"
+         },
+         "errors": [
+          {
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "column": 82,
+            "line": 25
+           },
+           "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Thank you for your order!' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: 'Thank you for your order!' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Thank you for your order!' })\u001b[22m\n\n\n  23 |   await page.getByRole('button', { name: 'Continue' }).click();\n  24 |   await page.getByRole('button', { name: 'Finish' }).click();\n> 25 |   await expect(page.getByRole('heading', { name: 'Thank you for your order!' })).toBeVisible();\n     |                                                                                  ^\n  26 | });\n  27 | test('incorrect-assertion-count', ann('CAP-2-SC-03'), async ({ page }) => {\n  28 |   await signIn(page, 'standard_user');\n    at <repo>/generated/capture2/capture.spec.ts:25:82"
+          }
+         ],
+         "stdout": [],
+         "stderr": [],
+         "retry": 0,
+         "startTime": "2026-10-18T21:34:23.611Z",
+         "annotations": [
+          {
+           "type": "scenario",
+           "description": "CAP-2-SC-02",
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "line": 16,
+            "column": 5
+           }
+          }
+         ],
+         "attachments": [
+          {
+           "name": "screenshot",
+           "contentType": "image/png",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-regression-finish-agent-generated/test-failed-1.png"
+          },
+          {
+           "name": "error-context",
+           "contentType": "text/markdown",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-regression-finish-agent-generated/error-context.md"
+          },
+          {
+           "name": "trace",
+           "contentType": "application/zip",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-regression-finish-agent-generated/trace.zip"
+          }
+         ],
+         "errorLocation": {
+          "file": "<repo>/generated/capture2/capture.spec.ts",
+          "column": 82,
+          "line": 25
+         }
+        },
+        {
+         "workerIndex": 7,
+         "parallelIndex": 1,
+         "status": "failed",
+         "duration": 5685,
+         "error": {
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Thank you for your order!' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: 'Thank you for your order!' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Thank you for your order!' })\u001b[22m\n",
+          "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Thank you for your order!' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: 'Thank you for your order!' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Thank you for your order!' })\u001b[22m\n\n    at <repo>/generated/capture2/capture.spec.ts:25:82",
+          "location": {
+           "file": "<repo>/generated/capture2/capture.spec.ts",
+           "column": 82,
+           "line": 25
+          },
+          "snippet": "  23 |   await page.getByRole('button', { name: 'Continue' }).click();\n  24 |   await page.getByRole('button', { name: 'Finish' }).click();\n> 25 |   await expect(page.getByRole('heading', { name: 'Thank you for your order!' })).toBeVisible();\n     |                                                                                  ^\n  26 | });\n  27 | test('incorrect-assertion-count', ann('CAP-2-SC-03'), async ({ page }) => {\n  28 |   await signIn(page, 'standard_user');"
+         },
+         "errors": [
+          {
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "column": 82,
+            "line": 25
+           },
+           "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('heading', { name: 'Thank you for your order!' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByRole('heading', { name: 'Thank you for your order!' }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('heading', { name: 'Thank you for your order!' })\u001b[22m\n\n\n  23 |   await page.getByRole('button', { name: 'Continue' }).click();\n  24 |   await page.getByRole('button', { name: 'Finish' }).click();\n> 25 |   await expect(page.getByRole('heading', { name: 'Thank you for your order!' })).toBeVisible();\n     |                                                                                  ^\n  26 | });\n  27 | test('incorrect-assertion-count', ann('CAP-2-SC-03'), async ({ page }) => {\n  28 |   await signIn(page, 'standard_user');\n    at <repo>/generated/capture2/capture.spec.ts:25:82"
+          }
+         ],
+         "stdout": [],
+         "stderr": [],
+         "retry": 1,
+         "startTime": "2026-10-18T21:34:30.034Z",
+         "annotations": [
+          {
+           "type": "scenario",
+           "description": "CAP-2-SC-02",
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "line": 16,
+            "column": 5
+           }
+          }
+         ],
+         "attachments": [
+          {
+           "name": "screenshot",
+           "contentType": "image/png",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-regression-finish-agent-generated-retry1/test-failed-1.png"
+          },
+          {
+           "name": "error-context",
+           "contentType": "text/markdown",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-regression-finish-agent-generated-retry1/error-context.md"
+          },
+          {
+           "name": "trace",
+           "contentType": "application/zip",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-regression-finish-agent-generated-retry1/trace.zip"
+          }
+         ],
+         "errorLocation": {
+          "file": "<repo>/generated/capture2/capture.spec.ts",
+          "column": 82,
+          "line": 25
+         }
+        }
+       ],
+       "status": "unexpected"
+      }
+     ],
+     "id": "1cf4d77ed79077317e86-1fb87878878df1791b10",
+     "file": "../generated/capture2/capture.spec.ts",
+     "line": 16,
+     "column": 5
+    },
+    {
+     "title": "incorrect-assertion-count",
+     "ok": false,
+     "tags": [],
+     "tests": [
+      {
+       "timeout": 30000,
+       "annotations": [
+        {
+         "type": "scenario",
+         "description": "CAP-2-SC-03",
+         "location": {
+          "file": "<repo>/generated/capture2/capture.spec.ts",
+          "line": 27,
+          "column": 5
+         }
+        }
+       ],
+       "expectedStatus": "passed",
+       "projectId": "agent-generated",
+       "projectName": "agent-generated",
+       "results": [
+        {
+         "workerIndex": 3,
+         "parallelIndex": 2,
+         "status": "failed",
+         "duration": 5629,
+         "error": {
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('inventory-item')\nExpected: \u001b[32m5\u001b[39m\nReceived: \u001b[31m6\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" getByTestId('inventory-item') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('inventory-item')\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to 6 elements\u001b[22m\n\u001b[2m       - unexpected value \"6\"\u001b[22m\n",
+          "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('inventory-item')\nExpected: \u001b[32m5\u001b[39m\nReceived: \u001b[31m6\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" getByTestId('inventory-item') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('inventory-item')\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to 6 elements\u001b[22m\n\u001b[2m       - unexpected value \"6\"\u001b[22m\n\n    at <repo>/generated/capture2/capture.spec.ts:29:52",
+          "location": {
+           "file": "<repo>/generated/capture2/capture.spec.ts",
+           "column": 52,
+           "line": 29
+          },
+          "snippet": "  27 | test('incorrect-assertion-count', ann('CAP-2-SC-03'), async ({ page }) => {\n  28 |   await signIn(page, 'standard_user');\n> 29 |   await expect(page.getByTestId('inventory-item')).toHaveCount(5);\n     |                                                    ^\n  30 | });\n  31 | test('locator-click-timeout', ann('CAP-2-SC-04'), async ({ page }) => {\n  32 |   test.setTimeout(8_000);"
+         },
+         "errors": [
+          {
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "column": 52,
+            "line": 29
+           },
+           "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('inventory-item')\nExpected: \u001b[32m5\u001b[39m\nReceived: \u001b[31m6\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" getByTestId('inventory-item') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('inventory-item')\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to 6 elements\u001b[22m\n\u001b[2m       - unexpected value \"6\"\u001b[22m\n\n\n  27 | test('incorrect-assertion-count', ann('CAP-2-SC-03'), async ({ page }) => {\n  28 |   await signIn(page, 'standard_user');\n> 29 |   await expect(page.getByTestId('inventory-item')).toHaveCount(5);\n     |                                                    ^\n  30 | });\n  31 | test('locator-click-timeout', ann('CAP-2-SC-04'), async ({ page }) => {\n  32 |   test.setTimeout(8_000);\n    at <repo>/generated/capture2/capture.spec.ts:29:52"
+          }
+         ],
+         "stdout": [],
+         "stderr": [],
+         "retry": 0,
+         "startTime": "2026-10-18T21:34:23.599Z",
+         "annotations": [
+          {
+           "type": "scenario",
+           "description": "CAP-2-SC-03",
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "line": 27,
+            "column": 5
+           }
+          }
+         ],
+         "attachments": [
+          {
+           "name": "screenshot",
+           "contentType": "image/png",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-incorrect-assertion-count-agent-generated/test-failed-1.png"
+          },
+          {
+           "name": "error-context",
+           "contentType": "text/markdown",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-incorrect-assertion-count-agent-generated/error-context.md"
+          },
+          {
+           "name": "trace",
+           "contentType": "application/zip",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-incorrect-assertion-count-agent-generated/trace.zip"
+          }
+         ],
+         "errorLocation": {
+          "file": "<repo>/generated/capture2/capture.spec.ts",
+          "column": 52,
+          "line": 29
+         }
+        },
+        {
+         "workerIndex": 5,
+         "parallelIndex": 2,
+         "status": "failed",
+         "duration": 5536,
+         "error": {
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('inventory-item')\nExpected: \u001b[32m5\u001b[39m\nReceived: \u001b[31m6\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" getByTestId('inventory-item') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('inventory-item')\u001b[22m\n\u001b[2m    - locator resolved to 0 elements\u001b[22m\n\u001b[2m    - unexpected value \"0\"\u001b[22m\n\u001b[2m    13 \u00d7 locator resolved to 6 elements\u001b[22m\n\u001b[2m       - unexpected value \"6\"\u001b[22m\n",
+          "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('inventory-item')\nExpected: \u001b[32m5\u001b[39m\nReceived: \u001b[31m6\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" getByTestId('inventory-item') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('inventory-item')\u001b[22m\n\u001b[2m    - locator resolved to 0 elements\u001b[22m\n\u001b[2m    - unexpected value \"0\"\u001b[22m\n\u001b[2m    13 \u00d7 locator resolved to 6 elements\u001b[22m\n\u001b[2m       - unexpected value \"6\"\u001b[22m\n\n    at <repo>/generated/capture2/capture.spec.ts:29:52",
+          "location": {
+           "file": "<repo>/generated/capture2/capture.spec.ts",
+           "column": 52,
+           "line": 29
+          },
+          "snippet": "  27 | test('incorrect-assertion-count', ann('CAP-2-SC-03'), async ({ page }) => {\n  28 |   await signIn(page, 'standard_user');\n> 29 |   await expect(page.getByTestId('inventory-item')).toHaveCount(5);\n     |                                                    ^\n  30 | });\n  31 | test('locator-click-timeout', ann('CAP-2-SC-04'), async ({ page }) => {\n  32 |   test.setTimeout(8_000);"
+         },
+         "errors": [
+          {
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "column": 52,
+            "line": 29
+           },
+           "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('inventory-item')\nExpected: \u001b[32m5\u001b[39m\nReceived: \u001b[31m6\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" getByTestId('inventory-item') with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('inventory-item')\u001b[22m\n\u001b[2m    - locator resolved to 0 elements\u001b[22m\n\u001b[2m    - unexpected value \"0\"\u001b[22m\n\u001b[2m    13 \u00d7 locator resolved to 6 elements\u001b[22m\n\u001b[2m       - unexpected value \"6\"\u001b[22m\n\n\n  27 | test('incorrect-assertion-count', ann('CAP-2-SC-03'), async ({ page }) => {\n  28 |   await signIn(page, 'standard_user');\n> 29 |   await expect(page.getByTestId('inventory-item')).toHaveCount(5);\n     |                                                    ^\n  30 | });\n  31 | test('locator-click-timeout', ann('CAP-2-SC-04'), async ({ page }) => {\n  32 |   test.setTimeout(8_000);\n    at <repo>/generated/capture2/capture.spec.ts:29:52"
+          }
+         ],
+         "stdout": [],
+         "stderr": [],
+         "retry": 1,
+         "startTime": "2026-10-18T21:34:29.736Z",
+         "annotations": [
+          {
+           "type": "scenario",
+           "description": "CAP-2-SC-03",
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "line": 27,
+            "column": 5
+           }
+          }
+         ],
+         "attachments": [
+          {
+           "name": "screenshot",
+           "contentType": "image/png",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-incorrect-assertion-count-agent-generated-retry1/test-failed-1.png"
+          },
+          {
+           "name": "error-context",
+           "contentType": "text/markdown",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-incorrect-assertion-count-agent-generated-retry1/error-context.md"
+          },
+          {
+           "name": "trace",
+           "contentType": "application/zip",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-incorrect-assertion-count-agent-generated-retry1/trace.zip"
+          }
+         ],
+         "errorLocation": {
+          "file": "<repo>/generated/capture2/capture.spec.ts",
+          "column": 52,
+          "line": 29
+         }
+        }
+       ],
+       "status": "unexpected"
+      }
+     ],
+     "id": "1cf4d77ed79077317e86-3e60e5d63641ba545cec",
+     "file": "../generated/capture2/capture.spec.ts",
+     "line": 27,
+     "column": 5
+    },
+    {
+     "title": "locator-click-timeout",
+     "ok": false,
+     "tags": [],
+     "tests": [
+      {
+       "timeout": 8000,
+       "annotations": [
+        {
+         "type": "scenario",
+         "description": "CAP-2-SC-04",
+         "location": {
+          "file": "<repo>/generated/capture2/capture.spec.ts",
+          "line": 31,
+          "column": 5
+         }
+        }
+       ],
+       "expectedStatus": "passed",
+       "projectId": "agent-generated",
+       "projectName": "agent-generated",
+       "results": [
+        {
+         "workerIndex": 4,
+         "parallelIndex": 3,
+         "status": "timedOut",
+         "duration": 8113,
+         "error": {
+          "message": "\u001b[31mTest timeout of 8000ms exceeded.\u001b[39m",
+          "stack": "\u001b[31mTest timeout of 8000ms exceeded.\u001b[39m"
+         },
+         "errors": [
+          {
+           "message": "\u001b[31mTest timeout of 8000ms exceeded.\u001b[39m"
+          },
+          {
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "column": 63,
+            "line": 34
+           },
+           "message": "Error: locator.click: Test timeout of 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Add all to cart' })\u001b[22m\n\n\n  32 |   test.setTimeout(8_000);\n  33 |   await signIn(page, 'standard_user');\n> 34 |   await page.getByRole('button', { name: 'Add all to cart' }).click();\n     |                                                               ^\n  35 | });\n  36 | test('test-data-unknown-product', ann('CAP-2-SC-05'), async ({ page }) => {\n  37 |   test.setTimeout(8_000);\n    at <repo>/generated/capture2/capture.spec.ts:34:63"
+          }
+         ],
+         "stdout": [],
+         "stderr": [],
+         "retry": 0,
+         "startTime": "2026-10-18T21:34:23.611Z",
+         "annotations": [
+          {
+           "type": "scenario",
+           "description": "CAP-2-SC-04",
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "line": 31,
+            "column": 5
+           }
+          }
+         ],
+         "attachments": [
+          {
+           "name": "screenshot",
+           "contentType": "image/png",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-locator-click-timeout-agent-generated/test-failed-1.png"
+          },
+          {
+           "name": "error-context",
+           "contentType": "text/markdown",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-locator-click-timeout-agent-generated/error-context.md"
+          },
+          {
+           "name": "trace",
+           "contentType": "application/zip",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-locator-click-timeout-agent-generated/trace.zip"
+          }
+         ]
+        },
+        {
+         "workerIndex": 8,
+         "parallelIndex": 3,
+         "status": "timedOut",
+         "duration": 8094,
+         "error": {
+          "message": "\u001b[31mTest timeout of 8000ms exceeded.\u001b[39m",
+          "stack": "\u001b[31mTest timeout of 8000ms exceeded.\u001b[39m"
+         },
+         "errors": [
+          {
+           "message": "\u001b[31mTest timeout of 8000ms exceeded.\u001b[39m"
+          },
+          {
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "column": 63,
+            "line": 34
+           },
+           "message": "Error: locator.click: Test timeout of 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Add all to cart' })\u001b[22m\n\n\n  32 |   test.setTimeout(8_000);\n  33 |   await signIn(page, 'standard_user');\n> 34 |   await page.getByRole('button', { name: 'Add all to cart' }).click();\n     |                                                               ^\n  35 | });\n  36 | test('test-data-unknown-product', ann('CAP-2-SC-05'), async ({ page }) => {\n  37 |   test.setTimeout(8_000);\n    at <repo>/generated/capture2/capture.spec.ts:34:63"
+          }
+         ],
+         "stdout": [],
+         "stderr": [],
+         "retry": 1,
+         "startTime": "2026-10-18T21:34:32.183Z",
+         "annotations": [
+          {
+           "type": "scenario",
+           "description": "CAP-2-SC-04",
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "line": 31,
+            "column": 5
+           }
+          }
+         ],
+         "attachments": [
+          {
+           "name": "screenshot",
+           "contentType": "image/png",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-locator-click-timeout-agent-generated-retry1/test-failed-1.png"
+          },
+          {
+           "name": "error-context",
+           "contentType": "text/markdown",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-locator-click-timeout-agent-generated-retry1/error-context.md"
+          },
+          {
+           "name": "trace",
+           "contentType": "application/zip",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-locator-click-timeout-agent-generated-retry1/trace.zip"
+          }
+         ]
+        }
+       ],
+       "status": "unexpected"
+      }
+     ],
+     "id": "1cf4d77ed79077317e86-2460273df34963c493b5",
+     "file": "../generated/capture2/capture.spec.ts",
+     "line": 31,
+     "column": 5
+    },
+    {
+     "title": "test-data-unknown-product",
+     "ok": false,
+     "tags": [],
+     "tests": [
+      {
+       "timeout": 8000,
+       "annotations": [
+        {
+         "type": "scenario",
+         "description": "CAP-2-SC-05",
+         "location": {
+          "file": "<repo>/generated/capture2/capture.spec.ts",
+          "line": 36,
+          "column": 5
+         }
+        }
+       ],
+       "expectedStatus": "passed",
+       "projectId": "agent-generated",
+       "projectName": "agent-generated",
+       "results": [
+        {
+         "workerIndex": 9,
+         "parallelIndex": 2,
+         "status": "timedOut",
+         "duration": 8109,
+         "error": {
+          "message": "\u001b[31mTest timeout of 8000ms exceeded.\u001b[39m",
+          "stack": "\u001b[31mTest timeout of 8000ms exceeded.\u001b[39m"
+         },
+         "errors": [
+          {
+           "message": "\u001b[31mTest timeout of 8000ms exceeded.\u001b[39m"
+          },
+          {
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "column": 130,
+            "line": 39
+           },
+           "message": "Error: locator.click: Test timeout of 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByTestId('inventory-item').filter({ hasText: 'Sauce Labs Hoodie' }).getByRole('button', { name: 'Add to cart' })\u001b[22m\n\n\n  37 |   test.setTimeout(8_000);\n  38 |   await signIn(page, 'standard_user');\n> 39 |   await page.getByTestId('inventory-item').filter({ hasText: 'Sauce Labs Hoodie' }).getByRole('button', { name: 'Add to cart' }).click();\n     |                                                                                                                                  ^\n  40 | });\n  41 | test('environment-dns', ann('CAP-2-SC-06'), async ({ page }) => {\n  42 |   await page.goto('https://relynx-does-not-exist.invalid/');\n    at <repo>/generated/capture2/capture.spec.ts:39:130"
+          }
+         ],
+         "stdout": [],
+         "stderr": [],
+         "retry": 0,
+         "startTime": "2026-10-18T21:34:35.717Z",
+         "annotations": [
+          {
+           "type": "scenario",
+           "description": "CAP-2-SC-05",
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "line": 36,
+            "column": 5
+           }
+          }
+         ],
+         "attachments": [
+          {
+           "name": "screenshot",
+           "contentType": "image/png",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-test-data-unknown-product-agent-generated/test-failed-1.png"
+          },
+          {
+           "name": "error-context",
+           "contentType": "text/markdown",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-test-data-unknown-product-agent-generated/error-context.md"
+          },
+          {
+           "name": "trace",
+           "contentType": "application/zip",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-test-data-unknown-product-agent-generated/trace.zip"
+          }
+         ]
+        },
+        {
+         "workerIndex": 17,
+         "parallelIndex": 0,
+         "status": "timedOut",
+         "duration": 8121,
+         "error": {
+          "message": "\u001b[31mTest timeout of 8000ms exceeded.\u001b[39m",
+          "stack": "\u001b[31mTest timeout of 8000ms exceeded.\u001b[39m"
+         },
+         "errors": [
+          {
+           "message": "\u001b[31mTest timeout of 8000ms exceeded.\u001b[39m"
+          },
+          {
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "column": 130,
+            "line": 39
+           },
+           "message": "Error: locator.click: Test timeout of 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByTestId('inventory-item').filter({ hasText: 'Sauce Labs Hoodie' }).getByRole('button', { name: 'Add to cart' })\u001b[22m\n\n\n  37 |   test.setTimeout(8_000);\n  38 |   await signIn(page, 'standard_user');\n> 39 |   await page.getByTestId('inventory-item').filter({ hasText: 'Sauce Labs Hoodie' }).getByRole('button', { name: 'Add to cart' }).click();\n     |                                                                                                                                  ^\n  40 | });\n  41 | test('environment-dns', ann('CAP-2-SC-06'), async ({ page }) => {\n  42 |   await page.goto('https://relynx-does-not-exist.invalid/');\n    at <repo>/generated/capture2/capture.spec.ts:39:130"
+          }
+         ],
+         "stdout": [],
+         "stderr": [],
+         "retry": 1,
+         "startTime": "2026-10-18T21:34:44.223Z",
+         "annotations": [
+          {
+           "type": "scenario",
+           "description": "CAP-2-SC-05",
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "line": 36,
+            "column": 5
+           }
+          }
+         ],
+         "attachments": [
+          {
+           "name": "screenshot",
+           "contentType": "image/png",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-test-data-unknown-product-agent-generated-retry1/test-failed-1.png"
+          },
+          {
+           "name": "error-context",
+           "contentType": "text/markdown",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-test-data-unknown-product-agent-generated-retry1/error-context.md"
+          },
+          {
+           "name": "trace",
+           "contentType": "application/zip",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-test-data-unknown-product-agent-generated-retry1/trace.zip"
+          }
+         ]
+        }
+       ],
+       "status": "unexpected"
+      }
+     ],
+     "id": "1cf4d77ed79077317e86-f78e3d8db216622fed84",
+     "file": "../generated/capture2/capture.spec.ts",
+     "line": 36,
+     "column": 5
+    },
+    {
+     "title": "environment-dns",
+     "ok": false,
+     "tags": [],
+     "tests": [
+      {
+       "timeout": 30000,
+       "annotations": [
+        {
+         "type": "scenario",
+         "description": "CAP-2-SC-06",
+         "location": {
+          "file": "<repo>/generated/capture2/capture.spec.ts",
+          "line": 41,
+          "column": 5
+         }
+        }
+       ],
+       "expectedStatus": "passed",
+       "projectId": "agent-generated",
+       "projectName": "agent-generated",
+       "results": [
+        {
+         "workerIndex": 10,
+         "parallelIndex": 0,
+         "status": "failed",
+         "duration": 193,
+         "error": {
+          "message": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://relynx-does-not-exist.invalid/\nCall log:\n\u001b[2m  - navigating to \"https://relynx-does-not-exist.invalid/\", waiting until \"load\"\u001b[22m\n",
+          "stack": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://relynx-does-not-exist.invalid/\nCall log:\n\u001b[2m  - navigating to \"https://relynx-does-not-exist.invalid/\", waiting until \"load\"\u001b[22m\n\n    at <repo>/generated/capture2/capture.spec.ts:42:14",
+          "location": {
+           "file": "<repo>/generated/capture2/capture.spec.ts",
+           "column": 14,
+           "line": 42
+          },
+          "snippet": "  40 | });\n  41 | test('environment-dns', ann('CAP-2-SC-06'), async ({ page }) => {\n> 42 |   await page.goto('https://relynx-does-not-exist.invalid/');\n     |              ^\n  43 | });\n  44 | test('test-timeout-slow-user', ann('CAP-2-SC-07'), async ({ page }) => {\n  45 |   test.setTimeout(3_000);"
+         },
+         "errors": [
+          {
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "column": 14,
+            "line": 42
+           },
+           "message": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://relynx-does-not-exist.invalid/\nCall log:\n\u001b[2m  - navigating to \"https://relynx-does-not-exist.invalid/\", waiting until \"load\"\u001b[22m\n\n\n  40 | });\n  41 | test('environment-dns', ann('CAP-2-SC-06'), async ({ page }) => {\n> 42 |   await page.goto('https://relynx-does-not-exist.invalid/');\n     |              ^\n  43 | });\n  44 | test('test-timeout-slow-user', ann('CAP-2-SC-07'), async ({ page }) => {\n  45 |   test.setTimeout(3_000);\n    at <repo>/generated/capture2/capture.spec.ts:42:14"
+          }
+         ],
+         "stdout": [],
+         "stderr": [],
+         "retry": 0,
+         "startTime": "2026-10-18T21:34:35.741Z",
+         "annotations": [
+          {
+           "type": "scenario",
+           "description": "CAP-2-SC-06",
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "line": 41,
+            "column": 5
+           }
+          }
+         ],
+         "attachments": [
+          {
+           "name": "screenshot",
+           "contentType": "image/png",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-environment-dns-agent-generated/test-failed-1.png"
+          },
+          {
+           "name": "error-context",
+           "contentType": "text/markdown",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-environment-dns-agent-generated/error-context.md"
+          },
+          {
+           "name": "trace",
+           "contentType": "application/zip",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-environment-dns-agent-generated/trace.zip"
+          }
+         ],
+         "errorLocation": {
+          "file": "<repo>/generated/capture2/capture.spec.ts",
+          "column": 14,
+          "line": 42
+         }
+        },
+        {
+         "workerIndex": 12,
+         "parallelIndex": 0,
+         "status": "failed",
+         "duration": 182,
+         "error": {
+          "message": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://relynx-does-not-exist.invalid/\nCall log:\n\u001b[2m  - navigating to \"https://relynx-does-not-exist.invalid/\", waiting until \"load\"\u001b[22m\n",
+          "stack": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://relynx-does-not-exist.invalid/\nCall log:\n\u001b[2m  - navigating to \"https://relynx-does-not-exist.invalid/\", waiting until \"load\"\u001b[22m\n\n    at <repo>/generated/capture2/capture.spec.ts:42:14",
+          "location": {
+           "file": "<repo>/generated/capture2/capture.spec.ts",
+           "column": 14,
+           "line": 42
+          },
+          "snippet": "  40 | });\n  41 | test('environment-dns', ann('CAP-2-SC-06'), async ({ page }) => {\n> 42 |   await page.goto('https://relynx-does-not-exist.invalid/');\n     |              ^\n  43 | });\n  44 | test('test-timeout-slow-user', ann('CAP-2-SC-07'), async ({ page }) => {\n  45 |   test.setTimeout(3_000);"
+         },
+         "errors": [
+          {
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "column": 14,
+            "line": 42
+           },
+           "message": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://relynx-does-not-exist.invalid/\nCall log:\n\u001b[2m  - navigating to \"https://relynx-does-not-exist.invalid/\", waiting until \"load\"\u001b[22m\n\n\n  40 | });\n  41 | test('environment-dns', ann('CAP-2-SC-06'), async ({ page }) => {\n> 42 |   await page.goto('https://relynx-does-not-exist.invalid/');\n     |              ^\n  43 | });\n  44 | test('test-timeout-slow-user', ann('CAP-2-SC-07'), async ({ page }) => {\n  45 |   test.setTimeout(3_000);\n    at <repo>/generated/capture2/capture.spec.ts:42:14"
+          }
+         ],
+         "stdout": [],
+         "stderr": [],
+         "retry": 1,
+         "startTime": "2026-10-18T21:34:36.415Z",
+         "annotations": [
+          {
+           "type": "scenario",
+           "description": "CAP-2-SC-06",
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "line": 41,
+            "column": 5
+           }
+          }
+         ],
+         "attachments": [
+          {
+           "name": "screenshot",
+           "contentType": "image/png",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-environment-dns-agent-generated-retry1/test-failed-1.png"
+          },
+          {
+           "name": "error-context",
+           "contentType": "text/markdown",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-environment-dns-agent-generated-retry1/error-context.md"
+          },
+          {
+           "name": "trace",
+           "contentType": "application/zip",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-environment-dns-agent-generated-retry1/trace.zip"
+          }
+         ],
+         "errorLocation": {
+          "file": "<repo>/generated/capture2/capture.spec.ts",
+          "column": 14,
+          "line": 42
+         }
+        }
+       ],
+       "status": "unexpected"
+      }
+     ],
+     "id": "1cf4d77ed79077317e86-b889f7ec193afd3cc122",
+     "file": "../generated/capture2/capture.spec.ts",
+     "line": 41,
+     "column": 5
+    },
+    {
+     "title": "test-timeout-slow-user",
+     "ok": true,
+     "tags": [],
+     "tests": [
+      {
+       "timeout": 3000,
+       "annotations": [
+        {
+         "type": "scenario",
+         "description": "CAP-2-SC-07",
+         "location": {
+          "file": "<repo>/generated/capture2/capture.spec.ts",
+          "line": 44,
+          "column": 5
+         }
+        }
+       ],
+       "expectedStatus": "passed",
+       "projectId": "agent-generated",
+       "projectName": "agent-generated",
+       "results": [
+        {
+         "workerIndex": 11,
+         "parallelIndex": 1,
+         "status": "passed",
+         "duration": 5353,
+         "errors": [],
+         "stdout": [],
+         "stderr": [],
+         "retry": 0,
+         "startTime": "2026-10-18T21:34:36.273Z",
+         "annotations": [
+          {
+           "type": "scenario",
+           "description": "CAP-2-SC-07",
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "line": 44,
+            "column": 5
+           }
+          }
+         ],
+         "attachments": []
+        }
+       ],
+       "status": "expected"
+      }
+     ],
+     "id": "1cf4d77ed79077317e86-a8a91341ca32dd075abe",
+     "file": "../generated/capture2/capture.spec.ts",
+     "line": 44,
+     "column": 5
+    },
+    {
+     "title": "flaky-first-attempt",
+     "ok": true,
+     "tags": [],
+     "tests": [
+      {
+       "timeout": 30000,
+       "annotations": [
+        {
+         "type": "scenario",
+         "description": "CAP-2-SC-08",
+         "location": {
+          "file": "<repo>/generated/capture2/capture.spec.ts",
+          "line": 49,
+          "column": 5
+         }
+        }
+       ],
+       "expectedStatus": "passed",
+       "projectId": "agent-generated",
+       "projectName": "agent-generated",
+       "results": [
+        {
+         "workerIndex": 13,
+         "parallelIndex": 0,
+         "status": "failed",
+         "duration": 2412,
+         "error": {
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('title')\nExpected: \u001b[32m\"Loading\u2026\"\u001b[39m\nReceived: \u001b[31m\"Products\"\u001b[39m\nTimeout:  2000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('title') with timeout 2000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('title')\u001b[22m\n\u001b[2m    20 \u00d7 locator resolved to <span class=\"title\" data-test=\"title\">Products</span>\u001b[22m\n\u001b[2m       - unexpected value \"Products\"\u001b[22m\n",
+          "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('title')\nExpected: \u001b[32m\"Loading\u2026\"\u001b[39m\nReceived: \u001b[31m\"Products\"\u001b[39m\nTimeout:  2000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('title') with timeout 2000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('title')\u001b[22m\n\u001b[2m    20 \u00d7 locator resolved to <span class=\"title\" data-test=\"title\">Products</span>\u001b[22m\n\u001b[2m       - unexpected value \"Products\"\u001b[22m\n\n    at <repo>/generated/capture2/capture.spec.ts:51:43",
+          "location": {
+           "file": "<repo>/generated/capture2/capture.spec.ts",
+           "column": 43,
+           "line": 51
+          },
+          "snippet": "  49 | test('flaky-first-attempt', ann('CAP-2-SC-08'), async ({ page }, testInfo) => {\n  50 |   await signIn(page, 'standard_user');\n> 51 |   await expect(page.getByTestId('title')).toHaveText(testInfo.retry === 0 ? 'Loading\u2026' : 'Products', { timeout: 2000 });\n     |                                           ^\n  52 | });\n  53 | test('insufficient-evidence', ann('CAP-2-SC-09'), async ({ page }) => {\n  54 |   await signIn(page, 'standard_user');"
+         },
+         "errors": [
+          {
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "column": 43,
+            "line": 51
+           },
+           "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('title')\nExpected: \u001b[32m\"Loading\u2026\"\u001b[39m\nReceived: \u001b[31m\"Products\"\u001b[39m\nTimeout:  2000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" getByTestId('title') with timeout 2000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('title')\u001b[22m\n\u001b[2m    20 \u00d7 locator resolved to <span class=\"title\" data-test=\"title\">Products</span>\u001b[22m\n\u001b[2m       - unexpected value \"Products\"\u001b[22m\n\n\n  49 | test('flaky-first-attempt', ann('CAP-2-SC-08'), async ({ page }, testInfo) => {\n  50 |   await signIn(page, 'standard_user');\n> 51 |   await expect(page.getByTestId('title')).toHaveText(testInfo.retry === 0 ? 'Loading\u2026' : 'Products', { timeout: 2000 });\n     |                                           ^\n  52 | });\n  53 | test('insufficient-evidence', ann('CAP-2-SC-09'), async ({ page }) => {\n  54 |   await signIn(page, 'standard_user');\n    at <repo>/generated/capture2/capture.spec.ts:51:43"
+          }
+         ],
+         "stdout": [],
+         "stderr": [],
+         "retry": 0,
+         "startTime": "2026-10-18T21:34:36.993Z",
+         "annotations": [
+          {
+           "type": "scenario",
+           "description": "CAP-2-SC-08",
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "line": 49,
+            "column": 5
+           }
+          }
+         ],
+         "attachments": [
+          {
+           "name": "screenshot",
+           "contentType": "image/png",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-flaky-first-attempt-agent-generated/test-failed-1.png"
+          },
+          {
+           "name": "error-context",
+           "contentType": "text/markdown",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-flaky-first-attempt-agent-generated/error-context.md"
+          },
+          {
+           "name": "trace",
+           "contentType": "application/zip",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-flaky-first-attempt-agent-generated/trace.zip"
+          }
+         ],
+         "errorLocation": {
+          "file": "<repo>/generated/capture2/capture.spec.ts",
+          "column": 43,
+          "line": 51
+         }
+        },
+        {
+         "workerIndex": 14,
+         "parallelIndex": 0,
+         "status": "passed",
+         "duration": 414,
+         "errors": [],
+         "stdout": [],
+         "stderr": [],
+         "retry": 1,
+         "startTime": "2026-10-18T21:34:39.800Z",
+         "annotations": [
+          {
+           "type": "scenario",
+           "description": "CAP-2-SC-08",
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "line": 49,
+            "column": 5
+           }
+          }
+         ],
+         "attachments": []
+        }
+       ],
+       "status": "flaky"
+      }
+     ],
+     "id": "1cf4d77ed79077317e86-d0753e8842c3525e377d",
+     "file": "../generated/capture2/capture.spec.ts",
+     "line": 49,
+     "column": 5
+    },
+    {
+     "title": "insufficient-evidence",
+     "ok": false,
+     "tags": [],
+     "tests": [
+      {
+       "timeout": 30000,
+       "annotations": [
+        {
+         "type": "scenario",
+         "description": "CAP-2-SC-09",
+         "location": {
+          "file": "<repo>/generated/capture2/capture.spec.ts",
+          "line": 53,
+          "column": 5
+         }
+        }
+       ],
+       "expectedStatus": "passed",
+       "projectId": "agent-generated",
+       "projectName": "agent-generated",
+       "results": [
+        {
+         "workerIndex": 14,
+         "parallelIndex": 0,
+         "status": "failed",
+         "duration": 392,
+         "error": {
+          "message": "Error: Unexpected state",
+          "stack": "Error: Unexpected state\n    at <repo>/generated/capture2/capture.spec.ts:55:9",
+          "location": {
+           "file": "<repo>/generated/capture2/capture.spec.ts",
+           "column": 9,
+           "line": 55
+          },
+          "snippet": "  53 | test('insufficient-evidence', ann('CAP-2-SC-09'), async ({ page }) => {\n  54 |   await signIn(page, 'standard_user');\n> 55 |   throw new Error('Unexpected state');\n     |         ^\n  56 | });\n  57 | test('auth-locked-session', ann('CAP-2-SC-10'), async ({ page }) => {\n  58 |   await signIn(page, 'locked_out_user');"
+         },
+         "errors": [
+          {
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "column": 9,
+            "line": 55
+           },
+           "message": "Error: Unexpected state\n\n  53 | test('insufficient-evidence', ann('CAP-2-SC-09'), async ({ page }) => {\n  54 |   await signIn(page, 'standard_user');\n> 55 |   throw new Error('Unexpected state');\n     |         ^\n  56 | });\n  57 | test('auth-locked-session', ann('CAP-2-SC-10'), async ({ page }) => {\n  58 |   await signIn(page, 'locked_out_user');\n    at <repo>/generated/capture2/capture.spec.ts:55:9"
+          }
+         ],
+         "stdout": [],
+         "stderr": [],
+         "retry": 0,
+         "startTime": "2026-10-18T21:34:40.335Z",
+         "annotations": [
+          {
+           "type": "scenario",
+           "description": "CAP-2-SC-09",
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "line": 53,
+            "column": 5
+           }
+          }
+         ],
+         "attachments": [
+          {
+           "name": "screenshot",
+           "contentType": "image/png",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-insufficient-evidence-agent-generated/test-failed-1.png"
+          },
+          {
+           "name": "error-context",
+           "contentType": "text/markdown",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-insufficient-evidence-agent-generated/error-context.md"
+          },
+          {
+           "name": "trace",
+           "contentType": "application/zip",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-insufficient-evidence-agent-generated/trace.zip"
+          }
+         ],
+         "errorLocation": {
+          "file": "<repo>/generated/capture2/capture.spec.ts",
+          "column": 9,
+          "line": 55
+         }
+        },
+        {
+         "workerIndex": 16,
+         "parallelIndex": 0,
+         "status": "failed",
+         "duration": 396,
+         "error": {
+          "message": "Error: Unexpected state",
+          "stack": "Error: Unexpected state\n    at <repo>/generated/capture2/capture.spec.ts:55:9",
+          "location": {
+           "file": "<repo>/generated/capture2/capture.spec.ts",
+           "column": 9,
+           "line": 55
+          },
+          "snippet": "  53 | test('insufficient-evidence', ann('CAP-2-SC-09'), async ({ page }) => {\n  54 |   await signIn(page, 'standard_user');\n> 55 |   throw new Error('Unexpected state');\n     |         ^\n  56 | });\n  57 | test('auth-locked-session', ann('CAP-2-SC-10'), async ({ page }) => {\n  58 |   await signIn(page, 'locked_out_user');"
+         },
+         "errors": [
+          {
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "column": 9,
+            "line": 55
+           },
+           "message": "Error: Unexpected state\n\n  53 | test('insufficient-evidence', ann('CAP-2-SC-09'), async ({ page }) => {\n  54 |   await signIn(page, 'standard_user');\n> 55 |   throw new Error('Unexpected state');\n     |         ^\n  56 | });\n  57 | test('auth-locked-session', ann('CAP-2-SC-10'), async ({ page }) => {\n  58 |   await signIn(page, 'locked_out_user');\n    at <repo>/generated/capture2/capture.spec.ts:55:9"
+          }
+         ],
+         "stdout": [],
+         "stderr": [],
+         "retry": 1,
+         "startTime": "2026-10-18T21:34:41.101Z",
+         "annotations": [
+          {
+           "type": "scenario",
+           "description": "CAP-2-SC-09",
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "line": 53,
+            "column": 5
+           }
+          }
+         ],
+         "attachments": [
+          {
+           "name": "screenshot",
+           "contentType": "image/png",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-insufficient-evidence-agent-generated-retry1/test-failed-1.png"
+          },
+          {
+           "name": "error-context",
+           "contentType": "text/markdown",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-insufficient-evidence-agent-generated-retry1/error-context.md"
+          },
+          {
+           "name": "trace",
+           "contentType": "application/zip",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-insufficient-evidence-agent-generated-retry1/trace.zip"
+          }
+         ],
+         "errorLocation": {
+          "file": "<repo>/generated/capture2/capture.spec.ts",
+          "column": 9,
+          "line": 55
+         }
+        }
+       ],
+       "status": "unexpected"
+      }
+     ],
+     "id": "1cf4d77ed79077317e86-accdf257b492c587fc93",
+     "file": "../generated/capture2/capture.spec.ts",
+     "line": 53,
+     "column": 5
+    },
+    {
+     "title": "auth-locked-session",
+     "ok": false,
+     "tags": [],
+     "tests": [
+      {
+       "timeout": 30000,
+       "annotations": [
+        {
+         "type": "scenario",
+         "description": "CAP-2-SC-10",
+         "location": {
+          "file": "<repo>/generated/capture2/capture.spec.ts",
+          "line": 57,
+          "column": 5
+         }
+        }
+       ],
+       "expectedStatus": "passed",
+       "projectId": "agent-generated",
+       "projectName": "agent-generated",
+       "results": [
+        {
+         "workerIndex": 15,
+         "parallelIndex": 3,
+         "status": "failed",
+         "duration": 5408,
+         "error": {
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/inventory\\.html/\u001b[39m\nReceived string:  \u001b[31m\"https://www.saucedemo.com/\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <html lang=\"en\">\u2026</html>\u001b[22m\n\u001b[2m       - unexpected value \"https://www.saucedemo.com/\"\u001b[22m\n",
+          "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/inventory\\.html/\u001b[39m\nReceived string:  \u001b[31m\"https://www.saucedemo.com/\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <html lang=\"en\">\u2026</html>\u001b[22m\n\u001b[2m       - unexpected value \"https://www.saucedemo.com/\"\u001b[22m\n\n    at <repo>/generated/capture2/capture.spec.ts:59:22",
+          "location": {
+           "file": "<repo>/generated/capture2/capture.spec.ts",
+           "column": 22,
+           "line": 59
+          },
+          "snippet": "  57 | test('auth-locked-session', ann('CAP-2-SC-10'), async ({ page }) => {\n  58 |   await signIn(page, 'locked_out_user');\n> 59 |   await expect(page).toHaveURL(/inventory\\.html/);\n     |                      ^\n  60 | });\n  61 |"
+         },
+         "errors": [
+          {
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "column": 22,
+            "line": 59
+           },
+           "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/inventory\\.html/\u001b[39m\nReceived string:  \u001b[31m\"https://www.saucedemo.com/\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <html lang=\"en\">\u2026</html>\u001b[22m\n\u001b[2m       - unexpected value \"https://www.saucedemo.com/\"\u001b[22m\n\n\n  57 | test('auth-locked-session', ann('CAP-2-SC-10'), async ({ page }) => {\n  58 |   await signIn(page, 'locked_out_user');\n> 59 |   await expect(page).toHaveURL(/inventory\\.html/);\n     |                      ^\n  60 | });\n  61 |\n    at <repo>/generated/capture2/capture.spec.ts:59:22"
+          }
+         ],
+         "stdout": [],
+         "stderr": [],
+         "retry": 0,
+         "startTime": "2026-10-18T21:34:40.750Z",
+         "annotations": [
+          {
+           "type": "scenario",
+           "description": "CAP-2-SC-10",
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "line": 57,
+            "column": 5
+           }
+          }
+         ],
+         "attachments": [
+          {
+           "name": "screenshot",
+           "contentType": "image/png",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-auth-locked-session-agent-generated/test-failed-1.png"
+          },
+          {
+           "name": "error-context",
+           "contentType": "text/markdown",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-auth-locked-session-agent-generated/error-context.md"
+          },
+          {
+           "name": "trace",
+           "contentType": "application/zip",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-auth-locked-session-agent-generated/trace.zip"
+          }
+         ],
+         "errorLocation": {
+          "file": "<repo>/generated/capture2/capture.spec.ts",
+          "column": 22,
+          "line": 59
+         }
+        },
+        {
+         "workerIndex": 18,
+         "parallelIndex": 1,
+         "status": "failed",
+         "duration": 5405,
+         "error": {
+          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/inventory\\.html/\u001b[39m\nReceived string:  \u001b[31m\"https://www.saucedemo.com/\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <html lang=\"en\">\u2026</html>\u001b[22m\n\u001b[2m       - unexpected value \"https://www.saucedemo.com/\"\u001b[22m\n",
+          "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/inventory\\.html/\u001b[39m\nReceived string:  \u001b[31m\"https://www.saucedemo.com/\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <html lang=\"en\">\u2026</html>\u001b[22m\n\u001b[2m       - unexpected value \"https://www.saucedemo.com/\"\u001b[22m\n\n    at <repo>/generated/capture2/capture.spec.ts:59:22",
+          "location": {
+           "file": "<repo>/generated/capture2/capture.spec.ts",
+           "column": 22,
+           "line": 59
+          },
+          "snippet": "  57 | test('auth-locked-session', ann('CAP-2-SC-10'), async ({ page }) => {\n  58 |   await signIn(page, 'locked_out_user');\n> 59 |   await expect(page).toHaveURL(/inventory\\.html/);\n     |                      ^\n  60 | });\n  61 |"
+         },
+         "errors": [
+          {
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "column": 22,
+            "line": 59
+           },
+           "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nExpected pattern: \u001b[32m/inventory\\.html/\u001b[39m\nReceived string:  \u001b[31m\"https://www.saucedemo.com/\"\u001b[39m\nTimeout: 5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    14 \u00d7 locator resolved to <html lang=\"en\">\u2026</html>\u001b[22m\n\u001b[2m       - unexpected value \"https://www.saucedemo.com/\"\u001b[22m\n\n\n  57 | test('auth-locked-session', ann('CAP-2-SC-10'), async ({ page }) => {\n  58 |   await signIn(page, 'locked_out_user');\n> 59 |   await expect(page).toHaveURL(/inventory\\.html/);\n     |                      ^\n  60 | });\n  61 |\n    at <repo>/generated/capture2/capture.spec.ts:59:22"
+          }
+         ],
+         "stdout": [],
+         "stderr": [],
+         "retry": 1,
+         "startTime": "2026-10-18T21:34:46.532Z",
+         "annotations": [
+          {
+           "type": "scenario",
+           "description": "CAP-2-SC-10",
+           "location": {
+            "file": "<repo>/generated/capture2/capture.spec.ts",
+            "line": 57,
+            "column": 5
+           }
+          }
+         ],
+         "attachments": [
+          {
+           "name": "screenshot",
+           "contentType": "image/png",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-auth-locked-session-agent-generated-retry1/test-failed-1.png"
+          },
+          {
+           "name": "error-context",
+           "contentType": "text/markdown",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-auth-locked-session-agent-generated-retry1/error-context.md"
+          },
+          {
+           "name": "trace",
+           "contentType": "application/zip",
+           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-auth-locked-session-agent-generated-retry1/trace.zip"
+          }
+         ],
+         "errorLocation": {
+          "file": "<repo>/generated/capture2/capture.spec.ts",
+          "column": 22,
+          "line": 59
+         }
+        }
+       ],
+       "status": "unexpected"
+      }
+     ],
+     "id": "1cf4d77ed79077317e86-23474b4eba3f97fd4c4b",
+     "file": "../generated/capture2/capture.spec.ts",
+     "line": 57,
+     "column": 5
+    }
+   ]
+  }
+ ],
+ "errors": [],
+ "stats": {
+  "startTime": "2026-10-18T21:34:22.516Z",
+  "duration": 29991.93,
+  "expected": 2,
+  "skipped": 0,
+  "unexpected": 8,
+  "flaky": 1
+ }
+}

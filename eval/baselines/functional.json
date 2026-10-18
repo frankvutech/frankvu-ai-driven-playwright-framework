@@ -1,0 +1,1955 @@
+{
+  "schemaVersion": 1,
+  "metadata": {
+    "runId": "eval-20261018T215601Z-functional-vhmai4",
+    "timestamp": "2026-10-18T21:56:01.648Z",
+    "mode": "functional",
+    "datasetVersion": "2.0.0",
+    "datasetSha256": "da4be56d96709871d8aceb93eece3d6409345f51a7c14bba36ad321f474c4506",
+    "agent": {
+      "commit": "2fbfb3a0bb248643e93be8ee309aa94a88ece55c",
+      "dirty": true
+    },
+    "promptVersion": "2.0.0",
+    "promptSha256": "79d0e70e6c999d1429df3b65c9df65833fbc667ab476889e45120308469ec917",
+    "provider": {
+      "name": "mock",
+      "model": "pinned-dataset-specs",
+      "note": "Executed tests are pinned, hand-written candidate specs (including deliberately weak and incorrect ones) run through the real Phase 2 pipeline against the demo target. They do not measure a model."
+    },
+    "judge": null,
+    "metricVersion": "3.0.0",
+    "config": {
+      "policyExecution": {
+        "maxDurationMs": 300000,
+        "testTimeoutMs": 30000,
+        "retries": 0,
+        "workers": 2
+      },
+      "repeat": 1,
+      "suites": "all",
+      "baseline": null
+    },
+    "target": {
+      "name": "saucedemo-public-demo",
+      "version": "unversioned public demo site; behaviour verified 2026-10-18"
+    },
+    "labelReview": {
+      "total": 62,
+      "humanReviewed": 0,
+      "byMethod": {
+        "constructed": 18,
+        "observed-controlled-variation": 4,
+        "author-judgment": 40
+      }
+    },
+    "executionRefs": [
+      ".relynx/runs/20261018T215601Z-REQ-301-c9d8on",
+      ".relynx/runs/20261018T215601Z-REQ-301-9106q5",
+      ".relynx/runs/20261018T215601Z-REQ-301-fwdyoq",
+      ".relynx/runs/20261018T215607Z-REQ-302-pczq2d",
+      ".relynx/runs/20261018T215610Z-REQ-302-lyzfuf",
+      ".relynx/runs/20261018T215613Z-REQ-302-mt08q4",
+      ".relynx/runs/20261018T215614Z-REQ-303-rh661w",
+      ".relynx/runs/20261018T215617Z-REQ-303-yiqpry",
+      ".relynx/runs/20261018T215619Z-REQ-303-6zd6bp",
+      ".relynx/runs/20261018T215623Z-REQ-304-1hd98v"
+    ],
+    "repeat": 1
+  },
+  "summary": {
+    "casesEvaluated": 29,
+    "passed": 24,
+    "failed": 5,
+    "inconclusive": 0,
+    "datasetSize": {
+      "planningCases": 21,
+      "generationCases": 19,
+      "functionalReferenceOutcomes": 29,
+      "labelledFailures": 15,
+      "reportControls": 3
+    }
+  },
+  "metrics": [
+    {
+      "id": "functional.detection.truePositives",
+      "value": 11,
+      "unit": "count",
+      "kind": "measured",
+      "higherIsBetter": true,
+      "gate": "exact",
+      "status": "ok",
+      "definition": "Relevant seeded defect present and the generated test failed.",
+      "source": "eval/dataset/functional.json executed through the Phase 2 workflow"
+    },
+    {
+      "id": "functional.detection.falseNegatives",
+      "value": 4,
+      "unit": "count",
+      "kind": "measured",
+      "higherIsBetter": false,
+      "gate": "exact",
+      "status": "ok",
+      "definition": "Relevant seeded defect present but the generated test passed.",
+      "source": "eval/dataset/functional.json executed through the Phase 2 workflow"
+    },
+    {
+      "id": "functional.detection.falsePositives",
+      "value": 1,
+      "unit": "count",
+      "kind": "measured",
+      "higherIsBetter": false,
+      "gate": "exact",
+      "status": "ok",
+      "definition": "No relevant defect but the generated test failed (false-positive failure).",
+      "source": "eval/dataset/functional.json executed through the Phase 2 workflow"
+    },
+    {
+      "id": "functional.detection.trueNegatives",
+      "value": 13,
+      "unit": "count",
+      "kind": "measured",
+      "higherIsBetter": true,
+      "gate": "exact",
+      "status": "ok",
+      "definition": "No relevant defect and the generated test passed.",
+      "source": "eval/dataset/functional.json executed through the Phase 2 workflow"
+    },
+    {
+      "id": "functional.detection.inconclusive",
+      "value": 0,
+      "unit": "count",
+      "kind": "measured",
+      "higherIsBetter": false,
+      "gate": "exact",
+      "status": "ok",
+      "definition": "Cases with no pass/fail outcome (not executed, inconclusive, rejected).",
+      "source": "eval/dataset/functional.json executed through the Phase 2 workflow"
+    },
+    {
+      "id": "functional.detection.recall",
+      "value": 0.7333333333333333,
+      "numerator": 11,
+      "denominator": 15,
+      "unit": "ratio",
+      "kind": "measured",
+      "higherIsBetter": true,
+      "gate": "none",
+      "status": "ok",
+      "interval": {
+        "low": 0.4804911034231324,
+        "high": 0.8910272389681718
+      },
+      "definition": "TP / (TP + FN): share of relevant seeded defects detected by a failing test.",
+      "source": "eval/dataset/functional.json executed through the Phase 2 workflow"
+    },
+    {
+      "id": "functional.detection.falsePositiveRate",
+      "value": 0.07142857142857142,
+      "numerator": 1,
+      "denominator": 14,
+      "unit": "ratio",
+      "kind": "measured",
+      "higherIsBetter": false,
+      "gate": "none",
+      "status": "ok",
+      "interval": {
+        "low": 0.012721886112291636,
+        "high": 0.3146926955395781
+      },
+      "definition": "FP / (FP + TN): share of defect-free cases where the test still failed.",
+      "source": "eval/dataset/functional.json executed through the Phase 2 workflow"
+    },
+    {
+      "id": "functional.diagnosis.truePositives",
+      "value": 2,
+      "unit": "count",
+      "kind": "measured",
+      "higherIsBetter": true,
+      "gate": "exact",
+      "status": "ok",
+      "definition": "Failed tests caused by a seeded defect that the analysis called product_behavior.",
+      "source": "eval/dataset/functional.json executed through the Phase 2 workflow"
+    },
+    {
+      "id": "functional.diagnosis.falseNegatives",
+      "value": 9,
+      "unit": "count",
+      "kind": "measured",
+      "higherIsBetter": false,
+      "gate": "exact",
+      "status": "ok",
+      "definition": "Failed tests caused by a seeded defect that the analysis did not call product_behavior.",
+      "source": "eval/dataset/functional.json executed through the Phase 2 workflow"
+    },
+    {
+      "id": "functional.diagnosis.falsePositives",
+      "value": 0,
+      "unit": "count",
+      "kind": "measured",
+      "higherIsBetter": false,
+      "gate": "exact",
+      "status": "ok",
+      "definition": "Failed tests with no defect that the analysis called product_behavior.",
+      "source": "eval/dataset/functional.json executed through the Phase 2 workflow"
+    },
+    {
+      "id": "functional.diagnosis.trueNegatives",
+      "value": 1,
+      "unit": "count",
+      "kind": "measured",
+      "higherIsBetter": true,
+      "gate": "exact",
+      "status": "ok",
+      "definition": "Failed tests with no defect that the analysis did not call product_behavior.",
+      "source": "eval/dataset/functional.json executed through the Phase 2 workflow"
+    },
+    {
+      "id": "functional.agreementWithReference",
+      "value": 0.8275862068965517,
+      "numerator": 24,
+      "denominator": 29,
+      "unit": "ratio",
+      "kind": "measured",
+      "higherIsBetter": true,
+      "gate": "exact",
+      "status": "ok",
+      "interval": {
+        "low": 0.6545119942718488,
+        "high": 0.9240225472852007
+      },
+      "definition": "Cases whose pass/fail outcome equals the reference expected outcome / decided cases.",
+      "source": "eval/dataset/functional.json executed through the Phase 2 workflow"
+    },
+    {
+      "id": "functional.passOnDefectFreeControl",
+      "value": 0.9090909090909091,
+      "numerator": 10,
+      "denominator": 11,
+      "unit": "ratio",
+      "kind": "measured",
+      "higherIsBetter": true,
+      "gate": "exact",
+      "status": "ok",
+      "interval": {
+        "low": 0.6226353745137962,
+        "high": 0.9837682477371741
+      },
+      "definition": "Tests passing on the standard (defect-free) account / tests run on it.",
+      "source": "eval/dataset/functional.json executed through the Phase 2 workflow"
+    },
+    {
+      "id": "functional.falseNegativesFlaggedByAssertionRules",
+      "value": 1,
+      "numerator": 4,
+      "denominator": 4,
+      "unit": "ratio",
+      "kind": "deterministic",
+      "higherIsBetter": true,
+      "gate": "exact",
+      "status": "ok",
+      "definition": "False negatives whose test the deterministic assertion rules had flagged / false negatives.",
+      "source": "eval/dataset/functional.json executed through the Phase 2 workflow"
+    },
+    {
+      "id": "cost.workflows",
+      "value": 10,
+      "unit": "count",
+      "kind": "measured",
+      "higherIsBetter": null,
+      "gate": "none",
+      "status": "ok",
+      "definition": "Agent workflows measured in this run.",
+      "source": "workflow measurements"
+    },
+    {
+      "id": "cost.modelCalls",
+      "value": 20,
+      "unit": "count",
+      "kind": "measured",
+      "higherIsBetter": null,
+      "gate": "none",
+      "status": "ok",
+      "definition": "Model call attempts across all workflows, including retries.",
+      "source": "llm-usage.json"
+    },
+    {
+      "id": "cost.retryOverhead",
+      "value": 0,
+      "numerator": 0,
+      "denominator": 20,
+      "unit": "ratio",
+      "kind": "measured",
+      "higherIsBetter": false,
+      "gate": "none",
+      "status": "ok",
+      "interval": {
+        "low": 0,
+        "high": 0.16113012549493322
+      },
+      "definition": "Retry attempts / all model call attempts.",
+      "source": "llm-usage.json"
+    },
+    {
+      "id": "cost.workflowFailureRate",
+      "value": 0,
+      "numerator": 0,
+      "denominator": 10,
+      "unit": "ratio",
+      "kind": "measured",
+      "higherIsBetter": false,
+      "gate": "none",
+      "status": "ok",
+      "interval": {
+        "low": 0,
+        "high": 0.2775401687666166
+      },
+      "definition": "Workflows that did not complete / workflows.",
+      "source": "workflow measurements"
+    },
+    {
+      "id": "latency.totalMedianMs",
+      "value": 8404,
+      "unit": "ms",
+      "kind": "measured",
+      "higherIsBetter": false,
+      "gate": "none",
+      "status": "insufficient-data",
+      "definition": "Median end-to-end workflow wall-clock (generation, validation, approval, execution, analysis).",
+      "source": "runner wall-clock"
+    },
+    {
+      "id": "latency.totalP90Ms",
+      "value": 12575,
+      "unit": "ms",
+      "kind": "measured",
+      "higherIsBetter": false,
+      "gate": "none",
+      "status": "insufficient-data",
+      "definition": "Nearest-rank 90th percentile of workflow wall-clock.",
+      "source": "runner wall-clock"
+    },
+    {
+      "id": "latency.modelMedianMs",
+      "value": null,
+      "unit": "ms",
+      "kind": "measured",
+      "higherIsBetter": false,
+      "gate": "none",
+      "status": "not-run",
+      "definition": "Median per-workflow model latency (sum over model steps, including retries and backoff).",
+      "source": "llm-usage.json latencyMs"
+    },
+    {
+      "id": "latency.playwrightMedianMs",
+      "value": 7662,
+      "unit": "ms",
+      "kind": "measured",
+      "higherIsBetter": false,
+      "gate": "none",
+      "status": "insufficient-data",
+      "definition": "Median Playwright runner wall-clock per executed workflow.",
+      "source": "evidence.json startedAt/finishedAt"
+    },
+    {
+      "id": "cost.inputTokens",
+      "value": null,
+      "unit": "count",
+      "kind": "measured",
+      "higherIsBetter": null,
+      "gate": "none",
+      "status": "unavailable",
+      "definition": "Input tokens reported by the provider (unavailable if any call lacked usage data).",
+      "source": "provider usage"
+    },
+    {
+      "id": "cost.outputTokens",
+      "value": null,
+      "unit": "count",
+      "kind": "measured",
+      "higherIsBetter": null,
+      "gate": "none",
+      "status": "unavailable",
+      "definition": "Output tokens reported by the provider.",
+      "source": "provider usage"
+    },
+    {
+      "id": "cost.medianPerWorkflowUsd",
+      "value": null,
+      "unit": "usd",
+      "kind": "measured",
+      "higherIsBetter": false,
+      "gate": "none",
+      "status": "unavailable",
+      "definition": "Median per-workflow cost = sum over calls of reported tokens x list price.",
+      "source": "eval/pricing.json (2026-10-06)"
+    },
+    {
+      "id": "cost.perSuccessfulWorkflowUsd",
+      "value": null,
+      "unit": "usd",
+      "kind": "measured",
+      "higherIsBetter": false,
+      "gate": "none",
+      "status": "unavailable",
+      "definition": "Total cost / workflows that completed.",
+      "source": "eval/pricing.json (2026-10-06)"
+    }
+  ],
+  "sections": {
+    "functional": {
+      "cases": [
+        {
+          "suiteId": "FS-SORT",
+          "variant": "standard",
+          "scenarioId": "REQ-301-SC-01",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-SORT",
+          "variant": "standard",
+          "scenarioId": "REQ-301-SC-02",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-SORT",
+          "variant": "standard",
+          "scenarioId": "REQ-301-SC-03",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": [
+            {
+              "scenarioId": "REQ-301-SC-03",
+              "requirementId": "REQ-301",
+              "rule": "AQ_UNTRACED",
+              "expectedBehavior": "Choosing Name (Z to A) lists \"Test.allTheThings() T-Shirt (Red)\" first.",
+              "observedAssertion": "expect(inventoryPage.items).toHaveCount(6)",
+              "weakness": "the expected value is not stated in the linked acceptance criteria",
+              "evidence": "not found in criteria: 6",
+              "method": "deterministic-rule",
+              "uncertainty": "medium"
+            }
+          ]
+        },
+        {
+          "suiteId": "FS-SORT",
+          "variant": "problem",
+          "scenarioId": "REQ-301-SC-01",
+          "relevantDefect": true,
+          "defectId": "D-SORT",
+          "expectedTestOutcome": "fail",
+          "observedState": "failed",
+          "testStatus": "failed",
+          "diagnosis": {
+            "category": "product_behavior",
+            "confidence": "medium",
+            "sufficientEvidence": false
+          },
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-SORT",
+          "variant": "problem",
+          "scenarioId": "REQ-301-SC-02",
+          "relevantDefect": true,
+          "defectId": "D-SORT",
+          "expectedTestOutcome": "fail",
+          "observedState": "failed",
+          "testStatus": "failed",
+          "diagnosis": {
+            "category": "inconclusive",
+            "confidence": "low",
+            "sufficientEvidence": false
+          },
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-SORT",
+          "variant": "problem",
+          "scenarioId": "REQ-301-SC-03",
+          "relevantDefect": true,
+          "defectId": "D-SORT",
+          "expectedTestOutcome": "fail",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": false,
+          "assertionFindings": [
+            {
+              "scenarioId": "REQ-301-SC-03",
+              "requirementId": "REQ-301",
+              "rule": "AQ_UNTRACED",
+              "expectedBehavior": "Choosing Name (Z to A) lists \"Test.allTheThings() T-Shirt (Red)\" first.",
+              "observedAssertion": "expect(inventoryPage.items).toHaveCount(6)",
+              "weakness": "the expected value is not stated in the linked acceptance criteria",
+              "evidence": "not found in criteria: 6",
+              "method": "deterministic-rule",
+              "uncertainty": "medium"
+            }
+          ]
+        },
+        {
+          "suiteId": "FS-SORT",
+          "variant": "error",
+          "scenarioId": "REQ-301-SC-01",
+          "relevantDefect": true,
+          "defectId": "D-SORT",
+          "expectedTestOutcome": "fail",
+          "observedState": "failed",
+          "testStatus": "failed",
+          "diagnosis": {
+            "category": "product_behavior",
+            "confidence": "medium",
+            "sufficientEvidence": false
+          },
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-SORT",
+          "variant": "error",
+          "scenarioId": "REQ-301-SC-02",
+          "relevantDefect": true,
+          "defectId": "D-SORT",
+          "expectedTestOutcome": "fail",
+          "observedState": "failed",
+          "testStatus": "failed",
+          "diagnosis": {
+            "category": "inconclusive",
+            "confidence": "low",
+            "sufficientEvidence": false
+          },
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-SORT",
+          "variant": "error",
+          "scenarioId": "REQ-301-SC-03",
+          "relevantDefect": true,
+          "defectId": "D-SORT",
+          "expectedTestOutcome": "fail",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": false,
+          "assertionFindings": [
+            {
+              "scenarioId": "REQ-301-SC-03",
+              "requirementId": "REQ-301",
+              "rule": "AQ_UNTRACED",
+              "expectedBehavior": "Choosing Name (Z to A) lists \"Test.allTheThings() T-Shirt (Red)\" first.",
+              "observedAssertion": "expect(inventoryPage.items).toHaveCount(6)",
+              "weakness": "the expected value is not stated in the linked acceptance criteria",
+              "evidence": "not found in criteria: 6",
+              "method": "deterministic-rule",
+              "uncertainty": "medium"
+            }
+          ]
+        },
+        {
+          "suiteId": "FS-CART",
+          "variant": "standard",
+          "scenarioId": "REQ-302-SC-01",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-CART",
+          "variant": "standard",
+          "scenarioId": "REQ-302-SC-02",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-CART",
+          "variant": "standard",
+          "scenarioId": "REQ-302-SC-03",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": [
+            {
+              "scenarioId": "REQ-302-SC-03",
+              "requirementId": "REQ-302",
+              "rule": "AQ_VISIBILITY_ONLY",
+              "expectedBehavior": "Removing \"Sauce Labs Backpack\" after adding it hides the cart badge.",
+              "observedAssertion": "expect(inventoryPage.header.cartBadge).toBeHidden()",
+              "weakness": "only visibility is checked, but the criteria state observable values",
+              "evidence": "criteria quote: \"Sauce Labs Backpack\"",
+              "method": "deterministic-rule",
+              "uncertainty": "medium"
+            }
+          ]
+        },
+        {
+          "suiteId": "FS-CART",
+          "variant": "standard",
+          "scenarioId": "REQ-302-SC-04",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": [
+            {
+              "scenarioId": "REQ-302-SC-04",
+              "requirementId": "REQ-302",
+              "rule": "AQ_UNTRACED",
+              "expectedBehavior": "Adding \"Sauce Labs Bolt T-Shirt\" shows the cart badge \"1\".",
+              "observedAssertion": "expect(inventoryPage.title).toHaveText(\"Products\")",
+              "weakness": "the expected value is not stated in the linked acceptance criteria",
+              "evidence": "not found in criteria: \"Products\"",
+              "method": "deterministic-rule",
+              "uncertainty": "medium"
+            }
+          ]
+        },
+        {
+          "suiteId": "FS-CART",
+          "variant": "problem",
+          "scenarioId": "REQ-302-SC-01",
+          "relevantDefect": true,
+          "defectId": "D-ADD",
+          "expectedTestOutcome": "fail",
+          "observedState": "failed",
+          "testStatus": "failed",
+          "diagnosis": {
+            "category": "locator",
+            "confidence": "medium",
+            "sufficientEvidence": false
+          },
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-CART",
+          "variant": "problem",
+          "scenarioId": "REQ-302-SC-02",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-CART",
+          "variant": "problem",
+          "scenarioId": "REQ-302-SC-03",
+          "relevantDefect": true,
+          "defectId": "D-REMOVE",
+          "expectedTestOutcome": "fail",
+          "observedState": "failed",
+          "testStatus": "failed",
+          "diagnosis": {
+            "category": "assertion_logic",
+            "confidence": "medium",
+            "sufficientEvidence": false
+          },
+          "matchesReference": true,
+          "assertionFindings": [
+            {
+              "scenarioId": "REQ-302-SC-03",
+              "requirementId": "REQ-302",
+              "rule": "AQ_VISIBILITY_ONLY",
+              "expectedBehavior": "Removing \"Sauce Labs Backpack\" after adding it hides the cart badge.",
+              "observedAssertion": "expect(inventoryPage.header.cartBadge).toBeHidden()",
+              "weakness": "only visibility is checked, but the criteria state observable values",
+              "evidence": "criteria quote: \"Sauce Labs Backpack\"",
+              "method": "deterministic-rule",
+              "uncertainty": "medium"
+            }
+          ]
+        },
+        {
+          "suiteId": "FS-CART",
+          "variant": "problem",
+          "scenarioId": "REQ-302-SC-04",
+          "relevantDefect": true,
+          "defectId": "D-ADD",
+          "expectedTestOutcome": "fail",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": false,
+          "assertionFindings": [
+            {
+              "scenarioId": "REQ-302-SC-04",
+              "requirementId": "REQ-302",
+              "rule": "AQ_UNTRACED",
+              "expectedBehavior": "Adding \"Sauce Labs Bolt T-Shirt\" shows the cart badge \"1\".",
+              "observedAssertion": "expect(inventoryPage.title).toHaveText(\"Products\")",
+              "weakness": "the expected value is not stated in the linked acceptance criteria",
+              "evidence": "not found in criteria: \"Products\"",
+              "method": "deterministic-rule",
+              "uncertainty": "medium"
+            }
+          ]
+        },
+        {
+          "suiteId": "FS-CART",
+          "variant": "error",
+          "scenarioId": "REQ-302-SC-01",
+          "relevantDefect": true,
+          "defectId": "D-ADD",
+          "expectedTestOutcome": "fail",
+          "observedState": "failed",
+          "testStatus": "failed",
+          "diagnosis": {
+            "category": "locator",
+            "confidence": "medium",
+            "sufficientEvidence": false
+          },
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-CART",
+          "variant": "error",
+          "scenarioId": "REQ-302-SC-02",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-CART",
+          "variant": "error",
+          "scenarioId": "REQ-302-SC-03",
+          "relevantDefect": true,
+          "defectId": "D-REMOVE",
+          "expectedTestOutcome": "fail",
+          "observedState": "failed",
+          "testStatus": "failed",
+          "diagnosis": {
+            "category": "assertion_logic",
+            "confidence": "medium",
+            "sufficientEvidence": false
+          },
+          "matchesReference": true,
+          "assertionFindings": [
+            {
+              "scenarioId": "REQ-302-SC-03",
+              "requirementId": "REQ-302",
+              "rule": "AQ_VISIBILITY_ONLY",
+              "expectedBehavior": "Removing \"Sauce Labs Backpack\" after adding it hides the cart badge.",
+              "observedAssertion": "expect(inventoryPage.header.cartBadge).toBeHidden()",
+              "weakness": "only visibility is checked, but the criteria state observable values",
+              "evidence": "criteria quote: \"Sauce Labs Backpack\"",
+              "method": "deterministic-rule",
+              "uncertainty": "medium"
+            }
+          ]
+        },
+        {
+          "suiteId": "FS-CART",
+          "variant": "error",
+          "scenarioId": "REQ-302-SC-04",
+          "relevantDefect": true,
+          "defectId": "D-ADD",
+          "expectedTestOutcome": "fail",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": false,
+          "assertionFindings": [
+            {
+              "scenarioId": "REQ-302-SC-04",
+              "requirementId": "REQ-302",
+              "rule": "AQ_UNTRACED",
+              "expectedBehavior": "Adding \"Sauce Labs Bolt T-Shirt\" shows the cart badge \"1\".",
+              "observedAssertion": "expect(inventoryPage.title).toHaveText(\"Products\")",
+              "weakness": "the expected value is not stated in the linked acceptance criteria",
+              "evidence": "not found in criteria: \"Products\"",
+              "method": "deterministic-rule",
+              "uncertainty": "medium"
+            }
+          ]
+        },
+        {
+          "suiteId": "FS-CHECKOUT",
+          "variant": "standard",
+          "scenarioId": "REQ-303-SC-01",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-CHECKOUT",
+          "variant": "standard",
+          "scenarioId": "REQ-303-SC-02",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-CHECKOUT",
+          "variant": "problem",
+          "scenarioId": "REQ-303-SC-01",
+          "relevantDefect": true,
+          "defectId": "D-LASTNAME",
+          "expectedTestOutcome": "fail",
+          "observedState": "failed",
+          "testStatus": "timedOut",
+          "diagnosis": {
+            "category": "locator",
+            "confidence": "medium",
+            "sufficientEvidence": false
+          },
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-CHECKOUT",
+          "variant": "problem",
+          "scenarioId": "REQ-303-SC-02",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-CHECKOUT",
+          "variant": "error",
+          "scenarioId": "REQ-303-SC-01",
+          "relevantDefect": true,
+          "defectId": "D-FINISH",
+          "expectedTestOutcome": "fail",
+          "observedState": "failed",
+          "testStatus": "failed",
+          "diagnosis": {
+            "category": "locator",
+            "confidence": "medium",
+            "sufficientEvidence": false
+          },
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-CHECKOUT",
+          "variant": "error",
+          "scenarioId": "REQ-303-SC-02",
+          "relevantDefect": true,
+          "defectId": "D-LASTNAME-VALIDATION",
+          "expectedTestOutcome": "fail",
+          "observedState": "failed",
+          "testStatus": "failed",
+          "diagnosis": {
+            "category": "locator",
+            "confidence": "medium",
+            "sufficientEvidence": false
+          },
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-LOGIN",
+          "variant": "standard",
+          "scenarioId": "REQ-304-SC-01",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-LOGIN",
+          "variant": "standard",
+          "scenarioId": "REQ-304-SC-02",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "failed",
+          "testStatus": "failed",
+          "diagnosis": {
+            "category": "assertion_logic",
+            "confidence": "medium",
+            "sufficientEvidence": false
+          },
+          "matchesReference": false,
+          "assertionFindings": [
+            {
+              "scenarioId": "REQ-304-SC-02",
+              "requirementId": "REQ-304",
+              "rule": "AQ_UNTRACED",
+              "expectedBehavior": "A locked-out user sees \"Epic sadface: Sorry, this user has been locked out.\"",
+              "observedAssertion": "expect(loginPage.errorMessage).toHaveText(\"Epic sadface: This account is locked.\")",
+              "weakness": "the expected value is not stated in the linked acceptance criteria",
+              "evidence": "not found in criteria: \"Epic sadface: This account is locked.\"",
+              "method": "deterministic-rule",
+              "uncertainty": "medium"
+            }
+          ]
+        }
+      ],
+      "workflows": [
+        {
+          "suiteId": "FS-SORT",
+          "variant": "standard",
+          "runId": "20261018T215601Z-REQ-301-c9d8on",
+          "status": "executed",
+          "measurement": {
+            "workflowId": "20261018T215601Z-REQ-301-c9d8on",
+            "caseId": "FS-SORT/standard",
+            "usage": [
+              {
+                "useCase": "test-plan",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 1,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              },
+              {
+                "useCase": "test-generation",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 26,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              }
+            ],
+            "totalMs": 5900,
+            "playwrightMs": 3829,
+            "succeeded": true
+          }
+        },
+        {
+          "suiteId": "FS-SORT",
+          "variant": "problem",
+          "runId": "20261018T215601Z-REQ-301-9106q5",
+          "status": "executed",
+          "measurement": {
+            "workflowId": "20261018T215601Z-REQ-301-9106q5",
+            "caseId": "FS-SORT/problem",
+            "usage": [
+              {
+                "useCase": "test-plan",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 0,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              },
+              {
+                "useCase": "test-generation",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 14,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              }
+            ],
+            "totalMs": 11888,
+            "playwrightMs": 9807,
+            "succeeded": true
+          }
+        },
+        {
+          "suiteId": "FS-SORT",
+          "variant": "error",
+          "runId": "20261018T215601Z-REQ-301-fwdyoq",
+          "status": "executed",
+          "measurement": {
+            "workflowId": "20261018T215601Z-REQ-301-fwdyoq",
+            "caseId": "FS-SORT/error",
+            "usage": [
+              {
+                "useCase": "test-plan",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 0,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              },
+              {
+                "useCase": "test-generation",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 0,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              }
+            ],
+            "totalMs": 12575,
+            "playwrightMs": 10481,
+            "succeeded": true
+          }
+        },
+        {
+          "suiteId": "FS-CART",
+          "variant": "standard",
+          "runId": "20261018T215607Z-REQ-302-pczq2d",
+          "status": "executed",
+          "measurement": {
+            "workflowId": "20261018T215607Z-REQ-302-pczq2d",
+            "caseId": "FS-CART/standard",
+            "usage": [
+              {
+                "useCase": "test-plan",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 0,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              },
+              {
+                "useCase": "test-generation",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 0,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              }
+            ],
+            "totalMs": 3209,
+            "playwrightMs": 2751,
+            "succeeded": true
+          }
+        },
+        {
+          "suiteId": "FS-CART",
+          "variant": "problem",
+          "runId": "20261018T215610Z-REQ-302-lyzfuf",
+          "status": "executed",
+          "measurement": {
+            "workflowId": "20261018T215610Z-REQ-302-lyzfuf",
+            "caseId": "FS-CART/problem",
+            "usage": [
+              {
+                "useCase": "test-plan",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 1,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              },
+              {
+                "useCase": "test-generation",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 0,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              }
+            ],
+            "totalMs": 9205,
+            "playwrightMs": 8713,
+            "succeeded": true
+          }
+        },
+        {
+          "suiteId": "FS-CART",
+          "variant": "error",
+          "runId": "20261018T215613Z-REQ-302-mt08q4",
+          "status": "executed",
+          "measurement": {
+            "workflowId": "20261018T215613Z-REQ-302-mt08q4",
+            "caseId": "FS-CART/error",
+            "usage": [
+              {
+                "useCase": "test-plan",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 0,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              },
+              {
+                "useCase": "test-generation",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 1,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              }
+            ],
+            "totalMs": 10162,
+            "playwrightMs": 9031,
+            "succeeded": true
+          }
+        },
+        {
+          "suiteId": "FS-CHECKOUT",
+          "variant": "standard",
+          "runId": "20261018T215614Z-REQ-303-rh661w",
+          "status": "executed",
+          "measurement": {
+            "workflowId": "20261018T215614Z-REQ-303-rh661w",
+            "caseId": "FS-CHECKOUT/standard",
+            "usage": [
+              {
+                "useCase": "test-plan",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 1,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              },
+              {
+                "useCase": "test-generation",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 1,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              }
+            ],
+            "totalMs": 3514,
+            "playwrightMs": 3061,
+            "succeeded": true
+          }
+        },
+        {
+          "suiteId": "FS-CHECKOUT",
+          "variant": "problem",
+          "runId": "20261018T215617Z-REQ-303-yiqpry",
+          "status": "executed",
+          "measurement": {
+            "workflowId": "20261018T215617Z-REQ-303-yiqpry",
+            "caseId": "FS-CHECKOUT/problem",
+            "usage": [
+              {
+                "useCase": "test-plan",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 0,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              },
+              {
+                "useCase": "test-generation",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 0,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              }
+            ],
+            "totalMs": 17439,
+            "playwrightMs": 16961,
+            "succeeded": true
+          }
+        },
+        {
+          "suiteId": "FS-CHECKOUT",
+          "variant": "error",
+          "runId": "20261018T215619Z-REQ-303-6zd6bp",
+          "status": "executed",
+          "measurement": {
+            "workflowId": "20261018T215619Z-REQ-303-6zd6bp",
+            "caseId": "FS-CHECKOUT/error",
+            "usage": [
+              {
+                "useCase": "test-plan",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 0,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              },
+              {
+                "useCase": "test-generation",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 0,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              }
+            ],
+            "totalMs": 8404,
+            "playwrightMs": 7662,
+            "succeeded": true
+          }
+        },
+        {
+          "suiteId": "FS-LOGIN",
+          "variant": "standard",
+          "runId": "20261018T215623Z-REQ-304-1hd98v",
+          "status": "executed",
+          "measurement": {
+            "workflowId": "20261018T215623Z-REQ-304-1hd98v",
+            "caseId": "FS-LOGIN/standard",
+            "usage": [
+              {
+                "useCase": "test-plan",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 0,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              },
+              {
+                "useCase": "test-generation",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 0,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              }
+            ],
+            "totalMs": 7698,
+            "playwrightMs": 7172,
+            "succeeded": true
+          }
+        }
+      ],
+      "metrics": {
+        "detection": {
+          "positiveClass": "a relevant seeded defect exists",
+          "predictedPositive": "the generated test failed",
+          "tp": 11,
+          "fp": 1,
+          "tn": 13,
+          "fn": 4,
+          "inconclusive": 0,
+          "recall": {
+            "n": 11,
+            "d": 15,
+            "value": 0.7333333333333333
+          },
+          "precision": {
+            "n": 11,
+            "d": 12,
+            "value": 0.9166666666666666
+          },
+          "falsePositiveRate": {
+            "n": 1,
+            "d": 14,
+            "value": 0.07142857142857142
+          },
+          "falseNegativeRate": {
+            "n": 4,
+            "d": 15,
+            "value": 0.26666666666666666
+          },
+          "rateStatus": "ok",
+          "intervals": {
+            "recall": {
+              "low": 0.4804911034231324,
+              "high": 0.8910272389681718
+            },
+            "falsePositiveRate": {
+              "low": 0.012721886112291636,
+              "high": 0.3146926955395781
+            }
+          }
+        },
+        "diagnosis": {
+          "positiveClass": "the failure is caused by a seeded product defect",
+          "predictedPositive": "the analysis says product_behavior",
+          "tp": 2,
+          "fp": 0,
+          "tn": 1,
+          "fn": 9,
+          "inconclusive": 0,
+          "recall": {
+            "n": 2,
+            "d": 11,
+            "value": 0.18181818181818182
+          },
+          "precision": {
+            "n": 2,
+            "d": 2,
+            "value": 1
+          },
+          "falsePositiveRate": {
+            "n": 0,
+            "d": 1,
+            "value": 0
+          },
+          "falseNegativeRate": {
+            "n": 9,
+            "d": 11,
+            "value": 0.8181818181818182
+          },
+          "rateStatus": "insufficient-data",
+          "intervals": {
+            "recall": {
+              "low": 0.05136660067100063,
+              "high": 0.4769861375782448
+            },
+            "falsePositiveRate": {
+              "low": 0,
+              "high": 0.7934567085261071
+            }
+          }
+        },
+        "functional": {
+          "agreementWithReference": {
+            "n": 24,
+            "d": 29,
+            "value": 0.8275862068965517
+          },
+          "passOnDefectFreeControl": {
+            "n": 10,
+            "d": 11,
+            "value": 0.9090909090909091
+          },
+          "inconclusive": 0,
+          "falsePositiveFailures": [
+            "FS-LOGIN/standard/REQ-304-SC-02"
+          ],
+          "falseNegatives": [
+            "FS-SORT/problem/REQ-301-SC-03",
+            "FS-SORT/error/REQ-301-SC-03",
+            "FS-CART/problem/REQ-302-SC-04",
+            "FS-CART/error/REQ-302-SC-04"
+          ],
+          "falseNegativesFlaggedByAssertionRules": {
+            "n": 4,
+            "d": 4,
+            "value": 1
+          }
+        }
+      },
+      "defects": [
+        {
+          "id": "D-SORT",
+          "variants": [
+            "problem",
+            "error"
+          ],
+          "behavior": "Choosing a sort order does not reorder the product list (error_user also shows an alert).",
+          "verifiedBy": "eval/probes/seeded-defects.ts"
+        },
+        {
+          "id": "D-ADD",
+          "variants": [
+            "problem",
+            "error"
+          ],
+          "behavior": "\"Add to cart\" for Sauce Labs Bolt T-Shirt does not add it (no cart badge).",
+          "verifiedBy": "eval/probes/seeded-defects.ts"
+        },
+        {
+          "id": "D-REMOVE",
+          "variants": [
+            "problem",
+            "error"
+          ],
+          "behavior": "\"Remove\" for Sauce Labs Backpack does not remove it (badge stays).",
+          "verifiedBy": "eval/probes/seeded-defects.ts"
+        },
+        {
+          "id": "D-LASTNAME",
+          "variants": [
+            "problem"
+          ],
+          "behavior": "Typing a last name writes into the first-name field; checkout cannot continue.",
+          "verifiedBy": "eval/probes/seeded-defects.ts"
+        },
+        {
+          "id": "D-LASTNAME-VALIDATION",
+          "variants": [
+            "error"
+          ],
+          "behavior": "The last-name field ignores input and the missing last name is not reported; checkout continues.",
+          "verifiedBy": "eval/probes/seeded-defects.ts"
+        },
+        {
+          "id": "D-FINISH",
+          "variants": [
+            "error"
+          ],
+          "behavior": "Finish does not complete the order.",
+          "verifiedBy": "eval/probes/seeded-defects.ts"
+        }
+      ]
+    },
+    "costLatency": {
+      "summary": {
+        "workflows": 10,
+        "modelCalls": 20,
+        "failureRate": {
+          "n": 0,
+          "d": 10,
+          "value": 0
+        },
+        "retryOverhead": {
+          "n": 0,
+          "d": 20,
+          "value": 0
+        },
+        "providerErrors": 0,
+        "tokens": {
+          "available": false,
+          "input": null,
+          "output": null,
+          "workflowsWithCompleteTokens": 0
+        },
+        "latencyMs": {
+          "total": {
+            "n": 10,
+            "mean": 8999.4,
+            "median": 8404,
+            "p90": 12575,
+            "max": 17439,
+            "sufficientForPercentiles": false
+          },
+          "model": {
+            "n": 10,
+            "mean": 4.5,
+            "median": 0,
+            "p90": 14,
+            "max": 27,
+            "sufficientForPercentiles": false
+          },
+          "playwright": {
+            "n": 10,
+            "mean": 7946.8,
+            "median": 7662,
+            "p90": 10481,
+            "max": 16961,
+            "sufficientForPercentiles": false
+          }
+        },
+        "cost": {
+          "status": "unavailable",
+          "reason": "mock did not report complete token usage",
+          "pricingEffectiveDate": "2026-10-06",
+          "perWorkflowUsd": null,
+          "totalUsd": null,
+          "perSuccessfulWorkflowUsd": null,
+          "byOperationUsd": null
+        }
+      },
+      "workflows": [
+        {
+          "workflowId": "20261018T215601Z-REQ-301-c9d8on",
+          "caseId": "FS-SORT/standard",
+          "usage": [
+            {
+              "useCase": "test-plan",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 1,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            },
+            {
+              "useCase": "test-generation",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 26,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            }
+          ],
+          "totalMs": 5900,
+          "playwrightMs": 3829,
+          "succeeded": true
+        },
+        {
+          "workflowId": "20261018T215601Z-REQ-301-9106q5",
+          "caseId": "FS-SORT/problem",
+          "usage": [
+            {
+              "useCase": "test-plan",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 0,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            },
+            {
+              "useCase": "test-generation",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 14,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            }
+          ],
+          "totalMs": 11888,
+          "playwrightMs": 9807,
+          "succeeded": true
+        },
+        {
+          "workflowId": "20261018T215601Z-REQ-301-fwdyoq",
+          "caseId": "FS-SORT/error",
+          "usage": [
+            {
+              "useCase": "test-plan",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 0,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            },
+            {
+              "useCase": "test-generation",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 0,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            }
+          ],
+          "totalMs": 12575,
+          "playwrightMs": 10481,
+          "succeeded": true
+        },
+        {
+          "workflowId": "20261018T215607Z-REQ-302-pczq2d",
+          "caseId": "FS-CART/standard",
+          "usage": [
+            {
+              "useCase": "test-plan",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 0,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            },
+            {
+              "useCase": "test-generation",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 0,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            }
+          ],
+          "totalMs": 3209,
+          "playwrightMs": 2751,
+          "succeeded": true
+        },
+        {
+          "workflowId": "20261018T215610Z-REQ-302-lyzfuf",
+          "caseId": "FS-CART/problem",
+          "usage": [
+            {
+              "useCase": "test-plan",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 1,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            },
+            {
+              "useCase": "test-generation",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 0,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            }
+          ],
+          "totalMs": 9205,
+          "playwrightMs": 8713,
+          "succeeded": true
+        },
+        {
+          "workflowId": "20261018T215613Z-REQ-302-mt08q4",
+          "caseId": "FS-CART/error",
+          "usage": [
+            {
+              "useCase": "test-plan",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 0,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            },
+            {
+              "useCase": "test-generation",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 1,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            }
+          ],
+          "totalMs": 10162,
+          "playwrightMs": 9031,
+          "succeeded": true
+        },
+        {
+          "workflowId": "20261018T215614Z-REQ-303-rh661w",
+          "caseId": "FS-CHECKOUT/standard",
+          "usage": [
+            {
+              "useCase": "test-plan",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 1,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            },
+            {
+              "useCase": "test-generation",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 1,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            }
+          ],
+          "totalMs": 3514,
+          "playwrightMs": 3061,
+          "succeeded": true
+        },
+        {
+          "workflowId": "20261018T215617Z-REQ-303-yiqpry",
+          "caseId": "FS-CHECKOUT/problem",
+          "usage": [
+            {
+              "useCase": "test-plan",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 0,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            },
+            {
+              "useCase": "test-generation",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 0,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            }
+          ],
+          "totalMs": 17439,
+          "playwrightMs": 16961,
+          "succeeded": true
+        },
+        {
+          "workflowId": "20261018T215619Z-REQ-303-6zd6bp",
+          "caseId": "FS-CHECKOUT/error",
+          "usage": [
+            {
+              "useCase": "test-plan",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 0,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            },
+            {
+              "useCase": "test-generation",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 0,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            }
+          ],
+          "totalMs": 8404,
+          "playwrightMs": 7662,
+          "succeeded": true
+        },
+        {
+          "workflowId": "20261018T215623Z-REQ-304-1hd98v",
+          "caseId": "FS-LOGIN/standard",
+          "usage": [
+            {
+              "useCase": "test-plan",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 0,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            },
+            {
+              "useCase": "test-generation",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 0,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            }
+          ],
+          "totalMs": 7698,
+          "playwrightMs": 7172,
+          "succeeded": true
+        }
+      ]
+    }
+  },
+  "findings": [
+    {
+      "type": "false-positive-failure",
+      "id": "FS-LOGIN/standard/REQ-304-SC-02",
+      "detail": "failed on a target where the behaviour under test is correct",
+      "source": "measured"
+    },
+    {
+      "type": "false-negative",
+      "id": "FS-SORT/problem/REQ-301-SC-03",
+      "detail": "passed although a relevant seeded defect is present",
+      "source": "measured"
+    },
+    {
+      "type": "false-negative",
+      "id": "FS-SORT/error/REQ-301-SC-03",
+      "detail": "passed although a relevant seeded defect is present",
+      "source": "measured"
+    },
+    {
+      "type": "false-negative",
+      "id": "FS-CART/problem/REQ-302-SC-04",
+      "detail": "passed although a relevant seeded defect is present",
+      "source": "measured"
+    },
+    {
+      "type": "false-negative",
+      "id": "FS-CART/error/REQ-302-SC-04",
+      "detail": "passed although a relevant seeded defect is present",
+      "source": "measured"
+    },
+    {
+      "type": "incorrect-diagnosis",
+      "id": "FS-SORT/problem/REQ-301-SC-02",
+      "detail": "seeded defect D-SORT, analysis said inconclusive",
+      "source": "measured"
+    },
+    {
+      "type": "incorrect-diagnosis",
+      "id": "FS-SORT/error/REQ-301-SC-02",
+      "detail": "seeded defect D-SORT, analysis said inconclusive",
+      "source": "measured"
+    },
+    {
+      "type": "incorrect-diagnosis",
+      "id": "FS-CART/problem/REQ-302-SC-01",
+      "detail": "seeded defect D-ADD, analysis said locator",
+      "source": "measured"
+    },
+    {
+      "type": "incorrect-diagnosis",
+      "id": "FS-CART/problem/REQ-302-SC-03",
+      "detail": "seeded defect D-REMOVE, analysis said assertion_logic",
+      "source": "measured"
+    },
+    {
+      "type": "incorrect-diagnosis",
+      "id": "FS-CART/error/REQ-302-SC-01",
+      "detail": "seeded defect D-ADD, analysis said locator",
+      "source": "measured"
+    },
+    {
+      "type": "incorrect-diagnosis",
+      "id": "FS-CART/error/REQ-302-SC-03",
+      "detail": "seeded defect D-REMOVE, analysis said assertion_logic",
+      "source": "measured"
+    },
+    {
+      "type": "incorrect-diagnosis",
+      "id": "FS-CHECKOUT/problem/REQ-303-SC-01",
+      "detail": "seeded defect D-LASTNAME, analysis said locator",
+      "source": "measured"
+    },
+    {
+      "type": "incorrect-diagnosis",
+      "id": "FS-CHECKOUT/error/REQ-303-SC-01",
+      "detail": "seeded defect D-FINISH, analysis said locator",
+      "source": "measured"
+    },
+    {
+      "type": "incorrect-diagnosis",
+      "id": "FS-CHECKOUT/error/REQ-303-SC-02",
+      "detail": "seeded defect D-LASTNAME-VALIDATION, analysis said locator",
+      "source": "measured"
+    },
+    {
+      "type": "latency-outlier",
+      "id": "FS-CHECKOUT/problem",
+      "detail": "17439 ms vs median 8404 ms",
+      "source": "measured"
+    }
+  ],
+  "gates": [
+    {
+      "name": "functional-target-available",
+      "status": "pass",
+      "detail": "0 inconclusive case(s); workflow statuses executed"
+    },
+    {
+      "name": "baseline-regression",
+      "status": "not-applicable",
+      "detail": "no baseline given"
+    },
+    {
+      "name": "report-schema",
+      "status": "pass",
+      "detail": "report matches ReportSchema"
+    }
+  ],
+  "limitations": [
+    "0 of 62 reference labels are human-reviewed; the rest are author-assigned (by the AI assistant that built the framework) and pending review.",
+    "Datasets are small: rates with fewer than 10 cases in the denominator are marked insufficient-data, and percentiles from fewer than 20 samples are not distributions.",
+    "The test target is a public demo site with no version identifier; seeded defects are its intentionally broken accounts, verified by eval/probes/seeded-defects.ts.",
+    "The failure classifier treats an expected value as coming from the requirement when it appears anywhere in the criterion text (substring), which can turn an incorrect assertion into a product_behavior diagnosis.",
+    "Live-provider evaluation has not been run in this repository (no credentials); no model-quality, token or cost figures exist yet.",
+    "Functional mode executes pinned hand-written candidate specs; detection rates describe those specs and the pipeline, not what a model would generate.",
+    "Functional runs use a 15 s test timeout (stricter than the policy) so stuck pages fail fast."
+  ]
+}

@@ -26,10 +26,19 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - name: Agent unit tests (mock provider, no network)
         run: npm run test:agent
+      - name: Evaluation framework tests (dataset schema, metrics, fault injection, report schema)
+        run: npm run test:eval
+      - name: Deterministic evaluation (gated against eval/baselines/deterministic.json)
+        run: npm run eval
       - name: Playwright UI/API tests and agent integration (approved demo target)
         run: npx playwright test --project=setup --project=ui-chromium --project=api --project=agent-integration
-      - name: Deterministic evaluation
-        run: npm run eval
+      - name: Verify seeded-defect reference labels on the demo target
+        run: npm run eval:probe-defects
+      - name: Functional evaluation on seeded defects (gated against eval/baselines/functional.json)
+        run: npm run eval:functional
+        env:
+          # Executes only the sha256-pinned dataset specs; the approver is the person whose push or PR triggered the run.
+          RELYNX_EVAL_APPROVER: ${{ github.actor }}
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
@@ -38,4 +47,5 @@ jobs:
             playwright-report/
             test-results/
             eval-results/
+            .relynx/runs/
           retention-days: 14

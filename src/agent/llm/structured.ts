@@ -26,6 +26,8 @@ export interface UsageRecord {
   latencyMs: number;
   inputTokens: number;
   outputTokens: number;
+  /** False when any attempt returned no usage data; token counts are then incomplete. */
+  tokensAvailable: boolean;
   outcome: 'ok' | StructuredFailureKind;
 }
 
@@ -63,6 +65,7 @@ export async function callStructured<S extends z.ZodType>(
   let attempts = 0;
   let inputTokens = 0;
   let outputTokens = 0;
+  let tokensAvailable = true;
 
   const usage = (outcome: UsageRecord['outcome']): UsageRecord => ({
     useCase: request.useCase,
@@ -72,6 +75,7 @@ export async function callStructured<S extends z.ZodType>(
     latencyMs: now() - started,
     inputTokens,
     outputTokens,
+    tokensAvailable: tokensAvailable && attempts > 0,
     outcome,
   });
 
@@ -89,10 +93,16 @@ export async function callStructured<S extends z.ZodType>(
           ),
         ),
       ]);
-      inputTokens += response.usage?.inputTokens ?? 0;
-      outputTokens += response.usage?.outputTokens ?? 0;
+      if (response.usage) {
+        inputTokens += response.usage.inputTokens;
+        outputTokens += response.usage.outputTokens;
+      } else {
+        tokensAvailable = false;
+      }
       text = response.text;
     } catch (error) {
+      // A failed attempt may still have consumed tokens that the provider did not report.
+      tokensAvailable = false;
       const err = error instanceof ProviderError ? error : new ProviderError('unknown', 'provider call failed');
       if (err.retryable && attempts < policy.maxAttempts) {
         const backoff = Math.min(policy.maxBackoffMs, err.retryAfterMs ?? policy.baseBackoffMs * 2 ** (attempts - 1));

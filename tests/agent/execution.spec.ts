@@ -113,6 +113,24 @@ test.describe('execution boundary', () => {
     }
   });
 
+  test('session variants must come from the policy', async () => {
+    const run = await generatedRun();
+    try {
+      recordDecision(run.store, 'approved', 'Frank Vu', 'ok');
+      const { calls, spawner } = fakeSpawner();
+      const artifacts = run.store.manifest().artifacts;
+      const approval = readApproval(run.store.runDir);
+      const base = { repoRoot: REPO_ROOT, runId: run.runId, runDir: run.store.runDir, artifacts, approval, policy, env: {}, spawner };
+      expect(await executeApproved({ ...base, variant: 'admin' })).toEqual({ executed: false, refusals: ['session variant "admin" is not in the policy'] });
+      expect(calls).toHaveLength(0);
+      const ok = await executeApproved({ ...base, variant: 'problem' });
+      expect(ok).toMatchObject({ executed: true, variant: 'problem' });
+      expect(calls[0].env.RELYNX_SESSION_USER).toBe('problem');
+    } finally {
+      run.cleanup();
+    }
+  });
+
   test('only approved test targets are allowed; production-looking hosts are blocked', () => {
     expect(resolveTarget(policy, 'https://www.saucedemo.com')).toMatchObject({ ok: true, name: 'saucedemo-public-demo' });
     expect(resolveTarget(policy, 'https://evil.example')).toMatchObject({ ok: false, reason: expect.stringContaining('not an approved test target') });
@@ -133,7 +151,8 @@ test.describe('execution boundary', () => {
       expect(call.args[0]).toBe(require.resolve('@playwright/test/cli'));
       const files = manifest.artifacts.map((a) => a.file);
       expect(call.args.slice(1)).toEqual(['test', '--config', AGENT_CONFIG, '--project', 'agent-generated', '--retries', '0', '--workers', '2', '--timeout', '30000', ...files]);
-      expect(Object.keys(call.env).sort()).toEqual(['HOME', 'PATH', 'RELYNX_APPROVED_FILES', 'RELYNX_OUTPUT_DIR', 'RELYNX_RESULTS_FILE', 'UI_BASE_URL']);
+      expect(Object.keys(call.env).sort()).toEqual(['HOME', 'PATH', 'RELYNX_APPROVED_FILES', 'RELYNX_OUTPUT_DIR', 'RELYNX_RESULTS_FILE', 'RELYNX_SESSION_USER', 'UI_BASE_URL']);
+      expect(call.env.RELYNX_SESSION_USER).toBe('standard');
       expect(JSON.parse(call.env.RELYNX_APPROVED_FILES!)).toEqual(files);
       expect(call.timeoutMs).toBe(policy.execution.maxDurationMs);
       // The fake runner produced no report, so nothing can be reported as passed.

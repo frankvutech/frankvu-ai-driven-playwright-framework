@@ -25,6 +25,11 @@ export const PolicySchema = z
       })
       .strict(),
     envPassthrough: z.array(z.string().regex(/^[A-Z_][A-Z0-9_]*$/)),
+    /** Which demo account the signed-in session uses. "standard" is the default. */
+    sessionVariants: z.record(
+      z.string().regex(/^[a-z]+$/),
+      z.object({ user: z.enum(['standard', 'problem', 'error']), purpose: z.string() }).strict(),
+    ),
   })
   .strict();
 

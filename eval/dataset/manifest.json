@@ -1,0 +1,15 @@
+{
+  "datasetVersion": "2.0.0",
+  "description": "Relynx AI Test Agent evaluation dataset.",
+  "files": {
+    "planning": "planning.json",
+    "generation": "generation.json",
+    "functional": "functional.json",
+    "failures": "failures/labels.json"
+  },
+  "labelPolicy": "Every label records how it was produced (constructed | observed-controlled-variation | author-judgment) and its review status. No label is human-reviewed yet: a person must review a case and set review.status to \"human-reviewed\" with reviewer and date. Reports count reviewed and pending labels separately.",
+  "changelog": [
+    { "version": "1.0.0", "date": "2026-10-18", "changes": "Phase 2: 15 planning cases, 10 generation cases, 8 labelled report tests." },
+    { "version": "2.0.0", "date": "2026-10-18", "changes": "Phase 3: label provenance and review status; 6 planning cases (multiple criteria, input validation, conflicting, untestable); 9 assertion-quality cases; 4 seeded-defect functional suites (29 reference outcomes); 10 more real failure captures; failure taxonomy aligned with the Phase 3 categories." }
+  ]
+}

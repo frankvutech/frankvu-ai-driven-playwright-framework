@@ -11,6 +11,7 @@ export interface CollectInput {
   startedAt: Date;
   finishedAt: Date;
   target: { name: string; host: string };
+  sessionVariant?: string;
   runner: { exitCode: number | null; timedOut: boolean; stderr: string };
   secrets?: string[];
 }
@@ -105,6 +106,7 @@ export function collectEvidence(input: CollectInput): RunEvidence {
     environment: {
       targetName: input.target.name,
       baseUrlHost: input.target.host,
+      sessionVariant: input.sessionVariant ?? 'standard',
       playwrightVersion: report?.config.version ?? 'unknown',
       node: process.version,
       platform: process.platform,

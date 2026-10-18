@@ -28,6 +28,8 @@ export interface ExecutionRequest {
   policy: Policy;
   env: NodeJS.ProcessEnv;
   spawner?: Spawner;
+  /** Session variant from policy.sessionVariants (default "standard"). */
+  variant?: string;
 }
 
 export type ExecutionResult =
@@ -35,6 +37,7 @@ export type ExecutionResult =
   | {
       executed: true;
       target: { name: string; host: string };
+      variant: string;
       files: string[];
       reportPath: string;
       startedAt: Date;
@@ -98,7 +101,10 @@ export async function executeApproved(req: ExecutionRequest): Promise<ExecutionR
   const uiBaseUrl = req.env.UI_BASE_URL ?? policy.approvedTargets[0].uiBaseUrl;
   const target = resolveTarget(policy, uiBaseUrl);
   if (!target.ok) refusals.push(target.reason);
-  if (refusals.length > 0 || !target.ok) return { executed: false, refusals };
+  const variantName = req.variant ?? 'standard';
+  const variant = policy.sessionVariants[variantName];
+  if (!variant) refusals.push(`session variant "${variantName}" is not in the policy`);
+  if (refusals.length > 0 || !target.ok || !variant) return { executed: false, refusals };
 
   const files = req.artifacts.filter((a) => a.state === 'approved').map((a) => a.file);
   const outputDir = path.join(req.runDir, 'artifacts');
@@ -126,10 +132,11 @@ export async function executeApproved(req: ExecutionRequest): Promise<ExecutionR
     RELYNX_APPROVED_FILES: JSON.stringify(files),
     RELYNX_RESULTS_FILE: reportPath,
     RELYNX_OUTPUT_DIR: outputDir,
+    RELYNX_SESSION_USER: variant.user,
   });
 
   const startedAt = new Date();
   const spawner = req.spawner ?? defaultSpawner;
   const result = await spawner(process.execPath, args, { cwd: repoRoot, env, timeoutMs: policy.execution.maxDurationMs });
-  return { executed: true, target: { name: target.name, host: target.host }, files, reportPath, startedAt, finishedAt: new Date(), spawn: result };
+  return { executed: true, target: { name: target.name, host: target.host }, variant: variantName, files, reportPath, startedAt, finishedAt: new Date(), spawn: result };
 }

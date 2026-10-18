@@ -25,6 +25,12 @@ for (const p of [resultsFile, outputDir]) {
   if (!p || !path.resolve(p).startsWith(runsRoot)) throw new Error('results and output paths must be inside .relynx/runs/');
 }
 
+const sessionUser = process.env.RELYNX_SESSION_USER ?? 'standard';
+if (!['standard', 'problem', 'error'].includes(sessionUser)) throw new Error(`unknown session variant ${sessionUser}`);
+// Session state lives inside the run directory, never in the shared .auth/ folder.
+const sessionState = path.join(path.resolve(outputDir!), '..', 'session-state.json');
+process.env.RELYNX_SESSION_STATE = sessionState;
+
 const project = (name: string) => {
   const found = base.projects?.find((p) => p.name === name);
   if (!found) throw new Error(`base config has no project ${name}`);
@@ -38,11 +44,17 @@ export default defineConfig({
   retries: 0,
   use: { ...base.use, trace: 'retain-on-failure', screenshot: 'only-on-failure' },
   projects: [
-    project('setup'),
+    {
+      ...project('setup'),
+      name: 'agent-setup',
+      testMatch: /session\.agent-setup\.ts$/,
+    },
     {
       ...project('ui-chromium'),
       name: 'agent-generated',
       testDir: './generated',
+      dependencies: ['agent-setup'],
+      use: { ...project('ui-chromium').use, storageState: sessionState },
       testMatch: approvedAbs.map((f) => new RegExp(`^${f.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`)),
     },
   ],

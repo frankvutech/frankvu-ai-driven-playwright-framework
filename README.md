@@ -1,6 +1,6 @@
 # AI-Driven Playwright Framework
 
-Playwright Test + TypeScript framework built on the **Page Object Model** (Phase 1), plus the **Relynx AI Test Agent** (Phase 2). The agent turns requirements into candidate tests that run only after a person approves them. See [docs/PHASE2_AGENT.md](docs/PHASE2_AGENT.md).
+Playwright Test + TypeScript framework built on the **Page Object Model** (Phase 1), plus the **Relynx AI Test Agent** (Phase 2) and its **evaluation system** (Phase 3). The agent turns requirements into candidate tests that run only after a person approves them. See [docs/PHASE2_AGENT.md](docs/PHASE2_AGENT.md) and [docs/PHASE3_EVALUATION.md](docs/PHASE3_EVALUATION.md).
 
 | Layer | Target | Default URL (override with env var) |
 |-------|--------|--------------------------------------|
@@ -24,7 +24,9 @@ npm run report        # open the last HTML report
 # AI Test Agent (Phase 2)
 npm run test:agent                # agent unit tests
 npm run test:agent-integration    # full agent workflow against the demo target
-npm run eval                      # deterministic evaluation
+npm run test:eval                 # evaluation-system tests
+npm run eval                      # deterministic evaluation, gated against eval/baselines/
+RELYNX_EVAL_APPROVER="Your Name" npm run eval:functional   # seeded-defect evaluation on the demo site
 npm run agent -- generate --requirement examples/requirements/REQ-101-sign-in.json --provider mock --mock-replies examples/mock-replies/REQ-101.json
 ```
 
@@ -52,7 +54,8 @@ relynx.policy.json        execution policy (protected; change via review)
 eval/                     evaluation dataset and runners
 examples/                 sample requirements and hand-written mock replies
 docs/ARCHITECTURE.md      Phase 1 design decisions and review gate
-docs/PHASE2_AGENT.md      Phase 2 architecture, workflow, security, evaluation
+docs/PHASE2_AGENT.md      Phase 2 architecture, workflow, security
+docs/PHASE3_EVALUATION.md Phase 3 evaluation methodology, results, limitations
 ```
 
 ## Writing a test
@@ -79,4 +82,4 @@ Every run writes:
 - `test-results/results.json`: machine-readable results
 - `test-results/junit.xml`: for CI dashboards
 
-CI (`.github/workflows/playwright.yml`) lints and type-checks, runs the agent unit tests, the UI/API suites and the agent integration tests, then runs the deterministic evaluation. It uploads the results as the `playwright-evidence` artifact. Live model evaluation is a separate, manual workflow (`live-eval.yml`).
+CI (`.github/workflows/playwright.yml`) lints and type-checks. It runs the agent and evaluation unit tests, the baseline-gated deterministic evaluation, the UI/API suites and agent integration tests, the seeded-defect probe, and the baseline-gated functional evaluation. It uploads the results as the `playwright-evidence` artifact. Live model evaluation is a separate, manual workflow (`live-eval.yml`).

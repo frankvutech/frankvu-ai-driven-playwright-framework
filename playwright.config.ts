@@ -60,6 +60,12 @@ export default defineConfig({
       fullyParallel: false,
     },
     {
+      // Tests for the Phase 3 evaluation system (eval/). Local only, no demo-site traffic.
+      name: 'eval-unit',
+      testDir: './tests/eval',
+      timeout: 120_000,
+    },
+    {
       name: 'api',
       testDir: './tests/api',
       use: {

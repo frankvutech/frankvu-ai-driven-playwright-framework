@@ -1,5 +1,5 @@
 {
- "provenance": "Hand-written. recordedOutput values are stand-ins for model responses written by the framework author; no model produced them.",
+ "provenance": "recordedOutput values are hand-written stand-ins for model responses; no model produced them. Assertion-weakness labels are author-assigned and pending human review.",
  "cases": [
   {
    "id": "GE-01",
@@ -237,6 +237,50 @@
      "REQ-101-SC-03"
     ],
     "rejected": {}
+   },
+   "requirementId": "REQ-101",
+   "dimensions": [
+    "structural",
+    "semantic",
+    "assertion_quality"
+   ],
+   "requiredAssertions": {
+    "REQ-101-SC-01": [
+     {
+      "target": "inventoryPage.title",
+      "expected": "Products"
+     }
+    ],
+    "REQ-101-SC-02": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Sorry, this user has been locked out."
+     }
+    ],
+    "REQ-101-SC-03": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Username and password do not match any user in this service"
+     }
+    ]
+   },
+   "assertionLabels": {
+    "REQ-101-SC-01": {
+     "weaknesses": []
+    },
+    "REQ-101-SC-02": {
+     "weaknesses": []
+    },
+    "REQ-101-SC-03": {
+     "weaknesses": []
+    }
+   },
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
    }
   },
   {
@@ -442,6 +486,44 @@
       "unknown_method"
      ]
     }
+   },
+   "requirementId": "REQ-101",
+   "dimensions": [
+    "structural",
+    "semantic",
+    "assertion_quality"
+   ],
+   "requiredAssertions": {
+    "REQ-101-SC-01": [
+     {
+      "target": "inventoryPage.title",
+      "expected": "Products"
+     }
+    ],
+    "REQ-101-SC-02": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Sorry, this user has been locked out."
+     }
+    ],
+    "REQ-101-SC-03": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Username and password do not match any user in this service"
+     }
+    ]
+   },
+   "assertionLabels": {
+    "REQ-101-SC-02": {
+     "weaknesses": []
+    }
+   },
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
    }
   },
   {
@@ -605,6 +687,40 @@
       "literal_secret"
      ]
     }
+   },
+   "requirementId": "REQ-101",
+   "dimensions": [
+    "structural",
+    "semantic",
+    "assertion_quality"
+   ],
+   "requiredAssertions": {
+    "REQ-101-SC-01": [
+     {
+      "target": "inventoryPage.title",
+      "expected": "Products"
+     }
+    ],
+    "REQ-101-SC-02": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Sorry, this user has been locked out."
+     }
+    ],
+    "REQ-101-SC-03": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Username and password do not match any user in this service"
+     }
+    ]
+   },
+   "assertionLabels": {},
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
    }
   },
   {
@@ -754,6 +870,40 @@
      "REQ-101-SC-03": [
       "no_assertion"
      ]
+    }
+   },
+   "requirementId": "REQ-101",
+   "dimensions": [
+    "structural",
+    "semantic",
+    "assertion_quality"
+   ],
+   "requiredAssertions": {
+    "REQ-101-SC-01": [
+     {
+      "target": "inventoryPage.title",
+      "expected": "Products"
+     }
+    ],
+    "REQ-101-SC-02": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Sorry, this user has been locked out."
+     }
+    ],
+    "REQ-101-SC-03": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Username and password do not match any user in this service"
+     }
+    ]
+   },
+   "assertionLabels": {},
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
     }
    }
   },
@@ -918,6 +1068,40 @@
       "unknown_scenario"
      ]
     }
+   },
+   "requirementId": "REQ-101",
+   "dimensions": [
+    "structural",
+    "semantic",
+    "assertion_quality"
+   ],
+   "requiredAssertions": {
+    "REQ-101-SC-01": [
+     {
+      "target": "inventoryPage.title",
+      "expected": "Products"
+     }
+    ],
+    "REQ-101-SC-02": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Sorry, this user has been locked out."
+     }
+    ],
+    "REQ-101-SC-03": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Username and password do not match any user in this service"
+     }
+    ]
+   },
+   "assertionLabels": {},
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
    }
   },
   {
@@ -1081,6 +1265,40 @@
       "unsafe_url_pattern"
      ]
     }
+   },
+   "requirementId": "REQ-101",
+   "dimensions": [
+    "structural",
+    "semantic",
+    "assertion_quality"
+   ],
+   "requiredAssertions": {
+    "REQ-101-SC-01": [
+     {
+      "target": "inventoryPage.title",
+      "expected": "Products"
+     }
+    ],
+    "REQ-101-SC-02": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Sorry, this user has been locked out."
+     }
+    ],
+    "REQ-101-SC-03": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Username and password do not match any user in this service"
+     }
+    ]
+   },
+   "assertionLabels": {},
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
    }
   },
   {
@@ -1195,6 +1413,38 @@
    "recordedOutput": "{\"tests\": [ {\"scenarioId\": ",
    "expected": {
     "failureKind": "malformed_json"
+   },
+   "requirementId": "REQ-101",
+   "dimensions": [
+    "structural"
+   ],
+   "requiredAssertions": {
+    "REQ-101-SC-01": [
+     {
+      "target": "inventoryPage.title",
+      "expected": "Products"
+     }
+    ],
+    "REQ-101-SC-02": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Sorry, this user has been locked out."
+     }
+    ],
+    "REQ-101-SC-03": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Username and password do not match any user in this service"
+     }
+    ]
+   },
+   "assertionLabels": {},
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
    }
   },
   {
@@ -1357,6 +1607,44 @@
     ],
     "rejected": {},
     "note": "hostile title must stay inside a string literal"
+   },
+   "requirementId": "REQ-101",
+   "dimensions": [
+    "structural",
+    "semantic",
+    "assertion_quality"
+   ],
+   "requiredAssertions": {
+    "REQ-101-SC-01": [
+     {
+      "target": "inventoryPage.title",
+      "expected": "Products"
+     }
+    ],
+    "REQ-101-SC-02": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Sorry, this user has been locked out."
+     }
+    ],
+    "REQ-101-SC-03": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Username and password do not match any user in this service"
+     }
+    ]
+   },
+   "assertionLabels": {
+    "REQ-101-SC-01": {
+     "weaknesses": []
+    }
+   },
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
    }
   },
   {
@@ -1482,6 +1770,40 @@
     "accepted": [],
     "rejected": {},
     "missingCapabilities": 1
+   },
+   "requirementId": "REQ-101",
+   "dimensions": [
+    "structural",
+    "semantic",
+    "assertion_quality"
+   ],
+   "requiredAssertions": {
+    "REQ-101-SC-01": [
+     {
+      "target": "inventoryPage.title",
+      "expected": "Products"
+     }
+    ],
+    "REQ-101-SC-02": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Sorry, this user has been locked out."
+     }
+    ],
+    "REQ-101-SC-03": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Username and password do not match any user in this service"
+     }
+    ]
+   },
+   "assertionLabels": {},
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
    }
   },
   {
@@ -1639,6 +1961,1829 @@
     ],
     "rejected": {},
     "contentAssertion": false
+   },
+   "requirementId": "REQ-101",
+   "dimensions": [
+    "structural",
+    "semantic",
+    "assertion_quality"
+   ],
+   "requiredAssertions": {
+    "REQ-101-SC-01": [
+     {
+      "target": "inventoryPage.title",
+      "expected": "Products"
+     }
+    ],
+    "REQ-101-SC-02": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Sorry, this user has been locked out."
+     }
+    ],
+    "REQ-101-SC-03": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Username and password do not match any user in this service"
+     }
+    ]
+   },
+   "assertionLabels": {
+    "REQ-101-SC-01": {
+     "weaknesses": [
+      "AQ_VISIBILITY_ONLY"
+     ]
+    }
+   },
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   }
+  },
+  {
+   "id": "GE-11",
+   "category": "assertion_quality",
+   "description": "navigation-only",
+   "requirementId": "REQ-101",
+   "requirement": {
+    "id": "REQ-101",
+    "title": "Sign in to the storefront",
+    "description": "Registered shoppers sign in with a username and password to reach the product catalogue. Locked accounts must not get in.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "Given a valid standard account, when the shopper signs in, then the product list titled \"Products\" is shown."
+     },
+     {
+      "id": "AC-2",
+      "text": "Given a locked-out account, when the shopper signs in, then the error \"Epic sadface: Sorry, this user has been locked out.\" is shown and the shopper stays on the login page."
+     },
+     {
+      "id": "AC-3",
+      "text": "Given a wrong password, when the shopper signs in, then the error \"Epic sadface: Username and password do not match any user in this service\" is shown."
+     }
+    ],
+    "source": "examples/requirements (synthetic example for the saucedemo.com demo target)"
+   },
+   "scenarios": [
+    {
+     "id": "REQ-101-SC-01",
+     "requirementId": "REQ-101",
+     "acceptanceCriteriaIds": [
+      "AC-1"
+     ],
+     "title": "Standard user signs in and sees the product list",
+     "objective": "Verify a valid account reaches the catalogue",
+     "type": "positive",
+     "priority": "high",
+     "priorityRationale": "Sign-in gates every other journey",
+     "preconditions": [
+      "Shopper is signed out"
+     ],
+     "steps": [
+      "Open the login page",
+      "Sign in as the standard user"
+     ],
+     "testData": [
+      "standard user credentials"
+     ],
+     "expectedOutcomes": [
+      "URL is the inventory page",
+      "Title reads \"Products\""
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-101-SC-02",
+     "requirementId": "REQ-101",
+     "acceptanceCriteriaIds": [
+      "AC-2"
+     ],
+     "title": "Locked-out user is refused",
+     "objective": "Verify locked accounts cannot sign in",
+     "type": "authorization",
+     "priority": "high",
+     "priorityRationale": "Access control",
+     "preconditions": [
+      "Shopper is signed out"
+     ],
+     "steps": [
+      "Open the login page",
+      "Sign in as the locked-out user"
+     ],
+     "testData": [
+      "locked-out user credentials"
+     ],
+     "expectedOutcomes": [
+      "Error \"Epic sadface: Sorry, this user has been locked out.\" is shown",
+      "Shopper stays on the login page"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-101-SC-03",
+     "requirementId": "REQ-101",
+     "acceptanceCriteriaIds": [
+      "AC-3"
+     ],
+     "title": "Wrong password is rejected",
+     "objective": "Verify invalid credentials are refused",
+     "type": "negative",
+     "priority": "medium",
+     "priorityRationale": "Common error path",
+     "preconditions": [
+      "Shopper is signed out"
+     ],
+     "steps": [
+      "Open the login page",
+      "Sign in with the standard username and a wrong password"
+     ],
+     "testData": [
+      "standard username",
+      "an incorrect password"
+     ],
+     "expectedOutcomes": [
+      "Error \"Epic sadface: Username and password do not match any user in this service\" is shown"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    }
+   ],
+   "recordedOutput": {
+    "tests": [
+     {
+      "scenarioId": "REQ-101-SC-01",
+      "requirementId": "REQ-101",
+      "title": "standard user signs in and sees the product list",
+      "startSignedIn": false,
+      "steps": [
+       {
+        "kind": "action",
+        "target": "loginPage.goto",
+        "args": []
+       },
+       {
+        "kind": "action",
+        "target": "loginPage.login",
+        "args": [
+         {
+          "kind": "data",
+          "ref": "users.standard.username"
+         },
+         {
+          "kind": "data",
+          "ref": "users.standard.password"
+         }
+        ]
+       },
+       {
+        "kind": "expectUrl",
+        "pathPattern": "inventory\\.html",
+        "negate": false
+       }
+      ]
+     }
+    ],
+    "missingCapabilities": []
+   },
+   "expected": {
+    "accepted": [
+     "REQ-101-SC-01"
+    ],
+    "rejected": {}
+   },
+   "requiredAssertions": {
+    "REQ-101-SC-01": [
+     {
+      "target": "inventoryPage.title",
+      "expected": "Products"
+     }
+    ],
+    "REQ-101-SC-02": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Sorry, this user has been locked out."
+     }
+    ],
+    "REQ-101-SC-03": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Username and password do not match any user in this service"
+     }
+    ]
+   },
+   "assertionLabels": {
+    "REQ-101-SC-01": {
+     "weaknesses": [
+      "AQ_NAV_ONLY"
+     ]
+    }
+   },
+   "dimensions": [
+    "assertion_quality",
+    "semantic"
+   ],
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   }
+  },
+  {
+   "id": "GE-12",
+   "category": "assertion_quality",
+   "description": "untraced expected value",
+   "requirementId": "REQ-101",
+   "requirement": {
+    "id": "REQ-101",
+    "title": "Sign in to the storefront",
+    "description": "Registered shoppers sign in with a username and password to reach the product catalogue. Locked accounts must not get in.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "Given a valid standard account, when the shopper signs in, then the product list titled \"Products\" is shown."
+     },
+     {
+      "id": "AC-2",
+      "text": "Given a locked-out account, when the shopper signs in, then the error \"Epic sadface: Sorry, this user has been locked out.\" is shown and the shopper stays on the login page."
+     },
+     {
+      "id": "AC-3",
+      "text": "Given a wrong password, when the shopper signs in, then the error \"Epic sadface: Username and password do not match any user in this service\" is shown."
+     }
+    ],
+    "source": "examples/requirements (synthetic example for the saucedemo.com demo target)"
+   },
+   "scenarios": [
+    {
+     "id": "REQ-101-SC-01",
+     "requirementId": "REQ-101",
+     "acceptanceCriteriaIds": [
+      "AC-1"
+     ],
+     "title": "Standard user signs in and sees the product list",
+     "objective": "Verify a valid account reaches the catalogue",
+     "type": "positive",
+     "priority": "high",
+     "priorityRationale": "Sign-in gates every other journey",
+     "preconditions": [
+      "Shopper is signed out"
+     ],
+     "steps": [
+      "Open the login page",
+      "Sign in as the standard user"
+     ],
+     "testData": [
+      "standard user credentials"
+     ],
+     "expectedOutcomes": [
+      "URL is the inventory page",
+      "Title reads \"Products\""
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-101-SC-02",
+     "requirementId": "REQ-101",
+     "acceptanceCriteriaIds": [
+      "AC-2"
+     ],
+     "title": "Locked-out user is refused",
+     "objective": "Verify locked accounts cannot sign in",
+     "type": "authorization",
+     "priority": "high",
+     "priorityRationale": "Access control",
+     "preconditions": [
+      "Shopper is signed out"
+     ],
+     "steps": [
+      "Open the login page",
+      "Sign in as the locked-out user"
+     ],
+     "testData": [
+      "locked-out user credentials"
+     ],
+     "expectedOutcomes": [
+      "Error \"Epic sadface: Sorry, this user has been locked out.\" is shown",
+      "Shopper stays on the login page"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-101-SC-03",
+     "requirementId": "REQ-101",
+     "acceptanceCriteriaIds": [
+      "AC-3"
+     ],
+     "title": "Wrong password is rejected",
+     "objective": "Verify invalid credentials are refused",
+     "type": "negative",
+     "priority": "medium",
+     "priorityRationale": "Common error path",
+     "preconditions": [
+      "Shopper is signed out"
+     ],
+     "steps": [
+      "Open the login page",
+      "Sign in with the standard username and a wrong password"
+     ],
+     "testData": [
+      "standard username",
+      "an incorrect password"
+     ],
+     "expectedOutcomes": [
+      "Error \"Epic sadface: Username and password do not match any user in this service\" is shown"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    }
+   ],
+   "recordedOutput": {
+    "tests": [
+     {
+      "scenarioId": "REQ-101-SC-01",
+      "requirementId": "REQ-101",
+      "title": "standard user signs in and sees the product list",
+      "startSignedIn": false,
+      "steps": [
+       {
+        "kind": "action",
+        "target": "loginPage.goto",
+        "args": []
+       },
+       {
+        "kind": "action",
+        "target": "loginPage.login",
+        "args": [
+         {
+          "kind": "data",
+          "ref": "users.standard.username"
+         },
+         {
+          "kind": "data",
+          "ref": "users.standard.password"
+         }
+        ]
+       },
+       {
+        "kind": "expect",
+        "target": "inventoryPage.title",
+        "select": "all",
+        "matcher": "toHaveText",
+        "expected": "Our Products",
+        "negate": false
+       }
+      ]
+     }
+    ],
+    "missingCapabilities": []
+   },
+   "expected": {
+    "accepted": [
+     "REQ-101-SC-01"
+    ],
+    "rejected": {}
+   },
+   "requiredAssertions": {
+    "REQ-101-SC-01": [
+     {
+      "target": "inventoryPage.title",
+      "expected": "Products"
+     }
+    ],
+    "REQ-101-SC-02": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Sorry, this user has been locked out."
+     }
+    ],
+    "REQ-101-SC-03": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Username and password do not match any user in this service"
+     }
+    ]
+   },
+   "assertionLabels": {
+    "REQ-101-SC-01": {
+     "weaknesses": [
+      "AQ_UNTRACED"
+     ]
+    }
+   },
+   "dimensions": [
+    "assertion_quality",
+    "semantic"
+   ],
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   }
+  },
+  {
+   "id": "GE-13",
+   "category": "assertion_quality",
+   "description": "contradictory assertions",
+   "requirementId": "REQ-101",
+   "requirement": {
+    "id": "REQ-101",
+    "title": "Sign in to the storefront",
+    "description": "Registered shoppers sign in with a username and password to reach the product catalogue. Locked accounts must not get in.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "Given a valid standard account, when the shopper signs in, then the product list titled \"Products\" is shown."
+     },
+     {
+      "id": "AC-2",
+      "text": "Given a locked-out account, when the shopper signs in, then the error \"Epic sadface: Sorry, this user has been locked out.\" is shown and the shopper stays on the login page."
+     },
+     {
+      "id": "AC-3",
+      "text": "Given a wrong password, when the shopper signs in, then the error \"Epic sadface: Username and password do not match any user in this service\" is shown."
+     }
+    ],
+    "source": "examples/requirements (synthetic example for the saucedemo.com demo target)"
+   },
+   "scenarios": [
+    {
+     "id": "REQ-101-SC-01",
+     "requirementId": "REQ-101",
+     "acceptanceCriteriaIds": [
+      "AC-1"
+     ],
+     "title": "Standard user signs in and sees the product list",
+     "objective": "Verify a valid account reaches the catalogue",
+     "type": "positive",
+     "priority": "high",
+     "priorityRationale": "Sign-in gates every other journey",
+     "preconditions": [
+      "Shopper is signed out"
+     ],
+     "steps": [
+      "Open the login page",
+      "Sign in as the standard user"
+     ],
+     "testData": [
+      "standard user credentials"
+     ],
+     "expectedOutcomes": [
+      "URL is the inventory page",
+      "Title reads \"Products\""
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-101-SC-02",
+     "requirementId": "REQ-101",
+     "acceptanceCriteriaIds": [
+      "AC-2"
+     ],
+     "title": "Locked-out user is refused",
+     "objective": "Verify locked accounts cannot sign in",
+     "type": "authorization",
+     "priority": "high",
+     "priorityRationale": "Access control",
+     "preconditions": [
+      "Shopper is signed out"
+     ],
+     "steps": [
+      "Open the login page",
+      "Sign in as the locked-out user"
+     ],
+     "testData": [
+      "locked-out user credentials"
+     ],
+     "expectedOutcomes": [
+      "Error \"Epic sadface: Sorry, this user has been locked out.\" is shown",
+      "Shopper stays on the login page"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-101-SC-03",
+     "requirementId": "REQ-101",
+     "acceptanceCriteriaIds": [
+      "AC-3"
+     ],
+     "title": "Wrong password is rejected",
+     "objective": "Verify invalid credentials are refused",
+     "type": "negative",
+     "priority": "medium",
+     "priorityRationale": "Common error path",
+     "preconditions": [
+      "Shopper is signed out"
+     ],
+     "steps": [
+      "Open the login page",
+      "Sign in with the standard username and a wrong password"
+     ],
+     "testData": [
+      "standard username",
+      "an incorrect password"
+     ],
+     "expectedOutcomes": [
+      "Error \"Epic sadface: Username and password do not match any user in this service\" is shown"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    }
+   ],
+   "recordedOutput": {
+    "tests": [
+     {
+      "scenarioId": "REQ-101-SC-02",
+      "requirementId": "REQ-101",
+      "title": "locked-out user is refused",
+      "startSignedIn": false,
+      "steps": [
+       {
+        "kind": "action",
+        "target": "loginPage.goto",
+        "args": []
+       },
+       {
+        "kind": "action",
+        "target": "loginPage.login",
+        "args": [
+         {
+          "kind": "data",
+          "ref": "users.lockedOut.username"
+         },
+         {
+          "kind": "data",
+          "ref": "users.lockedOut.password"
+         }
+        ]
+       },
+       {
+        "kind": "expect",
+        "target": "loginPage.errorMessage",
+        "select": "all",
+        "matcher": "toHaveText",
+        "expected": "Epic sadface: Sorry, this user has been locked out.",
+        "negate": false
+       },
+       {
+        "kind": "expect",
+        "target": "loginPage.errorMessage",
+        "select": "all",
+        "matcher": "toHaveText",
+        "expected": "Epic sadface: Sorry, this user has been locked out.",
+        "negate": true
+       }
+      ]
+     }
+    ],
+    "missingCapabilities": []
+   },
+   "expected": {
+    "accepted": [
+     "REQ-101-SC-02"
+    ],
+    "rejected": {}
+   },
+   "requiredAssertions": {
+    "REQ-101-SC-01": [
+     {
+      "target": "inventoryPage.title",
+      "expected": "Products"
+     }
+    ],
+    "REQ-101-SC-02": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Sorry, this user has been locked out."
+     }
+    ],
+    "REQ-101-SC-03": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Username and password do not match any user in this service"
+     }
+    ]
+   },
+   "assertionLabels": {
+    "REQ-101-SC-02": {
+     "weaknesses": [
+      "AQ_CONTRADICTORY"
+     ]
+    }
+   },
+   "dimensions": [
+    "assertion_quality",
+    "semantic"
+   ],
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   }
+  },
+  {
+   "id": "GE-14",
+   "category": "assertion_quality",
+   "description": "redundant assertion",
+   "requirementId": "REQ-101",
+   "requirement": {
+    "id": "REQ-101",
+    "title": "Sign in to the storefront",
+    "description": "Registered shoppers sign in with a username and password to reach the product catalogue. Locked accounts must not get in.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "Given a valid standard account, when the shopper signs in, then the product list titled \"Products\" is shown."
+     },
+     {
+      "id": "AC-2",
+      "text": "Given a locked-out account, when the shopper signs in, then the error \"Epic sadface: Sorry, this user has been locked out.\" is shown and the shopper stays on the login page."
+     },
+     {
+      "id": "AC-3",
+      "text": "Given a wrong password, when the shopper signs in, then the error \"Epic sadface: Username and password do not match any user in this service\" is shown."
+     }
+    ],
+    "source": "examples/requirements (synthetic example for the saucedemo.com demo target)"
+   },
+   "scenarios": [
+    {
+     "id": "REQ-101-SC-01",
+     "requirementId": "REQ-101",
+     "acceptanceCriteriaIds": [
+      "AC-1"
+     ],
+     "title": "Standard user signs in and sees the product list",
+     "objective": "Verify a valid account reaches the catalogue",
+     "type": "positive",
+     "priority": "high",
+     "priorityRationale": "Sign-in gates every other journey",
+     "preconditions": [
+      "Shopper is signed out"
+     ],
+     "steps": [
+      "Open the login page",
+      "Sign in as the standard user"
+     ],
+     "testData": [
+      "standard user credentials"
+     ],
+     "expectedOutcomes": [
+      "URL is the inventory page",
+      "Title reads \"Products\""
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-101-SC-02",
+     "requirementId": "REQ-101",
+     "acceptanceCriteriaIds": [
+      "AC-2"
+     ],
+     "title": "Locked-out user is refused",
+     "objective": "Verify locked accounts cannot sign in",
+     "type": "authorization",
+     "priority": "high",
+     "priorityRationale": "Access control",
+     "preconditions": [
+      "Shopper is signed out"
+     ],
+     "steps": [
+      "Open the login page",
+      "Sign in as the locked-out user"
+     ],
+     "testData": [
+      "locked-out user credentials"
+     ],
+     "expectedOutcomes": [
+      "Error \"Epic sadface: Sorry, this user has been locked out.\" is shown",
+      "Shopper stays on the login page"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-101-SC-03",
+     "requirementId": "REQ-101",
+     "acceptanceCriteriaIds": [
+      "AC-3"
+     ],
+     "title": "Wrong password is rejected",
+     "objective": "Verify invalid credentials are refused",
+     "type": "negative",
+     "priority": "medium",
+     "priorityRationale": "Common error path",
+     "preconditions": [
+      "Shopper is signed out"
+     ],
+     "steps": [
+      "Open the login page",
+      "Sign in with the standard username and a wrong password"
+     ],
+     "testData": [
+      "standard username",
+      "an incorrect password"
+     ],
+     "expectedOutcomes": [
+      "Error \"Epic sadface: Username and password do not match any user in this service\" is shown"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    }
+   ],
+   "recordedOutput": {
+    "tests": [
+     {
+      "scenarioId": "REQ-101-SC-02",
+      "requirementId": "REQ-101",
+      "title": "locked-out user is refused",
+      "startSignedIn": false,
+      "steps": [
+       {
+        "kind": "action",
+        "target": "loginPage.goto",
+        "args": []
+       },
+       {
+        "kind": "action",
+        "target": "loginPage.login",
+        "args": [
+         {
+          "kind": "data",
+          "ref": "users.lockedOut.username"
+         },
+         {
+          "kind": "data",
+          "ref": "users.lockedOut.password"
+         }
+        ]
+       },
+       {
+        "kind": "expect",
+        "target": "loginPage.errorMessage",
+        "select": "all",
+        "matcher": "toHaveText",
+        "expected": "Epic sadface: Sorry, this user has been locked out.",
+        "negate": false
+       },
+       {
+        "kind": "expect",
+        "target": "loginPage.errorMessage",
+        "select": "all",
+        "matcher": "toHaveText",
+        "expected": "Epic sadface: Sorry, this user has been locked out.",
+        "negate": false
+       }
+      ]
+     }
+    ],
+    "missingCapabilities": []
+   },
+   "expected": {
+    "accepted": [
+     "REQ-101-SC-02"
+    ],
+    "rejected": {}
+   },
+   "requiredAssertions": {
+    "REQ-101-SC-01": [
+     {
+      "target": "inventoryPage.title",
+      "expected": "Products"
+     }
+    ],
+    "REQ-101-SC-02": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Sorry, this user has been locked out."
+     }
+    ],
+    "REQ-101-SC-03": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Username and password do not match any user in this service"
+     }
+    ]
+   },
+   "assertionLabels": {
+    "REQ-101-SC-02": {
+     "weaknesses": [
+      "AQ_REDUNDANT"
+     ]
+    }
+   },
+   "dimensions": [
+    "assertion_quality",
+    "semantic"
+   ],
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   }
+  },
+  {
+   "id": "GE-15",
+   "category": "assertion_quality",
+   "description": "weak partial match",
+   "requirementId": "REQ-101",
+   "requirement": {
+    "id": "REQ-101",
+    "title": "Sign in to the storefront",
+    "description": "Registered shoppers sign in with a username and password to reach the product catalogue. Locked accounts must not get in.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "Given a valid standard account, when the shopper signs in, then the product list titled \"Products\" is shown."
+     },
+     {
+      "id": "AC-2",
+      "text": "Given a locked-out account, when the shopper signs in, then the error \"Epic sadface: Sorry, this user has been locked out.\" is shown and the shopper stays on the login page."
+     },
+     {
+      "id": "AC-3",
+      "text": "Given a wrong password, when the shopper signs in, then the error \"Epic sadface: Username and password do not match any user in this service\" is shown."
+     }
+    ],
+    "source": "examples/requirements (synthetic example for the saucedemo.com demo target)"
+   },
+   "scenarios": [
+    {
+     "id": "REQ-101-SC-01",
+     "requirementId": "REQ-101",
+     "acceptanceCriteriaIds": [
+      "AC-1"
+     ],
+     "title": "Standard user signs in and sees the product list",
+     "objective": "Verify a valid account reaches the catalogue",
+     "type": "positive",
+     "priority": "high",
+     "priorityRationale": "Sign-in gates every other journey",
+     "preconditions": [
+      "Shopper is signed out"
+     ],
+     "steps": [
+      "Open the login page",
+      "Sign in as the standard user"
+     ],
+     "testData": [
+      "standard user credentials"
+     ],
+     "expectedOutcomes": [
+      "URL is the inventory page",
+      "Title reads \"Products\""
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-101-SC-02",
+     "requirementId": "REQ-101",
+     "acceptanceCriteriaIds": [
+      "AC-2"
+     ],
+     "title": "Locked-out user is refused",
+     "objective": "Verify locked accounts cannot sign in",
+     "type": "authorization",
+     "priority": "high",
+     "priorityRationale": "Access control",
+     "preconditions": [
+      "Shopper is signed out"
+     ],
+     "steps": [
+      "Open the login page",
+      "Sign in as the locked-out user"
+     ],
+     "testData": [
+      "locked-out user credentials"
+     ],
+     "expectedOutcomes": [
+      "Error \"Epic sadface: Sorry, this user has been locked out.\" is shown",
+      "Shopper stays on the login page"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-101-SC-03",
+     "requirementId": "REQ-101",
+     "acceptanceCriteriaIds": [
+      "AC-3"
+     ],
+     "title": "Wrong password is rejected",
+     "objective": "Verify invalid credentials are refused",
+     "type": "negative",
+     "priority": "medium",
+     "priorityRationale": "Common error path",
+     "preconditions": [
+      "Shopper is signed out"
+     ],
+     "steps": [
+      "Open the login page",
+      "Sign in with the standard username and a wrong password"
+     ],
+     "testData": [
+      "standard username",
+      "an incorrect password"
+     ],
+     "expectedOutcomes": [
+      "Error \"Epic sadface: Username and password do not match any user in this service\" is shown"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    }
+   ],
+   "recordedOutput": {
+    "tests": [
+     {
+      "scenarioId": "REQ-101-SC-02",
+      "requirementId": "REQ-101",
+      "title": "locked-out user is refused",
+      "startSignedIn": false,
+      "steps": [
+       {
+        "kind": "action",
+        "target": "loginPage.goto",
+        "args": []
+       },
+       {
+        "kind": "action",
+        "target": "loginPage.login",
+        "args": [
+         {
+          "kind": "data",
+          "ref": "users.lockedOut.username"
+         },
+         {
+          "kind": "data",
+          "ref": "users.lockedOut.password"
+         }
+        ]
+       },
+       {
+        "kind": "expect",
+        "target": "loginPage.errorMessage",
+        "select": "all",
+        "matcher": "toContainText",
+        "expected": "Epic",
+        "negate": false
+       }
+      ]
+     }
+    ],
+    "missingCapabilities": []
+   },
+   "expected": {
+    "accepted": [
+     "REQ-101-SC-02"
+    ],
+    "rejected": {}
+   },
+   "requiredAssertions": {
+    "REQ-101-SC-01": [
+     {
+      "target": "inventoryPage.title",
+      "expected": "Products"
+     }
+    ],
+    "REQ-101-SC-02": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Sorry, this user has been locked out."
+     }
+    ],
+    "REQ-101-SC-03": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Username and password do not match any user in this service"
+     }
+    ]
+   },
+   "assertionLabels": {
+    "REQ-101-SC-02": {
+     "weaknesses": [
+      "AQ_WEAK_PARTIAL"
+     ]
+    }
+   },
+   "dimensions": [
+    "assertion_quality",
+    "semantic"
+   ],
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   }
+  },
+  {
+   "id": "GE-16",
+   "category": "assertion_quality",
+   "description": "negative-only",
+   "requirementId": "REQ-101",
+   "requirement": {
+    "id": "REQ-101",
+    "title": "Sign in to the storefront",
+    "description": "Registered shoppers sign in with a username and password to reach the product catalogue. Locked accounts must not get in.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "Given a valid standard account, when the shopper signs in, then the product list titled \"Products\" is shown."
+     },
+     {
+      "id": "AC-2",
+      "text": "Given a locked-out account, when the shopper signs in, then the error \"Epic sadface: Sorry, this user has been locked out.\" is shown and the shopper stays on the login page."
+     },
+     {
+      "id": "AC-3",
+      "text": "Given a wrong password, when the shopper signs in, then the error \"Epic sadface: Username and password do not match any user in this service\" is shown."
+     }
+    ],
+    "source": "examples/requirements (synthetic example for the saucedemo.com demo target)"
+   },
+   "scenarios": [
+    {
+     "id": "REQ-101-SC-01",
+     "requirementId": "REQ-101",
+     "acceptanceCriteriaIds": [
+      "AC-1"
+     ],
+     "title": "Standard user signs in and sees the product list",
+     "objective": "Verify a valid account reaches the catalogue",
+     "type": "positive",
+     "priority": "high",
+     "priorityRationale": "Sign-in gates every other journey",
+     "preconditions": [
+      "Shopper is signed out"
+     ],
+     "steps": [
+      "Open the login page",
+      "Sign in as the standard user"
+     ],
+     "testData": [
+      "standard user credentials"
+     ],
+     "expectedOutcomes": [
+      "URL is the inventory page",
+      "Title reads \"Products\""
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-101-SC-02",
+     "requirementId": "REQ-101",
+     "acceptanceCriteriaIds": [
+      "AC-2"
+     ],
+     "title": "Locked-out user is refused",
+     "objective": "Verify locked accounts cannot sign in",
+     "type": "authorization",
+     "priority": "high",
+     "priorityRationale": "Access control",
+     "preconditions": [
+      "Shopper is signed out"
+     ],
+     "steps": [
+      "Open the login page",
+      "Sign in as the locked-out user"
+     ],
+     "testData": [
+      "locked-out user credentials"
+     ],
+     "expectedOutcomes": [
+      "Error \"Epic sadface: Sorry, this user has been locked out.\" is shown",
+      "Shopper stays on the login page"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-101-SC-03",
+     "requirementId": "REQ-101",
+     "acceptanceCriteriaIds": [
+      "AC-3"
+     ],
+     "title": "Wrong password is rejected",
+     "objective": "Verify invalid credentials are refused",
+     "type": "negative",
+     "priority": "medium",
+     "priorityRationale": "Common error path",
+     "preconditions": [
+      "Shopper is signed out"
+     ],
+     "steps": [
+      "Open the login page",
+      "Sign in with the standard username and a wrong password"
+     ],
+     "testData": [
+      "standard username",
+      "an incorrect password"
+     ],
+     "expectedOutcomes": [
+      "Error \"Epic sadface: Username and password do not match any user in this service\" is shown"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    }
+   ],
+   "recordedOutput": {
+    "tests": [
+     {
+      "scenarioId": "REQ-101-SC-03",
+      "requirementId": "REQ-101",
+      "title": "wrong password is rejected",
+      "startSignedIn": false,
+      "steps": [
+       {
+        "kind": "action",
+        "target": "loginPage.goto",
+        "args": []
+       },
+       {
+        "kind": "action",
+        "target": "loginPage.login",
+        "args": [
+         {
+          "kind": "data",
+          "ref": "users.standard.username"
+         },
+         {
+          "kind": "literal",
+          "value": "not-the-password"
+         }
+        ]
+       },
+       {
+        "kind": "expectUrl",
+        "pathPattern": "inventory\\.html",
+        "negate": true
+       }
+      ]
+     }
+    ],
+    "missingCapabilities": []
+   },
+   "expected": {
+    "accepted": [
+     "REQ-101-SC-03"
+    ],
+    "rejected": {}
+   },
+   "requiredAssertions": {
+    "REQ-101-SC-01": [
+     {
+      "target": "inventoryPage.title",
+      "expected": "Products"
+     }
+    ],
+    "REQ-101-SC-02": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Sorry, this user has been locked out."
+     }
+    ],
+    "REQ-101-SC-03": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Username and password do not match any user in this service"
+     }
+    ]
+   },
+   "assertionLabels": {
+    "REQ-101-SC-03": {
+     "weaknesses": [
+      "AQ_NAV_ONLY",
+      "AQ_NEGATIVE_ONLY"
+     ]
+    }
+   },
+   "dimensions": [
+    "assertion_quality",
+    "semantic"
+   ],
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   }
+  },
+  {
+   "id": "GE-17",
+   "category": "assertion_quality",
+   "description": "overbroad URL pattern",
+   "requirementId": "REQ-101",
+   "requirement": {
+    "id": "REQ-101",
+    "title": "Sign in to the storefront",
+    "description": "Registered shoppers sign in with a username and password to reach the product catalogue. Locked accounts must not get in.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "Given a valid standard account, when the shopper signs in, then the product list titled \"Products\" is shown."
+     },
+     {
+      "id": "AC-2",
+      "text": "Given a locked-out account, when the shopper signs in, then the error \"Epic sadface: Sorry, this user has been locked out.\" is shown and the shopper stays on the login page."
+     },
+     {
+      "id": "AC-3",
+      "text": "Given a wrong password, when the shopper signs in, then the error \"Epic sadface: Username and password do not match any user in this service\" is shown."
+     }
+    ],
+    "source": "examples/requirements (synthetic example for the saucedemo.com demo target)"
+   },
+   "scenarios": [
+    {
+     "id": "REQ-101-SC-01",
+     "requirementId": "REQ-101",
+     "acceptanceCriteriaIds": [
+      "AC-1"
+     ],
+     "title": "Standard user signs in and sees the product list",
+     "objective": "Verify a valid account reaches the catalogue",
+     "type": "positive",
+     "priority": "high",
+     "priorityRationale": "Sign-in gates every other journey",
+     "preconditions": [
+      "Shopper is signed out"
+     ],
+     "steps": [
+      "Open the login page",
+      "Sign in as the standard user"
+     ],
+     "testData": [
+      "standard user credentials"
+     ],
+     "expectedOutcomes": [
+      "URL is the inventory page",
+      "Title reads \"Products\""
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-101-SC-02",
+     "requirementId": "REQ-101",
+     "acceptanceCriteriaIds": [
+      "AC-2"
+     ],
+     "title": "Locked-out user is refused",
+     "objective": "Verify locked accounts cannot sign in",
+     "type": "authorization",
+     "priority": "high",
+     "priorityRationale": "Access control",
+     "preconditions": [
+      "Shopper is signed out"
+     ],
+     "steps": [
+      "Open the login page",
+      "Sign in as the locked-out user"
+     ],
+     "testData": [
+      "locked-out user credentials"
+     ],
+     "expectedOutcomes": [
+      "Error \"Epic sadface: Sorry, this user has been locked out.\" is shown",
+      "Shopper stays on the login page"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-101-SC-03",
+     "requirementId": "REQ-101",
+     "acceptanceCriteriaIds": [
+      "AC-3"
+     ],
+     "title": "Wrong password is rejected",
+     "objective": "Verify invalid credentials are refused",
+     "type": "negative",
+     "priority": "medium",
+     "priorityRationale": "Common error path",
+     "preconditions": [
+      "Shopper is signed out"
+     ],
+     "steps": [
+      "Open the login page",
+      "Sign in with the standard username and a wrong password"
+     ],
+     "testData": [
+      "standard username",
+      "an incorrect password"
+     ],
+     "expectedOutcomes": [
+      "Error \"Epic sadface: Username and password do not match any user in this service\" is shown"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    }
+   ],
+   "recordedOutput": {
+    "tests": [
+     {
+      "scenarioId": "REQ-101-SC-01",
+      "requirementId": "REQ-101",
+      "title": "standard user signs in and sees the product list",
+      "startSignedIn": false,
+      "steps": [
+       {
+        "kind": "action",
+        "target": "loginPage.goto",
+        "args": []
+       },
+       {
+        "kind": "action",
+        "target": "loginPage.login",
+        "args": [
+         {
+          "kind": "data",
+          "ref": "users.standard.username"
+         },
+         {
+          "kind": "data",
+          "ref": "users.standard.password"
+         }
+        ]
+       },
+       {
+        "kind": "expectUrl",
+        "pathPattern": ".*",
+        "negate": false
+       },
+       {
+        "kind": "expect",
+        "target": "inventoryPage.title",
+        "select": "all",
+        "matcher": "toHaveText",
+        "expected": "Products",
+        "negate": false
+       }
+      ]
+     }
+    ],
+    "missingCapabilities": []
+   },
+   "expected": {
+    "accepted": [
+     "REQ-101-SC-01"
+    ],
+    "rejected": {}
+   },
+   "requiredAssertions": {
+    "REQ-101-SC-01": [
+     {
+      "target": "inventoryPage.title",
+      "expected": "Products"
+     }
+    ],
+    "REQ-101-SC-02": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Sorry, this user has been locked out."
+     }
+    ],
+    "REQ-101-SC-03": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Username and password do not match any user in this service"
+     }
+    ]
+   },
+   "assertionLabels": {
+    "REQ-101-SC-01": {
+     "weaknesses": [
+      "AQ_UNSTABLE_URL"
+     ]
+    }
+   },
+   "dimensions": [
+    "assertion_quality",
+    "semantic"
+   ],
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   }
+  },
+  {
+   "id": "GE-18",
+   "category": "assertion_quality",
+   "description": "visibility-only, unrelated element",
+   "requirementId": "REQ-101",
+   "requirement": {
+    "id": "REQ-101",
+    "title": "Sign in to the storefront",
+    "description": "Registered shoppers sign in with a username and password to reach the product catalogue. Locked accounts must not get in.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "Given a valid standard account, when the shopper signs in, then the product list titled \"Products\" is shown."
+     },
+     {
+      "id": "AC-2",
+      "text": "Given a locked-out account, when the shopper signs in, then the error \"Epic sadface: Sorry, this user has been locked out.\" is shown and the shopper stays on the login page."
+     },
+     {
+      "id": "AC-3",
+      "text": "Given a wrong password, when the shopper signs in, then the error \"Epic sadface: Username and password do not match any user in this service\" is shown."
+     }
+    ],
+    "source": "examples/requirements (synthetic example for the saucedemo.com demo target)"
+   },
+   "scenarios": [
+    {
+     "id": "REQ-101-SC-01",
+     "requirementId": "REQ-101",
+     "acceptanceCriteriaIds": [
+      "AC-1"
+     ],
+     "title": "Standard user signs in and sees the product list",
+     "objective": "Verify a valid account reaches the catalogue",
+     "type": "positive",
+     "priority": "high",
+     "priorityRationale": "Sign-in gates every other journey",
+     "preconditions": [
+      "Shopper is signed out"
+     ],
+     "steps": [
+      "Open the login page",
+      "Sign in as the standard user"
+     ],
+     "testData": [
+      "standard user credentials"
+     ],
+     "expectedOutcomes": [
+      "URL is the inventory page",
+      "Title reads \"Products\""
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-101-SC-02",
+     "requirementId": "REQ-101",
+     "acceptanceCriteriaIds": [
+      "AC-2"
+     ],
+     "title": "Locked-out user is refused",
+     "objective": "Verify locked accounts cannot sign in",
+     "type": "authorization",
+     "priority": "high",
+     "priorityRationale": "Access control",
+     "preconditions": [
+      "Shopper is signed out"
+     ],
+     "steps": [
+      "Open the login page",
+      "Sign in as the locked-out user"
+     ],
+     "testData": [
+      "locked-out user credentials"
+     ],
+     "expectedOutcomes": [
+      "Error \"Epic sadface: Sorry, this user has been locked out.\" is shown",
+      "Shopper stays on the login page"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-101-SC-03",
+     "requirementId": "REQ-101",
+     "acceptanceCriteriaIds": [
+      "AC-3"
+     ],
+     "title": "Wrong password is rejected",
+     "objective": "Verify invalid credentials are refused",
+     "type": "negative",
+     "priority": "medium",
+     "priorityRationale": "Common error path",
+     "preconditions": [
+      "Shopper is signed out"
+     ],
+     "steps": [
+      "Open the login page",
+      "Sign in with the standard username and a wrong password"
+     ],
+     "testData": [
+      "standard username",
+      "an incorrect password"
+     ],
+     "expectedOutcomes": [
+      "Error \"Epic sadface: Username and password do not match any user in this service\" is shown"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    }
+   ],
+   "recordedOutput": {
+    "tests": [
+     {
+      "scenarioId": "REQ-101-SC-02",
+      "requirementId": "REQ-101",
+      "title": "locked-out user is refused",
+      "startSignedIn": false,
+      "steps": [
+       {
+        "kind": "action",
+        "target": "loginPage.goto",
+        "args": []
+       },
+       {
+        "kind": "action",
+        "target": "loginPage.login",
+        "args": [
+         {
+          "kind": "data",
+          "ref": "users.lockedOut.username"
+         },
+         {
+          "kind": "data",
+          "ref": "users.lockedOut.password"
+         }
+        ]
+       },
+       {
+        "kind": "expect",
+        "target": "loginPage.loginButton",
+        "select": "all",
+        "matcher": "toBeVisible",
+        "expected": null,
+        "negate": false
+       }
+      ]
+     }
+    ],
+    "missingCapabilities": []
+   },
+   "expected": {
+    "accepted": [
+     "REQ-101-SC-02"
+    ],
+    "rejected": {}
+   },
+   "requiredAssertions": {
+    "REQ-101-SC-01": [
+     {
+      "target": "inventoryPage.title",
+      "expected": "Products"
+     }
+    ],
+    "REQ-101-SC-02": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Sorry, this user has been locked out."
+     }
+    ],
+    "REQ-101-SC-03": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Username and password do not match any user in this service"
+     }
+    ]
+   },
+   "assertionLabels": {
+    "REQ-101-SC-02": {
+     "weaknesses": [
+      "AQ_VISIBILITY_ONLY"
+     ]
+    }
+   },
+   "dimensions": [
+    "assertion_quality",
+    "semantic"
+   ],
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   }
+  },
+  {
+   "id": "GE-19",
+   "category": "assertion_quality",
+   "description": "strong assertions (control)",
+   "requirementId": "REQ-101",
+   "requirement": {
+    "id": "REQ-101",
+    "title": "Sign in to the storefront",
+    "description": "Registered shoppers sign in with a username and password to reach the product catalogue. Locked accounts must not get in.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "Given a valid standard account, when the shopper signs in, then the product list titled \"Products\" is shown."
+     },
+     {
+      "id": "AC-2",
+      "text": "Given a locked-out account, when the shopper signs in, then the error \"Epic sadface: Sorry, this user has been locked out.\" is shown and the shopper stays on the login page."
+     },
+     {
+      "id": "AC-3",
+      "text": "Given a wrong password, when the shopper signs in, then the error \"Epic sadface: Username and password do not match any user in this service\" is shown."
+     }
+    ],
+    "source": "examples/requirements (synthetic example for the saucedemo.com demo target)"
+   },
+   "scenarios": [
+    {
+     "id": "REQ-101-SC-01",
+     "requirementId": "REQ-101",
+     "acceptanceCriteriaIds": [
+      "AC-1"
+     ],
+     "title": "Standard user signs in and sees the product list",
+     "objective": "Verify a valid account reaches the catalogue",
+     "type": "positive",
+     "priority": "high",
+     "priorityRationale": "Sign-in gates every other journey",
+     "preconditions": [
+      "Shopper is signed out"
+     ],
+     "steps": [
+      "Open the login page",
+      "Sign in as the standard user"
+     ],
+     "testData": [
+      "standard user credentials"
+     ],
+     "expectedOutcomes": [
+      "URL is the inventory page",
+      "Title reads \"Products\""
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-101-SC-02",
+     "requirementId": "REQ-101",
+     "acceptanceCriteriaIds": [
+      "AC-2"
+     ],
+     "title": "Locked-out user is refused",
+     "objective": "Verify locked accounts cannot sign in",
+     "type": "authorization",
+     "priority": "high",
+     "priorityRationale": "Access control",
+     "preconditions": [
+      "Shopper is signed out"
+     ],
+     "steps": [
+      "Open the login page",
+      "Sign in as the locked-out user"
+     ],
+     "testData": [
+      "locked-out user credentials"
+     ],
+     "expectedOutcomes": [
+      "Error \"Epic sadface: Sorry, this user has been locked out.\" is shown",
+      "Shopper stays on the login page"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-101-SC-03",
+     "requirementId": "REQ-101",
+     "acceptanceCriteriaIds": [
+      "AC-3"
+     ],
+     "title": "Wrong password is rejected",
+     "objective": "Verify invalid credentials are refused",
+     "type": "negative",
+     "priority": "medium",
+     "priorityRationale": "Common error path",
+     "preconditions": [
+      "Shopper is signed out"
+     ],
+     "steps": [
+      "Open the login page",
+      "Sign in with the standard username and a wrong password"
+     ],
+     "testData": [
+      "standard username",
+      "an incorrect password"
+     ],
+     "expectedOutcomes": [
+      "Error \"Epic sadface: Username and password do not match any user in this service\" is shown"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    }
+   ],
+   "recordedOutput": {
+    "tests": [
+     {
+      "scenarioId": "REQ-101-SC-02",
+      "requirementId": "REQ-101",
+      "title": "locked-out user is refused",
+      "startSignedIn": false,
+      "steps": [
+       {
+        "kind": "action",
+        "target": "loginPage.goto",
+        "args": []
+       },
+       {
+        "kind": "action",
+        "target": "loginPage.login",
+        "args": [
+         {
+          "kind": "data",
+          "ref": "users.lockedOut.username"
+         },
+         {
+          "kind": "data",
+          "ref": "users.lockedOut.password"
+         }
+        ]
+       },
+       {
+        "kind": "expect",
+        "target": "loginPage.errorMessage",
+        "select": "all",
+        "matcher": "toHaveText",
+        "expected": "Epic sadface: Sorry, this user has been locked out.",
+        "negate": false
+       },
+       {
+        "kind": "expectUrl",
+        "pathPattern": "inventory\\.html",
+        "negate": true
+       }
+      ]
+     }
+    ],
+    "missingCapabilities": []
+   },
+   "expected": {
+    "accepted": [
+     "REQ-101-SC-02"
+    ],
+    "rejected": {}
+   },
+   "requiredAssertions": {
+    "REQ-101-SC-01": [
+     {
+      "target": "inventoryPage.title",
+      "expected": "Products"
+     }
+    ],
+    "REQ-101-SC-02": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Sorry, this user has been locked out."
+     }
+    ],
+    "REQ-101-SC-03": [
+     {
+      "target": "loginPage.errorMessage",
+      "expected": "Epic sadface: Username and password do not match any user in this service"
+     }
+    ]
+   },
+   "assertionLabels": {
+    "REQ-101-SC-02": {
+     "weaknesses": []
+    }
+   },
+   "dimensions": [
+    "assertion_quality",
+    "semantic"
+   ],
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
    }
   }
  ]

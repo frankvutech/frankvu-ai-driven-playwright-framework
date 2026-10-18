@@ -309,46 +309,7 @@ Optional model analysis (`--analysis-provider`) is kept only when it is schema-v
 
 ## 13. Evaluation dataset and metrics
 
-See `eval/README.md`. In summary:
-
-- `eval/dataset/planning.json` has 15 cases: clear requirements, boundary, authorization, ambiguous (surfaced and ignored), missing criteria, 2 malformed outputs, unsupported assumptions, traceability errors, an embedded instruction, and an invalid requirement.
-- `eval/dataset/generation.json` has 10 cases: clean, unknown method, literal secret, no assertion, assumption scenario, host in URL, malformed output, hostile title, missing capability, and a weak assertion.
-- `eval/dataset/failures/` holds 2 genuine Playwright reports, captured from runs against saucedemo.com, with 8 labelled tests: assertion, a real product defect (`problem_user` sorting), locator, environment, slow login, setup failure, a passing control, and a never-run test.
-
-`npm run eval` is deterministic. Its results at the time of writing:
-
-| Area | Metric | Result |
-|---|---|---|
-| Planning | case expectations met | 15/15 |
-| Planning | outcome accuracy | 15/15 |
-| Planning | ambiguity detection | 3/3 |
-| Planning | unsupported-assumption detection | 2/2 |
-| Planning | malformed output handled | 2/2 |
-| Planning | scenario traceability (all plans with scenarios) | 24/28 |
-| Generation | case expectations met | 10/10 |
-| Generation | schema validity | 9/10 (one malformed by design) |
-| Generation | spec accept/reject accuracy | 11/11 |
-| Generation | TypeScript validity of rendered files | 6/6 |
-| Generation | convention compliance | 6/6 |
-| Generation | traceability | 6/6 |
-| Generation | content-assertion rate | 5/6 (one weak by design) |
-| Execution evidence | status interpretation | 8/8 |
-| Execution evidence | scenario association | 8/8 |
-| Execution evidence | false passes | 0 |
-| Execution evidence | phantom evidence references | 0 |
-| Failure analysis (rules) | label agreement | 5/6 |
-| Failure analysis (rules) | label in top or alternatives | 6/6 |
-| Failure analysis (rules) | evidence grounding | 6/6 |
-| Failure analysis (rules) | overconfident wrong claims | 0 |
-
-The one disagreement: a slow login (`performance_glitch_user` with a 1 s assertion timeout) is labelled `timeout_sync`. The rules call it `locator`, because Playwright reports "element(s) not found", and list `timeout_sync` as an alternative. This is a real limit of message-based rules.
-
-What these numbers do and don't show:
-
-- The planning and generation inputs are hand-written stand-ins for model output, so these figures measure the deterministic pipeline, not a model.
-- Calibration is not computed, because 6 labelled failures are too few.
-- No LLM-as-judge is used.
-- `npm run eval:live` measures a real model. It reports schema validity, plan validity, coverage, traceability, spec acceptance and static validity, and needs `RELYNX_LIVE_EVAL=1` plus credentials. **It has not been run.**
+Phase 3 replaced this section. See [PHASE3_EVALUATION.md](PHASE3_EVALUATION.md).
 
 ## 14. Local development
 

@@ -1,0 +1,1084 @@
+{
+ "provenance": "Candidate specs are hand-written stand-ins for agent output (including deliberately weak and incorrect ones). Reference outcomes come from the defect catalog below. Labels pending human review.",
+ "target": {
+  "name": "saucedemo-public-demo",
+  "version": "unversioned public demo site; behaviour verified 2026-10-18"
+ },
+ "defects": [
+  {
+   "id": "D-SORT",
+   "variants": [
+    "problem",
+    "error"
+   ],
+   "behavior": "Choosing a sort order does not reorder the product list (error_user also shows an alert).",
+   "verifiedBy": "eval/probes/seeded-defects.ts"
+  },
+  {
+   "id": "D-ADD",
+   "variants": [
+    "problem",
+    "error"
+   ],
+   "behavior": "\"Add to cart\" for Sauce Labs Bolt T-Shirt does not add it (no cart badge).",
+   "verifiedBy": "eval/probes/seeded-defects.ts"
+  },
+  {
+   "id": "D-REMOVE",
+   "variants": [
+    "problem",
+    "error"
+   ],
+   "behavior": "\"Remove\" for Sauce Labs Backpack does not remove it (badge stays).",
+   "verifiedBy": "eval/probes/seeded-defects.ts"
+  },
+  {
+   "id": "D-LASTNAME",
+   "variants": [
+    "problem"
+   ],
+   "behavior": "Typing a last name writes into the first-name field; checkout cannot continue.",
+   "verifiedBy": "eval/probes/seeded-defects.ts"
+  },
+  {
+   "id": "D-LASTNAME-VALIDATION",
+   "variants": [
+    "error"
+   ],
+   "behavior": "The last-name field ignores input and the missing last name is not reported; checkout continues.",
+   "verifiedBy": "eval/probes/seeded-defects.ts"
+  },
+  {
+   "id": "D-FINISH",
+   "variants": [
+    "error"
+   ],
+   "behavior": "Finish does not complete the order.",
+   "verifiedBy": "eval/probes/seeded-defects.ts"
+  }
+ ],
+ "suites": [
+  {
+   "id": "FS-SORT",
+   "requirement": {
+    "id": "REQ-301",
+    "title": "Sort products",
+    "description": "Shoppers can reorder the product list.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "Choosing Name (Z to A) lists \"Test.allTheThings() T-Shirt (Red)\" first."
+     },
+     {
+      "id": "AC-2",
+      "text": "Choosing Price (low to high) lists the prices \"$7.99\", \"$9.99\", \"$15.99\", \"$15.99\", \"$29.99\", \"$49.99\" in that order."
+     }
+    ]
+   },
+   "scenarios": [
+    {
+     "id": "REQ-301-SC-01",
+     "requirementId": "REQ-301",
+     "acceptanceCriteriaIds": [
+      "AC-1"
+     ],
+     "title": "Name Z to A",
+     "objective": "Name Z to A",
+     "type": "positive",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [
+      "signed in"
+     ],
+     "steps": [
+      "see title"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "red T-shirt first"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-301-SC-02",
+     "requirementId": "REQ-301",
+     "acceptanceCriteriaIds": [
+      "AC-2"
+     ],
+     "title": "Price low to high",
+     "objective": "Price low to high",
+     "type": "positive",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [
+      "signed in"
+     ],
+     "steps": [
+      "see title"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "prices ascending"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-301-SC-03",
+     "requirementId": "REQ-301",
+     "acceptanceCriteriaIds": [
+      "AC-1"
+     ],
+     "title": "Name Z to A (weak candidate)",
+     "objective": "Name Z to A (weak candidate)",
+     "type": "positive",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [
+      "signed in"
+     ],
+     "steps": [
+      "see title"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "six products"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    }
+   ],
+   "specs": [
+    {
+     "scenarioId": "REQ-301-SC-01",
+     "requirementId": "REQ-301",
+     "title": "name Z to A puts the red T-shirt first",
+     "startSignedIn": true,
+     "steps": [
+      {
+       "kind": "action",
+       "target": "inventoryPage.goto",
+       "args": []
+      },
+      {
+       "kind": "action",
+       "target": "inventoryPage.sortBy",
+       "args": [
+        {
+         "kind": "literal",
+         "value": "za"
+        }
+       ]
+      },
+      {
+       "kind": "expect",
+       "target": "inventoryPage.itemNames",
+       "select": "first",
+       "matcher": "toHaveText",
+       "expected": "Test.allTheThings() T-Shirt (Red)",
+       "negate": false
+      }
+     ]
+    },
+    {
+     "scenarioId": "REQ-301-SC-02",
+     "requirementId": "REQ-301",
+     "title": "price low to high orders prices ascending",
+     "startSignedIn": true,
+     "steps": [
+      {
+       "kind": "action",
+       "target": "inventoryPage.goto",
+       "args": []
+      },
+      {
+       "kind": "action",
+       "target": "inventoryPage.sortBy",
+       "args": [
+        {
+         "kind": "literal",
+         "value": "lohi"
+        }
+       ]
+      },
+      {
+       "kind": "expect",
+       "target": "inventoryPage.itemPrices",
+       "select": "all",
+       "matcher": "toHaveText",
+       "expected": [
+        "$7.99",
+        "$9.99",
+        "$15.99",
+        "$15.99",
+        "$29.99",
+        "$49.99"
+       ],
+       "negate": false
+      }
+     ]
+    },
+    {
+     "scenarioId": "REQ-301-SC-03",
+     "requirementId": "REQ-301",
+     "title": "name Z to A still shows six products (weak)",
+     "startSignedIn": true,
+     "steps": [
+      {
+       "kind": "action",
+       "target": "inventoryPage.goto",
+       "args": []
+      },
+      {
+       "kind": "action",
+       "target": "inventoryPage.sortBy",
+       "args": [
+        {
+         "kind": "literal",
+         "value": "za"
+        }
+       ]
+      },
+      {
+       "kind": "expect",
+       "target": "inventoryPage.items",
+       "select": "all",
+       "matcher": "toHaveCount",
+       "expected": 6,
+       "negate": false
+      }
+     ]
+    }
+   ],
+   "variants": {
+    "standard": [
+     {
+      "scenarioId": "REQ-301-SC-01",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     },
+     {
+      "scenarioId": "REQ-301-SC-02",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     },
+     {
+      "scenarioId": "REQ-301-SC-03",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     }
+    ],
+    "problem": [
+     {
+      "scenarioId": "REQ-301-SC-01",
+      "relevantDefect": true,
+      "defectId": "D-SORT",
+      "expectedTestOutcome": "fail"
+     },
+     {
+      "scenarioId": "REQ-301-SC-02",
+      "relevantDefect": true,
+      "defectId": "D-SORT",
+      "expectedTestOutcome": "fail"
+     },
+     {
+      "scenarioId": "REQ-301-SC-03",
+      "relevantDefect": true,
+      "defectId": "D-SORT",
+      "expectedTestOutcome": "fail"
+     }
+    ],
+    "error": [
+     {
+      "scenarioId": "REQ-301-SC-01",
+      "relevantDefect": true,
+      "defectId": "D-SORT",
+      "expectedTestOutcome": "fail"
+     },
+     {
+      "scenarioId": "REQ-301-SC-02",
+      "relevantDefect": true,
+      "defectId": "D-SORT",
+      "expectedTestOutcome": "fail"
+     },
+     {
+      "scenarioId": "REQ-301-SC-03",
+      "relevantDefect": true,
+      "defectId": "D-SORT",
+      "expectedTestOutcome": "fail"
+     }
+    ]
+   },
+   "notes": "SC-03 is a deliberately weak candidate: it targets the sort behaviour but asserts only the item count, so it is expected to miss D-SORT (a false negative).",
+   "specSha256": {
+    "REQ-301-SC-01": "006a690171c1cc109d7817a30667891c2bf49eea8b8006f925888b71eb7b961e",
+    "REQ-301-SC-02": "11527920d70a931a470b45149d539e2273c12bc1d3b558994cf60a82c255bcd1",
+    "REQ-301-SC-03": "4849a605285248eb3f6a8c9a43e291d5dc4b528d0484e70cc85e247d4a5eaf81"
+   },
+   "labels": {
+    "method": "observed-controlled-variation",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    },
+    "notes": "relevantDefect follows the defect catalog, which eval/probes/seeded-defects.ts verifies against the live demo site independently of the agent's tests."
+   }
+  },
+  {
+   "id": "FS-CART",
+   "requirement": {
+    "id": "REQ-302",
+    "title": "Cart badge",
+    "description": "The cart icon shows how many products are in the cart.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "Adding \"Sauce Labs Bolt T-Shirt\" shows the cart badge \"1\"."
+     },
+     {
+      "id": "AC-2",
+      "text": "Adding \"Sauce Labs Backpack\" shows the cart badge \"1\"."
+     },
+     {
+      "id": "AC-3",
+      "text": "Removing \"Sauce Labs Backpack\" after adding it hides the cart badge."
+     }
+    ]
+   },
+   "scenarios": [
+    {
+     "id": "REQ-302-SC-01",
+     "requirementId": "REQ-302",
+     "acceptanceCriteriaIds": [
+      "AC-1"
+     ],
+     "title": "Add Bolt T-Shirt",
+     "objective": "Add Bolt T-Shirt",
+     "type": "positive",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [
+      "signed in"
+     ],
+     "steps": [
+      "see title"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "badge 1"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-302-SC-02",
+     "requirementId": "REQ-302",
+     "acceptanceCriteriaIds": [
+      "AC-2"
+     ],
+     "title": "Add Backpack",
+     "objective": "Add Backpack",
+     "type": "positive",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [
+      "signed in"
+     ],
+     "steps": [
+      "see title"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "badge 1"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-302-SC-03",
+     "requirementId": "REQ-302",
+     "acceptanceCriteriaIds": [
+      "AC-3"
+     ],
+     "title": "Remove Backpack",
+     "objective": "Remove Backpack",
+     "type": "boundary",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [
+      "signed in"
+     ],
+     "steps": [
+      "see title"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "badge hidden"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-302-SC-04",
+     "requirementId": "REQ-302",
+     "acceptanceCriteriaIds": [
+      "AC-1"
+     ],
+     "title": "Add Bolt T-Shirt (weak candidate)",
+     "objective": "Add Bolt T-Shirt (weak candidate)",
+     "type": "positive",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [
+      "signed in"
+     ],
+     "steps": [
+      "see title"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "product list shown"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    }
+   ],
+   "specs": [
+    {
+     "scenarioId": "REQ-302-SC-01",
+     "requirementId": "REQ-302",
+     "title": "adding the Bolt T-Shirt shows badge 1",
+     "startSignedIn": true,
+     "steps": [
+      {
+       "kind": "action",
+       "target": "inventoryPage.goto",
+       "args": []
+      },
+      {
+       "kind": "action",
+       "target": "inventoryPage.addToCart",
+       "args": [
+        {
+         "kind": "literal",
+         "value": "Sauce Labs Bolt T-Shirt"
+        }
+       ]
+      },
+      {
+       "kind": "expect",
+       "target": "inventoryPage.header.cartBadge",
+       "select": "all",
+       "matcher": "toHaveText",
+       "expected": "1",
+       "negate": false
+      }
+     ]
+    },
+    {
+     "scenarioId": "REQ-302-SC-02",
+     "requirementId": "REQ-302",
+     "title": "adding the Backpack shows badge 1",
+     "startSignedIn": true,
+     "steps": [
+      {
+       "kind": "action",
+       "target": "inventoryPage.goto",
+       "args": []
+      },
+      {
+       "kind": "action",
+       "target": "inventoryPage.addToCart",
+       "args": [
+        {
+         "kind": "literal",
+         "value": "Sauce Labs Backpack"
+        }
+       ]
+      },
+      {
+       "kind": "expect",
+       "target": "inventoryPage.header.cartBadge",
+       "select": "all",
+       "matcher": "toHaveText",
+       "expected": "1",
+       "negate": false
+      }
+     ]
+    },
+    {
+     "scenarioId": "REQ-302-SC-03",
+     "requirementId": "REQ-302",
+     "title": "removing the Backpack hides the badge",
+     "startSignedIn": true,
+     "steps": [
+      {
+       "kind": "action",
+       "target": "inventoryPage.goto",
+       "args": []
+      },
+      {
+       "kind": "action",
+       "target": "inventoryPage.addToCart",
+       "args": [
+        {
+         "kind": "literal",
+         "value": "Sauce Labs Backpack"
+        }
+       ]
+      },
+      {
+       "kind": "action",
+       "target": "inventoryPage.removeFromCart",
+       "args": [
+        {
+         "kind": "literal",
+         "value": "Sauce Labs Backpack"
+        }
+       ]
+      },
+      {
+       "kind": "expect",
+       "target": "inventoryPage.header.cartBadge",
+       "select": "all",
+       "matcher": "toBeHidden",
+       "expected": null,
+       "negate": false
+      }
+     ]
+    },
+    {
+     "scenarioId": "REQ-302-SC-04",
+     "requirementId": "REQ-302",
+     "title": "adding the Bolt T-Shirt keeps the product list (weak)",
+     "startSignedIn": true,
+     "steps": [
+      {
+       "kind": "action",
+       "target": "inventoryPage.goto",
+       "args": []
+      },
+      {
+       "kind": "action",
+       "target": "inventoryPage.addToCart",
+       "args": [
+        {
+         "kind": "literal",
+         "value": "Sauce Labs Bolt T-Shirt"
+        }
+       ]
+      },
+      {
+       "kind": "expect",
+       "target": "inventoryPage.title",
+       "select": "all",
+       "matcher": "toHaveText",
+       "expected": "Products",
+       "negate": false
+      }
+     ]
+    }
+   ],
+   "variants": {
+    "standard": [
+     {
+      "scenarioId": "REQ-302-SC-01",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     },
+     {
+      "scenarioId": "REQ-302-SC-02",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     },
+     {
+      "scenarioId": "REQ-302-SC-03",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     },
+     {
+      "scenarioId": "REQ-302-SC-04",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     }
+    ],
+    "problem": [
+     {
+      "scenarioId": "REQ-302-SC-01",
+      "relevantDefect": true,
+      "defectId": "D-ADD",
+      "expectedTestOutcome": "fail"
+     },
+     {
+      "scenarioId": "REQ-302-SC-02",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     },
+     {
+      "scenarioId": "REQ-302-SC-03",
+      "relevantDefect": true,
+      "defectId": "D-REMOVE",
+      "expectedTestOutcome": "fail"
+     },
+     {
+      "scenarioId": "REQ-302-SC-04",
+      "relevantDefect": true,
+      "defectId": "D-ADD",
+      "expectedTestOutcome": "fail"
+     }
+    ],
+    "error": [
+     {
+      "scenarioId": "REQ-302-SC-01",
+      "relevantDefect": true,
+      "defectId": "D-ADD",
+      "expectedTestOutcome": "fail"
+     },
+     {
+      "scenarioId": "REQ-302-SC-02",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     },
+     {
+      "scenarioId": "REQ-302-SC-03",
+      "relevantDefect": true,
+      "defectId": "D-REMOVE",
+      "expectedTestOutcome": "fail"
+     },
+     {
+      "scenarioId": "REQ-302-SC-04",
+      "relevantDefect": true,
+      "defectId": "D-ADD",
+      "expectedTestOutcome": "fail"
+     }
+    ]
+   },
+   "notes": "SC-02 exercises an item whose add-to-cart works on every account: on defect variants it is a true negative. SC-04 asserts something unrelated to AC-1 and is expected to miss D-ADD.",
+   "specSha256": {
+    "REQ-302-SC-01": "e8ac088061c0255f4ed320c566f6a1b5ca02e414f9db3576f0883c0be5541878",
+    "REQ-302-SC-02": "a3c1ac22f969e8c2cdba902003eaa015721434f9da9e2380bec83ebafb6f04a1",
+    "REQ-302-SC-03": "8921b69033d2869defe85480276b7bd639bbda63983bd2cb24ecb4e95080ce79",
+    "REQ-302-SC-04": "6fd5ad258ba007605f85886720716f4d5d140ad181228da61cc468853c88a6e3"
+   },
+   "labels": {
+    "method": "observed-controlled-variation",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    },
+    "notes": "relevantDefect follows the defect catalog, which eval/probes/seeded-defects.ts verifies against the live demo site independently of the agent's tests."
+   }
+  },
+  {
+   "id": "FS-CHECKOUT",
+   "requirement": {
+    "id": "REQ-303",
+    "title": "Checkout",
+    "description": "A shopper completes an order.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "Submitting first name, last name and postal code and finishing shows \"Thank you for your order!\"."
+     },
+     {
+      "id": "AC-2",
+      "text": "Submitting without a last name shows \"Error: Last Name is required\"."
+     }
+    ]
+   },
+   "scenarios": [
+    {
+     "id": "REQ-303-SC-01",
+     "requirementId": "REQ-303",
+     "acceptanceCriteriaIds": [
+      "AC-1"
+     ],
+     "title": "Complete order",
+     "objective": "Complete order",
+     "type": "positive",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [
+      "signed in"
+     ],
+     "steps": [
+      "see title"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "confirmation shown"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-303-SC-02",
+     "requirementId": "REQ-303",
+     "acceptanceCriteriaIds": [
+      "AC-2"
+     ],
+     "title": "Missing last name",
+     "objective": "Missing last name",
+     "type": "negative",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [
+      "signed in"
+     ],
+     "steps": [
+      "see title"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "error shown"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    }
+   ],
+   "specs": [
+    {
+     "scenarioId": "REQ-303-SC-01",
+     "requirementId": "REQ-303",
+     "title": "a complete order shows the confirmation",
+     "startSignedIn": true,
+     "steps": [
+      {
+       "kind": "action",
+       "target": "inventoryPage.goto",
+       "args": []
+      },
+      {
+       "kind": "action",
+       "target": "inventoryPage.addToCart",
+       "args": [
+        {
+         "kind": "literal",
+         "value": "Sauce Labs Backpack"
+        }
+       ]
+      },
+      {
+       "kind": "action",
+       "target": "inventoryPage.header.openCart",
+       "args": []
+      },
+      {
+       "kind": "action",
+       "target": "cartPage.checkout",
+       "args": []
+      },
+      {
+       "kind": "action",
+       "target": "checkoutInformationPage.submit",
+       "args": [
+        {
+         "kind": "customer",
+         "omit": []
+        }
+       ]
+      },
+      {
+       "kind": "action",
+       "target": "checkoutOverviewPage.finish",
+       "args": []
+      },
+      {
+       "kind": "expect",
+       "target": "checkoutCompletePage.heading",
+       "select": "all",
+       "matcher": "toHaveText",
+       "expected": "Thank you for your order!",
+       "negate": false
+      }
+     ]
+    },
+    {
+     "scenarioId": "REQ-303-SC-02",
+     "requirementId": "REQ-303",
+     "title": "a missing last name is rejected",
+     "startSignedIn": true,
+     "steps": [
+      {
+       "kind": "action",
+       "target": "inventoryPage.goto",
+       "args": []
+      },
+      {
+       "kind": "action",
+       "target": "inventoryPage.addToCart",
+       "args": [
+        {
+         "kind": "literal",
+         "value": "Sauce Labs Backpack"
+        }
+       ]
+      },
+      {
+       "kind": "action",
+       "target": "inventoryPage.header.openCart",
+       "args": []
+      },
+      {
+       "kind": "action",
+       "target": "cartPage.checkout",
+       "args": []
+      },
+      {
+       "kind": "action",
+       "target": "checkoutInformationPage.submit",
+       "args": [
+        {
+         "kind": "customer",
+         "omit": [
+          "lastName"
+         ]
+        }
+       ]
+      },
+      {
+       "kind": "expect",
+       "target": "checkoutInformationPage.errorMessage",
+       "select": "all",
+       "matcher": "toHaveText",
+       "expected": "Error: Last Name is required",
+       "negate": false
+      }
+     ]
+    }
+   ],
+   "variants": {
+    "standard": [
+     {
+      "scenarioId": "REQ-303-SC-01",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     },
+     {
+      "scenarioId": "REQ-303-SC-02",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     }
+    ],
+    "problem": [
+     {
+      "scenarioId": "REQ-303-SC-01",
+      "relevantDefect": true,
+      "defectId": "D-LASTNAME",
+      "expectedTestOutcome": "fail"
+     },
+     {
+      "scenarioId": "REQ-303-SC-02",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     }
+    ],
+    "error": [
+     {
+      "scenarioId": "REQ-303-SC-01",
+      "relevantDefect": true,
+      "defectId": "D-FINISH",
+      "expectedTestOutcome": "fail"
+     },
+     {
+      "scenarioId": "REQ-303-SC-02",
+      "relevantDefect": true,
+      "defectId": "D-LASTNAME-VALIDATION",
+      "expectedTestOutcome": "fail"
+     }
+    ]
+   },
+   "notes": "On problem_user, SC-02 omits the last name, so the last-name typing defect is not exercised: a true negative on a defective account.",
+   "specSha256": {
+    "REQ-303-SC-01": "4311ef5d6836467d423cb620e87738a65fc2c77f7aecf5e6887e40a86f55c5ee",
+    "REQ-303-SC-02": "695a7dfbb99b70acca537540772e7d3bad019c42641e1bcd43b81fe8cac23a9c"
+   },
+   "labels": {
+    "method": "observed-controlled-variation",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    },
+    "notes": "relevantDefect follows the defect catalog, which eval/probes/seeded-defects.ts verifies against the live demo site independently of the agent's tests."
+   }
+  },
+  {
+   "id": "FS-LOGIN",
+   "requirement": {
+    "id": "REQ-304",
+    "title": "Locked accounts",
+    "description": "Locked accounts cannot sign in.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "A locked-out user sees \"Epic sadface: Sorry, this user has been locked out.\""
+     }
+    ]
+   },
+   "scenarios": [
+    {
+     "id": "REQ-304-SC-01",
+     "requirementId": "REQ-304",
+     "acceptanceCriteriaIds": [
+      "AC-1"
+     ],
+     "title": "Locked-out error",
+     "objective": "Locked-out error",
+     "type": "authorization",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [
+      "signed in"
+     ],
+     "steps": [
+      "see title"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "lockout error shown"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-304-SC-02",
+     "requirementId": "REQ-304",
+     "acceptanceCriteriaIds": [
+      "AC-1"
+     ],
+     "title": "Locked-out error (incorrect candidate)",
+     "objective": "Locked-out error (incorrect candidate)",
+     "type": "authorization",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [
+      "signed in"
+     ],
+     "steps": [
+      "see title"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "lockout error shown"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    }
+   ],
+   "specs": [
+    {
+     "scenarioId": "REQ-304-SC-01",
+     "requirementId": "REQ-304",
+     "title": "locked-out user sees the lockout error",
+     "startSignedIn": false,
+     "steps": [
+      {
+       "kind": "action",
+       "target": "loginPage.goto",
+       "args": []
+      },
+      {
+       "kind": "action",
+       "target": "loginPage.login",
+       "args": [
+        {
+         "kind": "data",
+         "ref": "users.lockedOut.username"
+        },
+        {
+         "kind": "data",
+         "ref": "users.lockedOut.password"
+        }
+       ]
+      },
+      {
+       "kind": "expect",
+       "target": "loginPage.errorMessage",
+       "select": "all",
+       "matcher": "toHaveText",
+       "expected": "Epic sadface: Sorry, this user has been locked out.",
+       "negate": false
+      }
+     ]
+    },
+    {
+     "scenarioId": "REQ-304-SC-02",
+     "requirementId": "REQ-304",
+     "title": "locked-out user sees an invented message (incorrect assertion)",
+     "startSignedIn": false,
+     "steps": [
+      {
+       "kind": "action",
+       "target": "loginPage.goto",
+       "args": []
+      },
+      {
+       "kind": "action",
+       "target": "loginPage.login",
+       "args": [
+        {
+         "kind": "data",
+         "ref": "users.lockedOut.username"
+        },
+        {
+         "kind": "data",
+         "ref": "users.lockedOut.password"
+        }
+       ]
+      },
+      {
+       "kind": "expect",
+       "target": "loginPage.errorMessage",
+       "select": "all",
+       "matcher": "toHaveText",
+       "expected": "Epic sadface: This account is locked.",
+       "negate": false
+      }
+     ]
+    }
+   ],
+   "variants": {
+    "standard": [
+     {
+      "scenarioId": "REQ-304-SC-01",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     },
+     {
+      "scenarioId": "REQ-304-SC-02",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     }
+    ]
+   },
+   "notes": "SC-02 asserts a message the requirement never states; it is expected to fail although the product is correct (a false-positive failure).",
+   "specSha256": {
+    "REQ-304-SC-01": "12d7aa47cf7cd6c9da29d8657a09516afbb9470575773335cee23c64761e50ca",
+    "REQ-304-SC-02": "8e2017cdf6ff309cc9b21ba3fe795c11ffd68f613a87f36583daf0a2b9d6b60c"
+   },
+   "labels": {
+    "method": "observed-controlled-variation",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    },
+    "notes": "relevantDefect follows the defect catalog, which eval/probes/seeded-defects.ts verifies against the live demo site independently of the agent's tests."
+   }
+  }
+ ]
+}

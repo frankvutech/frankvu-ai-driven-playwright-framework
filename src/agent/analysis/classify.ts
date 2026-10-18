@@ -77,7 +77,7 @@ export function classifyFailure(test: TestEvidence, ctx: AnalysisContext = {}, r
   }
 
   const setup = find(errors, /storageState|\.auth\/|ENOENT/);
-  if (setup.length > 0 || test.project === 'setup') {
+  if (setup.length > 0 || /setup$/.test(test.project)) {
     return d({
       category: 'test_data_setup',
       confidence: 'medium',

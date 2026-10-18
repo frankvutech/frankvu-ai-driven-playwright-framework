@@ -1,85 +1,358 @@
 {
-  "provenance": "Reports were produced by real Playwright runs against www.saucedemo.com on 2026-10-18 using deliberately constructed tests (see eval/README.md). Labels are the author's ground truth based on how each failure was constructed. Local paths are replaced with <repo>/<home>.",
-  "cases": [
-    {
-      "id": "F-01",
-      "report": "playwright-report.capture.json",
-      "title": "assertion-not-from-requirement",
-      "expectedStatus": "failed",
-      "expectedScenarioId": "CAP-1-SC-01",
-      "label": "assertion_logic",
-      "acceptanceCriteria": "Given a valid standard account, when the shopper signs in, then the product list titled \"Products\" is shown.",
-      "rationale": "The test expects \"Our Products\", which the criterion never states."
+ "provenance": "Reports come from real Playwright runs against www.saucedemo.com (2026-10-18), using deliberately constructed tests. Labels follow how each failure was constructed and are pending human review. Local paths are replaced with <repo>/<home>.",
+ "cases": [
+  {
+   "id": "F-01",
+   "report": "playwright-report.capture.json",
+   "title": "assertion-not-from-requirement",
+   "expectedStatus": "failed",
+   "expectedScenarioId": "CAP-1-SC-01",
+   "label": "incorrect_assertion",
+   "acceptanceCriteria": "Given a valid standard account, when the shopper signs in, then the product list titled \"Products\" is shown.",
+   "rationale": "The test expects \"Our Products\", which the criterion never states.",
+   "evidenceSufficient": true,
+   "provenance": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
     },
-    {
-      "id": "F-02",
-      "report": "playwright-report.capture.json",
-      "title": "product-defect-sort",
-      "expectedStatus": "failed",
-      "expectedScenarioId": "CAP-1-SC-02",
-      "label": "product_behavior",
-      "acceptanceCriteria": "Sorting by name Z to A lists \"Test.allTheThings() T-Shirt (Red)\" first.",
-      "rationale": "problem_user is an intentionally broken account on the demo site; its sorting does not work."
+    "notes": "Failure deliberately constructed; label follows the construction."
+   }
+  },
+  {
+   "id": "F-02",
+   "report": "playwright-report.capture.json",
+   "title": "product-defect-sort",
+   "expectedStatus": "failed",
+   "expectedScenarioId": "CAP-1-SC-02",
+   "label": "product_regression",
+   "acceptanceCriteria": "Sorting by name Z to A lists \"Test.allTheThings() T-Shirt (Red)\" first.",
+   "rationale": "problem_user is an intentionally broken account on the demo site; its sorting does not work.",
+   "evidenceSufficient": false,
+   "provenance": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
     },
-    {
-      "id": "F-03",
-      "report": "playwright-report.capture.json",
-      "title": "locator-missing",
-      "expectedStatus": "failed",
-      "expectedScenarioId": "CAP-1-SC-03",
-      "label": "locator",
-      "acceptanceCriteria": "The product list is shown after sign-in.",
-      "rationale": "The test targets a data-test id that does not exist on the page."
+    "notes": "Failure deliberately constructed; label follows the construction."
+   }
+  },
+  {
+   "id": "F-03",
+   "report": "playwright-report.capture.json",
+   "title": "locator-missing",
+   "expectedStatus": "failed",
+   "expectedScenarioId": "CAP-1-SC-03",
+   "label": "locator",
+   "acceptanceCriteria": "The product list is shown after sign-in.",
+   "rationale": "The test targets a data-test id that does not exist on the page.",
+   "evidenceSufficient": false,
+   "provenance": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
     },
-    {
-      "id": "F-04",
-      "report": "playwright-report.capture.json",
-      "title": "environment-unreachable",
-      "expectedStatus": "failed",
-      "expectedScenarioId": "CAP-1-SC-04",
-      "label": "environment",
-      "acceptanceCriteria": "",
-      "rationale": "Navigation to an unreachable address."
+    "notes": "Failure deliberately constructed; label follows the construction."
+   }
+  },
+  {
+   "id": "F-04",
+   "report": "playwright-report.capture.json",
+   "title": "environment-unreachable",
+   "expectedStatus": "failed",
+   "expectedScenarioId": "CAP-1-SC-04",
+   "label": "environment",
+   "acceptanceCriteria": "",
+   "rationale": "Navigation to an unreachable address.",
+   "evidenceSufficient": true,
+   "provenance": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
     },
-    {
-      "id": "F-05",
-      "report": "playwright-report.capture.json",
-      "title": "slow-login",
-      "expectedStatus": "failed",
-      "expectedScenarioId": "CAP-1-SC-05",
-      "label": "timeout_sync",
-      "acceptanceCriteria": "Given a valid account, when the shopper signs in, then the product list titled \"Products\" is shown.",
-      "rationale": "performance_glitch_user delays sign-in by several seconds; the 1s assertion timeout is too short. The element exists later."
+    "notes": "Failure deliberately constructed; label follows the construction."
+   }
+  },
+  {
+   "id": "F-05",
+   "report": "playwright-report.capture.json",
+   "title": "slow-login",
+   "expectedStatus": "failed",
+   "expectedScenarioId": "CAP-1-SC-05",
+   "label": "timeout",
+   "acceptanceCriteria": "Given a valid account, when the shopper signs in, then the product list titled \"Products\" is shown.",
+   "rationale": "performance_glitch_user delays sign-in by several seconds; the 1s assertion timeout is too short. The element exists later.",
+   "evidenceSufficient": false,
+   "provenance": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
     },
-    {
-      "id": "F-06",
-      "report": "playwright-report.setup-failure.json",
-      "title": "sign in as standard user",
-      "expectedStatus": "failed",
-      "expectedScenarioId": null,
-      "label": "test_data_setup",
-      "acceptanceCriteria": "",
-      "rationale": "The setup project ran with a wrong password, so authentication state could not be created."
+    "notes": "Failure deliberately constructed; label follows the construction."
+   }
+  },
+  {
+   "id": "F-06",
+   "report": "playwright-report.setup-failure.json",
+   "title": "sign in as standard user",
+   "expectedStatus": "failed",
+   "expectedScenarioId": null,
+   "label": "auth_setup",
+   "acceptanceCriteria": "",
+   "rationale": "The setup project ran with a wrong password, so authentication state could not be created.",
+   "evidenceSufficient": true,
+   "provenance": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
     },
-    {
-      "id": "P-01",
-      "report": "playwright-report.capture.json",
-      "title": "passes",
-      "expectedStatus": "passed",
-      "expectedScenarioId": "CAP-1-SC-06",
-      "label": null,
-      "acceptanceCriteria": "",
-      "rationale": "Control: a passing test."
+    "notes": "Failure deliberately constructed; label follows the construction."
+   }
+  },
+  {
+   "id": "P-01",
+   "report": "playwright-report.capture.json",
+   "title": "passes",
+   "expectedStatus": "passed",
+   "expectedScenarioId": "CAP-1-SC-06",
+   "label": null,
+   "acceptanceCriteria": "",
+   "rationale": "Control: a passing test.",
+   "evidenceSufficient": null,
+   "provenance": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
     },
-    {
-      "id": "P-02",
-      "report": "playwright-report.setup-failure.json",
-      "title": "passes",
-      "expectedStatus": "skipped",
-      "expectedScenarioId": "CAP-1-SC-06",
-      "label": null,
-      "acceptanceCriteria": "",
-      "rationale": "Did not run because its setup dependency failed; must not be reported as passed."
-    }
-  ]
+    "notes": "Failure deliberately constructed; label follows the construction."
+   }
+  },
+  {
+   "id": "P-02",
+   "report": "playwright-report.setup-failure.json",
+   "title": "passes",
+   "expectedStatus": "skipped",
+   "expectedScenarioId": "CAP-1-SC-06",
+   "label": null,
+   "acceptanceCriteria": "",
+   "rationale": "Did not run because its setup dependency failed; must not be reported as passed.",
+   "evidenceSufficient": null,
+   "provenance": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    },
+    "notes": "Failure deliberately constructed; label follows the construction."
+   }
+  },
+  {
+   "id": "F-07",
+   "report": "playwright-report.capture2.json",
+   "title": "regression-add-to-cart",
+   "expectedStatus": "failed",
+   "expectedScenarioId": "CAP-2-SC-01",
+   "label": "product_regression",
+   "evidenceSufficient": false,
+   "acceptanceCriteria": "Adding \"Sauce Labs Bolt T-Shirt\" shows the cart badge \"1\".",
+   "rationale": "problem_user cannot add this item (catalogued defect D-ADD); Playwright only reports a missing badge.",
+   "provenance": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    },
+    "notes": "Failure deliberately constructed; label follows the construction."
+   }
+  },
+  {
+   "id": "F-08",
+   "report": "playwright-report.capture2.json",
+   "title": "regression-finish",
+   "expectedStatus": "failed",
+   "expectedScenarioId": "CAP-2-SC-02",
+   "label": "product_regression",
+   "evidenceSufficient": false,
+   "acceptanceCriteria": "Finishing an order shows \"Thank you for your order!\".",
+   "rationale": "error_user cannot finish orders (catalogued defect D-FINISH).",
+   "provenance": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    },
+    "notes": "Failure deliberately constructed; label follows the construction."
+   }
+  },
+  {
+   "id": "F-09",
+   "report": "playwright-report.capture2.json",
+   "title": "incorrect-assertion-count",
+   "expectedStatus": "failed",
+   "expectedScenarioId": "CAP-2-SC-03",
+   "label": "incorrect_assertion",
+   "evidenceSufficient": true,
+   "acceptanceCriteria": "The product list shows six products.",
+   "rationale": "The test expects 5 items; the criterion says six.",
+   "provenance": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    },
+    "notes": "Failure deliberately constructed; label follows the construction."
+   }
+  },
+  {
+   "id": "F-10",
+   "report": "playwright-report.capture2.json",
+   "title": "locator-click-timeout",
+   "expectedStatus": "timedOut",
+   "expectedScenarioId": "CAP-2-SC-04",
+   "label": "locator",
+   "evidenceSufficient": false,
+   "acceptanceCriteria": "",
+   "rationale": "The button \"Add all to cart\" does not exist on this site.",
+   "provenance": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    },
+    "notes": "Failure deliberately constructed; label follows the construction."
+   }
+  },
+  {
+   "id": "F-11",
+   "report": "playwright-report.capture2.json",
+   "title": "test-data-unknown-product",
+   "expectedStatus": "timedOut",
+   "expectedScenarioId": "CAP-2-SC-05",
+   "label": "test_data",
+   "evidenceSufficient": false,
+   "acceptanceCriteria": "",
+   "rationale": "The product \"Sauce Labs Hoodie\" is not in the catalogue: the test data is wrong.",
+   "provenance": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    },
+    "notes": "Failure deliberately constructed; label follows the construction."
+   }
+  },
+  {
+   "id": "F-12",
+   "report": "playwright-report.capture2.json",
+   "title": "environment-dns",
+   "expectedStatus": "failed",
+   "expectedScenarioId": "CAP-2-SC-06",
+   "label": "environment",
+   "evidenceSufficient": true,
+   "acceptanceCriteria": "",
+   "rationale": "The host name does not resolve.",
+   "provenance": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    },
+    "notes": "Failure deliberately constructed; label follows the construction."
+   }
+  },
+  {
+   "id": "F-13",
+   "report": "playwright-report.capture2.json",
+   "title": "flaky-first-attempt",
+   "expectedStatus": "flaky",
+   "expectedScenarioId": "CAP-2-SC-08",
+   "label": "flaky",
+   "evidenceSufficient": false,
+   "acceptanceCriteria": "",
+   "rationale": "Fails on the first attempt only, by construction.",
+   "provenance": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    },
+    "notes": "Failure deliberately constructed; label follows the construction."
+   }
+  },
+  {
+   "id": "F-14",
+   "report": "playwright-report.capture2.json",
+   "title": "insufficient-evidence",
+   "expectedStatus": "failed",
+   "expectedScenarioId": "CAP-2-SC-09",
+   "label": "insufficient_evidence",
+   "evidenceSufficient": false,
+   "acceptanceCriteria": "",
+   "rationale": "A generic error with no product or locator information.",
+   "provenance": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    },
+    "notes": "Failure deliberately constructed; label follows the construction."
+   }
+  },
+  {
+   "id": "F-15",
+   "report": "playwright-report.capture2.json",
+   "title": "auth-locked-session",
+   "expectedStatus": "failed",
+   "expectedScenarioId": "CAP-2-SC-10",
+   "label": "auth_setup",
+   "evidenceSufficient": false,
+   "acceptanceCriteria": "Signed-in shoppers see the product list.",
+   "rationale": "The account used for the session is locked, so the precondition (a signed-in session) never holds.",
+   "provenance": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    },
+    "notes": "Failure deliberately constructed; label follows the construction."
+   }
+  },
+  {
+   "id": "P-03",
+   "report": "playwright-report.capture2.json",
+   "title": "test-timeout-slow-user",
+   "expectedStatus": "passed",
+   "expectedScenarioId": "CAP-2-SC-07",
+   "label": null,
+   "evidenceSufficient": null,
+   "acceptanceCriteria": "",
+   "rationale": "Intended as a timeout capture but passed on 2026-10-18 (the glitch delay fit in 3 s). Kept as a passing control.",
+   "provenance": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    },
+    "notes": "Failure deliberately constructed; label follows the construction."
+   }
+  }
+ ],
+ "categories": [
+  "product_regression",
+  "incorrect_assertion",
+  "locator",
+  "auth_setup",
+  "test_data",
+  "environment",
+  "timeout",
+  "flaky",
+  "insufficient_evidence"
+ ]
 }

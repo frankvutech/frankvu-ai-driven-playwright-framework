@@ -48,6 +48,8 @@ export const RunEvidenceSchema = z.object({
   environment: z.object({
     targetName: z.string(),
     baseUrlHost: z.string(),
+    /** Demo account variant used for the signed-in session (absent in older evidence). */
+    sessionVariant: z.string().optional(),
     playwrightVersion: z.string(),
     node: z.string(),
     platform: z.string(),

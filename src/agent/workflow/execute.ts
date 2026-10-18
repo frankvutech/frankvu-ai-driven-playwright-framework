@@ -20,6 +20,8 @@ export interface ExecuteDeps {
   spawner?: Spawner;
   /** Optional model for advisory failure analysis. Rule-based analysis always runs. */
   analysisProvider?: LlmProvider;
+  /** Session variant from the policy (default "standard"). */
+  variant?: string;
   now?: () => Date;
 }
 
@@ -53,6 +55,7 @@ export async function executeRun(store: RunStore, deps: ExecuteDeps): Promise<Ru
     policy: deps.policy,
     env: deps.env,
     spawner: deps.spawner,
+    variant: deps.variant,
   });
 
   if (!result.executed) {
@@ -75,6 +78,7 @@ export async function executeRun(store: RunStore, deps: ExecuteDeps): Promise<Ru
     startedAt: result.startedAt,
     finishedAt: result.finishedAt,
     target: result.target,
+    sessionVariant: result.variant,
     runner: { exitCode: result.spawn.exitCode, timedOut: result.spawn.timedOut, stderr: result.spawn.stderr },
     secrets,
   });

@@ -8,6 +8,10 @@ const password = process.env.SAUCE_PASSWORD ?? 'secret_sauce';
 export const users = {
   standard: { username: 'standard_user', password },
   lockedOut: { username: 'locked_out_user', password },
+  // Intentionally defective accounts on the demo site. Used only as seeded-
+  // defect variants by the Phase 3 evaluation (see relynx.policy.json).
+  problem: { username: 'problem_user', password },
+  error: { username: 'error_user', password },
 } as const;
 
 export type User = (typeof users)[keyof typeof users];

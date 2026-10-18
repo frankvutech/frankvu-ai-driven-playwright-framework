@@ -10,12 +10,39 @@
       "kind": "test"
     }
   ],
-  "blockedHostPatterns": ["prod", "production", "live"],
+  "blockedHostPatterns": [
+    "prod",
+    "production",
+    "live"
+  ],
   "execution": {
     "maxDurationMs": 300000,
     "testTimeoutMs": 30000,
     "retries": 0,
     "workers": 2
   },
-  "envPassthrough": ["PATH", "HOME", "TMPDIR", "LANG", "CI", "PLAYWRIGHT_BROWSERS_PATH", "UI_BASE_URL", "SAUCE_PASSWORD"]
+  "envPassthrough": [
+    "PATH",
+    "HOME",
+    "TMPDIR",
+    "LANG",
+    "CI",
+    "PLAYWRIGHT_BROWSERS_PATH",
+    "UI_BASE_URL",
+    "SAUCE_PASSWORD"
+  ],
+  "sessionVariants": {
+    "standard": {
+      "user": "standard",
+      "purpose": "defect-free control"
+    },
+    "problem": {
+      "user": "problem",
+      "purpose": "seeded defects (demo site's intentionally broken account)"
+    },
+    "error": {
+      "user": "error",
+      "purpose": "seeded defects (demo site's intentionally broken account)"
+    }
+  }
 }

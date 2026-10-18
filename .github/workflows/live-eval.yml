@@ -11,6 +11,12 @@ on:
       effort:
         description: Effort level (low | medium | high | xhigh | max)
         default: high
+      repeat:
+        description: Repetitions per case (to measure variability)
+        default: '3'
+      judge_model:
+        description: Optional semantic-judge model (must differ from the evaluated model); empty to skip
+        default: ''
 
 permissions:
   contents: read
@@ -27,16 +33,18 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - name: Live evaluation (planning, generation, static validation; no execution)
-        run: npm run eval:live
+      - name: Live evaluation (planning, generation, static validation, failure analysis; no execution)
+        run: npm run eval:live -- --repeat "$REPEAT" ${JUDGE_MODEL:+--judge-model "$JUDGE_MODEL"}
         env:
           RELYNX_LIVE_EVAL: '1'
           RELYNX_MODEL: ${{ inputs.model }}
           RELYNX_EFFORT: ${{ inputs.effort }}
+          REPEAT: ${{ inputs.repeat }}
+          JUDGE_MODEL: ${{ inputs.judge_model }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
           name: live-eval
-          path: eval-results/live.json
+          path: eval-results/
           retention-days: 30
