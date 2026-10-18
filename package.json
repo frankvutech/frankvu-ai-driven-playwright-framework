@@ -1,0 +1,31 @@
+{
+  "name": "ai-driven-playwright-framework",
+  "version": "1.0.0",
+  "description": "Playwright + TypeScript UI/API test framework (Page Object Model)",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --project=ui-chromium",
+    "test:api": "playwright test --project=api",
+    "typecheck": "tsc --noEmit",
+    "report": "playwright show-report"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frankvutech/frankvu-ai-driven-playwright-framework.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/frankvutech/frankvu-ai-driven-playwright-framework/issues"
+  },
+  "homepage": "https://github.com/frankvutech/frankvu-ai-driven-playwright-framework#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^26.6.5",
+    "typescript": "^7.0.2"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  }
+}
