@@ -1,0 +1,319 @@
+{
+  "test-plan": [
+    {
+      "requirementId": "REQ-201",
+      "scenarios": [
+        {
+          "id": "REQ-201-SC-01",
+          "requirementId": "REQ-201",
+          "acceptanceCriteriaIds": [
+            "AC-1"
+          ],
+          "title": "Create a note",
+          "objective": "Create a note",
+          "type": "positive",
+          "layer": "api",
+          "priority": "high",
+          "priorityRationale": "core behaviour",
+          "preconditions": [],
+          "steps": [
+            "create a note as alice"
+          ],
+          "testData": [],
+          "expectedOutcomes": [
+            "201",
+            "owner alice"
+          ],
+          "assumptions": [],
+          "openQuestions": []
+        },
+        {
+          "id": "REQ-201-SC-02",
+          "requirementId": "REQ-201",
+          "acceptanceCriteriaIds": [
+            "AC-2"
+          ],
+          "title": "List without a token",
+          "objective": "List without a token",
+          "type": "authorization",
+          "layer": "api",
+          "priority": "high",
+          "priorityRationale": "core behaviour",
+          "preconditions": [],
+          "steps": [
+            "list notes with no token"
+          ],
+          "testData": [],
+          "expectedOutcomes": [
+            "401 unauthorized"
+          ],
+          "assumptions": [],
+          "openQuestions": []
+        },
+        {
+          "id": "REQ-201-SC-03",
+          "requirementId": "REQ-201",
+          "acceptanceCriteriaIds": [
+            "AC-3"
+          ],
+          "title": "Read another user's note",
+          "objective": "Read another user's note",
+          "type": "authorization",
+          "layer": "api",
+          "priority": "high",
+          "priorityRationale": "core behaviour",
+          "preconditions": [],
+          "steps": [
+            "alice creates a note",
+            "bob reads it"
+          ],
+          "testData": [],
+          "expectedOutcomes": [
+            "403 forbidden"
+          ],
+          "assumptions": [],
+          "openQuestions": []
+        },
+        {
+          "id": "REQ-201-SC-04",
+          "requirementId": "REQ-201",
+          "acceptanceCriteriaIds": [
+            "AC-4"
+          ],
+          "title": "Title over 120 characters",
+          "objective": "Title over 120 characters",
+          "type": "boundary",
+          "layer": "api",
+          "priority": "high",
+          "priorityRationale": "core behaviour",
+          "preconditions": [],
+          "steps": [
+            "create with a 121-character title"
+          ],
+          "testData": [],
+          "expectedOutcomes": [
+            "400 validation_error"
+          ],
+          "assumptions": [],
+          "openQuestions": []
+        }
+      ],
+      "ambiguities": [],
+      "uncoveredAcceptanceCriteria": []
+    }
+  ],
+  "test-generation": [
+    {
+      "tests": [
+        {
+          "scenarioId": "REQ-201-SC-01",
+          "requirementId": "REQ-201",
+          "title": "creating a note returns 201 and the caller as owner",
+          "layer": "api",
+          "startSignedIn": false,
+          "steps": [
+            {
+              "kind": "apiCall",
+              "saveAs": "r1",
+              "client": "notes",
+              "as": "alice",
+              "method": "create",
+              "args": [
+                {
+                  "kind": "note",
+                  "title": {
+                    "kind": "prefixed",
+                    "suffix": "Groceries"
+                  },
+                  "body": {
+                    "kind": "literal",
+                    "value": "Milk"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "expectStatus",
+              "response": "r1",
+              "status": 201
+            },
+            {
+              "kind": "expectHeader",
+              "response": "r1",
+              "header": "location",
+              "matcher": "toContain",
+              "expected": "/api/notes/"
+            },
+            {
+              "kind": "expectBody",
+              "response": "r1",
+              "schema": "Note",
+              "field": "owner",
+              "matcher": "toBe",
+              "expected": {
+                "kind": "literal",
+                "value": "alice"
+              },
+              "negate": false
+            },
+            {
+              "kind": "expectBody",
+              "response": "r1",
+              "schema": "Note",
+              "field": "title",
+              "matcher": "toBe",
+              "expected": {
+                "kind": "text",
+                "text": {
+                  "kind": "prefixed",
+                  "suffix": "Groceries"
+                }
+              },
+              "negate": false
+            }
+          ]
+        },
+        {
+          "scenarioId": "REQ-201-SC-02",
+          "requirementId": "REQ-201",
+          "title": "listing notes without a token is rejected with 401",
+          "layer": "api",
+          "startSignedIn": false,
+          "steps": [
+            {
+              "kind": "apiCall",
+              "saveAs": "r1",
+              "client": "notes",
+              "as": "anonymous",
+              "method": "list",
+              "args": []
+            },
+            {
+              "kind": "expectStatus",
+              "response": "r1",
+              "status": 401
+            },
+            {
+              "kind": "expectBody",
+              "response": "r1",
+              "schema": "ApiError",
+              "field": "error.code",
+              "matcher": "toBe",
+              "expected": {
+                "kind": "literal",
+                "value": "unauthorized"
+              },
+              "negate": false
+            }
+          ]
+        },
+        {
+          "scenarioId": "REQ-201-SC-03",
+          "requirementId": "REQ-201",
+          "title": "reading another user's note is forbidden",
+          "layer": "api",
+          "startSignedIn": false,
+          "steps": [
+            {
+              "kind": "apiCall",
+              "saveAs": "r1",
+              "client": "notes",
+              "as": "alice",
+              "method": "create",
+              "args": [
+                {
+                  "kind": "note",
+                  "title": {
+                    "kind": "prefixed",
+                    "suffix": "Private"
+                  },
+                  "body": null
+                }
+              ]
+            },
+            {
+              "kind": "expectStatus",
+              "response": "r1",
+              "status": 201
+            },
+            {
+              "kind": "apiCall",
+              "saveAs": "r2",
+              "client": "notes",
+              "as": "bob",
+              "method": "get",
+              "args": [
+                {
+                  "kind": "ref",
+                  "response": "r1",
+                  "field": "id"
+                }
+              ]
+            },
+            {
+              "kind": "expectStatus",
+              "response": "r2",
+              "status": 403
+            },
+            {
+              "kind": "expectBody",
+              "response": "r2",
+              "schema": "ApiError",
+              "field": "error.code",
+              "matcher": "toBe",
+              "expected": {
+                "kind": "literal",
+                "value": "forbidden"
+              },
+              "negate": false
+            }
+          ]
+        },
+        {
+          "scenarioId": "REQ-201-SC-04",
+          "requirementId": "REQ-201",
+          "title": "a 121-character title is rejected",
+          "layer": "api",
+          "startSignedIn": false,
+          "steps": [
+            {
+              "kind": "apiCall",
+              "saveAs": "r1",
+              "client": "notes",
+              "as": "alice",
+              "method": "create",
+              "args": [
+                {
+                  "kind": "note",
+                  "title": {
+                    "kind": "padded",
+                    "length": 121
+                  },
+                  "body": null
+                }
+              ]
+            },
+            {
+              "kind": "expectStatus",
+              "response": "r1",
+              "status": 400
+            },
+            {
+              "kind": "expectBody",
+              "response": "r1",
+              "schema": "ApiError",
+              "field": "error.code",
+              "matcher": "toBe",
+              "expected": {
+                "kind": "literal",
+                "value": "validation_error"
+              },
+              "negate": false
+            }
+          ]
+        }
+      ],
+      "missingCapabilities": []
+    }
+  ]
+}

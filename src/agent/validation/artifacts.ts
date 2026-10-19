@@ -5,7 +5,7 @@ import ts from 'typescript';
 import { ESLint } from 'eslint';
 import { resolveInside } from '../execution/files';
 import { GENERATED_MARKER } from '../generation/render';
-import { CATALOG } from '../generation/catalog';
+import { ALL_PAGE_FIXTURES } from '../generation/catalog';
 
 export type CheckName = 'path' | 'ast' | 'typecheck' | 'lint' | 'convention' | 'workspace';
 
@@ -29,13 +29,24 @@ export interface ExpectedTrace {
   scenarioId: string;
 }
 
-/** Imports a generated test may use (relative to generated/<runId>/). */
-export const ALLOWED_IMPORTS = new Set([
-  '../../src/fixtures/agent',
-  '../../src/config/auth',
-  '../../src/data/users',
-  '../../src/data/customers',
-]);
+/** Framework modules a generated test may import (relative to src/). */
+const ALLOWED_MODULES = [
+  'fixtures/agent',
+  'config/auth',
+  'data/users',
+  'data/customers',
+  'data/exampleApp',
+  'api/response',
+  'api/schemas',
+  'api/NotesClient',
+];
+/** Promoted tests use the ordinary fixtures instead of the guarded agent ones. */
+const PROMOTED_MODULES = ['fixtures/test', 'fixtures/api', 'fixtures/integration', ...ALLOWED_MODULES.filter((m) => m !== 'fixtures/agent')];
+
+/** Imports a candidate test may use (relative to generated/<runId>/). */
+export const ALLOWED_IMPORTS = new Set(ALLOWED_MODULES.map((m) => `../../src/${m}`));
+/** Imports a promoted test may use (relative to tests/<dir>/generated/). */
+export const PROMOTED_IMPORTS = new Set(PROMOTED_MODULES.map((m) => `../../../src/${m}`));
 
 const FORBIDDEN_IDENTIFIERS = new Set([
   'require',
@@ -58,8 +69,8 @@ const FORBIDDEN_IDENTIFIERS = new Set([
 /** Raw Playwright objects: allowed only as the subject of expect(page). */
 const RAW_PLAYWRIGHT = new Set(['page', 'context', 'browser', 'request', 'browserName', 'playwright']);
 
-/** Fixtures a generated test may destructure. */
-const ALLOWED_FIXTURES = new Set([...Object.keys(CATALOG), 'page']);
+/** Fixtures a generated test may destructure. Which family may use which is enforced by the type checker. */
+const ALLOWED_FIXTURES = new Set([...Object.keys(ALL_PAGE_FIXTURES), 'page', 'exampleAppApi', 'postsApi', 'testPrefix', 'signInBrowser']);
 
 const FORBIDDEN_MEMBERS = new Set([
   'evaluate',
@@ -92,7 +103,7 @@ const FORBIDDEN_MEMBERS = new Set([
  * from a deterministic renderer this should never fire; it exists so that a
  * hand-edited or tampered file cannot reach execution.
  */
-export function astFindings(file: string, source: string, expected: ExpectedTrace): Finding[] {
+export function astFindings(file: string, source: string, expected: ExpectedTrace, allowedImports: ReadonlySet<string> = ALLOWED_IMPORTS): Finding[] {
   const findings: Finding[] = [];
   const sf = ts.createSourceFile(file, source, ts.ScriptTarget.ES2022, true, ts.ScriptKind.TS);
   const at = (node: ts.Node) => sf.getLineAndCharacterOfPosition(node.getStart(sf)).line + 1;
@@ -105,7 +116,7 @@ export function astFindings(file: string, source: string, expected: ExpectedTrac
   for (const stmt of sf.statements) {
     if (ts.isImportDeclaration(stmt)) {
       const spec = (stmt.moduleSpecifier as ts.StringLiteral).text;
-      if (!ALLOWED_IMPORTS.has(spec)) add('ast', stmt, `import from "${spec}" is not allowed`);
+      if (!allowedImports.has(spec)) add('ast', stmt, `import from "${spec}" is not allowed`);
       continue;
     }
     if (ts.isExpressionStatement(stmt) && ts.isCallExpression(stmt.expression)) {
@@ -144,7 +155,7 @@ export function astFindings(file: string, source: string, expected: ExpectedTrac
         }
       }
     }
-    if (ts.isElementAccessExpression(node)) add('ast', node, 'computed member access is not allowed');
+    if (ts.isElementAccessExpression(node) && !isHeaderLookup(node)) add('ast', node, 'computed member access is not allowed');
     if (node.kind === ts.SyntaxKind.ImportKeyword && ts.isCallExpression(node.parent)) add('ast', node, 'dynamic import is not allowed');
     if (ts.isNewExpression(node) && !(ts.isIdentifier(node.expression) && node.expression.text === 'RegExp')) {
       add('ast', node, 'only "new RegExp(...)" is allowed');
@@ -167,6 +178,18 @@ export function astFindings(file: string, source: string, expected: ExpectedTrac
   return findings;
 }
 
+/** `<response>.headers()["name"]`: the only element access a generated test needs. */
+function isHeaderLookup(node: ts.ElementAccessExpression): boolean {
+  const target = node.expression;
+  return (
+    ts.isStringLiteral(node.argumentExpression) &&
+    ts.isCallExpression(target) &&
+    target.arguments.length === 0 &&
+    ts.isPropertyAccessExpression(target.expression) &&
+    target.expression.name.text === 'headers'
+  );
+}
+
 /** Type-check the generated files together with the framework they import. */
 export function typecheckFindings(repoRoot: string, absFiles: string[]): Finding[] {
   const configPath = path.join(repoRoot, 'tsconfig.json');
@@ -185,7 +208,8 @@ export function typecheckFindings(repoRoot: string, absFiles: string[]): Finding
 }
 
 export async function lintFindings(repoRoot: string, absFiles: string[]): Promise<Finding[]> {
-  const eslint = new ESLint({ cwd: repoRoot });
+  // tsconfigRootDir is explicit so a workspace copy nested in the repo (healing) is linted against its own config.
+  const eslint = new ESLint({ cwd: repoRoot, overrideConfig: { languageOptions: { parserOptions: { tsconfigRootDir: repoRoot } } } });
   const results = await eslint.lintFiles(absFiles);
   return results.flatMap((r) =>
     r.messages

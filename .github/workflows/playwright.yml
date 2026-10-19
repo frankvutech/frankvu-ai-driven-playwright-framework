@@ -40,7 +40,7 @@ jobs:
         run: npm run eval:functional
         env:
           # Executes only the sha256-pinned dataset specs; the approver is the person whose push or PR triggered the run.
-          RELYNX_EVAL_APPROVER: ${{ github.actor }}
+          AGENT_EVAL_APPROVER: ${{ github.actor }}
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
@@ -49,5 +49,5 @@ jobs:
             playwright-report/
             test-results/
             eval-results/
-            .relynx/runs/
+            .agent/runs/
           retention-days: 14

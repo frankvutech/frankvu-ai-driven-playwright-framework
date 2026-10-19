@@ -1,0 +1,149 @@
+{
+  "test-plan": [
+    {
+      "requirementId": "REQ-203",
+      "scenarios": [
+        {
+          "id": "REQ-203-SC-01",
+          "requirementId": "REQ-203",
+          "acceptanceCriteriaIds": [
+            "AC-1"
+          ],
+          "title": "Read post 1",
+          "objective": "Read post 1",
+          "type": "positive",
+          "layer": "api",
+          "priority": "high",
+          "priorityRationale": "core behaviour",
+          "preconditions": [],
+          "steps": [
+            "GET /posts/1"
+          ],
+          "testData": [],
+          "expectedOutcomes": [
+            "200, id 1, userId 1"
+          ],
+          "assumptions": [],
+          "openQuestions": []
+        },
+        {
+          "id": "REQ-203-SC-02",
+          "requirementId": "REQ-203",
+          "acceptanceCriteriaIds": [
+            "AC-2"
+          ],
+          "title": "Post 101 does not exist",
+          "objective": "Post 101 does not exist",
+          "type": "boundary",
+          "layer": "api",
+          "priority": "high",
+          "priorityRationale": "core behaviour",
+          "preconditions": [],
+          "steps": [
+            "GET /posts/101"
+          ],
+          "testData": [],
+          "expectedOutcomes": [
+            "404"
+          ],
+          "assumptions": [],
+          "openQuestions": []
+        }
+      ],
+      "ambiguities": [],
+      "uncoveredAcceptanceCriteria": []
+    }
+  ],
+  "test-generation": [
+    {
+      "tests": [
+        {
+          "scenarioId": "REQ-203-SC-01",
+          "requirementId": "REQ-203",
+          "title": "post 1 is returned with its id and author",
+          "layer": "api",
+          "startSignedIn": false,
+          "steps": [
+            {
+              "kind": "apiCall",
+              "saveAs": "r1",
+              "client": "posts",
+              "as": null,
+              "method": "get",
+              "args": [
+                {
+                  "kind": "literal",
+                  "value": 1
+                }
+              ]
+            },
+            {
+              "kind": "expectStatus",
+              "response": "r1",
+              "status": 200
+            },
+            {
+              "kind": "expectHeader",
+              "response": "r1",
+              "header": "content-type",
+              "matcher": "toContain",
+              "expected": "application/json"
+            },
+            {
+              "kind": "expectBody",
+              "response": "r1",
+              "schema": "Post",
+              "field": "id",
+              "matcher": "toBe",
+              "expected": {
+                "kind": "literal",
+                "value": 1
+              },
+              "negate": false
+            },
+            {
+              "kind": "expectBody",
+              "response": "r1",
+              "schema": "Post",
+              "field": "userId",
+              "matcher": "toBe",
+              "expected": {
+                "kind": "literal",
+                "value": 1
+              },
+              "negate": false
+            }
+          ]
+        },
+        {
+          "scenarioId": "REQ-203-SC-02",
+          "requirementId": "REQ-203",
+          "title": "post 101 does not exist",
+          "layer": "api",
+          "startSignedIn": false,
+          "steps": [
+            {
+              "kind": "apiCall",
+              "saveAs": "r1",
+              "client": "posts",
+              "as": null,
+              "method": "get",
+              "args": [
+                {
+                  "kind": "literal",
+                  "value": 101
+                }
+              ]
+            },
+            {
+              "kind": "expectStatus",
+              "response": "r1",
+              "status": 404
+            }
+          ]
+        }
+      ],
+      "missingCapabilities": []
+    }
+  ]
+}

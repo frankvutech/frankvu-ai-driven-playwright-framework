@@ -5,7 +5,7 @@ import { MockProvider } from '../../src/agent/llm/mock';
 import { ProviderError } from '../../src/agent/llm/provider';
 import { callStructured, type RetryPolicy } from '../../src/agent/llm/structured';
 import { mapAnthropicError } from '../../src/agent/llm/anthropic';
-import { anthropicConfigFromEnv, createProvider } from '../../src/agent/config/llm';
+import { anthropicConfigFromEnv, createProvider, ProviderConfigError } from '../../src/agent/config/llm';
 
 const Schema = z.object({ answer: z.number() }).strict();
 const request = { useCase: 'demo', system: 'SYSTEM', prompt: 'PROMPT-with-sensitive-requirement-text', maxTokens: 100 };
@@ -132,7 +132,14 @@ test.describe('provider configuration', () => {
 
   test('model settings have explicit defaults and validate overrides', () => {
     expect(anthropicConfigFromEnv({})).toEqual({ model: 'claude-opus-5-5', effort: 'high', timeoutMs: 180_000 });
-    expect(anthropicConfigFromEnv({ RELYNX_MODEL: 'claude-sonnet-5-5', RELYNX_EFFORT: 'low' })).toMatchObject({ model: 'claude-sonnet-5-5', effort: 'low' });
-    expect(() => anthropicConfigFromEnv({ RELYNX_EFFORT: 'turbo' })).toThrow('invalid RELYNX_EFFORT');
+    expect(anthropicConfigFromEnv({ AGENT_MODEL: 'claude-sonnet-5-5', AGENT_EFFORT: 'low' })).toMatchObject({ model: 'claude-sonnet-5-5', effort: 'low' });
+    expect(() => anthropicConfigFromEnv({ AGENT_EFFORT: 'turbo' })).toThrow('invalid AGENT_EFFORT');
+    expect(() => anthropicConfigFromEnv({ AGENT_LLM_TIMEOUT_MS: 'soon' })).toThrow('AGENT_LLM_TIMEOUT_MS must be an integer');
+  });
+
+  test('a missing credential is a configuration error before any model call', () => {
+    expect(() => createProvider('anthropic', undefined, {})).toThrow(ProviderConfigError);
+    expect(() => createProvider('anthropic', undefined, {})).toThrow('ANTHROPIC_API_KEY is not set');
+    expect(createProvider('anthropic', undefined, { ANTHROPIC_API_KEY: 'sk-ant-test-not-real' }).name).toBe('anthropic');
   });
 });

@@ -1,0 +1,13 @@
+{
+  "id": "REQ-201",
+  "title": "Notes API: create notes and protect them",
+  "application": "notes",
+  "description": "Signed-in users manage their own notes through the REST API. Notes are private to their owner.",
+  "acceptanceCriteria": [
+    { "id": "AC-1", "text": "Given a valid token, when the user creates a note with a title, then the API answers 201 and returns the note with the caller as owner." },
+    { "id": "AC-2", "text": "Given no token, when the notes list is requested, then the API answers 401 with error code \"unauthorized\"." },
+    { "id": "AC-3", "text": "Given a note owned by another user, when the user reads it, then the API answers 403 with error code \"forbidden\"." },
+    { "id": "AC-4", "text": "Given a title longer than 120 characters, when the user creates a note, then the API answers 400 with error code \"validation_error\"." }
+  ],
+  "source": "examples/requirements (synthetic example for the local example app)"
+}

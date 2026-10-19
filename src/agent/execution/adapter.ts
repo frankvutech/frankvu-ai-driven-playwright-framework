@@ -4,10 +4,18 @@ import path from 'node:path';
 import type { ArtifactRecord } from '../domain/state';
 import type { Approval } from './approval';
 import { verifyApproval } from './approval';
-import { resolveTarget, type Policy } from './policy';
+import { resolveApiTarget, resolveTarget, type Policy } from './policy';
 
 export const AGENT_CONFIG = 'playwright.agent.config.ts';
 export const AGENT_PROJECT = 'agent-generated';
+
+/** Agent Playwright project for each generated-file family (see playwright.agent.config.ts). */
+export function agentProjectFor(file: string): string {
+  if (file.endsWith('.notes.spec.ts')) return 'agent-generated-notes';
+  if (file.endsWith('.api.spec.ts')) return 'agent-generated-api';
+  return AGENT_PROJECT;
+}
+export const AGENT_PROJECTS = [AGENT_PROJECT, 'agent-generated-notes', 'agent-generated-api'] as const;
 
 export interface SpawnResult {
   exitCode: number | null;
@@ -30,6 +38,8 @@ export interface ExecutionRequest {
   spawner?: Spawner;
   /** Session variant from policy.sessionVariants (default "standard"). */
   variant?: string;
+  /** Example-app failure mode (default "standard"); must be listed in the policy. */
+  exampleAppVariant?: string;
 }
 
 export type ExecutionResult =
@@ -38,6 +48,7 @@ export type ExecutionResult =
       executed: true;
       target: { name: string; host: string };
       variant: string;
+      exampleAppVariant: string;
       files: string[];
       reportPath: string;
       startedAt: Date;
@@ -104,9 +115,27 @@ export async function executeApproved(req: ExecutionRequest): Promise<ExecutionR
   const variantName = req.variant ?? 'standard';
   const variant = policy.sessionVariants[variantName];
   if (!variant) refusals.push(`session variant "${variantName}" is not in the policy`);
-  if (refusals.length > 0 || !target.ok || !variant) return { executed: false, refusals };
 
   const files = req.artifacts.filter((a) => a.state === 'approved').map((a) => a.file);
+  const projects = [...new Set(files.map(agentProjectFor))].sort();
+  const extraEnv: Record<string, string> = {};
+  if (projects.includes('agent-generated-api')) {
+    const apiBaseUrl = req.env.API_BASE_URL ?? policy.apiTargets[0]?.baseUrl;
+    const api = apiBaseUrl ? resolveApiTarget(policy, apiBaseUrl) : { ok: false as const, reason: 'no API target is approved in the policy' };
+    if (!api.ok) refusals.push(api.reason);
+    else extraEnv.API_BASE_URL = apiBaseUrl!;
+  }
+  const exampleAppVariant = req.exampleAppVariant ?? 'standard';
+  if (projects.some((p) => p !== AGENT_PROJECT)) {
+    if (!(policy.exampleApp.variants as string[]).includes(exampleAppVariant)) refusals.push(`example-app variant "${exampleAppVariant}" is not in the policy`);
+    const external = req.env.EXAMPLE_APP_URL;
+    if (external && !policy.exampleApp.approvedUrls.some((u) => new URL(u).origin === safeOrigin(external))) {
+      refusals.push(`example app ${safeOrigin(external) ?? 'URL'} is not approved (unset EXAMPLE_APP_URL to use the local app)`);
+    }
+    extraEnv.EXAMPLE_APP_VARIANT = exampleAppVariant;
+  }
+  if (refusals.length > 0 || !target.ok || !variant) return { executed: false, refusals };
+
   const outputDir = path.join(req.runDir, 'artifacts');
   const reportPath = path.join(req.runDir, 'playwright-results.json');
   mkdirSync(outputDir, { recursive: true });
@@ -117,8 +146,7 @@ export async function executeApproved(req: ExecutionRequest): Promise<ExecutionR
     'test',
     '--config',
     AGENT_CONFIG,
-    '--project',
-    AGENT_PROJECT,
+    ...projects.flatMap((p) => ['--project', p]),
     '--retries',
     String(policy.execution.retries),
     '--workers',
@@ -129,14 +157,33 @@ export async function executeApproved(req: ExecutionRequest): Promise<ExecutionR
   ];
   const env = childEnv(policy, req.env, {
     UI_BASE_URL: uiBaseUrl,
-    RELYNX_APPROVED_FILES: JSON.stringify(files),
-    RELYNX_RESULTS_FILE: reportPath,
-    RELYNX_OUTPUT_DIR: outputDir,
-    RELYNX_SESSION_USER: variant.user,
+    AGENT_APPROVED_FILES: JSON.stringify(files),
+    AGENT_RESULTS_FILE: reportPath,
+    AGENT_OUTPUT_DIR: outputDir,
+    AGENT_SESSION_USER: variant.user,
+    ...extraEnv,
   });
 
   const startedAt = new Date();
   const spawner = req.spawner ?? defaultSpawner;
   const result = await spawner(process.execPath, args, { cwd: repoRoot, env, timeoutMs: policy.execution.maxDurationMs });
-  return { executed: true, target: { name: target.name, host: target.host }, variant: variantName, files, reportPath, startedAt, finishedAt: new Date(), spawn: result };
+  return {
+    executed: true,
+    target: { name: target.name, host: target.host },
+    variant: variantName,
+    exampleAppVariant,
+    files,
+    reportPath,
+    startedAt,
+    finishedAt: new Date(),
+    spawn: result,
+  };
+}
+
+function safeOrigin(url: string): string | undefined {
+  try {
+    return new URL(url).origin;
+  } catch {
+    return undefined;
+  }
 }

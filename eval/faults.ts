@@ -124,7 +124,7 @@ function countingSpawner(inner: Spawner) {
 /** A spawner double that writes a Playwright-shaped JSON report for the approved files. */
 function reportWriter(build: (files: string[]) => object): Spawner {
   return async (_cmd, _args, opts) => {
-    writeFileSync(opts.env.RELYNX_RESULTS_FILE!, JSON.stringify(build(JSON.parse(opts.env.RELYNX_APPROVED_FILES!))));
+    writeFileSync(opts.env.AGENT_RESULTS_FILE!, JSON.stringify(build(JSON.parse(opts.env.AGENT_APPROVED_FILES!))));
     return { exitCode: 1, timedOut: false, stdout: '', stderr: '' };
   };
 }
@@ -235,12 +235,12 @@ export async function runFaultInjection(policy: Policy): Promise<{ results: Faul
   const execFaults: ExecFault[] = [
     {
       id: 'FI-08', fault: 'test runner cannot start (missing executable)', expected: 'record the runner error, mark tests inconclusive, never passed, no retry',
-      spawner: (_c, args, opts) => defaultSpawner('/nonexistent/relynx-node', args, opts),
+      spawner: (_c, args, opts) => defaultSpawner('/nonexistent/agent-node', args, opts),
       expect: { status: 'executed', executions: 1, artifactStates: ['inconclusive', 'inconclusive', 'inconclusive'], evidence: true, stderrIncludes: 'ENOENT', limitMs: NO_RUN_LIMIT },
     },
     {
       id: 'FI-09', fault: 'invalid test configuration', expected: 'Playwright refuses to load; the error is preserved and tests are inconclusive',
-      spawner: (cmd, args, opts) => defaultSpawner(cmd, args, { ...opts, env: { ...opts.env, RELYNX_APPROVED_FILES: '[]' } }),
+      spawner: (cmd, args, opts) => defaultSpawner(cmd, args, { ...opts, env: { ...opts.env, AGENT_APPROVED_FILES: '[]' } }),
       expect: { status: 'executed', executions: 1, artifactStates: ['inconclusive', 'inconclusive', 'inconclusive'], evidence: true, stderrIncludes: 'only runs files approved', limitMs: 60_000 },
     },
     {

@@ -1,7 +1,13 @@
 import { z } from 'zod';
 import { RequirementSchema } from '../src/agent/domain/requirement';
 import { ScenarioSchema } from '../src/agent/domain/plan';
-import { TestSpecSchema } from '../src/agent/domain/testSpec';
+import { TestSpecSchema, type TestSpec } from '../src/agent/domain/testSpec';
+
+/**
+ * Validates a recorded spec without transforming it. Pinned specs are hashed
+ * as written, so schema defaults added later (e.g. layer) must not be applied.
+ */
+const RecordedSpecSchema = z.custom<TestSpec>((v) => TestSpecSchema.safeParse(v).success, { message: 'not a valid TestSpec' });
 
 /* ------------------------------ provenance ------------------------------ */
 
@@ -127,7 +133,7 @@ export const FunctionalSuiteSchema = z
     id: z.string().regex(/^FS-[A-Z]+$/),
     requirement: RequirementSchema,
     scenarios: z.array(ScenarioSchema).min(1),
-    specs: z.array(TestSpecSchema).min(1),
+    specs: z.array(RecordedSpecSchema).min(1),
     specSha256: z.record(z.string(), z.string().regex(/^[0-9a-f]{64}$/)),
     variants: z.record(z.string(), z.array(FunctionalCaseSchema)),
     notes: z.string().optional(),

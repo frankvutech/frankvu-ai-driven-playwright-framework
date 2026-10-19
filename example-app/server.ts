@@ -11,7 +11,16 @@ import type { AddressInfo } from 'node:net';
  * - REST API under /api (JSON, `Authorization: Bearer <token>`)
  * - Server-rendered notes UI (cookie session), no client-side JavaScript
  * - In-memory state per process; users are passed in by the caller
+ *
+ * Variants are deterministic failure modes, off by default. They exist only so
+ * failure analysis and guarded healing can be verified end to end:
+ * - renamed-add-button: the "Add note" button reads "Save note" (UI drift; same element)
+ * - intermittent-slow-list: every other /notes page reveals its list only after 6 s (flaky timing)
+ * - broken-create: creating a note fails with 500 (a product defect that must not be "healed")
  */
+export const EXAMPLE_APP_VARIANTS = ['standard', 'renamed-add-button', 'intermittent-slow-list', 'broken-create'] as const;
+export type ExampleAppVariant = (typeof EXAMPLE_APP_VARIANTS)[number];
+export const SLOW_LIST_REVEAL_MS = 6_000;
 export interface ExampleAppUser {
   username: string;
   password: string;
@@ -45,10 +54,22 @@ class HttpError extends Error {
   }
 }
 
-export async function startExampleApp(options: { users: ExampleAppUser[]; port?: number; host?: string }): Promise<RunningExampleApp> {
+export async function startExampleApp(options: {
+  users: ExampleAppUser[];
+  port?: number;
+  host?: string;
+  variant?: ExampleAppVariant;
+}): Promise<RunningExampleApp> {
   const users = new Map(options.users.map((u) => [u.username, u.password]));
   const tokens = new Map<string, string>(); // token -> username
   const notes = new Map<string, Note>();
+  const variant = options.variant ?? 'standard';
+  let notesPageViews = 0;
+  const view = () => ({
+    addLabel: variant === 'renamed-add-button' ? 'Save note' : 'Add note',
+    // Odd-numbered views are slow, so repeated runs alternate fail/pass.
+    revealAfterMs: variant === 'intermittent-slow-list' && ++notesPageViews % 2 === 1 ? SLOW_LIST_REVEAL_MS : 0,
+  });
 
   const server = createServer((req, res) => {
     handle(req, res).catch((error: unknown) => {
@@ -83,11 +104,11 @@ export async function startExampleApp(options: { users: ExampleAppUser[]; port?:
     if (url.pathname === '/notes') {
       const user = userFor(cookieToken(req));
       if (!user) return redirect(res, '/login');
-      if (method === 'GET') return sendHtml(res, 200, notesPage(user, ownedBy(user)));
+      if (method === 'GET') return sendHtml(res, 200, notesPage(user, ownedBy(user), view()));
       if (method === 'POST') {
         const form = new URLSearchParams(await readBody(req));
         const problem = validationProblem({ title: form.get('title') ?? '', body: form.get('body') ?? '' });
-        if (problem) return sendHtml(res, 400, notesPage(user, ownedBy(user), problem));
+        if (problem) return sendHtml(res, 400, notesPage(user, ownedBy(user), view(), problem));
         createNote(user, { title: form.get('title') ?? '', body: form.get('body') ?? '' });
         return redirect(res, '/notes');
       }
@@ -175,6 +196,7 @@ export async function startExampleApp(options: { users: ExampleAppUser[]; port?:
   }
 
   function createNote(owner: string, input: { title: string; body: string }): Note {
+    if (variant === 'broken-create') throw new HttpError(500, 'internal_error', 'Unexpected server error');
     const now = new Date().toISOString();
     const note: Note = { id: randomUUID(), owner, title: input.title.trim(), body: input.body, createdAt: now, updatedAt: now };
     notes.set(note.id, note);
@@ -310,7 +332,7 @@ ${error ? `<p role="alert" data-test="login-error">${escapeHtml(error)}</p>` : '
   );
 }
 
-function notesPage(user: string, items: Note[], error?: string): string {
+function notesPage(user: string, items: Note[], view: { addLabel: string; revealAfterMs: number }, error?: string): string {
   const list = items
     .map((n) => `<li data-test="note"><h2 data-test="note-title">${escapeHtml(n.title)}</h2><p data-test="note-body">${escapeHtml(n.body)}</p></li>`)
     .join('');
@@ -323,8 +345,11 @@ ${error ? `<p role="alert" data-test="note-error">${escapeHtml(error)}</p>` : ''
 <form method="post" action="/notes" aria-label="New note">
   <label>Title <input name="title"></label>
   <label>Body <textarea name="body"></textarea></label>
-  <button type="submit">Add note</button>
+  <button type="submit">${escapeHtml(view.addLabel)}</button>
 </form>
-${items.length === 0 ? '<p data-test="empty-state">No notes yet</p>' : `<ul data-test="note-list">${list}</ul>`}`,
+<section data-test="notes-section"${view.revealAfterMs > 0 ? ' hidden' : ''}>
+${items.length === 0 ? '<p data-test="empty-state">No notes yet</p>' : `<ul data-test="note-list">${list}</ul>`}
+</section>
+${view.revealAfterMs > 0 ? `<script>setTimeout(() => document.querySelector('[data-test="notes-section"]').hidden = false, ${view.revealAfterMs});</script>` : ''}`,
   );
 }

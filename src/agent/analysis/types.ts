@@ -1,5 +1,13 @@
 import { z } from 'zod';
 
+/**
+ * product_behavior: likely product defect. assertion_logic: test logic or
+ * expectation defect. locator: locator drift. timeout_sync: timing or
+ * synchronisation. test_data_setup / environment: data, setup or target
+ * problems. api_contract: an API answered outside the expected contract
+ * (status or schema). infrastructure: the runner or tooling failed.
+ * inconclusive: insufficient evidence; never forced into a category.
+ */
 export const FAILURE_CATEGORIES = [
   'product_behavior',
   'assertion_logic',
@@ -7,6 +15,8 @@ export const FAILURE_CATEGORIES = [
   'test_data_setup',
   'environment',
   'timeout_sync',
+  'api_contract',
+  'infrastructure',
   'inconclusive',
 ] as const;
 export type FailureCategory = (typeof FAILURE_CATEGORIES)[number];

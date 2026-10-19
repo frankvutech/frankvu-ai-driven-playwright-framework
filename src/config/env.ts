@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { parseEnv as parseDotEnv } from 'node:util';
 import { z } from 'zod';
+import { EXAMPLE_APP_VARIANTS } from '../../example-app/server';
 
 /**
  * Single place where environment-specific values are resolved and validated.
@@ -25,6 +26,8 @@ const EnvSchema = z.object({
   API_BASE_URL: httpUrl.default('https://jsonplaceholder.typicode.com'),
   /** Unset: tests start the local example app themselves (see example-app/). */
   EXAMPLE_APP_URL: httpUrl.optional(),
+  /** Only used when the tests start the example app themselves. */
+  EXAMPLE_APP_VARIANT: z.enum(EXAMPLE_APP_VARIANTS, { error: `must be one of: ${EXAMPLE_APP_VARIANTS.join(', ')}` }).default('standard'),
   UI_BROWSERS: z
     .string()
     .default('chromium')
@@ -53,6 +56,7 @@ export function parseEnv(source: Partial<Record<string, string | undefined>>) {
     uiBaseUrl: v.UI_BASE_URL,
     apiBaseUrl: v.API_BASE_URL,
     exampleAppUrl: v.EXAMPLE_APP_URL,
+    exampleAppVariant: v.EXAMPLE_APP_VARIANT,
     uiBrowsers: [...new Set(v.UI_BROWSERS)],
     saucePassword: v.SAUCE_PASSWORD,
     exampleAppPassword: v.EXAMPLE_APP_PASSWORD,

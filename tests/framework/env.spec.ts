@@ -8,6 +8,7 @@ test.describe('environment configuration', () => {
       uiBaseUrl: 'https://www.saucedemo.com',
       apiBaseUrl: 'https://jsonplaceholder.typicode.com',
       exampleAppUrl: undefined,
+      exampleAppVariant: 'standard',
       uiBrowsers: ['chromium'],
       saucePassword: 'secret_sauce',
       exampleAppPassword: 'example-app-pass',
@@ -27,6 +28,11 @@ test.describe('environment configuration', () => {
 
   test('rejects an unknown browser', () => {
     expect(() => parseEnv({ UI_BROWSERS: 'chromium,edge' })).toThrow(/UI_BROWSERS\.1: must list browsers from: chromium, firefox, webkit/);
+  });
+
+  test('accepts only known example-app variants', () => {
+    expect(parseEnv({ EXAMPLE_APP_VARIANT: 'renamed-add-button' }).exampleAppVariant).toBe('renamed-add-button');
+    expect(() => parseEnv({ EXAMPLE_APP_VARIANT: 'chaos' })).toThrow(/EXAMPLE_APP_VARIANT: must be one of/);
   });
 
   test('rejects non-http URLs, naming the variable', () => {

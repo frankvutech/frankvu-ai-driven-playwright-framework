@@ -9,13 +9,14 @@ const req: Requirement = {
   id: 'REQ-1',
   title: 't',
   description: 'd',
+  application: 'storefront',
   acceptanceCriteria: [{ id: 'AC-1', text: 'A locked-out user sees "Epic sadface: Sorry, this user has been locked out." and the list shows six products.' }],
 };
 const scenario = { id: 'REQ-1-SC-01', acceptanceCriteriaIds: ['AC-1'] } as Scenario;
 const login: Step = { kind: 'action', target: 'loginPage.login', args: [] };
 const E = (target: string, matcher: Extract<Step, { kind: 'expect' }>['matcher'], expected: string | number | string[] | null, negate = false): Step => ({ kind: 'expect', target, select: 'all', matcher, expected, negate });
 const U = (pathPattern: string, negate = false): Step => ({ kind: 'expectUrl', pathPattern, negate });
-const spec = (steps: Step[]): TestSpec => ({ scenarioId: 'REQ-1-SC-01', requirementId: 'REQ-1', title: 't', startSignedIn: false, steps });
+const spec = (steps: Step[]): TestSpec => ({ scenarioId: 'REQ-1-SC-01', requirementId: 'REQ-1', title: 't', layer: 'ui', startSignedIn: false, steps });
 const rules = (steps: Step[]) => [...new Set(assertionFindings(spec(steps), scenario, req).map((f) => f.rule))].sort();
 const LOCKED = 'Epic sadface: Sorry, this user has been locked out.';
 

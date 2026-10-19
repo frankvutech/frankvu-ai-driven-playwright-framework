@@ -1,18 +1,39 @@
+import { existsSync, readFileSync } from 'node:fs';
+import path from 'node:path';
 import type { RunEvidence, TestEvidence } from '../domain/result';
+import { redact } from '../evidence/redact';
 import type { Diagnosis, FailureAnalysis, Observation } from './types';
 
 export interface AnalysisContext {
   /** Acceptance-criteria text of the originating requirement, if known. */
   acceptanceCriteriaText?: string;
+  /** Resolves attachment paths; without it, attachment contents are not read. */
+  repoRoot?: string;
 }
 
 const MAX_OBSERVATION = 1500;
+const MAX_SNAPSHOT = 6000;
+
+/**
+ * The accessibility snapshot of the page at the moment of failure, from the
+ * error-context attachment Playwright writes. Only the snapshot section is
+ * kept: the rest of that file includes generic instructions and source.
+ */
+export function pageSnapshot(test: TestEvidence, repoRoot: string): string | undefined {
+  const last = test.attempts[test.attempts.length - 1];
+  const ref = last?.attachments.find((a) => a.name === 'error-context');
+  if (!ref) return undefined;
+  const file = path.resolve(repoRoot, ref.path);
+  if (!file.startsWith(path.resolve(repoRoot) + path.sep) || !existsSync(file)) return undefined;
+  const match = /# Page snapshot\s*```yaml\n([\s\S]*?)\n```/.exec(readFileSync(file, 'utf8'));
+  return match ? redact(match[1]).slice(0, MAX_SNAPSHOT) : undefined;
+}
 
 /** Build the fact list for one failed test from runner evidence only. */
-export function collectObservations(test: TestEvidence, run?: RunEvidence): Observation[] {
+export function collectObservations(test: TestEvidence, run?: RunEvidence, repoRoot?: string): Observation[] {
   const obs: Observation[] = [];
-  const add = (source: string, text: string) =>
-    obs.push({ id: `E${obs.length + 1}`, source, text: text.slice(0, MAX_OBSERVATION) });
+  const add = (source: string, text: string, limit = MAX_OBSERVATION) =>
+    obs.push({ id: `E${obs.length + 1}`, source, text: text.slice(0, limit) });
 
   add('status', `final status ${test.status} after ${test.attempts.length} attempt(s), ${Math.round(test.durationMs)}ms`);
   const last = test.attempts[test.attempts.length - 1];
@@ -22,6 +43,9 @@ export function collectObservations(test: TestEvidence, run?: RunEvidence): Obse
   });
   if (test.traceRef) add('attachment.trace', test.traceRef);
   test.screenshotRefs.forEach((s) => add('attachment.screenshot', s));
+  const snapshot = repoRoot ? pageSnapshot(test, repoRoot) : undefined;
+  if (snapshot) add('attachment.page-snapshot', snapshot, MAX_SNAPSHOT);
+  if (test.attempts.length > 1) add('retries', `attempt statuses: ${test.attempts.map((a) => a.status).join(', ')}`);
   run?.runner.globalErrors.forEach((g, i) => add(`run.globalError[${i}]`, g));
   if (run?.runner.timedOut) add('run.timedOut', 'the runner was stopped by the execution time limit');
   return obs;
@@ -50,7 +74,7 @@ const norm = (s: string) => s.toLowerCase().replace(/\s+/g, ' ').trim();
  * evidence; each cites the observations it used.
  */
 export function classifyFailure(test: TestEvidence, ctx: AnalysisContext = {}, run?: RunEvidence): FailureAnalysis {
-  const obs = collectObservations(test, run);
+  const obs = collectObservations(test, run, ctx.repoRoot);
   const errors = obs.filter((o) => o.source.endsWith('.message') || o.source.startsWith('run.'));
   const status = obs.filter((o) => o.source === 'status');
   const d = (diag: Diagnosis): FailureAnalysis => ({
@@ -62,6 +86,19 @@ export function classifyFailure(test: TestEvidence, ctx: AnalysisContext = {}, r
     method: 'rules',
     notes: [],
   });
+
+  const infra = find(errors, /Cannot find module|ERR_MODULE_NOT_FOUND|SyntaxError: |Error: No tests found|Worker process exited unexpectedly|Error: Project\(s\) .* not found/);
+  if (infra.length > 0) {
+    return d({
+      category: 'infrastructure',
+      confidence: 'high',
+      hypothesis: 'The test runner or tooling failed before the test could exercise the application.',
+      alternatives: [],
+      evidenceIds: ids(infra),
+      sufficientEvidence: true,
+      nextSteps: ['Fix the runner, configuration or dependency problem named in the error, then re-run.'],
+    });
+  }
 
   const env = find(errors, /net::ERR_|ECONNREFUSED|ENOTFOUND|EAI_AGAIN|Executable doesn't exist|browserType\.launch|ERR_NAME_NOT_RESOLVED/);
   if (env.length > 0) {
@@ -104,6 +141,72 @@ export function classifyFailure(test: TestEvidence, ctx: AnalysisContext = {}, r
       evidenceIds: ids(notFound, waitingFor, timeout),
       sufficientEvidence: false,
       nextSteps: ['Open the trace or screenshot and check whether the element exists on the page at that moment.'],
+    });
+  }
+
+  // The element exists but stayed hidden for the whole assertion timeout.
+  const stillHidden = find(errors, /^Expected: visible$/m).filter((o) => /^Received: hidden$/m.test(o.text) || /unexpected value "hidden"/.test(o.text));
+  if (stillHidden.length > 0) {
+    return d({
+      category: 'timeout_sync',
+      confidence: 'medium',
+      hypothesis: 'The element was found but did not become visible within the assertion timeout: a timing or synchronisation problem.',
+      alternatives: [
+        { category: 'product_behavior', why: 'the element may never be shown because of a defect' },
+        { category: 'locator', why: 'the locator may match a different, hidden element' },
+      ],
+      evidenceIds: ids(stillHidden),
+      sufficientEvidence: false,
+      nextSteps: ['Check in the trace when the element became visible, and re-run to see whether the failure is intermittent.'],
+    });
+  }
+
+  // HTTP status assertions in API tests: expect(<response>.status()).toBe(<n>).
+  const statusMismatch = find(errors, /\.status\(\)\)\.toBe\(/).filter((o) => /^Expected: \d{3}$/m.test(o.text) && /^Received: \d{3}$/m.test(o.text));
+  if (statusMismatch.length > 0) {
+    const expected = /^Expected: (\d{3})$/m.exec(statusMismatch[0].text)![1];
+    const received = /^Received: (\d{3})$/m.exec(statusMismatch[0].text)![1];
+    const inRequirement = ctx.acceptanceCriteriaText !== undefined && new RegExp(`\\b${expected}\\b`).test(ctx.acceptanceCriteriaText);
+    if (received.startsWith('5') || inRequirement) {
+      return d({
+        category: 'product_behavior',
+        confidence: 'medium',
+        hypothesis: received.startsWith('5')
+          ? `The API answered ${received} (server error) where the test expected ${expected}. A server error is not a valid outcome of the contract.`
+          : `The API answered ${received}, but the acceptance criteria require ${expected}.`,
+        alternatives: [
+          { category: 'environment', why: 'the service may be unhealthy or misconfigured rather than defective' },
+          { category: 'api_contract', why: 'the contract may have changed intentionally' },
+        ],
+        evidenceIds: ids(statusMismatch),
+        sufficientEvidence: false,
+        nextSteps: ['Reproduce the request and check the service logs; confirm the expected status with the API owner.'],
+      });
+    }
+    return d({
+      category: 'api_contract',
+      confidence: 'medium',
+      hypothesis: `The API answered ${received} where the test expected ${expected}, and the acceptance criteria do not state ${expected}.`,
+      alternatives: [
+        { category: 'assertion_logic', why: 'the expected status may be a wrong assumption of the test' },
+        { category: 'product_behavior', why: 'the API may be wrong' },
+      ],
+      evidenceIds: ids(statusMismatch),
+      sufficientEvidence: false,
+      nextSteps: ['Compare the status with the documented API contract before changing either side.'],
+    });
+  }
+
+  const schemaMismatch = find(errors, /does not match the expected schema|is not JSON \(content-type/);
+  if (schemaMismatch.length > 0) {
+    return d({
+      category: 'api_contract',
+      confidence: 'medium',
+      hypothesis: 'The response body did not match the expected schema.',
+      alternatives: [{ category: 'product_behavior', why: 'the API may return wrong data' }],
+      evidenceIds: ids(schemaMismatch),
+      sufficientEvidence: false,
+      nextSteps: ['Compare the schema problems in the error with the API contract.'],
     });
   }
 

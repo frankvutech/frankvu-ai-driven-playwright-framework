@@ -3,11 +3,11 @@ import { defaultSpawner } from '../../src/agent/execution/adapter';
 
 test.describe('default spawner', () => {
   test('passes arguments without a shell', async () => {
-    const result = await defaultSpawner(process.execPath, ['-e', 'console.log(process.argv[1])', '$(touch /tmp/relynx-should-not-exist); echo hi'], {
+    const result = await defaultSpawner(process.execPath, ['-e', 'console.log(process.argv[1])', '$(touch /tmp/agent-should-not-exist); echo hi'], {
       cwd: process.cwd(), env: { PATH: process.env.PATH }, timeoutMs: 10_000,
     });
     expect(result).toMatchObject({ exitCode: 0, timedOut: false });
-    expect(result.stdout.trim()).toBe('$(touch /tmp/relynx-should-not-exist); echo hi');
+    expect(result.stdout.trim()).toBe('$(touch /tmp/agent-should-not-exist); echo hi');
   });
 
   test('stops the process group at the time limit', async () => {

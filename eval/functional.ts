@@ -27,7 +27,7 @@ import { REPO_ROOT } from './evaluate';
  */
 export interface FunctionalOptions {
   policy: Policy;
-  /** The person authorising execution of the pinned dataset specs (RELYNX_EVAL_APPROVER). */
+  /** The person authorising execution of the pinned dataset specs (AGENT_EVAL_APPROVER). */
   approver: string;
   env: NodeJS.ProcessEnv;
   /** Keep run directories (evidence, traces) after the evaluation. */
@@ -156,7 +156,7 @@ async function runSuiteVariant(suite: FunctionalSuite, variant: string, opts: Fu
 
 export async function evaluateFunctional(dataset: FunctionalDataset, opts: FunctionalOptions) {
   if (!isAcceptableApprover(opts.approver)) {
-    throw new Error('functional evaluation executes tests: set RELYNX_EVAL_APPROVER to the name of the person authorising it');
+    throw new Error('functional evaluation executes tests: set AGENT_EVAL_APPROVER to the name of the person authorising it');
   }
   const jobs = dataset.suites
     .filter((s) => !opts.suites || opts.suites.includes(s.id))

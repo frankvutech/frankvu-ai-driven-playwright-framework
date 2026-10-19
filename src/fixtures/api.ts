@@ -14,6 +14,8 @@ export interface ExampleAppApi {
   as(user: ExampleAppUserName): Promise<NotesClient>;
   /** A request context with no credentials, for 401 scenarios. */
   anonymous(): Promise<APIRequestContext>;
+  /** A NotesClient with no credentials, for 401 scenarios through the client. */
+  asAnonymous(): Promise<NotesClient>;
 }
 
 type ApiFixtures = {
@@ -38,7 +40,7 @@ export const test = base.extend<ApiFixtures, WorkerFixtures>({
     // eslint-disable-next-line no-empty-pattern
     async ({}, use) => {
       if (env.exampleAppUrl) return use(env.exampleAppUrl);
-      const app = await startExampleApp({ users: Object.values(exampleAppUsers) });
+      const app = await startExampleApp({ users: Object.values(exampleAppUsers), variant: env.exampleAppVariant });
       await use(app.url);
       await app.close();
     },
@@ -86,7 +88,7 @@ export const test = base.extend<ApiFixtures, WorkerFixtures>({
     };
 
     try {
-      await use({ url: exampleAppUrl, as, anonymous: () => newContext() });
+      await use({ url: exampleAppUrl, as, anonymous: () => newContext(), asAnonymous: async () => new NotesClient(await newContext()) });
       for (const client of clients.values()) await deleteNotesWithPrefix(client, testPrefix);
     } finally {
       await Promise.all(contexts.map((c) => c.dispose()));

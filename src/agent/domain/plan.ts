@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { APPLICATIONS, LAYERS, supportsLayer } from './application';
 import type { Requirement, RequirementAssessment } from './requirement';
 
 export const ScenarioTypeSchema = z.enum(['positive', 'negative', 'boundary', 'authorization']);
@@ -11,6 +12,8 @@ export const ScenarioSchema = z
     title: z.string().min(1).max(200),
     objective: z.string().min(1).max(1000),
     type: ScenarioTypeSchema,
+    /** ui, api or combined (UI and API in one test). Defaults to ui for older plans. */
+    layer: z.enum(LAYERS).default('ui'),
     priority: z.enum(['high', 'medium', 'low']),
     priorityRationale: z.string().max(500),
     preconditions: z.array(z.string().max(500)).max(20),
@@ -43,6 +46,7 @@ export type PlanIssueCode =
   | 'untraceable_scenario'
   | 'assumption_scenario'
   | 'undeclared_uncovered_criterion'
+  | 'unsupported_layer'
   | 'declared_uncovered_criterion'
   | 'ambiguity_not_surfaced';
 
@@ -99,6 +103,18 @@ export function validatePlan(
         severity: 'error',
         scenarioId: sc.id,
         message: `scenario ${sc.id} does not trace to ${req.id}`,
+      });
+    }
+
+    // Older inputs that bypassed schema parsing have no application or layer: use the schema defaults.
+    const application = req.application ?? 'storefront';
+    const layer = sc.layer ?? 'ui';
+    if (!supportsLayer(application, layer)) {
+      issues.push({
+        code: 'unsupported_layer',
+        severity: 'error',
+        scenarioId: sc.id,
+        message: `${application} supports ${APPLICATIONS[application].layers.join(', ')} tests, not ${layer}`,
       });
     }
 

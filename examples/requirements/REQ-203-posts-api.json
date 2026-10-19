@@ -1,0 +1,11 @@
+{
+  "id": "REQ-203",
+  "title": "Read posts from the public posts API",
+  "application": "posts",
+  "description": "Clients read individual posts by id. Ids outside the seeded range do not exist.",
+  "acceptanceCriteria": [
+    { "id": "AC-1", "text": "When post 1 is requested, then the API answers 200 with the post whose id is 1 and userId is 1." },
+    { "id": "AC-2", "text": "When post 101 is requested, then the API answers 404." }
+  ],
+  "source": "examples/requirements (synthetic example for JSONPlaceholder)"
+}

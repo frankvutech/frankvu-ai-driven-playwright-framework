@@ -17,16 +17,23 @@ const replies = () => read<{ 'test-plan': [TestPlan]; 'test-generation': [Genera
 export const plan101 = (): TestPlan => replies()['test-plan'][0];
 export const generation101 = (): GenerationOutput => replies()['test-generation'][0];
 
+/** Example requirements and recorded mock replies for the notes app and the posts API. */
+export const example = (id: 'REQ-201' | 'REQ-202' | 'REQ-203') => {
+  const file = { 'REQ-201': 'REQ-201-notes-api.json', 'REQ-202': 'REQ-202-notes-ui-api.json', 'REQ-203': 'REQ-203-posts-api.json' }[id];
+  const replies = read<{ 'test-plan': [TestPlan]; 'test-generation': [GenerationOutput] }>(`examples/mock-replies/${id}.json`);
+  return { requirement: read<Requirement>(`examples/requirements/${file}`), plan: replies['test-plan'][0], generation: replies['test-generation'][0] };
+};
+
 export const NO_WAIT: RetryPolicy = { maxAttempts: 3, timeoutMs: 5_000, baseBackoffMs: 1, maxBackoffMs: 5 };
 
-/** A unique run id; removes its generated/ and .relynx/ folders on cleanup. */
+/** A unique run id; removes its generated/ and .agent/ folders on cleanup. */
 export function scratchRun(requirementId = 'REQ-101') {
   const runId = newRunId(requirementId);
   return {
     runId,
     cleanup: () => {
       rmSync(path.join(REPO_ROOT, 'generated', runId), { recursive: true, force: true });
-      rmSync(path.join(REPO_ROOT, '.relynx', 'runs', runId), { recursive: true, force: true });
+      rmSync(path.join(REPO_ROOT, '.agent', 'runs', runId), { recursive: true, force: true });
     },
   };
 }

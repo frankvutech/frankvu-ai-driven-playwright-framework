@@ -13,7 +13,7 @@ test.describe.configure({ mode: 'serial', timeout: 240_000 });
 let out: string;
 
 test.beforeAll(() => {
-  out = mkdtempSync(path.join(os.tmpdir(), 'relynx-eval-'));
+  out = mkdtempSync(path.join(os.tmpdir(), 'agent-eval-'));
 });
 
 test.afterAll(() => rmSync(out, { recursive: true, force: true }));
@@ -24,7 +24,7 @@ test('deterministic run: all gates pass, report validates, metadata is complete'
   expect(ReportSchema.safeParse(JSON.parse(readFileSync(path.join(dir, 'report.json'), 'utf8'))).success).toBe(true);
   expect(readFileSync(path.join(dir, 'summary.md'), 'utf8')).toContain('## Limitations');
   expect(report.gates.filter((g) => g.status === 'fail')).toEqual([]);
-  expect(report.metadata).toMatchObject({ mode: 'deterministic', datasetVersion: '2.0.0', promptVersion: '2.0.0', metricVersion: '3.0.0', provider: { name: 'mock' } });
+  expect(report.metadata).toMatchObject({ mode: 'deterministic', datasetVersion: '2.0.1', promptVersion: '3.0.0', metricVersion: '3.0.0', provider: { name: 'mock' } });
   expect(report.metadata.agent.commit).toMatch(/^[0-9a-f]{40}$|^unknown$/);
   // Deterministic, fixed-input metrics are pinned exactly; timing is not gated.
   const byId = Object.fromEntries(report.metrics.map((m) => [m.id, m]));
@@ -86,5 +86,5 @@ test('reports are sanitized of local paths and secrets', async () => {
 });
 
 test('functional mode refuses to execute without a named human approver', async () => {
-  await expect(runEvaluation({ mode: 'functional', outDir: out, approver: 'ci', env: {} })).rejects.toThrow('RELYNX_EVAL_APPROVER');
+  await expect(runEvaluation({ mode: 'functional', outDir: out, approver: 'ci', env: {} })).rejects.toThrow('AGENT_EVAL_APPROVER');
 });

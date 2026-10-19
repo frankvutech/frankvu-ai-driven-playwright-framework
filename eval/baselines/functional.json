@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
   "metadata": {
-    "runId": "eval-20261018T215601Z-functional-vhmai4",
-    "timestamp": "2026-10-18T21:56:01.648Z",
+    "runId": "eval-20261019T081218Z-functional-6dskdt",
+    "timestamp": "2026-10-19T08:12:18.785Z",
     "mode": "functional",
-    "datasetVersion": "2.0.0",
-    "datasetSha256": "da4be56d96709871d8aceb93eece3d6409345f51a7c14bba36ad321f474c4506",
+    "datasetVersion": "2.0.1",
+    "datasetSha256": "eb88dee33d630989ed392ced0e6831a3e207df6d3c3fa29e54703704bd3c9e77",
     "agent": {
-      "commit": "2fbfb3a0bb248643e93be8ee309aa94a88ece55c",
+      "commit": "dd141616fcaa8f751f9f22fca9f52a7ceacdc304",
       "dirty": true
     },
-    "promptVersion": "2.0.0",
-    "promptSha256": "79d0e70e6c999d1429df3b65c9df65833fbc667ab476889e45120308469ec917",
+    "promptVersion": "3.0.0",
+    "promptSha256": "52f2781252dddc0ed7bba2c77bac3c61283f86d17859f76017a3d14481262b94",
     "provider": {
       "name": "mock",
       "model": "pinned-dataset-specs",
@@ -28,7 +28,7 @@
       },
       "repeat": 1,
       "suites": "all",
-      "baseline": null
+      "baseline": "eval/baselines/functional.json"
     },
     "target": {
       "name": "saucedemo-public-demo",
@@ -44,16 +44,16 @@
       }
     },
     "executionRefs": [
-      ".relynx/runs/20261018T215601Z-REQ-301-c9d8on",
-      ".relynx/runs/20261018T215601Z-REQ-301-9106q5",
-      ".relynx/runs/20261018T215601Z-REQ-301-fwdyoq",
-      ".relynx/runs/20261018T215607Z-REQ-302-pczq2d",
-      ".relynx/runs/20261018T215610Z-REQ-302-lyzfuf",
-      ".relynx/runs/20261018T215613Z-REQ-302-mt08q4",
-      ".relynx/runs/20261018T215614Z-REQ-303-rh661w",
-      ".relynx/runs/20261018T215617Z-REQ-303-yiqpry",
-      ".relynx/runs/20261018T215619Z-REQ-303-6zd6bp",
-      ".relynx/runs/20261018T215623Z-REQ-304-1hd98v"
+      ".agent/runs/20261019T081218Z-REQ-301-liq9c4",
+      ".agent/runs/20261019T081218Z-REQ-301-r5821j",
+      ".agent/runs/20261019T081218Z-REQ-301-q214l5",
+      ".agent/runs/20261019T081224Z-REQ-302-ojh9yy",
+      ".agent/runs/20261019T081227Z-REQ-302-kqyfv8",
+      ".agent/runs/20261019T081230Z-REQ-302-6ml0lq",
+      ".agent/runs/20261019T081230Z-REQ-303-kdz6h0",
+      ".agent/runs/20261019T081234Z-REQ-303-u2l5w9",
+      ".agent/runs/20261019T081236Z-REQ-303-5mnxpu",
+      ".agent/runs/20261019T081240Z-REQ-304-o82sa5"
     ],
     "repeat": 1
   },
@@ -309,7 +309,7 @@
     },
     {
       "id": "latency.totalMedianMs",
-      "value": 8404,
+      "value": 8500,
       "unit": "ms",
       "kind": "measured",
       "higherIsBetter": false,
@@ -320,7 +320,7 @@
     },
     {
       "id": "latency.totalP90Ms",
-      "value": 12575,
+      "value": 12108,
       "unit": "ms",
       "kind": "measured",
       "higherIsBetter": false,
@@ -342,7 +342,7 @@
     },
     {
       "id": "latency.playwrightMedianMs",
-      "value": 7662,
+      "value": 7764,
       "unit": "ms",
       "kind": "measured",
       "higherIsBetter": false,
@@ -831,7 +831,7 @@
           "defectId": "D-LASTNAME",
           "expectedTestOutcome": "fail",
           "observedState": "failed",
-          "testStatus": "timedOut",
+          "testStatus": "failed",
           "diagnosis": {
             "category": "locator",
             "confidence": "medium",
@@ -932,10 +932,10 @@
         {
           "suiteId": "FS-SORT",
           "variant": "standard",
-          "runId": "20261018T215601Z-REQ-301-c9d8on",
+          "runId": "20261019T081218Z-REQ-301-liq9c4",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261018T215601Z-REQ-301-c9d8on",
+            "workflowId": "20261019T081218Z-REQ-301-liq9c4",
             "caseId": "FS-SORT/standard",
             "usage": [
               {
@@ -954,25 +954,25 @@
                 "provider": "mock",
                 "model": "mock",
                 "attempts": 1,
-                "latencyMs": 26,
+                "latencyMs": 27,
                 "inputTokens": 0,
                 "outputTokens": 0,
                 "tokensAvailable": false,
                 "outcome": "ok"
               }
             ],
-            "totalMs": 5900,
-            "playwrightMs": 3829,
+            "totalMs": 5643,
+            "playwrightMs": 3457,
             "succeeded": true
           }
         },
         {
           "suiteId": "FS-SORT",
           "variant": "problem",
-          "runId": "20261018T215601Z-REQ-301-9106q5",
+          "runId": "20261019T081218Z-REQ-301-r5821j",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261018T215601Z-REQ-301-9106q5",
+            "workflowId": "20261019T081218Z-REQ-301-r5821j",
             "caseId": "FS-SORT/problem",
             "usage": [
               {
@@ -998,18 +998,18 @@
                 "outcome": "ok"
               }
             ],
-            "totalMs": 11888,
-            "playwrightMs": 9807,
+            "totalMs": 11452,
+            "playwrightMs": 9250,
             "succeeded": true
           }
         },
         {
           "suiteId": "FS-SORT",
           "variant": "error",
-          "runId": "20261018T215601Z-REQ-301-fwdyoq",
+          "runId": "20261019T081218Z-REQ-301-q214l5",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261018T215601Z-REQ-301-fwdyoq",
+            "workflowId": "20261019T081218Z-REQ-301-q214l5",
             "caseId": "FS-SORT/error",
             "usage": [
               {
@@ -1028,25 +1028,25 @@
                 "provider": "mock",
                 "model": "mock",
                 "attempts": 1,
-                "latencyMs": 0,
+                "latencyMs": 1,
                 "inputTokens": 0,
                 "outputTokens": 0,
                 "tokensAvailable": false,
                 "outcome": "ok"
               }
             ],
-            "totalMs": 12575,
-            "playwrightMs": 10481,
+            "totalMs": 12108,
+            "playwrightMs": 9902,
             "succeeded": true
           }
         },
         {
           "suiteId": "FS-CART",
           "variant": "standard",
-          "runId": "20261018T215607Z-REQ-302-pczq2d",
+          "runId": "20261019T081224Z-REQ-302-ojh9yy",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261018T215607Z-REQ-302-pczq2d",
+            "workflowId": "20261019T081224Z-REQ-302-ojh9yy",
             "caseId": "FS-CART/standard",
             "usage": [
               {
@@ -1072,18 +1072,18 @@
                 "outcome": "ok"
               }
             ],
-            "totalMs": 3209,
-            "playwrightMs": 2751,
+            "totalMs": 3095,
+            "playwrightMs": 2591,
             "succeeded": true
           }
         },
         {
           "suiteId": "FS-CART",
           "variant": "problem",
-          "runId": "20261018T215610Z-REQ-302-lyzfuf",
+          "runId": "20261019T081227Z-REQ-302-kqyfv8",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261018T215610Z-REQ-302-lyzfuf",
+            "workflowId": "20261019T081227Z-REQ-302-kqyfv8",
             "caseId": "FS-CART/problem",
             "usage": [
               {
@@ -1091,7 +1091,7 @@
                 "provider": "mock",
                 "model": "mock",
                 "attempts": 1,
-                "latencyMs": 1,
+                "latencyMs": 0,
                 "inputTokens": 0,
                 "outputTokens": 0,
                 "tokensAvailable": false,
@@ -1102,25 +1102,25 @@
                 "provider": "mock",
                 "model": "mock",
                 "attempts": 1,
-                "latencyMs": 0,
+                "latencyMs": 1,
                 "inputTokens": 0,
                 "outputTokens": 0,
                 "tokensAvailable": false,
                 "outcome": "ok"
               }
             ],
-            "totalMs": 9205,
-            "playwrightMs": 8713,
+            "totalMs": 9134,
+            "playwrightMs": 8575,
             "succeeded": true
           }
         },
         {
           "suiteId": "FS-CART",
           "variant": "error",
-          "runId": "20261018T215613Z-REQ-302-mt08q4",
+          "runId": "20261019T081230Z-REQ-302-6ml0lq",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261018T215613Z-REQ-302-mt08q4",
+            "workflowId": "20261019T081230Z-REQ-302-6ml0lq",
             "caseId": "FS-CART/error",
             "usage": [
               {
@@ -1139,25 +1139,25 @@
                 "provider": "mock",
                 "model": "mock",
                 "attempts": 1,
-                "latencyMs": 1,
+                "latencyMs": 0,
                 "inputTokens": 0,
                 "outputTokens": 0,
                 "tokensAvailable": false,
                 "outcome": "ok"
               }
             ],
-            "totalMs": 10162,
-            "playwrightMs": 9031,
+            "totalMs": 9893,
+            "playwrightMs": 8764,
             "succeeded": true
           }
         },
         {
           "suiteId": "FS-CHECKOUT",
           "variant": "standard",
-          "runId": "20261018T215614Z-REQ-303-rh661w",
+          "runId": "20261019T081230Z-REQ-303-kdz6h0",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261018T215614Z-REQ-303-rh661w",
+            "workflowId": "20261019T081230Z-REQ-303-kdz6h0",
             "caseId": "FS-CHECKOUT/standard",
             "usage": [
               {
@@ -1165,7 +1165,7 @@
                 "provider": "mock",
                 "model": "mock",
                 "attempts": 1,
-                "latencyMs": 1,
+                "latencyMs": 0,
                 "inputTokens": 0,
                 "outputTokens": 0,
                 "tokensAvailable": false,
@@ -1176,25 +1176,25 @@
                 "provider": "mock",
                 "model": "mock",
                 "attempts": 1,
-                "latencyMs": 1,
+                "latencyMs": 0,
                 "inputTokens": 0,
                 "outputTokens": 0,
                 "tokensAvailable": false,
                 "outcome": "ok"
               }
             ],
-            "totalMs": 3514,
-            "playwrightMs": 3061,
+            "totalMs": 3319,
+            "playwrightMs": 2835,
             "succeeded": true
           }
         },
         {
           "suiteId": "FS-CHECKOUT",
           "variant": "problem",
-          "runId": "20261018T215617Z-REQ-303-yiqpry",
+          "runId": "20261019T081234Z-REQ-303-u2l5w9",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261018T215617Z-REQ-303-yiqpry",
+            "workflowId": "20261019T081234Z-REQ-303-u2l5w9",
             "caseId": "FS-CHECKOUT/problem",
             "usage": [
               {
@@ -1220,18 +1220,18 @@
                 "outcome": "ok"
               }
             ],
-            "totalMs": 17439,
-            "playwrightMs": 16961,
+            "totalMs": 13063,
+            "playwrightMs": 12573,
             "succeeded": true
           }
         },
         {
           "suiteId": "FS-CHECKOUT",
           "variant": "error",
-          "runId": "20261018T215619Z-REQ-303-6zd6bp",
+          "runId": "20261019T081236Z-REQ-303-5mnxpu",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261018T215619Z-REQ-303-6zd6bp",
+            "workflowId": "20261019T081236Z-REQ-303-5mnxpu",
             "caseId": "FS-CHECKOUT/error",
             "usage": [
               {
@@ -1239,7 +1239,7 @@
                 "provider": "mock",
                 "model": "mock",
                 "attempts": 1,
-                "latencyMs": 0,
+                "latencyMs": 1,
                 "inputTokens": 0,
                 "outputTokens": 0,
                 "tokensAvailable": false,
@@ -1257,18 +1257,18 @@
                 "outcome": "ok"
               }
             ],
-            "totalMs": 8404,
-            "playwrightMs": 7662,
+            "totalMs": 8500,
+            "playwrightMs": 7764,
             "succeeded": true
           }
         },
         {
           "suiteId": "FS-LOGIN",
           "variant": "standard",
-          "runId": "20261018T215623Z-REQ-304-1hd98v",
+          "runId": "20261019T081240Z-REQ-304-o82sa5",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261018T215623Z-REQ-304-1hd98v",
+            "workflowId": "20261019T081240Z-REQ-304-o82sa5",
             "caseId": "FS-LOGIN/standard",
             "usage": [
               {
@@ -1294,8 +1294,8 @@
                 "outcome": "ok"
               }
             ],
-            "totalMs": 7698,
-            "playwrightMs": 7172,
+            "totalMs": 7699,
+            "playwrightMs": 7202,
             "succeeded": true
           }
         }
@@ -1487,10 +1487,10 @@
         "latencyMs": {
           "total": {
             "n": 10,
-            "mean": 8999.4,
-            "median": 8404,
-            "p90": 12575,
-            "max": 17439,
+            "mean": 8390.6,
+            "median": 8500,
+            "p90": 12108,
+            "max": 13063,
             "sufficientForPercentiles": false
           },
           "model": {
@@ -1498,15 +1498,15 @@
             "mean": 4.5,
             "median": 0,
             "p90": 14,
-            "max": 27,
+            "max": 28,
             "sufficientForPercentiles": false
           },
           "playwright": {
             "n": 10,
-            "mean": 7946.8,
-            "median": 7662,
-            "p90": 10481,
-            "max": 16961,
+            "mean": 7291.3,
+            "median": 7764,
+            "p90": 9902,
+            "max": 12573,
             "sufficientForPercentiles": false
           }
         },
@@ -1522,7 +1522,7 @@
       },
       "workflows": [
         {
-          "workflowId": "20261018T215601Z-REQ-301-c9d8on",
+          "workflowId": "20261019T081218Z-REQ-301-liq9c4",
           "caseId": "FS-SORT/standard",
           "usage": [
             {
@@ -1541,19 +1541,19 @@
               "provider": "mock",
               "model": "mock",
               "attempts": 1,
-              "latencyMs": 26,
+              "latencyMs": 27,
               "inputTokens": 0,
               "outputTokens": 0,
               "tokensAvailable": false,
               "outcome": "ok"
             }
           ],
-          "totalMs": 5900,
-          "playwrightMs": 3829,
+          "totalMs": 5643,
+          "playwrightMs": 3457,
           "succeeded": true
         },
         {
-          "workflowId": "20261018T215601Z-REQ-301-9106q5",
+          "workflowId": "20261019T081218Z-REQ-301-r5821j",
           "caseId": "FS-SORT/problem",
           "usage": [
             {
@@ -1579,12 +1579,12 @@
               "outcome": "ok"
             }
           ],
-          "totalMs": 11888,
-          "playwrightMs": 9807,
+          "totalMs": 11452,
+          "playwrightMs": 9250,
           "succeeded": true
         },
         {
-          "workflowId": "20261018T215601Z-REQ-301-fwdyoq",
+          "workflowId": "20261019T081218Z-REQ-301-q214l5",
           "caseId": "FS-SORT/error",
           "usage": [
             {
@@ -1603,19 +1603,19 @@
               "provider": "mock",
               "model": "mock",
               "attempts": 1,
-              "latencyMs": 0,
+              "latencyMs": 1,
               "inputTokens": 0,
               "outputTokens": 0,
               "tokensAvailable": false,
               "outcome": "ok"
             }
           ],
-          "totalMs": 12575,
-          "playwrightMs": 10481,
+          "totalMs": 12108,
+          "playwrightMs": 9902,
           "succeeded": true
         },
         {
-          "workflowId": "20261018T215607Z-REQ-302-pczq2d",
+          "workflowId": "20261019T081224Z-REQ-302-ojh9yy",
           "caseId": "FS-CART/standard",
           "usage": [
             {
@@ -1641,12 +1641,12 @@
               "outcome": "ok"
             }
           ],
-          "totalMs": 3209,
-          "playwrightMs": 2751,
+          "totalMs": 3095,
+          "playwrightMs": 2591,
           "succeeded": true
         },
         {
-          "workflowId": "20261018T215610Z-REQ-302-lyzfuf",
+          "workflowId": "20261019T081227Z-REQ-302-kqyfv8",
           "caseId": "FS-CART/problem",
           "usage": [
             {
@@ -1654,7 +1654,7 @@
               "provider": "mock",
               "model": "mock",
               "attempts": 1,
-              "latencyMs": 1,
+              "latencyMs": 0,
               "inputTokens": 0,
               "outputTokens": 0,
               "tokensAvailable": false,
@@ -1665,19 +1665,19 @@
               "provider": "mock",
               "model": "mock",
               "attempts": 1,
-              "latencyMs": 0,
+              "latencyMs": 1,
               "inputTokens": 0,
               "outputTokens": 0,
               "tokensAvailable": false,
               "outcome": "ok"
             }
           ],
-          "totalMs": 9205,
-          "playwrightMs": 8713,
+          "totalMs": 9134,
+          "playwrightMs": 8575,
           "succeeded": true
         },
         {
-          "workflowId": "20261018T215613Z-REQ-302-mt08q4",
+          "workflowId": "20261019T081230Z-REQ-302-6ml0lq",
           "caseId": "FS-CART/error",
           "usage": [
             {
@@ -1696,19 +1696,19 @@
               "provider": "mock",
               "model": "mock",
               "attempts": 1,
-              "latencyMs": 1,
+              "latencyMs": 0,
               "inputTokens": 0,
               "outputTokens": 0,
               "tokensAvailable": false,
               "outcome": "ok"
             }
           ],
-          "totalMs": 10162,
-          "playwrightMs": 9031,
+          "totalMs": 9893,
+          "playwrightMs": 8764,
           "succeeded": true
         },
         {
-          "workflowId": "20261018T215614Z-REQ-303-rh661w",
+          "workflowId": "20261019T081230Z-REQ-303-kdz6h0",
           "caseId": "FS-CHECKOUT/standard",
           "usage": [
             {
@@ -1716,7 +1716,7 @@
               "provider": "mock",
               "model": "mock",
               "attempts": 1,
-              "latencyMs": 1,
+              "latencyMs": 0,
               "inputTokens": 0,
               "outputTokens": 0,
               "tokensAvailable": false,
@@ -1727,19 +1727,19 @@
               "provider": "mock",
               "model": "mock",
               "attempts": 1,
-              "latencyMs": 1,
+              "latencyMs": 0,
               "inputTokens": 0,
               "outputTokens": 0,
               "tokensAvailable": false,
               "outcome": "ok"
             }
           ],
-          "totalMs": 3514,
-          "playwrightMs": 3061,
+          "totalMs": 3319,
+          "playwrightMs": 2835,
           "succeeded": true
         },
         {
-          "workflowId": "20261018T215617Z-REQ-303-yiqpry",
+          "workflowId": "20261019T081234Z-REQ-303-u2l5w9",
           "caseId": "FS-CHECKOUT/problem",
           "usage": [
             {
@@ -1765,12 +1765,12 @@
               "outcome": "ok"
             }
           ],
-          "totalMs": 17439,
-          "playwrightMs": 16961,
+          "totalMs": 13063,
+          "playwrightMs": 12573,
           "succeeded": true
         },
         {
-          "workflowId": "20261018T215619Z-REQ-303-6zd6bp",
+          "workflowId": "20261019T081236Z-REQ-303-5mnxpu",
           "caseId": "FS-CHECKOUT/error",
           "usage": [
             {
@@ -1778,7 +1778,7 @@
               "provider": "mock",
               "model": "mock",
               "attempts": 1,
-              "latencyMs": 0,
+              "latencyMs": 1,
               "inputTokens": 0,
               "outputTokens": 0,
               "tokensAvailable": false,
@@ -1796,12 +1796,12 @@
               "outcome": "ok"
             }
           ],
-          "totalMs": 8404,
-          "playwrightMs": 7662,
+          "totalMs": 8500,
+          "playwrightMs": 7764,
           "succeeded": true
         },
         {
-          "workflowId": "20261018T215623Z-REQ-304-1hd98v",
+          "workflowId": "20261019T081240Z-REQ-304-o82sa5",
           "caseId": "FS-LOGIN/standard",
           "usage": [
             {
@@ -1827,11 +1827,266 @@
               "outcome": "ok"
             }
           ],
-          "totalMs": 7698,
-          "playwrightMs": 7172,
+          "totalMs": 7699,
+          "playwrightMs": 7202,
           "succeeded": true
         }
       ]
+    },
+    "comparison": {
+      "before": {
+        "runId": "eval-20261018T215601Z-functional-vhmai4",
+        "datasetVersion": "2.0.0",
+        "commit": "2fbfb3a0bb248643e93be8ee309aa94a88ece55c",
+        "mode": "functional"
+      },
+      "after": {
+        "runId": "eval-20261019T081218Z-functional-6dskdt",
+        "datasetVersion": "2.0.1",
+        "commit": "dd141616fcaa8f751f9f22fca9f52a7ceacdc304",
+        "mode": "functional"
+      },
+      "comparable": true,
+      "notes": [
+        "dataset changed 2.0.0 -> 2.0.1: differences may come from the dataset"
+      ],
+      "changes": [
+        {
+          "id": "cost.inputTokens",
+          "kind": "measured",
+          "gate": "none",
+          "before": null,
+          "after": null,
+          "delta": null,
+          "direction": "unchanged"
+        },
+        {
+          "id": "cost.medianPerWorkflowUsd",
+          "kind": "measured",
+          "gate": "none",
+          "before": null,
+          "after": null,
+          "delta": null,
+          "direction": "unchanged"
+        },
+        {
+          "id": "cost.modelCalls",
+          "kind": "measured",
+          "gate": "none",
+          "before": 20,
+          "after": 20,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "cost.outputTokens",
+          "kind": "measured",
+          "gate": "none",
+          "before": null,
+          "after": null,
+          "delta": null,
+          "direction": "unchanged"
+        },
+        {
+          "id": "cost.perSuccessfulWorkflowUsd",
+          "kind": "measured",
+          "gate": "none",
+          "before": null,
+          "after": null,
+          "delta": null,
+          "direction": "unchanged"
+        },
+        {
+          "id": "cost.retryOverhead",
+          "kind": "measured",
+          "gate": "none",
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "cost.workflowFailureRate",
+          "kind": "measured",
+          "gate": "none",
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "cost.workflows",
+          "kind": "measured",
+          "gate": "none",
+          "before": 10,
+          "after": 10,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.agreementWithReference",
+          "kind": "measured",
+          "gate": "exact",
+          "before": 0.8275862068965517,
+          "after": 0.8275862068965517,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.detection.falseNegatives",
+          "kind": "measured",
+          "gate": "exact",
+          "before": 4,
+          "after": 4,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.detection.falsePositiveRate",
+          "kind": "measured",
+          "gate": "none",
+          "before": 0.07142857142857142,
+          "after": 0.07142857142857142,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.detection.falsePositives",
+          "kind": "measured",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.detection.inconclusive",
+          "kind": "measured",
+          "gate": "exact",
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.detection.recall",
+          "kind": "measured",
+          "gate": "none",
+          "before": 0.7333333333333333,
+          "after": 0.7333333333333333,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.detection.trueNegatives",
+          "kind": "measured",
+          "gate": "exact",
+          "before": 13,
+          "after": 13,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.detection.truePositives",
+          "kind": "measured",
+          "gate": "exact",
+          "before": 11,
+          "after": 11,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.diagnosis.falseNegatives",
+          "kind": "measured",
+          "gate": "exact",
+          "before": 9,
+          "after": 9,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.diagnosis.falsePositives",
+          "kind": "measured",
+          "gate": "exact",
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.diagnosis.trueNegatives",
+          "kind": "measured",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.diagnosis.truePositives",
+          "kind": "measured",
+          "gate": "exact",
+          "before": 2,
+          "after": 2,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.falseNegativesFlaggedByAssertionRules",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.passOnDefectFreeControl",
+          "kind": "measured",
+          "gate": "exact",
+          "before": 0.9090909090909091,
+          "after": 0.9090909090909091,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "latency.modelMedianMs",
+          "kind": "measured",
+          "gate": "none",
+          "before": null,
+          "after": null,
+          "delta": null,
+          "direction": "unchanged"
+        },
+        {
+          "id": "latency.playwrightMedianMs",
+          "kind": "measured",
+          "gate": "none",
+          "before": 7662,
+          "after": 7764,
+          "delta": 102,
+          "direction": "regressed"
+        },
+        {
+          "id": "latency.totalMedianMs",
+          "kind": "measured",
+          "gate": "none",
+          "before": 8404,
+          "after": 8500,
+          "delta": 96,
+          "direction": "regressed"
+        },
+        {
+          "id": "latency.totalP90Ms",
+          "kind": "measured",
+          "gate": "none",
+          "before": 12575,
+          "after": 12108,
+          "delta": -467,
+          "direction": "improved"
+        }
+      ],
+      "gatedRegressions": []
     }
   },
   "findings": [
@@ -1918,12 +2173,6 @@
       "id": "FS-CHECKOUT/error/REQ-303-SC-02",
       "detail": "seeded defect D-LASTNAME-VALIDATION, analysis said locator",
       "source": "measured"
-    },
-    {
-      "type": "latency-outlier",
-      "id": "FS-CHECKOUT/problem",
-      "detail": "17439 ms vs median 8404 ms",
-      "source": "measured"
     }
   ],
   "gates": [
@@ -1934,8 +2183,8 @@
     },
     {
       "name": "baseline-regression",
-      "status": "not-applicable",
-      "detail": "no baseline given"
+      "status": "pass",
+      "detail": "no gated regressions vs eval-20261018T215601Z-functional-vhmai4"
     },
     {
       "name": "report-schema",

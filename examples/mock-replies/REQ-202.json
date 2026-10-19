@@ -1,0 +1,195 @@
+{
+  "test-plan": [
+    {
+      "requirementId": "REQ-202",
+      "scenarios": [
+        {
+          "id": "REQ-202-SC-01",
+          "requirementId": "REQ-202",
+          "acceptanceCriteriaIds": [
+            "AC-1"
+          ],
+          "title": "API-created note is listed in the UI",
+          "objective": "API-created note is listed in the UI",
+          "type": "positive",
+          "layer": "combined",
+          "priority": "high",
+          "priorityRationale": "core behaviour",
+          "preconditions": [],
+          "steps": [
+            "create via API",
+            "open notes page"
+          ],
+          "testData": [],
+          "expectedOutcomes": [
+            "note listed"
+          ],
+          "assumptions": [],
+          "openQuestions": []
+        },
+        {
+          "id": "REQ-202-SC-02",
+          "requirementId": "REQ-202",
+          "acceptanceCriteriaIds": [
+            "AC-2"
+          ],
+          "title": "UI-added note is returned by the API",
+          "objective": "UI-added note is returned by the API",
+          "type": "positive",
+          "layer": "combined",
+          "priority": "high",
+          "priorityRationale": "core behaviour",
+          "preconditions": [],
+          "steps": [
+            "sign in",
+            "add note in UI",
+            "list via API"
+          ],
+          "testData": [],
+          "expectedOutcomes": [
+            "note in API list"
+          ],
+          "assumptions": [],
+          "openQuestions": []
+        }
+      ],
+      "ambiguities": [],
+      "uncoveredAcceptanceCriteria": []
+    }
+  ],
+  "test-generation": [
+    {
+      "tests": [
+        {
+          "scenarioId": "REQ-202-SC-01",
+          "requirementId": "REQ-202",
+          "title": "a note created through the API is listed on the notes page",
+          "layer": "combined",
+          "startSignedIn": false,
+          "steps": [
+            {
+              "kind": "apiCall",
+              "saveAs": "r1",
+              "client": "notes",
+              "as": "alice",
+              "method": "create",
+              "args": [
+                {
+                  "kind": "note",
+                  "title": {
+                    "kind": "prefixed",
+                    "suffix": "From the API"
+                  },
+                  "body": null
+                }
+              ]
+            },
+            {
+              "kind": "expectStatus",
+              "response": "r1",
+              "status": 201
+            },
+            {
+              "kind": "signIn",
+              "as": "alice"
+            },
+            {
+              "kind": "action",
+              "target": "notesPage.goto",
+              "args": []
+            },
+            {
+              "kind": "expect",
+              "target": "notesPage.note",
+              "locatorArgs": [
+                {
+                  "kind": "prefixed",
+                  "suffix": "From the API"
+                }
+              ],
+              "select": "all",
+              "matcher": "toBeVisible",
+              "expected": null,
+              "negate": false
+            }
+          ]
+        },
+        {
+          "scenarioId": "REQ-202-SC-02",
+          "requirementId": "REQ-202",
+          "title": "a note added on the notes page is returned by the API",
+          "layer": "combined",
+          "startSignedIn": false,
+          "steps": [
+            {
+              "kind": "signIn",
+              "as": "alice"
+            },
+            {
+              "kind": "action",
+              "target": "notesPage.goto",
+              "args": []
+            },
+            {
+              "kind": "action",
+              "target": "notesPage.addNote",
+              "args": [
+                {
+                  "kind": "prefixed",
+                  "suffix": "From the UI"
+                },
+                {
+                  "kind": "literal",
+                  "value": "Typed in the browser"
+                }
+              ]
+            },
+            {
+              "kind": "expect",
+              "target": "notesPage.note",
+              "locatorArgs": [
+                {
+                  "kind": "prefixed",
+                  "suffix": "From the UI"
+                }
+              ],
+              "select": "all",
+              "matcher": "toBeVisible",
+              "expected": null,
+              "negate": false
+            },
+            {
+              "kind": "apiCall",
+              "saveAs": "r1",
+              "client": "notes",
+              "as": "alice",
+              "method": "list",
+              "args": []
+            },
+            {
+              "kind": "expectStatus",
+              "response": "r1",
+              "status": 200
+            },
+            {
+              "kind": "expectBody",
+              "response": "r1",
+              "schema": "NoteList",
+              "field": "*.title",
+              "matcher": "toContain",
+              "expected": {
+                "kind": "text",
+                "text": {
+                  "kind": "prefixed",
+                  "suffix": "From the UI"
+                }
+              },
+              "negate": false
+            }
+          ]
+        }
+      ],
+      "missingCapabilities": []
+    }
+  ]
+}

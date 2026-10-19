@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generationArea": "generated",
-  "runsArea": ".relynx/runs",
+  "runsArea": ".agent/runs",
   "maxScenariosPerRun": 10,
   "approvedTargets": [
     {
@@ -29,7 +29,10 @@
     "CI",
     "PLAYWRIGHT_BROWSERS_PATH",
     "UI_BASE_URL",
-    "SAUCE_PASSWORD"
+    "SAUCE_PASSWORD",
+    "API_BASE_URL",
+    "EXAMPLE_APP_URL",
+    "EXAMPLE_APP_PASSWORD"
   ],
   "sessionVariants": {
     "standard": {
@@ -44,5 +47,31 @@
       "user": "error",
       "purpose": "seeded defects (demo site's intentionally broken account)"
     }
+  },
+  "apiTargets": [
+    {
+      "name": "jsonplaceholder-public-demo",
+      "baseUrl": "https://jsonplaceholder.typicode.com",
+      "kind": "test"
+    }
+  ],
+  "exampleApp": {
+    "approvedUrls": [],
+    "variants": [
+      "standard",
+      "renamed-add-button",
+      "intermittent-slow-list",
+      "broken-create"
+    ]
+  },
+  "healing": {
+    "reproduceRuns": 3,
+    "verifyRuns": 3,
+    "maxWaitTimeoutMs": 15000,
+    "maxChanges": 2,
+    "patchableRoots": [
+      "src/pages/",
+      "src/components/"
+    ]
   }
 }

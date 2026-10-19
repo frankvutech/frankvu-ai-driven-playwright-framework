@@ -2,7 +2,7 @@
  * Version of the prompt templates. Bump it whenever a system prompt or prompt
  * builder changes, so evaluation reports can be compared across versions.
  */
-export const PROMPT_VERSION = '2.0.0';
+export const PROMPT_VERSION = '3.0.0';
 
 /** Wrap untrusted content so the model can tell data from instructions. */
 export function asData(tag: string, value: unknown): string {

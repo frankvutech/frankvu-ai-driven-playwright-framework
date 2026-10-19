@@ -1,3 +1,4 @@
+import { agentProjectFor } from '../execution/adapter';
 import type { Requirement } from '../domain/requirement';
 import type { PlanValidation, TestPlan } from '../domain/plan';
 import type { RunEvidence } from '../domain/result';
@@ -49,7 +50,7 @@ export function buildReport(store: RunStore): RunReport {
     coverage: check?.coverage,
     scenarios: (plan?.scenarios ?? []).map((s) => {
       const artifact = manifest.artifacts.find((a) => a.scenarioId === s.id);
-      const test = evidence?.tests.find((t) => t.scenarioId === s.id && t.project === 'agent-generated');
+      const test = evidence?.tests.find((t) => t.scenarioId === s.id && artifact !== undefined && t.project === agentProjectFor(artifact.file));
       const analysis = analyses.find((a) => a.scenarioId === s.id);
       return {
         id: s.id,
@@ -83,7 +84,7 @@ const cell = (s: unknown) => String(s ?? '').replace(/\|/g, '\\|').replace(/\n/g
 
 export function renderMarkdown(r: RunReport, manifest: RunManifest, analyses: FailureAnalysis[]): string {
   const lines: string[] = [];
-  lines.push(`# Relynx run ${r.runId}`, '', `**Status:** ${r.status}`, '');
+  lines.push(`# Agent run ${r.runId}`, '', `**Status:** ${r.status}`, '');
   if (r.requirement) {
     lines.push(`## Requirement ${r.requirement.id}: ${r.requirement.title}`, '');
     for (const ac of r.requirement.acceptanceCriteria) lines.push(`- **${ac.id}** ${ac.text}`);

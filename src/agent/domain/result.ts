@@ -50,6 +50,8 @@ export const RunEvidenceSchema = z.object({
     baseUrlHost: z.string(),
     /** Demo account variant used for the signed-in session (absent in older evidence). */
     sessionVariant: z.string().optional(),
+    /** Example-app failure mode (absent in older evidence). */
+    exampleAppVariant: z.string().optional(),
     playwrightVersion: z.string(),
     node: z.string(),
     platform: z.string(),

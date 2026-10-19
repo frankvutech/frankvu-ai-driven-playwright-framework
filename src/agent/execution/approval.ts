@@ -19,7 +19,7 @@ export type Approval = z.infer<typeof ApprovalSchema>;
 export const APPROVAL_FILE = 'approval.json';
 
 /** Names that identify automation rather than a person. */
-const NON_HUMAN = /^(relynx|relynx-agent|agent|ai|bot|ci|claude|llm|model|automation|github-actions)(\b|$)/i;
+const NON_HUMAN = /^(test-agent|agent|ai|bot|ci|claude|llm|model|automation|github-actions)(\b|$)/i;
 
 export function isAcceptableApprover(name: string): boolean {
   const n = name.trim();

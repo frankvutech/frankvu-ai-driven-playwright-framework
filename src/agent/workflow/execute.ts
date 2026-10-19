@@ -4,7 +4,7 @@ import { recordOutcome, transition } from '../domain/state';
 import type { LlmProvider } from '../llm/provider';
 import type { UsageRecord } from '../llm/structured';
 import { readApproval } from '../execution/approval';
-import { executeApproved, type Spawner } from '../execution/adapter';
+import { agentProjectFor, executeApproved, type Spawner } from '../execution/adapter';
 import type { Policy } from '../execution/policy';
 import { collectEvidence } from '../evidence/collect';
 import { knownSecrets } from '../evidence/redact';
@@ -22,6 +22,8 @@ export interface ExecuteDeps {
   analysisProvider?: LlmProvider;
   /** Session variant from the policy (default "standard"). */
   variant?: string;
+  /** Example-app failure mode from the policy (default "standard"). */
+  exampleAppVariant?: string;
   now?: () => Date;
 }
 
@@ -56,6 +58,7 @@ export async function executeRun(store: RunStore, deps: ExecuteDeps): Promise<Ru
     env: deps.env,
     spawner: deps.spawner,
     variant: deps.variant,
+    exampleAppVariant: deps.exampleAppVariant,
   });
 
   if (!result.executed) {
@@ -79,6 +82,7 @@ export async function executeRun(store: RunStore, deps: ExecuteDeps): Promise<Ru
     finishedAt: result.finishedAt,
     target: result.target,
     sessionVariant: result.variant,
+    exampleAppVariant: result.exampleAppVariant,
     runner: { exitCode: result.spawn.exitCode, timedOut: result.spawn.timedOut, stderr: result.spawn.stderr },
     secrets,
   });
@@ -87,7 +91,8 @@ export async function executeRun(store: RunStore, deps: ExecuteDeps): Promise<Ru
 
   manifest.artifacts = manifest.artifacts.map((a) => {
     if (a.state !== 'executed') return a;
-    const match = evidence.tests.find((t) => t.project === 'agent-generated' && t.scenarioId === a.scenarioId && t.file.endsWith(`${a.scenarioId}.spec.ts`));
+    const fileName = a.file.split('/').pop()!;
+    const match = evidence.tests.find((t) => t.project === agentProjectFor(a.file) && t.scenarioId === a.scenarioId && (t.file === fileName || t.file.endsWith(`/${fileName}`)));
     return recordOutcome(a, match, now());
   });
 
@@ -98,7 +103,7 @@ export async function executeRun(store: RunStore, deps: ExecuteDeps): Promise<Ru
   for (const test of evidence.tests.filter((t) => t.status === 'failed' || t.status === 'timedOut' || t.status === 'interrupted')) {
     const scenario = plan?.scenarios.find((s) => s.id === test.scenarioId);
     const acs = req?.acceptanceCriteria.filter((ac) => scenario?.acceptanceCriteriaIds.includes(ac.id)) ?? [];
-    let analysis = classifyFailure(test, { acceptanceCriteriaText: acs.map((a) => a.text).join('\n') }, evidence);
+    let analysis = classifyFailure(test, { acceptanceCriteriaText: acs.map((a) => a.text).join('\n'), repoRoot: store.repoRoot }, evidence);
     if (deps.analysisProvider) {
       const refined = await refineWithModel(deps.analysisProvider, analysis, { scenario, acceptanceCriteria: acs });
       analysis = refined.analysis;

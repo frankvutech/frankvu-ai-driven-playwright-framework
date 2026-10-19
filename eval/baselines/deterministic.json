@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
   "metadata": {
-    "runId": "eval-20261018T215547Z-deterministic-v4yvpl",
-    "timestamp": "2026-10-18T21:55:47.669Z",
+    "runId": "eval-20261019T081120Z-deterministic-8qaigs",
+    "timestamp": "2026-10-19T08:11:20.034Z",
     "mode": "deterministic",
-    "datasetVersion": "2.0.0",
-    "datasetSha256": "da4be56d96709871d8aceb93eece3d6409345f51a7c14bba36ad321f474c4506",
+    "datasetVersion": "2.0.1",
+    "datasetSha256": "eb88dee33d630989ed392ced0e6831a3e207df6d3c3fa29e54703704bd3c9e77",
     "agent": {
-      "commit": "2fbfb3a0bb248643e93be8ee309aa94a88ece55c",
+      "commit": "dd141616fcaa8f751f9f22fca9f52a7ceacdc304",
       "dirty": true
     },
-    "promptVersion": "2.0.0",
-    "promptSha256": "79d0e70e6c999d1429df3b65c9df65833fbc667ab476889e45120308469ec917",
+    "promptVersion": "3.0.0",
+    "promptSha256": "52f2781252dddc0ed7bba2c77bac3c61283f86d17859f76017a3d14481262b94",
     "provider": {
       "name": "mock",
       "model": "recorded-dataset-outputs",
@@ -28,7 +28,7 @@
       },
       "repeat": 1,
       "suites": "all",
-      "baseline": null
+      "baseline": "eval/baselines/deterministic.json"
     },
     "target": {
       "name": "saucedemo-public-demo",
@@ -515,7 +515,7 @@
     },
     {
       "id": "recovery.meanRecoveryLatencyMs",
-      "value": 21.5,
+      "value": 24,
       "unit": "ms",
       "kind": "measured",
       "higherIsBetter": false,
@@ -624,7 +624,7 @@
             "provider": "mock",
             "model": "mock",
             "attempts": 1,
-            "latencyMs": 1,
+            "latencyMs": 0,
             "inputTokens": 0,
             "outputTokens": 0,
             "tokensAvailable": false,
@@ -649,6 +649,7 @@
                   "text": "Given a wrong password, when the shopper signs in, then the error \"Epic sadface: Username and password do not match any user in this service\" is shown."
                 }
               ],
+              "application": "storefront",
               "source": "examples/requirements (synthetic example for the saucedemo.com demo target)"
             },
             "traceableScenarios": [
@@ -661,6 +662,7 @@
                 "title": "Standard user signs in and sees the product list",
                 "objective": "Verify a valid account reaches the catalogue",
                 "type": "positive",
+                "layer": "ui",
                 "priority": "high",
                 "priorityRationale": "Sign-in gates every other journey",
                 "preconditions": [
@@ -689,6 +691,7 @@
                 "title": "Locked-out user is refused",
                 "objective": "Verify locked accounts cannot sign in",
                 "type": "authorization",
+                "layer": "ui",
                 "priority": "high",
                 "priorityRationale": "Access control",
                 "preconditions": [
@@ -717,6 +720,7 @@
                 "title": "Wrong password is rejected",
                 "objective": "Verify invalid credentials are refused",
                 "type": "negative",
+                "layer": "ui",
                 "priority": "medium",
                 "priorityRationale": "Common error path",
                 "preconditions": [
@@ -805,7 +809,8 @@
                   "id": "AC-2",
                   "text": "Removing the last product hides the badge."
                 }
-              ]
+              ],
+              "application": "storefront"
             },
             "traceableScenarios": [
               {
@@ -817,6 +822,7 @@
                 "title": "Badge shows 1 after adding one product",
                 "objective": "Badge shows 1 after adding one product",
                 "type": "positive",
+                "layer": "ui",
                 "priority": "medium",
                 "priorityRationale": "per acceptance criterion",
                 "preconditions": [],
@@ -839,6 +845,7 @@
                 "title": "Badge disappears when the last product is removed",
                 "objective": "Badge disappears when the last product is removed",
                 "type": "boundary",
+                "layer": "ui",
                 "priority": "medium",
                 "priorityRationale": "per acceptance criterion",
                 "preconditions": [],
@@ -899,7 +906,7 @@
             "provider": "mock",
             "model": "mock",
             "attempts": 1,
-            "latencyMs": 1,
+            "latencyMs": 0,
             "inputTokens": 0,
             "outputTokens": 0,
             "tokensAvailable": false,
@@ -915,7 +922,8 @@
                   "id": "AC-1",
                   "text": "A signed-out visitor opening /inventory.html sees the error \"Epic sadface: You can only access '/inventory.html' when you are logged in.\""
                 }
-              ]
+              ],
+              "application": "storefront"
             },
             "traceableScenarios": [
               {
@@ -927,6 +935,7 @@
                 "title": "Signed-out visitor cannot open the inventory",
                 "objective": "Signed-out visitor cannot open the inventory",
                 "type": "authorization",
+                "layer": "ui",
                 "priority": "medium",
                 "priorityRationale": "per acceptance criterion",
                 "preconditions": [],
@@ -1012,7 +1021,8 @@
                   "id": "AC-1",
                   "text": "Choosing Price (low to high) sorts products appropriately."
                 }
-              ]
+              ],
+              "application": "storefront"
             },
             "traceableScenarios": [
               {
@@ -1024,6 +1034,7 @@
                 "title": "Price low to high orders prices ascending",
                 "objective": "Price low to high orders prices ascending",
                 "type": "positive",
+                "layer": "ui",
                 "priority": "medium",
                 "priorityRationale": "per acceptance criterion",
                 "preconditions": [],
@@ -1110,7 +1121,8 @@
                   "id": "AC-1",
                   "text": "Choosing Price (low to high) sorts products appropriately."
                 }
-              ]
+              ],
+              "application": "storefront"
             },
             "traceableScenarios": [
               {
@@ -1122,6 +1134,7 @@
                 "title": "Price low to high",
                 "objective": "Price low to high",
                 "type": "positive",
+                "layer": "ui",
                 "priority": "medium",
                 "priorityRationale": "per acceptance criterion",
                 "preconditions": [],
@@ -1364,7 +1377,7 @@
             "provider": "mock",
             "model": "mock",
             "attempts": 1,
-            "latencyMs": 1,
+            "latencyMs": 0,
             "inputTokens": 0,
             "outputTokens": 0,
             "tokensAvailable": false,
@@ -1389,6 +1402,7 @@
                   "text": "Given a wrong password, when the shopper signs in, then the error \"Epic sadface: Username and password do not match any user in this service\" is shown."
                 }
               ],
+              "application": "storefront",
               "source": "examples/requirements (synthetic example for the saucedemo.com demo target)"
             },
             "traceableScenarios": [
@@ -1401,6 +1415,7 @@
                 "title": "Standard user signs in and sees the product list",
                 "objective": "Verify a valid account reaches the catalogue",
                 "type": "positive",
+                "layer": "ui",
                 "priority": "high",
                 "priorityRationale": "Sign-in gates every other journey",
                 "preconditions": [
@@ -1429,6 +1444,7 @@
                 "title": "Locked-out user is refused",
                 "objective": "Verify locked accounts cannot sign in",
                 "type": "authorization",
+                "layer": "ui",
                 "priority": "high",
                 "priorityRationale": "Access control",
                 "preconditions": [
@@ -1457,6 +1473,7 @@
                 "title": "Wrong password is rejected",
                 "objective": "Verify invalid credentials are refused",
                 "type": "negative",
+                "layer": "ui",
                 "priority": "medium",
                 "priorityRationale": "Common error path",
                 "preconditions": [
@@ -1523,7 +1540,7 @@
             "provider": "mock",
             "model": "mock",
             "attempts": 1,
-            "latencyMs": 0,
+            "latencyMs": 1,
             "inputTokens": 0,
             "outputTokens": 0,
             "tokensAvailable": false,
@@ -1624,7 +1641,7 @@
             "provider": "mock",
             "model": "mock",
             "attempts": 1,
-            "latencyMs": 0,
+            "latencyMs": 1,
             "inputTokens": 0,
             "outputTokens": 0,
             "tokensAvailable": false,
@@ -1689,7 +1706,8 @@
                   "id": "AC-1",
                   "text": "A locked-out user sees \"Epic sadface: Sorry, this user has been locked out.\""
                 }
-              ]
+              ],
+              "application": "storefront"
             },
             "traceableScenarios": [
               {
@@ -1701,6 +1719,7 @@
                 "title": "Locked-out user is refused",
                 "objective": "Locked-out user is refused",
                 "type": "authorization",
+                "layer": "ui",
                 "priority": "medium",
                 "priorityRationale": "per acceptance criterion",
                 "preconditions": [],
@@ -1828,7 +1847,8 @@
                   "id": "AC-6",
                   "text": "Finishing shows \"Thank you for your order!\"."
                 }
-              ]
+              ],
+              "application": "storefront"
             },
             "traceableScenarios": [
               {
@@ -1841,6 +1861,7 @@
                 "title": "Valid details open the overview with the right item total",
                 "objective": "Valid details open the overview with the right item total",
                 "type": "positive",
+                "layer": "ui",
                 "priority": "medium",
                 "priorityRationale": "per acceptance criterion",
                 "preconditions": [],
@@ -1864,6 +1885,7 @@
                 "title": "Missing first name is rejected",
                 "objective": "Missing first name is rejected",
                 "type": "negative",
+                "layer": "ui",
                 "priority": "medium",
                 "priorityRationale": "per acceptance criterion",
                 "preconditions": [],
@@ -1886,6 +1908,7 @@
                 "title": "Missing last name is rejected",
                 "objective": "Missing last name is rejected",
                 "type": "negative",
+                "layer": "ui",
                 "priority": "medium",
                 "priorityRationale": "per acceptance criterion",
                 "preconditions": [],
@@ -1908,6 +1931,7 @@
                 "title": "Missing postal code is rejected",
                 "objective": "Missing postal code is rejected",
                 "type": "negative",
+                "layer": "ui",
                 "priority": "medium",
                 "priorityRationale": "per acceptance criterion",
                 "preconditions": [],
@@ -1930,6 +1954,7 @@
                 "title": "Finishing confirms the order",
                 "objective": "Finishing confirms the order",
                 "type": "positive",
+                "layer": "ui",
                 "priority": "medium",
                 "priorityRationale": "per acceptance criterion",
                 "preconditions": [],
@@ -1985,7 +2010,7 @@
             "provider": "mock",
             "model": "mock",
             "attempts": 1,
-            "latencyMs": 0,
+            "latencyMs": 1,
             "inputTokens": 0,
             "outputTokens": 0,
             "tokensAvailable": false,
@@ -2021,7 +2046,8 @@
                   "id": "AC-6",
                   "text": "Finishing shows \"Thank you for your order!\"."
                 }
-              ]
+              ],
+              "application": "storefront"
             },
             "traceableScenarios": [
               {
@@ -2034,6 +2060,7 @@
                 "title": "Valid details open the overview with the right item total",
                 "objective": "Valid details open the overview with the right item total",
                 "type": "positive",
+                "layer": "ui",
                 "priority": "medium",
                 "priorityRationale": "per acceptance criterion",
                 "preconditions": [],
@@ -2057,6 +2084,7 @@
                 "title": "Finishing confirms the order",
                 "objective": "Finishing confirms the order",
                 "type": "positive",
+                "layer": "ui",
                 "priority": "medium",
                 "priorityRationale": "per acceptance criterion",
                 "preconditions": [],
@@ -2132,7 +2160,8 @@
                   "id": "AC-2",
                   "text": "A locked-out user is taken to the product list."
                 }
-              ]
+              ],
+              "application": "storefront"
             },
             "traceableScenarios": [
               {
@@ -2144,6 +2173,7 @@
                 "title": "Locked-out user sees the lockout error",
                 "objective": "Locked-out user sees the lockout error",
                 "type": "authorization",
+                "layer": "ui",
                 "priority": "medium",
                 "priorityRationale": "per acceptance criterion",
                 "preconditions": [],
@@ -2264,7 +2294,8 @@
                   "id": "AC-2",
                   "text": "The login page shows a \"Forgot password?\" link."
                 }
-              ]
+              ],
+              "application": "storefront"
             },
             "traceableScenarios": []
           },
@@ -2331,7 +2362,8 @@
                   "id": "AC-2",
                   "text": "The login page shows a \"Forgot password?\" link."
                 }
-              ]
+              ],
+              "application": "storefront"
             },
             "traceableScenarios": [
               {
@@ -2343,6 +2375,7 @@
                 "title": "Reset request shows a confirmation",
                 "objective": "Reset request shows a confirmation",
                 "type": "positive",
+                "layer": "ui",
                 "priority": "medium",
                 "priorityRationale": "per acceptance criterion",
                 "preconditions": [],
@@ -2365,6 +2398,7 @@
                 "title": "Forgot password link is visible",
                 "objective": "Forgot password link is visible",
                 "type": "positive",
+                "layer": "ui",
                 "priority": "medium",
                 "priorityRationale": "per acceptance criterion",
                 "preconditions": [],
@@ -2745,7 +2779,7 @@
             "provider": "mock",
             "model": "mock",
             "attempts": 1,
-            "latencyMs": 0,
+            "latencyMs": 1,
             "inputTokens": 0,
             "outputTokens": 0,
             "tokensAvailable": false,
@@ -2823,7 +2857,7 @@
             "provider": "mock",
             "model": "mock",
             "attempts": 1,
-            "latencyMs": 1,
+            "latencyMs": 0,
             "inputTokens": 0,
             "outputTokens": 0,
             "tokensAvailable": false,
@@ -3008,7 +3042,7 @@
             "provider": "mock",
             "model": "mock",
             "attempts": 1,
-            "latencyMs": 1,
+            "latencyMs": 0,
             "inputTokens": 0,
             "outputTokens": 0,
             "tokensAvailable": false,
@@ -3116,7 +3150,7 @@
             "provider": "mock",
             "model": "mock",
             "attempts": 1,
-            "latencyMs": 0,
+            "latencyMs": 1,
             "inputTokens": 0,
             "outputTokens": 0,
             "tokensAvailable": false,
@@ -3206,7 +3240,7 @@
             "provider": "mock",
             "model": "mock",
             "attempts": 1,
-            "latencyMs": 1,
+            "latencyMs": 0,
             "inputTokens": 0,
             "outputTokens": 0,
             "tokensAvailable": false,
@@ -3386,7 +3420,7 @@
             "provider": "mock",
             "model": "mock",
             "attempts": 1,
-            "latencyMs": 1,
+            "latencyMs": 0,
             "inputTokens": 0,
             "outputTokens": 0,
             "tokensAvailable": false,
@@ -3652,7 +3686,7 @@
             "provider": "mock",
             "model": "mock",
             "attempts": 1,
-            "latencyMs": 0,
+            "latencyMs": 1,
             "inputTokens": 0,
             "outputTokens": 0,
             "tokensAvailable": false,
@@ -4850,7 +4884,7 @@
             "retries": 2,
             "recovered": false,
             "executions": 0,
-            "elapsedMs": 638,
+            "elapsedMs": 641,
             "limitMs": 1680
           },
           "checks": [
@@ -4876,7 +4910,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "638ms <= 1680ms"
+              "detail": "641ms <= 1680ms"
             },
             {
               "name": "noGenerationAfterFailure",
@@ -4895,9 +4929,9 @@
             "attempts": 2,
             "retries": 1,
             "recovered": true,
-            "recoveryLatencyMs": 12,
+            "recoveryLatencyMs": 13,
             "executions": 0,
-            "elapsedMs": 13,
+            "elapsedMs": 14,
             "limitMs": 1680
           },
           "checks": [
@@ -4923,7 +4957,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "13ms <= 1680ms"
+              "detail": "14ms <= 1680ms"
             },
             {
               "name": "noGenerationAfterFailure",
@@ -4942,9 +4976,9 @@
             "attempts": 3,
             "retries": 2,
             "recovered": true,
-            "recoveryLatencyMs": 31,
+            "recoveryLatencyMs": 35,
             "executions": 0,
-            "elapsedMs": 32,
+            "elapsedMs": 35,
             "limitMs": 1680
           },
           "checks": [
@@ -4970,7 +5004,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "32ms <= 1680ms"
+              "detail": "35ms <= 1680ms"
             },
             {
               "name": "noGenerationAfterFailure",
@@ -4991,7 +5025,7 @@
             "retries": 2,
             "recovered": false,
             "executions": 0,
-            "elapsedMs": 32,
+            "elapsedMs": 34,
             "limitMs": 1680
           },
           "checks": [
@@ -5017,7 +5051,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "32ms <= 1680ms"
+              "detail": "34ms <= 1680ms"
             },
             {
               "name": "noGenerationAfterFailure",
@@ -5038,7 +5072,7 @@
             "retries": 0,
             "recovered": false,
             "executions": 0,
-            "elapsedMs": 0,
+            "elapsedMs": 1,
             "limitMs": 1680
           },
           "checks": [
@@ -5064,7 +5098,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "0ms <= 1680ms"
+              "detail": "1ms <= 1680ms"
             },
             {
               "name": "noGenerationAfterFailure",
@@ -5085,7 +5119,7 @@
             "retries": 0,
             "recovered": false,
             "executions": 0,
-            "elapsedMs": 1,
+            "elapsedMs": 0,
             "limitMs": 1680
           },
           "checks": [
@@ -5111,7 +5145,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "1ms <= 1680ms"
+              "detail": "0ms <= 1680ms"
             },
             {
               "name": "noGenerationAfterFailure",
@@ -5132,7 +5166,7 @@
             "retries": 0,
             "recovered": false,
             "executions": 0,
-            "elapsedMs": 1,
+            "elapsedMs": 0,
             "limitMs": 1680
           },
           "checks": [
@@ -5158,7 +5192,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "1ms <= 1680ms"
+              "detail": "0ms <= 1680ms"
             },
             {
               "name": "noGenerationAfterFailure",
@@ -5213,7 +5247,7 @@
             {
               "name": "errorPropagated",
               "pass": true,
-              "detail": "Error: spawn /nonexistent/relynx-node ENOENT"
+              "detail": "Error: spawn /nonexistent/agent-node ENOENT"
             }
           ],
           "pass": true
@@ -5228,7 +5262,7 @@
             "recovered": false,
             "executions": 1,
             "evidencePreserved": true,
-            "elapsedMs": 318,
+            "elapsedMs": 336,
             "limitMs": 60000
           },
           "checks": [
@@ -5254,7 +5288,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "318ms <= 60000ms"
+              "detail": "336ms <= 60000ms"
             },
             {
               "name": "artifactStates",
@@ -5264,7 +5298,7 @@
             {
               "name": "errorPropagated",
               "pass": true,
-              "detail": "Error: playwright.agent.config.ts only runs files approved through the Relynx execution adapter\n    at Object.<anonymous> (<home>/Projects/frankvu-ai-dr"
+              "detail": "Error: playwright.agent.config.ts only runs files approved through the agent execution adapter\n    at Object.<anonymous> (<home>/Projects/frankvu-ai-dri"
             }
           ],
           "pass": true
@@ -5279,7 +5313,7 @@
             "recovered": false,
             "executions": 1,
             "evidencePreserved": true,
-            "elapsedMs": 5,
+            "elapsedMs": 2,
             "limitMs": 30000
           },
           "checks": [
@@ -5305,7 +5339,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "5ms <= 30000ms"
+              "detail": "2ms <= 30000ms"
             },
             {
               "name": "artifactStates",
@@ -5330,7 +5364,7 @@
             "recovered": false,
             "executions": 1,
             "evidencePreserved": true,
-            "elapsedMs": 1511,
+            "elapsedMs": 1512,
             "limitMs": 8500
           },
           "checks": [
@@ -5356,7 +5390,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "1511ms <= 8500ms"
+              "detail": "1512ms <= 8500ms"
             },
             {
               "name": "artifactStates",
@@ -5422,7 +5456,7 @@
             "recovered": false,
             "executions": 1,
             "evidencePreserved": true,
-            "elapsedMs": 2,
+            "elapsedMs": 5,
             "limitMs": 30000
           },
           "checks": [
@@ -5448,7 +5482,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "2ms <= 30000ms"
+              "detail": "5ms <= 30000ms"
             },
             {
               "name": "artifactStates",
@@ -5586,7 +5620,7 @@
             {
               "name": "errorClassification",
               "pass": true,
-              "detail": "generated/20261018T215559Z-REQ-101-xhx563/REQ-101-SC-01.spec.ts changed after approval (hash mismatch)"
+              "detail": "generated/20261019T081133Z-REQ-101-yt17ed/REQ-101-SC-01.spec.ts changed after approval (hash mismatch)"
             }
           ],
           "pass": true
@@ -5655,7 +5689,7 @@
           "d": 2,
           "value": 1
         },
-        "meanRecoveryLatencyMs": 21.5,
+        "meanRecoveryLatencyMs": 24,
         "retriesOnRecoverable": [
           {
             "id": "FI-02",
@@ -5679,6 +5713,333 @@
         "duplicateExecutionPrevented": true,
         "neverPassedWithoutEvidence": true
       }
+    },
+    "comparison": {
+      "before": {
+        "runId": "eval-20261018T215547Z-deterministic-v4yvpl",
+        "datasetVersion": "2.0.0",
+        "commit": "2fbfb3a0bb248643e93be8ee309aa94a88ece55c",
+        "mode": "deterministic"
+      },
+      "after": {
+        "runId": "eval-20261019T081120Z-deterministic-8qaigs",
+        "datasetVersion": "2.0.1",
+        "commit": "dd141616fcaa8f751f9f22fca9f52a7ceacdc304",
+        "mode": "deterministic"
+      },
+      "comparable": true,
+      "notes": [
+        "dataset changed 2.0.0 -> 2.0.1: differences may come from the dataset"
+      ],
+      "changes": [
+        {
+          "id": "analysis.rules.accuracy",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 0.5333333333333333,
+          "after": 0.5333333333333333,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "analysis.rules.escalationOnInsufficientEvidence",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "analysis.rules.evidenceRelevance",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "analysis.rules.labelInTopOrAlternatives",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 0.7333333333333333,
+          "after": 0.7333333333333333,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "analysis.rules.macroRecall",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 0.5208333333333333,
+          "after": 0.5208333333333333,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "analysis.rules.uncertaintyIdentified",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 0.9,
+          "after": 0.9,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "analysis.rules.unsupportedRootCauseClaims",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "assertion.rules.exactAgreementWithLabels",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "evidence.falsePasses",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "evidence.phantomReferences",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "evidence.requirementAssociation",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "evidence.statusInterpretation",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "generation.semantic.requiredAssertionsSatisfied",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 0.6,
+          "after": 0.6,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "generation.semantic.specsWithoutAssertionFindings",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 0.4,
+          "after": 0.4,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "generation.structural.conventionCompliance",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "generation.structural.expectationsMet",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "generation.structural.schemaValidity",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 0.9473684210526315,
+          "after": 0.9473684210526315,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "generation.structural.traceability",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "generation.structural.typescriptValidity",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "planning.semantic.clarificationBehaviourCorrect",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 0.5714285714285714,
+          "after": 0.5714285714285714,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "planning.semantic.expectedScenarioCategoriesPresent",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 0.8,
+          "after": 0.8,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "planning.semantic.plansFreeOfProhibitedAssumptions",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 0.75,
+          "after": 0.75,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "planning.semantic.requiredCoverageMet",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 0.6666666666666666,
+          "after": 0.6666666666666666,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "planning.structural.ambiguityDetection",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "planning.structural.expectationsMet",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "planning.structural.outcomeAccuracy",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "planning.structural.scenarioTraceability",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 0.8974358974358975,
+          "after": 0.8974358974358975,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "planning.structural.unsupportedAssumptionRejection",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "recovery.errorClassificationCorrect",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "recovery.meanRecoveryLatencyMs",
+          "kind": "measured",
+          "gate": "none",
+          "before": 21.5,
+          "after": 24,
+          "delta": 2.5,
+          "direction": "regressed"
+        },
+        {
+          "id": "recovery.recoverySuccess",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "recovery.scenariosMeetingExpectations",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "recovery.terminatedWithinLimits",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "recovery.unrecoverablePropagated",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        }
+      ],
+      "gatedRegressions": []
     }
   },
   "findings": [
@@ -5809,8 +6170,8 @@
     },
     {
       "name": "baseline-regression",
-      "status": "not-applicable",
-      "detail": "no baseline given"
+      "status": "pass",
+      "detail": "no gated regressions vs eval-20261018T215547Z-deterministic-v4yvpl"
     },
     {
       "name": "report-schema",

@@ -9,7 +9,7 @@ import { callStructured, DEFAULT_RETRY_POLICY, type RetryPolicy, type UsageRecor
 import { PLAN_SYSTEM, planPrompt } from '../prompts/plan';
 import { GENERATE_SYSTEM, generatePrompt } from '../prompts/generate';
 import { validateSpec, type SpecIssue } from '../generation/validateSpec';
-import { renderSpec } from '../generation/render';
+import { FAMILY_SUFFIX, familyOf, renderSpec } from '../generation/render';
 import { validateArtifacts, workspaceSnapshot, type ArtifactValidation } from '../validation/artifacts';
 import { sha256File } from '../execution/files';
 import type { Policy } from '../execution/policy';
@@ -86,8 +86,9 @@ export async function generateSpecs(
   const seen = new Set<string>();
   const issues: Record<string, SpecIssue[]> = {};
   const accepted: TestSpec[] = [];
+  const layers = new Map(scenarios.map((s) => [s.id, s.layer]));
   for (const spec of generated.value.tests) {
-    const found = validateSpec(spec, allowed, req.id);
+    const found = validateSpec(spec, allowed, req.id, { application: req.application, layers });
     if (seen.has(spec.scenarioId)) found.push({ code: 'unknown_scenario', severity: 'error', message: 'more than one spec for this scenario' });
     seen.add(spec.scenarioId);
     issues[spec.scenarioId] = [...(issues[spec.scenarioId] ?? []), ...found];
@@ -186,7 +187,7 @@ export async function planAndGenerate(input: unknown, deps: GenerateDeps): Promi
   const genDir = path.join(deps.repoRoot, deps.policy.generationArea, runId);
   const toValidate: Record<string, { requirementId: string; scenarioId: string }> = {};
   for (const spec of generated.output.tests) {
-    const file = path.posix.join(deps.policy.generationArea, runId, `${spec.scenarioId}.spec.ts`);
+    const file = path.posix.join(deps.policy.generationArea, runId, `${spec.scenarioId}${FAMILY_SUFFIX[familyOf(req.application, spec.layer)]}`);
     if (!generated.accepted.includes(spec)) {
       manifest.artifacts.push(
         transition(blankRecord(spec.scenarioId, req.id, file), 'rejected', { kind: 'agent' }, 'spec failed catalog validation', now()),
@@ -194,7 +195,7 @@ export async function planAndGenerate(input: unknown, deps: GenerateDeps): Promi
       continue;
     }
     mkdirSync(genDir, { recursive: true });
-    writeFileSync(path.join(deps.repoRoot, file), renderSpec(spec, runId));
+    writeFileSync(path.join(deps.repoRoot, file), renderSpec(spec, runId, { application: req.application }));
     manifest.artifacts.push({ ...blankRecord(spec.scenarioId, req.id, file), sha256: sha256File(path.join(deps.repoRoot, file)) });
     toValidate[file] = { requirementId: req.id, scenarioId: spec.scenarioId };
   }

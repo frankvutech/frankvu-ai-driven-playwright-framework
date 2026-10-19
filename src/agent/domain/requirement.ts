@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { APPLICATION_IDS } from './application';
 
 /**
  * Requirement input model. Requirements come from outside the repository
@@ -18,6 +19,8 @@ export const RequirementSchema = z
     title: z.string().trim().min(1).max(200),
     description: z.string().trim().min(1).max(5000),
     acceptanceCriteria: z.array(AcceptanceCriterionSchema).max(50),
+    /** Application under test. Defaults to the storefront for older requirement files. */
+    application: z.enum(APPLICATION_IDS).default('storefront'),
     source: z.string().max(500).optional(),
     metadata: z.record(z.string(), z.union([z.string(), z.number(), z.boolean()])).optional(),
   })

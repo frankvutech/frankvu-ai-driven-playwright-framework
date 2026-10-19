@@ -67,7 +67,8 @@ export function assertionFindings(spec: TestSpec, scenario: Scenario | undefined
       uncertainty,
     });
 
-  const assertions = spec.steps.filter((s): s is Assertion => s.kind !== 'action');
+  // UI assertion rules. API assertions (expectStatus/Header/Body) are not scored by these rules yet.
+  const assertions = spec.steps.filter((s): s is Assertion => s.kind === 'expect' || s.kind === 'expectUrl');
   if (assertions.length === 0) {
     add('AQ_MISSING', [], 'the test asserts nothing', 'no expect or expectUrl step');
     return findings;
@@ -118,8 +119,8 @@ export function assertionFindings(spec: TestSpec, scenario: Scenario | undefined
     segment = [];
   };
   for (const step of spec.steps) {
-    if (step.kind === 'action') flush();
-    else segment.push(step);
+    if (step.kind === 'expect' || step.kind === 'expectUrl') segment.push(step);
+    else flush();
   }
   flush();
 

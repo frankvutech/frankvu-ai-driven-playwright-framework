@@ -156,7 +156,7 @@ function fmt(m: Metric): string {
 export function renderSummary(r: EvaluationReport): string {
   const m = r.metadata;
   const out: string[] = [
-    `# Relynx evaluation ${m.runId}`,
+    `# Agent evaluation ${m.runId}`,
     '',
     `Mode **${m.mode}** · dataset ${m.datasetVersion} (\`${m.datasetSha256.slice(0, 12)}\`) · agent \`${m.agent.commit.slice(0, 10)}\`${m.agent.dirty ? ' (uncommitted changes)' : ''} · prompts ${m.promptVersion} · metrics ${m.metricVersion}`,
     `Provider: ${m.provider.name}/${m.provider.model}. ${m.provider.note}`,

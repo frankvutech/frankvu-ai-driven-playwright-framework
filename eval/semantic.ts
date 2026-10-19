@@ -91,7 +91,7 @@ export async function judgeAssertions(
   if (!options.allowSelfJudge && judge.name === generator.name && judge.model === generator.model) {
     throw new SelfJudgeError(`judge ${judge.name}/${judge.model} is the model being evaluated`);
   }
-  const assertions = input.spec.steps.filter((s) => s.kind !== 'action').map((s, index) => ({ index, assertion: describeAssertion(s as never) }));
+  const assertions = input.spec.steps.filter((s) => s.kind === 'expect' || s.kind === 'expectUrl').map((s, index) => ({ index, assertion: describeAssertion(s as never) }));
   const result = await callStructured(
     judge,
     {

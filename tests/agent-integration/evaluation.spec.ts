@@ -11,7 +11,7 @@ import { REPO_ROOT } from '../../eval/evaluate';
  * analysis, and the report counts outcomes against reference labels.
  */
 test('functional evaluation of the login suite counts the incorrect assertion as a false-positive failure', async () => {
-  const out = mkdtempSync(path.join(os.tmpdir(), 'relynx-eval-int-'));
+  const out = mkdtempSync(path.join(os.tmpdir(), 'agent-eval-int-'));
   try {
     const { report, exitCode } = await runEvaluation({ mode: 'functional', outDir: out, approver: 'Integration Test Reviewer', suites: ['FS-LOGIN'], env: process.env });
     expect(exitCode).toBe(0);

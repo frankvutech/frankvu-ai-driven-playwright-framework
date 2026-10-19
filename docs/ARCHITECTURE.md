@@ -46,7 +46,7 @@ The example app is about 300 lines of Node `http` with no dependencies. It keeps
 | Test-data builder | `src/data/notes.ts` (`buildNote`) | Every note test needs a payload with the test's unique prefix. One function, not a builder class. |
 | Setup project + storage state | `tests/setup/auth.setup.ts`, `src/config/auth.ts` | saucedemo keeps the session in a cookie. The suite signs in once, and each UI test starts from a fresh context loaded from that file. |
 | Sign-in through the API for UI tests | `signInBrowser` in `src/fixtures/integration.ts` | `page.request` shares the browser's cookie jar. A form POST signs the browser in without UI steps, and the UI sign-in itself is covered by its own test. |
-| Agent fixtures (Phase 2) | `src/fixtures/agent.ts` | Extends `test.ts` with a network guard for generated tests. Phase 1 did not change it. |
+| Agent fixtures (Phase 2) | `src/fixtures/agent.ts` | Extends each fixture family (`test.ts`, `api.ts`, `integration.ts`) for generated tests. The browser families get a network guard. |
 
 ### Test isolation and cleanup
 

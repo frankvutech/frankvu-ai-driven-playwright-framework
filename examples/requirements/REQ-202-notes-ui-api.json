@@ -1,0 +1,11 @@
+{
+  "id": "REQ-202",
+  "title": "Notes created anywhere appear everywhere",
+  "application": "notes",
+  "description": "A note is the same whether it was created in the browser or through the API.",
+  "acceptanceCriteria": [
+    { "id": "AC-1", "text": "Given a note created through the API, when its owner opens the notes page, then the note is listed." },
+    { "id": "AC-2", "text": "Given a signed-in user, when they add a note on the notes page, then the API returns that note in the user's list." }
+  ],
+  "source": "examples/requirements (synthetic example for the local example app)"
+}

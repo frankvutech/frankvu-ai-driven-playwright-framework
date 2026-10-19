@@ -59,7 +59,7 @@ It adds no orchestration engine, and nothing in it can approve, merge or modify 
 | `npm run eval:compare -- a.json b.json` | metric-by-metric comparison; exit 1 on gated regressions | none | — |
 | `npm run eval:probe-defects` | re-verifies the seeded-defect catalogue on the demo site (2 repetitions each) | demo site | exit 1 on any mismatch |
 
-`eval:functional` needs `RELYNX_EVAL_APPROVER=<a person's name>`. It runs the normal Phase 2 approval path, with that person as approver, for specs that are byte-identical to the sha256-pinned dataset specs. No model output is ever executed by the evaluation. In CI the approver is `github.actor`, so bot accounts are refused. `eval:live` needs `RELYNX_LIVE_EVAL=1` and provider credentials.
+`eval:functional` needs `AGENT_EVAL_APPROVER=<a person's name>`. It runs the normal Phase 2 approval path, with that person as approver, for specs that are byte-identical to the sha256-pinned dataset specs. No model output is ever executed by the evaluation. In CI the approver is `github.actor`, so bot accounts are refused. `eval:live` needs `AGENT_LIVE_EVAL=1` and provider credentials.
 
 Every run writes `eval-results/<runId>/report.json` and `summary.md`. Each report records the following metadata:
 
@@ -282,6 +282,7 @@ Reports are uploaded as artifacts. Live evaluation is the separate, manual `live
 
 ## 7. Limitations
 
+- **Phase 2 extensions are not evaluated yet.** API and combined generation and guarded healing (added after this evaluation) have unit and end-to-end tests, but no dataset cases or metrics. The assertion-quality rules score UI assertions only. Dataset 2.0.1 renamed the product only; no case changed.
 - **0 of 62 labels are human-reviewed.** To review one, set `review: { status: "human-reviewed", reviewer, date }` in the dataset and bump the version.
 - **No live-model evaluation has been run**, so there is no model-quality, token or cost data. The live path is tested only with a mock standing in for the model.
 - Planning, generation and functional inputs are hand-written stand-ins for agent output. They exercise the pipeline and the evaluator, and they show the kind of weaknesses a model could produce. They say nothing about how often a model produces them.

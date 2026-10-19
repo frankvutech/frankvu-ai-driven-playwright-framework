@@ -1,6 +1,6 @@
 # AI-Driven Playwright Framework
 
-Playwright Test + TypeScript framework for **UI, API and combined UI + API testing**, built on the **Page Object Model** (Phase 1). The repository also contains the **Relynx AI Test Agent** (Phase 2) and its **evaluation system** (Phase 3). The agent turns requirements into candidate tests that run only after a person approves them. See [docs/PHASE2_AGENT.md](docs/PHASE2_AGENT.md) and [docs/PHASE3_EVALUATION.md](docs/PHASE3_EVALUATION.md).
+Playwright Test + TypeScript framework for **UI, API and combined UI + API testing**, built on the **Page Object Model** (Phase 1). The repository also contains the **AI Test Agent** (Phase 2) and its **evaluation system** (Phase 3). The agent turns requirements into candidate UI, API and combined tests that run only after a person approves them. For failures caused by the test itself, it proposes minimal repairs that are verified in a separate workspace and delivered as patches for review. See [docs/PHASE2_AGENT.md](docs/PHASE2_AGENT.md) and [docs/PHASE3_EVALUATION.md](docs/PHASE3_EVALUATION.md).
 
 | Suite | Target | Default (override with env var) |
 |-------|--------|----------------------------------|
@@ -39,13 +39,21 @@ UI_BROWSERS=chromium,firefox,webkit npm run test:ui   # after: npx playwright in
 AI Test Agent (Phase 2) and evaluation (Phase 3):
 
 ```bash
-npm run test:agent                # agent unit tests
-npm run test:agent-integration    # full agent workflow against the demo target
+npm run test:agent                # agent unit tests (mock provider, fake runners)
+npm run test:agent-integration    # real runs: agent workflow, guarded healing, promotion
 npm run test:eval                 # evaluation-system tests
 npm run eval                      # deterministic evaluation, gated against eval/baselines/
-RELYNX_EVAL_APPROVER="Your Name" npm run eval:functional   # seeded-defect evaluation on the demo site
-npm run agent -- generate --requirement examples/requirements/REQ-101-sign-in.json --provider mock --mock-replies examples/mock-replies/REQ-101.json
+AGENT_EVAL_APPROVER="Your Name" npm run eval:functional   # seeded-defect evaluation on the demo site
+npm run agent -- generate --requirement examples/requirements/REQ-201-notes-api.json --provider mock --mock-replies examples/mock-replies/REQ-201.json
+npm run agent -- approve <runId> --approver "Your Name"     # interactive
+npm run agent -- execute <runId>
+npm run agent -- promote <runId> --approver "Your Name"     # interactive; copies passed tests into tests/*/generated/
+npm run agent -- heal --test tests/integration/notes.spec.ts --title "a note added in the UI is returned by the API" \
+  --provider mock --mock-replies examples/mock-replies/heal-renamed-add-button.json --example-app-variant renamed-add-button
+npm run agent -- heal-approve <healId> --approver "Your Name"   # interactive; records a decision, never applies the patch
 ```
+
+The agent never applies, commits, pushes or merges anything. See [docs/PHASE2_AGENT.md](docs/PHASE2_AGENT.md) for its boundaries.
 
 ## Configuration
 
@@ -56,6 +64,7 @@ All settings are read and validated in `src/config/env.ts`. The order is: real e
 | `UI_BASE_URL` | `https://www.saucedemo.com` | UI target |
 | `API_BASE_URL` | `https://jsonplaceholder.typicode.com` | public API target |
 | `EXAMPLE_APP_URL` | unset: each worker starts its own local app | use a deployed example app instead |
+| `EXAMPLE_APP_VARIANT` | `standard` | deterministic failure modes of the local app (`renamed-add-button`, `intermittent-slow-list`, `broken-create`), used to verify analysis and healing |
 | `UI_BROWSERS` | `chromium` | comma-separated `chromium,firefox,webkit`, giving one `ui-<browser>` project each. The Phase 2 agent needs `chromium`. |
 | `SAUCE_PASSWORD` | `secret_sauce` | public demo password published by saucedemo |
 | `EXAMPLE_APP_PASSWORD` | `example-app-pass` | password of the example app's test users `alice` and `bob` (min. 8 characters) |
@@ -78,8 +87,8 @@ src/
   fixtures/test.ts          saucedemo page-object fixtures (UI tests)
   fixtures/api.ts           API clients, example-app lifecycle, auth, test-data cleanup
   fixtures/integration.ts   api.ts + example-app page objects + browser sign-in via API
-  fixtures/agent.ts         fixtures for agent-generated tests (+ network guard)
-  agent/                    Phase 2 AI Test Agent
+  fixtures/agent.ts         guarded fixtures for agent-generated tests (storefront, notes, API)
+  agent/                    Phase 2 AI Test Agent (generation, execution, analysis, healing)
 example-app/                local example application (server.ts) + `npm run example-app`
 tests/
   setup/                    signs in to saucedemo once, saves .auth/standard-user.json
@@ -90,7 +99,7 @@ tests/
   agent/, agent-integration/  Phase 2 tests
   eval/                     Phase 3 tests
 playwright.agent.config.ts  runs approved generated tests only
-relynx.policy.json          execution policy for the agent (protected; change via review)
+agent.policy.json           execution and healing policy for the agent (protected; change via review)
 eval/                       evaluation dataset and runners
 examples/                   sample requirements and hand-written mock replies
 docs/ARCHITECTURE.md        Phase 1 design decisions and review gate

@@ -5,12 +5,14 @@ import type { LlmProvider } from '../llm/provider';
 
 /** Explicit model configuration. Every value can be overridden by env; nothing is implicit. */
 export function anthropicConfigFromEnv(env: NodeJS.ProcessEnv = process.env): AnthropicConfig {
-  const effort = env.RELYNX_EFFORT ?? 'high';
-  if (!['low', 'medium', 'high', 'xhigh', 'max'].includes(effort)) throw new Error(`invalid RELYNX_EFFORT "${effort}"`);
+  const effort = env.AGENT_EFFORT ?? 'high';
+  if (!['low', 'medium', 'high', 'xhigh', 'max'].includes(effort)) throw new ProviderConfigError(`invalid AGENT_EFFORT "${effort}"`);
+  const timeoutMs = Number(env.AGENT_LLM_TIMEOUT_MS ?? 180_000);
+  if (!Number.isInteger(timeoutMs) || timeoutMs < 1_000 || timeoutMs > 600_000) throw new ProviderConfigError('AGENT_LLM_TIMEOUT_MS must be an integer between 1000 and 600000');
   return {
-    model: env.RELYNX_MODEL ?? 'claude-opus-5-5',
+    model: env.AGENT_MODEL ?? 'claude-opus-5-5',
     effort: effort as AnthropicConfig['effort'],
-    timeoutMs: Number(env.RELYNX_LLM_TIMEOUT_MS ?? 180_000),
+    timeoutMs,
   };
 }
 
@@ -28,14 +30,26 @@ export function mockFromFile(file: string): MockProvider {
   return new MockProvider(replies);
 }
 
+/** A provider cannot be created from the current configuration. Raised before any model call. */
+export class ProviderConfigError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'ProviderConfigError';
+  }
+}
+
 export function createProvider(kind: string | undefined, mockFile: string | undefined, env: NodeJS.ProcessEnv = process.env): LlmProvider {
   switch (kind) {
     case 'anthropic':
+      // Checked here so a missing credential is a clear configuration error, not an SDK exception mid-run.
+      if (!env.ANTHROPIC_API_KEY && !env.ANTHROPIC_AUTH_TOKEN) {
+        throw new ProviderConfigError('ANTHROPIC_API_KEY is not set: export it, or use --provider mock with --mock-replies');
+      }
       return new AnthropicProvider(anthropicConfigFromEnv(env));
     case 'mock':
-      if (!mockFile) throw new Error('--provider mock requires --mock-replies <file>');
+      if (!mockFile) throw new ProviderConfigError('--provider mock requires --mock-replies <file>');
       return mockFromFile(mockFile);
     default:
-      throw new Error('choose a provider explicitly: --provider anthropic | mock');
+      throw new ProviderConfigError('choose a provider explicitly: --provider anthropic | mock');
   }
 }

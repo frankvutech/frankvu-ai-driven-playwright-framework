@@ -224,7 +224,7 @@ async function deterministicMode(dataset: Dataset, policy: Policy) {
 }
 
 async function functionalMode(dataset: Dataset, policy: Policy, opts: RunOptions) {
-  const approver = opts.approver ?? opts.env?.RELYNX_EVAL_APPROVER ?? process.env.RELYNX_EVAL_APPROVER ?? '';
+  const approver = opts.approver ?? opts.env?.AGENT_EVAL_APPROVER ?? process.env.AGENT_EVAL_APPROVER ?? '';
   // Stricter than the protected policy: defective accounts make some tests wait for elements that never appear.
   const evalPolicy: Policy = { ...policy, execution: { ...policy.execution, testTimeoutMs: Math.min(policy.execution.testTimeoutMs, 15_000) } };
   const r = await evaluateFunctional(dataset.functional, { policy: evalPolicy, approver, env: opts.env ?? process.env, suites: opts.suites, keepRuns: true });
@@ -267,7 +267,7 @@ async function functionalMode(dataset: Dataset, policy: Policy, opts: RunOptions
       gate('functional-target-available', det.inconclusive === 0 && r.workflows.every((w) => w.status === 'executed'), `${det.inconclusive} inconclusive case(s); workflow statuses ${[...new Set(r.workflows.map((w) => w.status))].join(', ')}`),
     ],
     provider: { name: 'mock', model: 'pinned-dataset-specs', note: 'Executed tests are pinned, hand-written candidate specs (including deliberately weak and incorrect ones) run through the real Phase 2 pipeline against the demo target. They do not measure a model.' },
-    refs: r.workflows.map((w) => `.relynx/runs/${w.runId}`),
+    refs: r.workflows.map((w) => `.agent/runs/${w.runId}`),
   };
 }
 
@@ -453,8 +453,8 @@ async function main(): Promise<number> {
   }
   const mode = values.mode as Mode;
   if (!['deterministic', 'functional', 'live'].includes(mode)) throw new Error(`unknown mode ${mode}`);
-  if (mode === 'live' && process.env.RELYNX_LIVE_EVAL !== '1') {
-    process.stderr.write('Set RELYNX_LIVE_EVAL=1 to run the live evaluation (it calls a paid model API).\n');
+  if (mode === 'live' && process.env.AGENT_LIVE_EVAL !== '1') {
+    process.stderr.write('Set AGENT_LIVE_EVAL=1 to run the live evaluation (it calls a paid model API).\n');
     return 2;
   }
   const judge = values['judge-model'] ? new AnthropicProvider({ ...anthropicConfigFromEnv(), model: values['judge-model'] }) : undefined;

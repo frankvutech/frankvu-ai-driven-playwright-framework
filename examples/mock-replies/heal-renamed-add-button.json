@@ -1,0 +1,13 @@
+{
+  "heal-proposal": [
+    {
+      "decision": "propose",
+      "failureExplanation": "NotesPage.addNoteButton waits for a button named \"Add note\" (E2). The page snapshot (E6) shows the new-note form with a button named \"Save note\" in the same place, so the button was renamed.",
+      "intendedBehavior": "The test submits the new-note form and checks the note through the API. Clicking the form's submit button under its new name keeps that intent; no assertion changes.",
+      "evidenceIds": ["E2", "E6"],
+      "changes": [
+        { "kind": "replaceLocator", "pageObject": "NotesPage", "member": "addNoteButton", "locator": { "by": "role", "role": "button", "name": "Save note", "exact": true } }
+      ]
+    }
+  ]
+}

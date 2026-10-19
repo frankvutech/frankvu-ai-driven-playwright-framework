@@ -39,7 +39,7 @@ test.describe('evidence collection from real Playwright reports', () => {
   });
 
   test('artifact references are only kept when the file exists', () => {
-    const dir = path.join(REPO_ROOT, '.relynx/runs/evidence-unit');
+    const dir = path.join(REPO_ROOT, '.agent/runs/evidence-unit');
     mkdirSync(dir, { recursive: true });
     try {
       const shot = path.join(dir, 'shot.png');
@@ -56,7 +56,7 @@ test.describe('evidence collection from real Playwright reports', () => {
       };
       writeFileSync(path.join(dir, 'report.json'), JSON.stringify(report));
       const [t] = collectEvidence(input(path.join(dir, 'report.json'))).tests;
-      expect(t.screenshotRefs).toEqual(['.relynx/runs/evidence-unit/shot.png']);
+      expect(t.screenshotRefs).toEqual(['.agent/runs/evidence-unit/shot.png']);
       expect(t.traceRef).toBeUndefined();
     } finally {
       rmSync(dir, { recursive: true, force: true });
@@ -65,7 +65,7 @@ test.describe('evidence collection from real Playwright reports', () => {
 
   test('a missing or corrupt report yields no tests and reportFound=false', () => {
     expect(collectEvidence(input('/nonexistent/report.json'))).toMatchObject({ tests: [], runner: { reportFound: false } });
-    const dir = path.join(REPO_ROOT, '.relynx/runs/evidence-corrupt');
+    const dir = path.join(REPO_ROOT, '.agent/runs/evidence-corrupt');
     mkdirSync(dir, { recursive: true });
     try {
       writeFileSync(path.join(dir, 'r.json'), '{ not json');

@@ -9,18 +9,40 @@ import { planAndGenerate } from './workflow/generate';
 import { recordDecision } from './workflow/decide';
 import { executeRun } from './workflow/execute';
 import { RunStore } from './workflow/store';
+import { promoteRun } from './workflow/promote';
+import { approveHeal, healTest, listHeals, readHealRecord } from './healing/heal';
+import type { HealTarget } from './healing/types';
 
 const repoRoot = path.resolve(__dirname, '../..');
 
-const USAGE = `Relynx AI Test Agent
+const USAGE = `AI Test Agent
 
-  relynx generate --requirement <file.json> --provider anthropic|mock [--mock-replies <file.json>]
-  relynx approve  <runId> --approver "<your name>"        (interactive terminal only)
-  relynx reject   <runId> --approver "<your name>" --reason "<why>"
-  relynx execute  <runId> [--analysis-provider anthropic|mock] [--mock-replies <file.json>]
-  relynx report   <runId>
-  relynx list
+  agent generate --requirement <file.json> --provider anthropic|mock [--mock-replies <file.json>]
+  agent approve  <runId> --approver "<your name>"        (interactive terminal only)
+  agent reject   <runId> --approver "<your name>" --reason "<why>"
+  agent execute  <runId> [--analysis-provider anthropic|mock] [--mock-replies <file.json>]
+  agent report   <runId>
+  agent list
+  agent promote  <runId> --approver "<your name>"        (interactive terminal only; passed tests only)
+
+  agent heal --run <runId> --scenario <scenarioId> --provider anthropic|mock [--mock-replies <file.json>]
+  agent heal --test <tests/...spec.ts> --title "<exact test title>" --provider anthropic|mock [--mock-replies <file.json>]
+             [--example-app-variant <name>] [--session-variant <name>]
+  agent heal-approve <healId> --approver "<your name>"   (interactive terminal only; never applies the patch)
+  agent heals
 `;
+
+/** Ask the person at the terminal to type a confirmation code. */
+async function confirm(prompt: string, code: string): Promise<boolean> {
+  if (!process.stdin.isTTY || !process.stdout.isTTY) {
+    throw new Error('this command needs an interactive terminal: a person must confirm it');
+  }
+  process.stdout.write(`${prompt}\nType "${code}" to confirm: `);
+  const rl = createInterface({ input: process.stdin, output: process.stdout });
+  const answer = (await rl.question('')).trim();
+  rl.close();
+  return answer === code;
+}
 
 async function main(argv: string[]): Promise<number> {
   const { positionals, values } = parseArgs({
@@ -33,6 +55,12 @@ async function main(argv: string[]): Promise<number> {
       'mock-replies': { type: 'string' },
       approver: { type: 'string' },
       reason: { type: 'string' },
+      run: { type: 'string' },
+      scenario: { type: 'string' },
+      test: { type: 'string' },
+      title: { type: 'string' },
+      'example-app-variant': { type: 'string' },
+      'session-variant': { type: 'string' },
       help: { type: 'boolean' },
     },
   });
@@ -115,6 +143,62 @@ async function main(argv: string[]): Promise<number> {
           /* not a run directory */
         }
       }
+      return 0;
+    }
+    case 'promote': {
+      const s = store();
+      if (!values.approver) throw new Error('--approver "<your name>" is required');
+      const passed = s.manifest().artifacts.filter((a) => a.state === 'passed');
+      if (passed.length === 0) throw new Error(`run ${runId} has no passed tests to promote`);
+      const digest = createHash('sha256').update(passed.map((a) => a.sha256).join('\n')).digest('hex').slice(0, 8);
+      const list = passed.map((a) => `  ${a.file}`).join('\n');
+      if (!(await confirm(`Promote ${passed.length} passed test(s) of run ${runId} into the trusted suite (tests/*/generated/):\n${list}`, `promote ${digest}`))) {
+        process.stdout.write('not confirmed; nothing changed\n');
+        return 1;
+      }
+      const result = await promoteRun(s, values.approver);
+      for (const p of result.promoted) process.stdout.write(`  promoted ${p.scenarioId} -> ${p.file}\n`);
+      for (const k of result.skipped) process.stdout.write(`  skipped  ${k.scenarioId}: ${k.reason}\n`);
+      process.stdout.write('Nothing was committed. Review the new files and commit them yourself.\n');
+      return result.promoted.length > 0 ? 0 : 1;
+    }
+    case 'heal': {
+      let target: HealTarget;
+      if (values.run && values.scenario) target = { kind: 'generated', runId: values.run, scenarioId: values.scenario };
+      else if (values.test && values.title) target = { kind: 'trusted', file: values.test, title: values.title };
+      else throw new Error('heal needs --run <runId> --scenario <id>, or --test <file> --title "<title>"');
+      const provider = createProvider(values.provider, values['mock-replies']);
+      const record = await healTest(target, {
+        repoRoot,
+        policy,
+        env: process.env,
+        provider,
+        exampleAppVariant: values['example-app-variant'],
+        sessionVariant: values['session-variant'],
+      });
+      process.stdout.write(`heal ${record.healId}: ${record.outcome}\n  ${record.history[record.history.length - 1]?.reason ?? ''}\n`);
+      process.stdout.write(`report: ${path.join('.agent/heals', record.healId, 'heal-report.md')}\n`);
+      if (record.outcome === 'verified_pending_review') {
+        process.stdout.write(`\nReview ${record.patch!.file}, then record your decision:\n  npm run agent -- heal-approve ${record.healId} --approver "<your name>"\n`);
+      }
+      return record.outcome === 'verified_pending_review' ? 0 : 2;
+    }
+    case 'heal-approve': {
+      if (!runId) throw new Error('heal-approve needs a heal id');
+      if (!values.approver) throw new Error('--approver "<your name>" is required');
+      const record = readHealRecord(repoRoot, runId);
+      if (!record.patch) throw new Error(`heal ${runId} has no patch (${record.outcome})`);
+      const code = `approve ${record.patch.sha256.slice(0, 8)}`;
+      if (!(await confirm(`Heal ${runId} changes ${record.patch.changedFiles.join(', ')}.\nApproving records your decision only; the patch is not applied, committed or pushed.`, code))) {
+        process.stdout.write('not confirmed; nothing changed\n');
+        return 1;
+      }
+      const approved = approveHeal(repoRoot, runId, values.approver);
+      process.stdout.write(`approved. Apply it yourself after review:\n  git apply ${approved.patch!.file}\n`);
+      return 0;
+    }
+    case 'heals': {
+      for (const h of listHeals(repoRoot)) process.stdout.write(`${h.healId}  ${h.outcome}\n`);
       return 0;
     }
     default:

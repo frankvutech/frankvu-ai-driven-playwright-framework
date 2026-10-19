@@ -14,7 +14,9 @@ export type ArtifactState =
   | 'passed'
   | 'failed'
   | 'inconclusive'
-  | 'rejected';
+  | 'rejected'
+  /** Copied into the trusted regression suite by a named human after it passed. */
+  | 'promoted';
 
 export type Actor = { kind: 'agent' } | { kind: 'human'; name: string } | { kind: 'runner' };
 
@@ -42,10 +44,11 @@ const ALLOWED: Record<ArtifactState, ArtifactState[]> = {
   awaiting_approval: ['approved', 'rejected'],
   approved: ['executed'],
   executed: ['passed', 'failed', 'inconclusive'],
-  passed: [],
+  passed: ['promoted'],
   failed: [],
   inconclusive: [],
   rejected: [],
+  promoted: [],
 };
 
 export class InvalidTransitionError extends Error {
@@ -73,7 +76,7 @@ function apply(record: ArtifactRecord, to: ArtifactState, actor: Actor, reason: 
 /** Pre-execution transitions. Approval is reserved for a named human. */
 export function transition(
   record: ArtifactRecord,
-  to: 'validated' | 'awaiting_approval' | 'approved' | 'rejected' | 'executed',
+  to: 'validated' | 'awaiting_approval' | 'approved' | 'rejected' | 'executed' | 'promoted',
   actor: Actor,
   reason: string,
   now = new Date(),
@@ -82,9 +85,9 @@ export function transition(
   if ((['passed', 'failed', 'inconclusive'] as string[]).includes(to)) {
     throw new InvalidTransitionError('execution outcomes can only be derived from Playwright evidence');
   }
-  if (to === 'approved') {
+  if (to === 'approved' || to === 'promoted') {
     if (actor.kind !== 'human' || actor.name.trim() === '') {
-      throw new InvalidTransitionError('only a named human can approve an artifact');
+      throw new InvalidTransitionError(`only a named human can ${to === 'approved' ? 'approve' : 'promote'} an artifact`);
     }
   }
   if (to === 'executed' && actor.kind !== 'runner') {

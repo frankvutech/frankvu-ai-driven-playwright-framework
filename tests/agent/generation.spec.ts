@@ -104,7 +104,7 @@ test.describe('deterministic rendering', () => {
 
   test('customer arguments omit fields by setting them undefined', () => {
     const s: TestSpec = {
-      scenarioId: 'REQ-101-SC-01', requirementId: 'REQ-101', title: 'postal code required', startSignedIn: true,
+      scenarioId: 'REQ-101-SC-01', requirementId: 'REQ-101', title: 'postal code required', layer: 'ui', startSignedIn: true,
       steps: [
         { kind: 'action', target: 'checkoutInformationPage.submit', args: [{ kind: 'customer', omit: ['postalCode'] }] },
         { kind: 'expect', target: 'checkoutInformationPage.errorMessage', select: 'all', matcher: 'toHaveText', expected: 'Error: Postal Code is required', negate: false },

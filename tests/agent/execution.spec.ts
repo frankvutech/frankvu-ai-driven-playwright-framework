@@ -35,7 +35,7 @@ async function generatedRun() {
 test.describe('human approval', () => {
   test('approvers must be named people, not automation', () => {
     for (const name of ['Frank Vu', 'QA Lead Mai']) expect(isAcceptableApprover(name)).toBe(true);
-    for (const name of ['', ' ', 'x', 'relynx-agent', 'Relynx', 'Claude', 'agent', 'AI', 'ci', 'github-actions', 'dependabot[bot]', 'LLM reviewer']) {
+    for (const name of ['', ' ', 'x', 'test-agent', 'Automation', 'Claude', 'agent', 'AI', 'ci', 'github-actions', 'dependabot[bot]', 'LLM reviewer']) {
       expect(isAcceptableApprover(name), name).toBe(false);
     }
   });
@@ -43,7 +43,7 @@ test.describe('human approval', () => {
   test('an agent identity cannot write an approval record', async () => {
     const run = await generatedRun();
     try {
-      expect(() => recordDecision(run.store, 'approved', 'relynx-agent', undefined)).toThrow('not an acceptable human approver');
+      expect(() => recordDecision(run.store, 'approved', 'test-agent', undefined)).toThrow('not an acceptable human approver');
       expect(() => writeApproval(run.store.runDir, { runId: run.runId, decision: 'approved', approver: 'Claude', decidedAt: '', artifacts: [] })).toThrow();
       expect(readApproval(run.store.runDir)).toBeUndefined();
       expect(run.store.manifest().artifacts.every((a) => a.state === 'awaiting_approval')).toBe(true);
@@ -101,7 +101,7 @@ test.describe('execution boundary', () => {
 
       expect(await executeApproved({ ...base, approval: undefined })).toEqual({ executed: false, refusals: [expect.stringContaining('no approval record')] });
       expect((await executeApproved({ ...base, approval: { ...approval, decision: 'rejected' } })) as { refusals: string[] }).toMatchObject({ refusals: [expect.stringContaining('rejected')] });
-      expect((await executeApproved({ ...base, approval: { ...approval, approver: 'relynx-agent' } })) as { refusals: string[] }).toMatchObject({ refusals: [expect.stringContaining('not an acceptable human approver')] });
+      expect((await executeApproved({ ...base, approval: { ...approval, approver: 'test-agent' } })) as { refusals: string[] }).toMatchObject({ refusals: [expect.stringContaining('not an acceptable human approver')] });
       expect((await executeApproved({ ...base, approval: { ...approval, runId: 'other' } })) as { refusals: string[] }).toMatchObject({ refusals: [expect.stringContaining('approval is for run other')] });
       expect((await executeApproved({ ...base, approval: { ...approval, artifacts: approval.artifacts.slice(1) } })) as { refusals: string[] }).toMatchObject({ refusals: [expect.stringContaining('not covered by the approval')] });
 
@@ -125,7 +125,7 @@ test.describe('execution boundary', () => {
       expect(calls).toHaveLength(0);
       const ok = await executeApproved({ ...base, variant: 'problem' });
       expect(ok).toMatchObject({ executed: true, variant: 'problem' });
-      expect(calls[0].env.RELYNX_SESSION_USER).toBe('problem');
+      expect(calls[0].env.AGENT_SESSION_USER).toBe('problem');
     } finally {
       run.cleanup();
     }
@@ -151,9 +151,9 @@ test.describe('execution boundary', () => {
       expect(call.args[0]).toBe(require.resolve('@playwright/test/cli'));
       const files = manifest.artifacts.map((a) => a.file);
       expect(call.args.slice(1)).toEqual(['test', '--config', AGENT_CONFIG, '--project', 'agent-generated', '--retries', '0', '--workers', '2', '--timeout', '30000', ...files]);
-      expect(Object.keys(call.env).sort()).toEqual(['HOME', 'PATH', 'RELYNX_APPROVED_FILES', 'RELYNX_OUTPUT_DIR', 'RELYNX_RESULTS_FILE', 'RELYNX_SESSION_USER', 'UI_BASE_URL']);
-      expect(call.env.RELYNX_SESSION_USER).toBe('standard');
-      expect(JSON.parse(call.env.RELYNX_APPROVED_FILES!)).toEqual(files);
+      expect(Object.keys(call.env).sort()).toEqual(['AGENT_APPROVED_FILES', 'AGENT_OUTPUT_DIR', 'AGENT_RESULTS_FILE', 'AGENT_SESSION_USER', 'HOME', 'PATH', 'UI_BASE_URL']);
+      expect(call.env.AGENT_SESSION_USER).toBe('standard');
+      expect(JSON.parse(call.env.AGENT_APPROVED_FILES!)).toEqual(files);
       expect(call.timeoutMs).toBe(policy.execution.maxDurationMs);
       // The fake runner produced no report, so nothing can be reported as passed.
       expect(manifest.artifacts.map((a) => a.state)).toEqual(['inconclusive', 'inconclusive', 'inconclusive']);
@@ -180,10 +180,10 @@ test.describe('execution boundary', () => {
         return String((e as { stderr?: Buffer }).stderr ?? e) + String((e as { stdout?: Buffer }).stdout ?? '');
       }
     };
-    expect(run({})).toContain('only runs files approved through the Relynx execution adapter');
-    const runs = path.join(REPO_ROOT, '.relynx/runs/x');
-    expect(run({ RELYNX_APPROVED_FILES: '["tests/ui/login.spec.ts"]', RELYNX_RESULTS_FILE: `${runs}/r.json`, RELYNX_OUTPUT_DIR: runs })).toContain('approved files must be .spec.ts files inside generated/');
-    expect(run({ RELYNX_APPROVED_FILES: '["generated/x/a.spec.ts"]', RELYNX_RESULTS_FILE: '/tmp/r.json', RELYNX_OUTPUT_DIR: runs })).toContain('must be inside .relynx/runs/');
+    expect(run({})).toContain('only runs files approved through the agent execution adapter');
+    const runs = path.join(REPO_ROOT, '.agent/runs/x');
+    expect(run({ AGENT_APPROVED_FILES: '["tests/ui/login.spec.ts"]', AGENT_RESULTS_FILE: `${runs}/r.json`, AGENT_OUTPUT_DIR: runs })).toContain('approved files must be .spec.ts files inside generated/');
+    expect(run({ AGENT_APPROVED_FILES: '["generated/x/a.spec.ts"]', AGENT_RESULTS_FILE: '/tmp/r.json', AGENT_OUTPUT_DIR: runs })).toContain('must be inside .agent/');
   });
 
   test('the default Playwright config never picks up generated tests', () => {
