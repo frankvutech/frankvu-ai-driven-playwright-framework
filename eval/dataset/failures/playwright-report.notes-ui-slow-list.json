@@ -1,0 +1,268 @@
+{
+  "config": {
+    "argv": [
+      "<home>/.local/share/mise/installs/node/22.23.2/bin/node",
+      "<repo>/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "playwright.agent.config.ts",
+      "--project",
+      "agent-generated-notes",
+      "--retries",
+      "0",
+      "--workers",
+      "2",
+      "--timeout",
+      "30000",
+      "generated/20261019T120027Z-REQ-412-0v5pal/REQ-412-SC-01.notes.spec.ts"
+    ],
+    "configFile": "<repo>/playwright.agent.config.ts",
+    "rootDir": "<repo>/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "<repo>/.agent/runs/20261019T120027Z-REQ-412-0v5pal/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "agent-generated-notes",
+        "name": "agent-generated-notes",
+        "testDir": "<repo>/generated",
+        "testIgnore": [],
+        "testMatch": [
+          "/^\\/Users\\/frankvu\\/Projects\\/frankvu-ai-driven-playwright-framework\\/generated\\/20261019T120027Z-REQ-412-0v5pal\\/REQ-412-SC-01\\.notes\\.spec\\.ts$/"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "<repo>/.agent/runs/20261019T120027Z-REQ-412-0v5pal/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "agent-generated-notes",
+        "testDir": "<repo>/generated",
+        "snapshotDir": "<repo>/generated",
+        "testIgnore": [],
+        "testMatch": [
+          {}
+        ],
+        "timeout": 30000,
+        "use": {
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure",
+          "video": "off",
+          "actionTimeout": 10000,
+          "navigationTimeout": 15000,
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "testIdAttribute": "data-test"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "agent-generated-notes"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json",
+        {
+          "outputFile": "<repo>/.agent/runs/20261019T120027Z-REQ-412-0v5pal/playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 2,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "../generated/20261019T120027Z-REQ-412-0v5pal/REQ-412-SC-01.notes.spec.ts",
+      "file": "../generated/20261019T120027Z-REQ-412-0v5pal/REQ-412-SC-01.notes.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "a note created through the API is listed on the notes page",
+          "ok": false,
+          "tags": [
+            "generated"
+          ],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [
+                {
+                  "type": "requirement",
+                  "description": "REQ-412",
+                  "location": {
+                    "file": "<repo>/generated/20261019T120027Z-REQ-412-0v5pal/REQ-412-SC-01.notes.spec.ts",
+                    "line": 6,
+                    "column": 5
+                  }
+                },
+                {
+                  "type": "scenario",
+                  "description": "REQ-412-SC-01",
+                  "location": {
+                    "file": "<repo>/generated/20261019T120027Z-REQ-412-0v5pal/REQ-412-SC-01.notes.spec.ts",
+                    "line": 6,
+                    "column": 5
+                  }
+                },
+                {
+                  "type": "agent-run",
+                  "description": "20261019T120027Z-REQ-412-0v5pal",
+                  "location": {
+                    "file": "<repo>/generated/20261019T120027Z-REQ-412-0v5pal/REQ-412-SC-01.notes.spec.ts",
+                    "line": 6,
+                    "column": 5
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "agent-generated-notes",
+              "projectName": "agent-generated-notes",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 5198,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('note').filter({ has: getByTestId('note-title').getByText('t-4485b79a1c0c4456c590-a7650056ace5f953223e-0 From the API', { exact: true }) })\nExpected: visible\nReceived: hidden\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByTestId('note').filter({ has: getByTestId('note-title').getByText('t-4485b79a1c0c4456c590-a7650056ace5f953223e-0 From the API', { exact: true }) }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('note').filter({ has: getByTestId('note-title').getByText('t-4485b79a1c0c4456c590-a7650056ace5f953223e-0 From the API', { exact: true }) })\u001b[22m\n\u001b[2m    14 × locator resolved to <li data-test=\"note\">…</li>\u001b[22m\n\u001b[2m       - unexpected value \"hidden\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('note').filter({ has: getByTestId('note-title').getByText('t-4485b79a1c0c4456c590-a7650056ace5f953223e-0 From the API', { exact: true }) })\nExpected: visible\nReceived: hidden\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByTestId('note').filter({ has: getByTestId('note-title').getByText('t-4485b79a1c0c4456c590-a7650056ace5f953223e-0 From the API', { exact: true }) }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('note').filter({ has: getByTestId('note-title').getByText('t-4485b79a1c0c4456c590-a7650056ace5f953223e-0 From the API', { exact: true }) })\u001b[22m\n\u001b[2m    14 × locator resolved to <li data-test=\"note\">…</li>\u001b[22m\n\u001b[2m       - unexpected value \"hidden\"\u001b[22m\n\n    at <repo>/generated/20261019T120027Z-REQ-412-0v5pal/REQ-412-SC-01.notes.spec.ts:22:64",
+                    "location": {
+                      "file": "<repo>/generated/20261019T120027Z-REQ-412-0v5pal/REQ-412-SC-01.notes.spec.ts",
+                      "column": 64,
+                      "line": 22
+                    },
+                    "snippet": "  20 |     await signInBrowser(\"alice\");\n  21 |     await notesPage.goto();\n> 22 |     await expect(notesPage.note(testPrefix + \" From the API\")).toBeVisible();\n     |                                                                ^\n  23 |   },\n  24 | );\n  25 |"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "<repo>/generated/20261019T120027Z-REQ-412-0v5pal/REQ-412-SC-01.notes.spec.ts",
+                        "column": 64,
+                        "line": 22
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  getByTestId('note').filter({ has: getByTestId('note-title').getByText('t-4485b79a1c0c4456c590-a7650056ace5f953223e-0 From the API', { exact: true }) })\nExpected: visible\nReceived: hidden\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" getByTestId('note').filter({ has: getByTestId('note-title').getByText('t-4485b79a1c0c4456c590-a7650056ace5f953223e-0 From the API', { exact: true }) }) with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByTestId('note').filter({ has: getByTestId('note-title').getByText('t-4485b79a1c0c4456c590-a7650056ace5f953223e-0 From the API', { exact: true }) })\u001b[22m\n\u001b[2m    14 × locator resolved to <li data-test=\"note\">…</li>\u001b[22m\n\u001b[2m       - unexpected value \"hidden\"\u001b[22m\n\n\n  20 |     await signInBrowser(\"alice\");\n  21 |     await notesPage.goto();\n> 22 |     await expect(notesPage.note(testPrefix + \" From the API\")).toBeVisible();\n     |                                                                ^\n  23 |   },\n  24 | );\n  25 |\n    at <repo>/generated/20261019T120027Z-REQ-412-0v5pal/REQ-412-SC-01.notes.spec.ts:22:64"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-19T12:00:29.761Z",
+                  "annotations": [
+                    {
+                      "type": "requirement",
+                      "description": "REQ-412",
+                      "location": {
+                        "file": "<repo>/generated/20261019T120027Z-REQ-412-0v5pal/REQ-412-SC-01.notes.spec.ts",
+                        "line": 6,
+                        "column": 5
+                      }
+                    },
+                    {
+                      "type": "scenario",
+                      "description": "REQ-412-SC-01",
+                      "location": {
+                        "file": "<repo>/generated/20261019T120027Z-REQ-412-0v5pal/REQ-412-SC-01.notes.spec.ts",
+                        "line": 6,
+                        "column": 5
+                      }
+                    },
+                    {
+                      "type": "agent-run",
+                      "description": "20261019T120027Z-REQ-412-0v5pal",
+                      "location": {
+                        "file": "<repo>/generated/20261019T120027Z-REQ-412-0v5pal/REQ-412-SC-01.notes.spec.ts",
+                        "line": 6,
+                        "column": 5
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "<repo>/.agent/runs/20261019T120027Z-REQ-412-0v5pal/artifacts/20261019T120027Z-REQ-412-0-d47f0-is-listed-on-the-notes-page-agent-generated-notes/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "<repo>/.agent/runs/20261019T120027Z-REQ-412-0v5pal/artifacts/20261019T120027Z-REQ-412-0-d47f0-is-listed-on-the-notes-page-agent-generated-notes/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "<repo>/.agent/runs/20261019T120027Z-REQ-412-0v5pal/artifacts/20261019T120027Z-REQ-412-0-d47f0-is-listed-on-the-notes-page-agent-generated-notes/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "<repo>/generated/20261019T120027Z-REQ-412-0v5pal/REQ-412-SC-01.notes.spec.ts",
+                    "column": 64,
+                    "line": 22
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "4485b79a1c0c4456c590-a7650056ace5f953223e",
+          "file": "../generated/20261019T120027Z-REQ-412-0v5pal/REQ-412-SC-01.notes.spec.ts",
+          "line": 6,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-19T12:00:29.397Z",
+    "duration": 5737.089,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

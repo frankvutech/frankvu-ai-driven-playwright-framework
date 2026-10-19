@@ -1,0 +1,846 @@
+{
+  "config": {
+    "argv": [
+      "<home>/.local/share/mise/installs/node/22.23.2/bin/node",
+      "<repo>/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "playwright.agent.config.ts",
+      "--project",
+      "agent-generated-api",
+      "--retries",
+      "0",
+      "--workers",
+      "2",
+      "--timeout",
+      "15000",
+      "generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-01.api.spec.ts",
+      "generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-02.api.spec.ts",
+      "generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-03.api.spec.ts",
+      "generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-04.api.spec.ts",
+      "generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-05.api.spec.ts",
+      "generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-06.api.spec.ts"
+    ],
+    "configFile": "<repo>/playwright.agent.config.ts",
+    "rootDir": "<repo>/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 2
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "<repo>/.agent/runs/20261019T115923Z-REQ-411-c50juw/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "agent-generated-api",
+        "name": "agent-generated-api",
+        "testDir": "<repo>/generated",
+        "testIgnore": [],
+        "testMatch": [
+          "/^\\/Users\\/frankvu\\/Projects\\/frankvu-ai-driven-playwright-framework\\/generated\\/20261019T115923Z-REQ-411-c50juw\\/REQ-411-SC-01\\.api\\.spec\\.ts$/",
+          "/^\\/Users\\/frankvu\\/Projects\\/frankvu-ai-driven-playwright-framework\\/generated\\/20261019T115923Z-REQ-411-c50juw\\/REQ-411-SC-02\\.api\\.spec\\.ts$/",
+          "/^\\/Users\\/frankvu\\/Projects\\/frankvu-ai-driven-playwright-framework\\/generated\\/20261019T115923Z-REQ-411-c50juw\\/REQ-411-SC-03\\.api\\.spec\\.ts$/",
+          "/^\\/Users\\/frankvu\\/Projects\\/frankvu-ai-driven-playwright-framework\\/generated\\/20261019T115923Z-REQ-411-c50juw\\/REQ-411-SC-04\\.api\\.spec\\.ts$/",
+          "/^\\/Users\\/frankvu\\/Projects\\/frankvu-ai-driven-playwright-framework\\/generated\\/20261019T115923Z-REQ-411-c50juw\\/REQ-411-SC-05\\.api\\.spec\\.ts$/",
+          "/^\\/Users\\/frankvu\\/Projects\\/frankvu-ai-driven-playwright-framework\\/generated\\/20261019T115923Z-REQ-411-c50juw\\/REQ-411-SC-06\\.api\\.spec\\.ts$/"
+        ],
+        "timeout": 15000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "<repo>/.agent/runs/20261019T115923Z-REQ-411-c50juw/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "name": "agent-generated-api",
+        "testDir": "<repo>/generated",
+        "snapshotDir": "<repo>/generated",
+        "testIgnore": [],
+        "testMatch": [
+          {},
+          {},
+          {},
+          {},
+          {},
+          {}
+        ],
+        "timeout": 15000,
+        "use": {
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure",
+          "video": "off",
+          "actionTimeout": 10000,
+          "navigationTimeout": 15000,
+          "baseURL": "https://jsonplaceholder.typicode.com",
+          "extraHTTPHeaders": {
+            "Accept": "application/json"
+          }
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "agent-generated-api"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json",
+        {
+          "outputFile": "<repo>/.agent/runs/20261019T115923Z-REQ-411-c50juw/playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 2,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "../generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-01.api.spec.ts",
+      "file": "../generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-01.api.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "creating a note returns 201 and the caller as owner",
+          "ok": true,
+          "tags": [
+            "generated"
+          ],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [
+                {
+                  "type": "requirement",
+                  "description": "REQ-411",
+                  "location": {
+                    "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-01.api.spec.ts",
+                    "line": 8,
+                    "column": 5
+                  }
+                },
+                {
+                  "type": "scenario",
+                  "description": "REQ-411-SC-01",
+                  "location": {
+                    "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-01.api.spec.ts",
+                    "line": 8,
+                    "column": 5
+                  }
+                },
+                {
+                  "type": "agent-run",
+                  "description": "20261019T115923Z-REQ-411-c50juw",
+                  "location": {
+                    "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-01.api.spec.ts",
+                    "line": 8,
+                    "column": 5
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "agent-generated-api",
+              "projectName": "agent-generated-api",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 97,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-19T11:59:25.829Z",
+                  "annotations": [
+                    {
+                      "type": "requirement",
+                      "description": "REQ-411",
+                      "location": {
+                        "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-01.api.spec.ts",
+                        "line": 8,
+                        "column": 5
+                      }
+                    },
+                    {
+                      "type": "scenario",
+                      "description": "REQ-411-SC-01",
+                      "location": {
+                        "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-01.api.spec.ts",
+                        "line": 8,
+                        "column": 5
+                      }
+                    },
+                    {
+                      "type": "agent-run",
+                      "description": "20261019T115923Z-REQ-411-c50juw",
+                      "location": {
+                        "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-01.api.spec.ts",
+                        "line": 8,
+                        "column": 5
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c0cbc0a958a33cdfb6b8-f9f2d22d615b81592e1a",
+          "file": "../generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-01.api.spec.ts",
+          "line": 8,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "../generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-02.api.spec.ts",
+      "file": "../generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-02.api.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "listing notes without a token is rejected",
+          "ok": true,
+          "tags": [
+            "generated"
+          ],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [
+                {
+                  "type": "requirement",
+                  "description": "REQ-411",
+                  "location": {
+                    "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-02.api.spec.ts",
+                    "line": 8,
+                    "column": 5
+                  }
+                },
+                {
+                  "type": "scenario",
+                  "description": "REQ-411-SC-02",
+                  "location": {
+                    "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-02.api.spec.ts",
+                    "line": 8,
+                    "column": 5
+                  }
+                },
+                {
+                  "type": "agent-run",
+                  "description": "20261019T115923Z-REQ-411-c50juw",
+                  "location": {
+                    "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-02.api.spec.ts",
+                    "line": 8,
+                    "column": 5
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "agent-generated-api",
+              "projectName": "agent-generated-api",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 61,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-19T11:59:25.847Z",
+                  "annotations": [
+                    {
+                      "type": "requirement",
+                      "description": "REQ-411",
+                      "location": {
+                        "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-02.api.spec.ts",
+                        "line": 8,
+                        "column": 5
+                      }
+                    },
+                    {
+                      "type": "scenario",
+                      "description": "REQ-411-SC-02",
+                      "location": {
+                        "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-02.api.spec.ts",
+                        "line": 8,
+                        "column": 5
+                      }
+                    },
+                    {
+                      "type": "agent-run",
+                      "description": "20261019T115923Z-REQ-411-c50juw",
+                      "location": {
+                        "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-02.api.spec.ts",
+                        "line": 8,
+                        "column": 5
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "284ea8c611a9b1e0a79f-8168fcf8da8c5700bfd2",
+          "file": "../generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-02.api.spec.ts",
+          "line": 8,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "../generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-03.api.spec.ts",
+      "file": "../generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-03.api.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "another user's note is forbidden",
+          "ok": true,
+          "tags": [
+            "generated"
+          ],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [
+                {
+                  "type": "requirement",
+                  "description": "REQ-411",
+                  "location": {
+                    "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-03.api.spec.ts",
+                    "line": 8,
+                    "column": 5
+                  }
+                },
+                {
+                  "type": "scenario",
+                  "description": "REQ-411-SC-03",
+                  "location": {
+                    "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-03.api.spec.ts",
+                    "line": 8,
+                    "column": 5
+                  }
+                },
+                {
+                  "type": "agent-run",
+                  "description": "20261019T115923Z-REQ-411-c50juw",
+                  "location": {
+                    "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-03.api.spec.ts",
+                    "line": 8,
+                    "column": 5
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "agent-generated-api",
+              "projectName": "agent-generated-api",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 143,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-19T11:59:25.951Z",
+                  "annotations": [
+                    {
+                      "type": "requirement",
+                      "description": "REQ-411",
+                      "location": {
+                        "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-03.api.spec.ts",
+                        "line": 8,
+                        "column": 5
+                      }
+                    },
+                    {
+                      "type": "scenario",
+                      "description": "REQ-411-SC-03",
+                      "location": {
+                        "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-03.api.spec.ts",
+                        "line": 8,
+                        "column": 5
+                      }
+                    },
+                    {
+                      "type": "agent-run",
+                      "description": "20261019T115923Z-REQ-411-c50juw",
+                      "location": {
+                        "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-03.api.spec.ts",
+                        "line": 8,
+                        "column": 5
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c829b2391550fb65e7d5-8518a298cd6f6d48f533",
+          "file": "../generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-03.api.spec.ts",
+          "line": 8,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "../generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-04.api.spec.ts",
+      "file": "../generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-04.api.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "a 121-character title is rejected",
+          "ok": false,
+          "tags": [
+            "generated"
+          ],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [
+                {
+                  "type": "requirement",
+                  "description": "REQ-411",
+                  "location": {
+                    "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-04.api.spec.ts",
+                    "line": 8,
+                    "column": 5
+                  }
+                },
+                {
+                  "type": "scenario",
+                  "description": "REQ-411-SC-04",
+                  "location": {
+                    "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-04.api.spec.ts",
+                    "line": 8,
+                    "column": 5
+                  }
+                },
+                {
+                  "type": "agent-run",
+                  "description": "20261019T115923Z-REQ-411-c50juw",
+                  "location": {
+                    "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-04.api.spec.ts",
+                    "line": 8,
+                    "column": 5
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "agent-generated-api",
+              "projectName": "agent-generated-api",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 210,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m400\u001b[39m\nReceived: \u001b[31m201\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m400\u001b[39m\nReceived: \u001b[31m201\u001b[39m\n    at <repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-04.api.spec.ts:21:25",
+                    "location": {
+                      "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-04.api.spec.ts",
+                      "column": 25,
+                      "line": 21
+                    },
+                    "snippet": "  19 |     const alice = await exampleAppApi.as(\"alice\");\n  20 |     const r1 = await alice.create({ title: (testPrefix + \" \").padEnd(121, \"x\") });\n> 21 |     expect(r1.status()).toBe(400);\n     |                         ^\n  22 |     expect((await parseJson(r1, ApiErrorSchema)).error.code).toBe(\"validation_error\");\n  23 |   },\n  24 | );"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-04.api.spec.ts",
+                        "column": 25,
+                        "line": 21
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m400\u001b[39m\nReceived: \u001b[31m201\u001b[39m\n\n  19 |     const alice = await exampleAppApi.as(\"alice\");\n  20 |     const r1 = await alice.create({ title: (testPrefix + \" \").padEnd(121, \"x\") });\n> 21 |     expect(r1.status()).toBe(400);\n     |                         ^\n  22 |     expect((await parseJson(r1, ApiErrorSchema)).error.code).toBe(\"validation_error\");\n  23 |   },\n  24 | );\n    at <repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-04.api.spec.ts:21:25"
+                    },
+                    {
+                      "location": {
+                        "file": "<repo>/src/api/response.ts",
+                        "column": 11,
+                        "line": 20
+                      },
+                      "message": "Error: Response from /api/notes (HTTP 200) does not match the expected schema:\n  0.title: Too big: expected string to have <=120 characters\n\n   at ../src/api/response.ts:20\n\n  18 |   if (!result.success) {\n  19 |     const problems = result.error.issues.map((i) => `  ${i.path.join('.') || '(root)'}: ${i.message}`).join('\\n');\n> 20 |     throw new Error(`Response from ${where} does not match the expected schema:\\n${problems}`);\n     |           ^\n  21 |   }\n  22 |   return result.data;\n  23 | }\n    at parseJson (<repo>/src/api/response.ts:20:11)\n    at deleteNotesWithPrefix (<repo>/src/fixtures/api.ts:100:17)\n    at Object.exampleAppApi (<repo>/src/fixtures/api.ts:92:46)"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-19T11:59:25.960Z",
+                  "annotations": [
+                    {
+                      "type": "requirement",
+                      "description": "REQ-411",
+                      "location": {
+                        "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-04.api.spec.ts",
+                        "line": 8,
+                        "column": 5
+                      }
+                    },
+                    {
+                      "type": "scenario",
+                      "description": "REQ-411-SC-04",
+                      "location": {
+                        "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-04.api.spec.ts",
+                        "line": 8,
+                        "column": 5
+                      }
+                    },
+                    {
+                      "type": "agent-run",
+                      "description": "20261019T115923Z-REQ-411-c50juw",
+                      "location": {
+                        "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-04.api.spec.ts",
+                        "line": 8,
+                        "column": 5
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "<repo>/.agent/runs/20261019T115923Z-REQ-411-c50juw/artifacts/20261019T115923Z-REQ-411-c-05f8f-character-title-is-rejected-agent-generated-api/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "<repo>/.agent/runs/20261019T115923Z-REQ-411-c50juw/artifacts/20261019T115923Z-REQ-411-c-05f8f-character-title-is-rejected-agent-generated-api/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-04.api.spec.ts",
+                    "column": 25,
+                    "line": 21
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "7256688cb6359be32d9f-9bbb92d5b91bc3228e2d",
+          "file": "../generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-04.api.spec.ts",
+          "line": 8,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "../generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-05.api.spec.ts",
+      "file": "../generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-05.api.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "a long title gets a JSON answer",
+          "ok": false,
+          "tags": [
+            "generated"
+          ],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [
+                {
+                  "type": "requirement",
+                  "description": "REQ-411",
+                  "location": {
+                    "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-05.api.spec.ts",
+                    "line": 6,
+                    "column": 5
+                  }
+                },
+                {
+                  "type": "scenario",
+                  "description": "REQ-411-SC-05",
+                  "location": {
+                    "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-05.api.spec.ts",
+                    "line": 6,
+                    "column": 5
+                  }
+                },
+                {
+                  "type": "agent-run",
+                  "description": "20261019T115923Z-REQ-411-c50juw",
+                  "location": {
+                    "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-05.api.spec.ts",
+                    "line": 6,
+                    "column": 5
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "agent-generated-api",
+              "projectName": "agent-generated-api",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "failed",
+                  "duration": 63,
+                  "error": {
+                    "message": "Error: Response from /api/notes (HTTP 200) does not match the expected schema:\n  0.title: Too big: expected string to have <=120 characters",
+                    "stack": "Error: Response from /api/notes (HTTP 200) does not match the expected schema:\n  0.title: Too big: expected string to have <=120 characters\n    at parseJson (<repo>/src/api/response.ts:20:11)\n    at deleteNotesWithPrefix (<repo>/src/fixtures/api.ts:100:17)\n    at Object.exampleAppApi (<repo>/src/fixtures/api.ts:92:46)",
+                    "location": {
+                      "file": "<repo>/src/api/response.ts",
+                      "column": 11,
+                      "line": 20
+                    },
+                    "snippet": "   at ../src/api/response.ts:20\n\n  18 |   if (!result.success) {\n  19 |     const problems = result.error.issues.map((i) => `  ${i.path.join('.') || '(root)'}: ${i.message}`).join('\\n');\n> 20 |     throw new Error(`Response from ${where} does not match the expected schema:\\n${problems}`);\n     |           ^\n  21 |   }\n  22 |   return result.data;\n  23 | }"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "<repo>/src/api/response.ts",
+                        "column": 11,
+                        "line": 20
+                      },
+                      "message": "Error: Response from /api/notes (HTTP 200) does not match the expected schema:\n  0.title: Too big: expected string to have <=120 characters\n\n   at ../src/api/response.ts:20\n\n  18 |   if (!result.success) {\n  19 |     const problems = result.error.issues.map((i) => `  ${i.path.join('.') || '(root)'}: ${i.message}`).join('\\n');\n> 20 |     throw new Error(`Response from ${where} does not match the expected schema:\\n${problems}`);\n     |           ^\n  21 |   }\n  22 |   return result.data;\n  23 | }\n    at parseJson (<repo>/src/api/response.ts:20:11)\n    at deleteNotesWithPrefix (<repo>/src/fixtures/api.ts:100:17)\n    at Object.exampleAppApi (<repo>/src/fixtures/api.ts:92:46)"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-19T11:59:26.113Z",
+                  "annotations": [
+                    {
+                      "type": "requirement",
+                      "description": "REQ-411",
+                      "location": {
+                        "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-05.api.spec.ts",
+                        "line": 6,
+                        "column": 5
+                      }
+                    },
+                    {
+                      "type": "scenario",
+                      "description": "REQ-411-SC-05",
+                      "location": {
+                        "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-05.api.spec.ts",
+                        "line": 6,
+                        "column": 5
+                      }
+                    },
+                    {
+                      "type": "agent-run",
+                      "description": "20261019T115923Z-REQ-411-c50juw",
+                      "location": {
+                        "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-05.api.spec.ts",
+                        "line": 6,
+                        "column": 5
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "<repo>/.agent/runs/20261019T115923Z-REQ-411-c50juw/artifacts/20261019T115923Z-REQ-411-c-d15e3-ng-title-gets-a-JSON-answer-agent-generated-api/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "<repo>/.agent/runs/20261019T115923Z-REQ-411-c50juw/artifacts/20261019T115923Z-REQ-411-c-d15e3-ng-title-gets-a-JSON-answer-agent-generated-api/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "<repo>/src/api/response.ts",
+                    "column": 11,
+                    "line": 20
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "7d59f851764879192925-3ff4d751826bfb7a1174",
+          "file": "../generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-05.api.spec.ts",
+          "line": 6,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "../generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-06.api.spec.ts",
+      "file": "../generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-06.api.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "creating a note returns 200",
+          "ok": false,
+          "tags": [
+            "generated"
+          ],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [
+                {
+                  "type": "requirement",
+                  "description": "REQ-411",
+                  "location": {
+                    "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-06.api.spec.ts",
+                    "line": 8,
+                    "column": 5
+                  }
+                },
+                {
+                  "type": "scenario",
+                  "description": "REQ-411-SC-06",
+                  "location": {
+                    "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-06.api.spec.ts",
+                    "line": 8,
+                    "column": 5
+                  }
+                },
+                {
+                  "type": "agent-run",
+                  "description": "20261019T115923Z-REQ-411-c50juw",
+                  "location": {
+                    "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-06.api.spec.ts",
+                    "line": 8,
+                    "column": 5
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "agent-generated-api",
+              "projectName": "agent-generated-api",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 1,
+                  "status": "failed",
+                  "duration": 89,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m201\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m201\u001b[39m\n    at <repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-06.api.spec.ts:21:25",
+                    "location": {
+                      "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-06.api.spec.ts",
+                      "column": 25,
+                      "line": 21
+                    },
+                    "snippet": "  19 |     const alice = await exampleAppApi.as(\"alice\");\n  20 |     const r1 = await alice.create({ title: testPrefix + \" Groceries\" });\n> 21 |     expect(r1.status()).toBe(200);\n     |                         ^\n  22 |     expect((await parseJson(r1, NoteSchema)).owner).toBe(\"alice\");\n  23 |   },\n  24 | );"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-06.api.spec.ts",
+                        "column": 25,
+                        "line": 21
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m201\u001b[39m\n\n  19 |     const alice = await exampleAppApi.as(\"alice\");\n  20 |     const r1 = await alice.create({ title: testPrefix + \" Groceries\" });\n> 21 |     expect(r1.status()).toBe(200);\n     |                         ^\n  22 |     expect((await parseJson(r1, NoteSchema)).owner).toBe(\"alice\");\n  23 |   },\n  24 | );\n    at <repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-06.api.spec.ts:21:25"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-19T11:59:26.765Z",
+                  "annotations": [
+                    {
+                      "type": "requirement",
+                      "description": "REQ-411",
+                      "location": {
+                        "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-06.api.spec.ts",
+                        "line": 8,
+                        "column": 5
+                      }
+                    },
+                    {
+                      "type": "scenario",
+                      "description": "REQ-411-SC-06",
+                      "location": {
+                        "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-06.api.spec.ts",
+                        "line": 8,
+                        "column": 5
+                      }
+                    },
+                    {
+                      "type": "agent-run",
+                      "description": "20261019T115923Z-REQ-411-c50juw",
+                      "location": {
+                        "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-06.api.spec.ts",
+                        "line": 8,
+                        "column": 5
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "<repo>/.agent/runs/20261019T115923Z-REQ-411-c50juw/artifacts/20261019T115923Z-REQ-411-c-24837-creating-a-note-returns-200-agent-generated-api/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "<repo>/.agent/runs/20261019T115923Z-REQ-411-c50juw/artifacts/20261019T115923Z-REQ-411-c-24837-creating-a-note-returns-200-agent-generated-api/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "<repo>/generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-06.api.spec.ts",
+                    "column": 25,
+                    "line": 21
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "284716dc7e2c91525a3c-b7d923fba712f94596f3",
+          "file": "../generated/20261019T115923Z-REQ-411-c50juw/REQ-411-SC-06.api.spec.ts",
+          "line": 8,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-19T11:59:25.210Z",
+    "duration": 1695.987,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

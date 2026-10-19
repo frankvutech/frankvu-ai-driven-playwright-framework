@@ -6,6 +6,7 @@ import { recordDecision } from '../src/agent/workflow/decide';
 import { executeRun } from '../src/agent/workflow/execute';
 import { RunStore } from '../src/agent/workflow/store';
 import { renderSpec } from '../src/agent/generation/render';
+import { agentProjectFor } from '../src/agent/execution/adapter';
 import { isAcceptableApprover } from '../src/agent/execution/approval';
 import type { Policy } from '../src/agent/execution/policy';
 import type { RunEvidence } from '../src/agent/domain/result';
@@ -14,7 +15,7 @@ import type { UsageRecord } from '../src/agent/llm/structured';
 import type { FunctionalDataset, FunctionalSuite } from './schema';
 import { specHash } from './dataset';
 import { assertionFindings, type AssertionFinding } from './assertions';
-import type { WorkflowMeasurement } from './cost';
+import { phaseDurations, type WorkflowMeasurement } from './cost';
 import { binaryConfusion, countWhere, ratio } from './metrics';
 import { REPO_ROOT } from './evaluate';
 
@@ -39,6 +40,9 @@ export interface FunctionalOptions {
 
 export interface FunctionalCaseResult {
   suiteId: string;
+  /** Application under test and the spec's layer (ui / api / combined). */
+  application: string;
+  layer: string;
   variant: string;
   scenarioId: string;
   relevantDefect: boolean;
@@ -79,6 +83,7 @@ async function runSuiteVariant(suite: FunctionalSuite, variant: string, opts: Fu
   for (const spec of suite.specs) {
     if (specHash(spec) !== suite.specSha256[spec.scenarioId]) throw new Error(`${suite.id}/${spec.scenarioId}: spec does not match pinned hash`);
   }
+  const application = suite.requirement.application ?? 'storefront';
   const plan = { requirementId: suite.requirement.id, scenarios: suite.scenarios, ambiguities: [], uncoveredAcceptanceCriteria: [] };
   const provider = new MockProvider({ 'test-plan': [JSON.stringify(plan)], 'test-generation': [JSON.stringify({ tests: suite.specs, missingCapabilities: [] })] });
   const started = Date.now();
@@ -93,10 +98,15 @@ async function runSuiteVariant(suite: FunctionalSuite, variant: string, opts: Fu
       // The files must be exactly the pinned specs rendered for this run.
       for (const a of generated.artifacts.filter((x) => x.state === 'awaiting_approval')) {
         const spec = suite.specs.find((s) => s.scenarioId === a.scenarioId)!;
-        if (readFileSync(path.join(REPO_ROOT, a.file), 'utf8') !== renderSpec(spec, generated.runId)) throw new Error(`${a.file} differs from the pinned spec`);
+        if (readFileSync(path.join(REPO_ROOT, a.file), 'utf8') !== renderSpec(spec, generated.runId, { application })) throw new Error(`${a.file} differs from the pinned spec`);
       }
       recordDecision(store, 'approved', opts.approver, `pinned dataset specs ${suite.id} (dataset sha256-verified)`);
-      const executed = await executeRun(store, { policy: opts.policy, env: opts.env, variant });
+      // Storefront variants are demo accounts; notes variants are failure modes of the local example app.
+      const executed = await executeRun(store, {
+        policy: opts.policy,
+        env: opts.env,
+        ...(application === 'notes' ? { exampleAppVariant: variant } : { variant }),
+      });
       status = executed.status;
       const evidence = store.read<RunEvidence>('evidence.json');
       if (evidence) playwrightMs = Date.parse(evidence.finishedAt) - Date.parse(evidence.startedAt);
@@ -111,7 +121,7 @@ async function runSuiteVariant(suite: FunctionalSuite, variant: string, opts: Fu
   const usage = store.read<UsageRecord[]>('llm-usage.json') ?? [];
   const cases: FunctionalCaseResult[] = (suite.variants[variant] ?? []).map((ref) => {
     const artifact = manifest.artifacts.find((a) => a.scenarioId === ref.scenarioId);
-    const test = evidence?.tests.find((t) => t.project === 'agent-generated' && t.scenarioId === ref.scenarioId);
+    const test = evidence?.tests.find((t) => artifact !== undefined && t.project === agentProjectFor(artifact.file) && t.scenarioId === ref.scenarioId);
     const analysis = analyses.find((a) => a.scenarioId === ref.scenarioId);
     const spec = suite.specs.find((s) => s.scenarioId === ref.scenarioId)!;
     const scenario = suite.scenarios.find((s) => s.id === ref.scenarioId);
@@ -119,6 +129,8 @@ async function runSuiteVariant(suite: FunctionalSuite, variant: string, opts: Fu
     const observedOutcome = observedState === 'passed' ? 'pass' : observedState === 'failed' ? 'fail' : null;
     return {
       suiteId: suite.id,
+      application,
+      layer: spec.layer ?? 'ui',
       variant,
       scenarioId: ref.scenarioId,
       relevantDefect: ref.relevantDefect,
@@ -145,6 +157,7 @@ async function runSuiteVariant(suite: FunctionalSuite, variant: string, opts: Fu
       totalMs: Date.now() - started,
       playwrightMs,
       succeeded: status === 'executed' && !error,
+      phases: phaseDurations(manifest.steps),
     },
   };
   if (!opts.keepRuns) {
@@ -179,8 +192,15 @@ export function functionalMetrics(cases: FunctionalCaseResult[]) {
     'the analysis says product_behavior',
   );
   const control = cases.filter((c) => c.variant === 'standard');
+  const detectionFor = (subset: FunctionalCaseResult[]) =>
+    binaryConfusion(subset.map((c) => ({ actual: c.relevantDefect, predicted: decided(c) })), 'a relevant seeded defect exists', 'the generated test failed');
+  const byLayer = Object.fromEntries([...new Set(cases.map((c) => c.layer))].sort().map((layer) => [layer, detectionFor(cases.filter((c) => c.layer === layer))]));
+  // Detection precision: of the failures, how many point at a real seeded defect?
+  const precision = ratio(detection.tp, detection.tp + detection.fp);
   return {
     detection,
+    detectionPrecision: precision,
+    detectionByLayer: byLayer,
     diagnosis,
     functional: {
       agreementWithReference: ratio(countWhere(cases, (c) => c.matchesReference === true), countWhere(cases, (c) => c.matchesReference !== null)),

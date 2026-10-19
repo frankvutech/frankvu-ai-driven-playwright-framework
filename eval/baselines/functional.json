@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
   "metadata": {
-    "runId": "eval-20261019T081218Z-functional-6dskdt",
-    "timestamp": "2026-10-19T08:12:18.785Z",
+    "runId": "eval-20261019T121447Z-functional-qqve2i",
+    "timestamp": "2026-10-19T12:14:47.583Z",
     "mode": "functional",
-    "datasetVersion": "2.0.1",
-    "datasetSha256": "eb88dee33d630989ed392ced0e6831a3e207df6d3c3fa29e54703704bd3c9e77",
+    "datasetVersion": "3.0.0",
+    "datasetSha256": "a24e52dd49b397259d7a1028ae83fdc40f63598f2cc008f3a0e289735a291324",
     "agent": {
-      "commit": "dd141616fcaa8f751f9f22fca9f52a7ceacdc304",
+      "commit": "5215869940cfc6db78f5284a2b8f290bad51bb1a",
       "dirty": true
     },
     "promptVersion": "3.0.0",
-    "promptSha256": "52f2781252dddc0ed7bba2c77bac3c61283f86d17859f76017a3d14481262b94",
+    "promptSha256": "ecf777a66d374bd0a9acc3af44f86d592b533fe322770c398b439d5dcda35f92",
     "provider": {
       "name": "mock",
       "model": "pinned-dataset-specs",
@@ -26,54 +26,75 @@
         "retries": 0,
         "workers": 2
       },
+      "policyHealing": {
+        "reproduceRuns": 3,
+        "verifyRuns": 3,
+        "maxWaitTimeoutMs": 15000,
+        "maxChanges": 2,
+        "patchableRoots": [
+          "src/pages/",
+          "src/components/"
+        ]
+      },
       "repeat": 1,
       "suites": "all",
-      "baseline": "eval/baselines/functional.json"
+      "cases": "all",
+      "baseline": null,
+      "pricing": "eval/pricing.json",
+      "gates": "eval/gates.json"
     },
     "target": {
-      "name": "saucedemo-public-demo",
-      "version": "unversioned public demo site; behaviour verified 2026-10-18"
+      "name": "saucedemo-public-demo; local example-app",
+      "version": "saucedemo: unversioned public demo, behaviour verified 2026-10-18; example-app: example-app/server.ts at the evaluated commit"
     },
     "labelReview": {
-      "total": 62,
+      "total": 104,
       "humanReviewed": 0,
       "byMethod": {
-        "constructed": 18,
-        "observed-controlled-variation": 4,
-        "author-judgment": 40
+        "constructed": 41,
+        "observed-controlled-variation": 14,
+        "author-judgment": 49
       }
     },
     "executionRefs": [
-      ".agent/runs/20261019T081218Z-REQ-301-liq9c4",
-      ".agent/runs/20261019T081218Z-REQ-301-r5821j",
-      ".agent/runs/20261019T081218Z-REQ-301-q214l5",
-      ".agent/runs/20261019T081224Z-REQ-302-ojh9yy",
-      ".agent/runs/20261019T081227Z-REQ-302-kqyfv8",
-      ".agent/runs/20261019T081230Z-REQ-302-6ml0lq",
-      ".agent/runs/20261019T081230Z-REQ-303-kdz6h0",
-      ".agent/runs/20261019T081234Z-REQ-303-u2l5w9",
-      ".agent/runs/20261019T081236Z-REQ-303-5mnxpu",
-      ".agent/runs/20261019T081240Z-REQ-304-o82sa5"
+      ".agent/runs/20261019T121447Z-REQ-301-wkuc0u",
+      ".agent/runs/20261019T121447Z-REQ-301-368ah7",
+      ".agent/runs/20261019T121447Z-REQ-301-arhqnz",
+      ".agent/runs/20261019T121454Z-REQ-302-paifeh",
+      ".agent/runs/20261019T121458Z-REQ-302-ftybr1",
+      ".agent/runs/20261019T121459Z-REQ-302-nqhdxk",
+      ".agent/runs/20261019T121500Z-REQ-303-jkt2au",
+      ".agent/runs/20261019T121504Z-REQ-303-5kljyk",
+      ".agent/runs/20261019T121508Z-REQ-303-rgi33j",
+      ".agent/runs/20261019T121510Z-REQ-304-vwfb46",
+      ".agent/runs/20261019T121516Z-REQ-411-vk556c",
+      ".agent/runs/20261019T121518Z-REQ-411-6sim1g",
+      ".agent/runs/20261019T121518Z-REQ-411-79mzu6",
+      ".agent/runs/20261019T121519Z-REQ-411-5fj49l",
+      ".agent/runs/20261019T121521Z-REQ-412-ufpyfk",
+      ".agent/runs/20261019T121522Z-REQ-412-1gzdao",
+      ".agent/runs/20261019T121522Z-REQ-412-yui2m5"
     ],
     "repeat": 1
   },
   "summary": {
-    "casesEvaluated": 29,
-    "passed": 24,
-    "failed": 5,
+    "casesEvaluated": 62,
+    "passed": 53,
+    "failed": 9,
     "inconclusive": 0,
     "datasetSize": {
-      "planningCases": 21,
-      "generationCases": 19,
-      "functionalReferenceOutcomes": 29,
-      "labelledFailures": 15,
-      "reportControls": 3
+      "planningCases": 25,
+      "generationCases": 31,
+      "functionalReferenceOutcomes": 62,
+      "labelledFailures": 23,
+      "reportControls": 4,
+      "healingCases": 15
     }
   },
   "metrics": [
     {
       "id": "functional.detection.truePositives",
-      "value": 11,
+      "value": 20,
       "unit": "count",
       "kind": "measured",
       "higherIsBetter": true,
@@ -95,7 +116,7 @@
     },
     {
       "id": "functional.detection.falsePositives",
-      "value": 1,
+      "value": 5,
       "unit": "count",
       "kind": "measured",
       "higherIsBetter": false,
@@ -106,7 +127,7 @@
     },
     {
       "id": "functional.detection.trueNegatives",
-      "value": 13,
+      "value": 33,
       "unit": "count",
       "kind": "measured",
       "higherIsBetter": true,
@@ -128,6 +149,125 @@
     },
     {
       "id": "functional.detection.recall",
+      "value": 0.8333333333333334,
+      "numerator": 20,
+      "denominator": 24,
+      "unit": "ratio",
+      "kind": "measured",
+      "higherIsBetter": true,
+      "gate": "none",
+      "status": "ok",
+      "interval": {
+        "low": 0.6414652961213058,
+        "high": 0.9332143199927109
+      },
+      "definition": "TP / (TP + FN): share of relevant seeded defects detected by a failing test.",
+      "source": "eval/dataset/functional.json executed through the Phase 2 workflow"
+    },
+    {
+      "id": "functional.detection.falsePositiveRate",
+      "value": 0.13157894736842105,
+      "numerator": 5,
+      "denominator": 38,
+      "unit": "ratio",
+      "kind": "measured",
+      "higherIsBetter": false,
+      "gate": "none",
+      "status": "ok",
+      "interval": {
+        "low": 0.05753782875731436,
+        "high": 0.2732717005149887
+      },
+      "definition": "FP / (FP + TN): share of defect-free cases where the test still failed.",
+      "source": "eval/dataset/functional.json executed through the Phase 2 workflow"
+    },
+    {
+      "id": "functional.detection.precision",
+      "value": 0.8,
+      "numerator": 20,
+      "denominator": 25,
+      "unit": "ratio",
+      "kind": "measured",
+      "higherIsBetter": true,
+      "gate": "none",
+      "status": "ok",
+      "interval": {
+        "low": 0.6086866446346177,
+        "high": 0.9113954589934752
+      },
+      "definition": "TP / (TP + FP): share of test failures that point at a relevant seeded defect.",
+      "source": "eval/dataset/functional.json executed through the Phase 2 workflow"
+    },
+    {
+      "id": "functional.layer.api.recall",
+      "value": 1,
+      "numerator": 6,
+      "denominator": 6,
+      "unit": "ratio",
+      "kind": "measured",
+      "higherIsBetter": true,
+      "gate": "none",
+      "status": "insufficient-data",
+      "interval": {
+        "low": 0.6096569663469354,
+        "high": 0.9999999999999999
+      },
+      "definition": "TP / (TP + FN) for api tests.",
+      "source": "eval/dataset/functional.json executed through the Phase 2 workflow (layer api)"
+    },
+    {
+      "id": "functional.layer.api.falsePositiveRate",
+      "value": 0.16666666666666666,
+      "numerator": 3,
+      "denominator": 18,
+      "unit": "ratio",
+      "kind": "measured",
+      "higherIsBetter": false,
+      "gate": "none",
+      "status": "ok",
+      "interval": {
+        "low": 0.05836470400465757,
+        "high": 0.39222499638359243
+      },
+      "definition": "FP / (FP + TN) for api tests.",
+      "source": "eval/dataset/functional.json executed through the Phase 2 workflow (layer api)"
+    },
+    {
+      "id": "functional.layer.combined.recall",
+      "value": 1,
+      "numerator": 3,
+      "denominator": 3,
+      "unit": "ratio",
+      "kind": "measured",
+      "higherIsBetter": true,
+      "gate": "none",
+      "status": "insufficient-data",
+      "interval": {
+        "low": 0.43849391955098227,
+        "high": 1
+      },
+      "definition": "TP / (TP + FN) for combined tests.",
+      "source": "eval/dataset/functional.json executed through the Phase 2 workflow (layer combined)"
+    },
+    {
+      "id": "functional.layer.combined.falsePositiveRate",
+      "value": 0.16666666666666666,
+      "numerator": 1,
+      "denominator": 6,
+      "unit": "ratio",
+      "kind": "measured",
+      "higherIsBetter": false,
+      "gate": "none",
+      "status": "insufficient-data",
+      "interval": {
+        "low": 0.03005258587173032,
+        "high": 0.563509436563646
+      },
+      "definition": "FP / (FP + TN) for combined tests.",
+      "source": "eval/dataset/functional.json executed through the Phase 2 workflow (layer combined)"
+    },
+    {
+      "id": "functional.layer.ui.recall",
       "value": 0.7333333333333333,
       "numerator": 11,
       "denominator": 15,
@@ -140,11 +280,11 @@
         "low": 0.4804911034231324,
         "high": 0.8910272389681718
       },
-      "definition": "TP / (TP + FN): share of relevant seeded defects detected by a failing test.",
-      "source": "eval/dataset/functional.json executed through the Phase 2 workflow"
+      "definition": "TP / (TP + FN) for ui tests.",
+      "source": "eval/dataset/functional.json executed through the Phase 2 workflow (layer ui)"
     },
     {
-      "id": "functional.detection.falsePositiveRate",
+      "id": "functional.layer.ui.falsePositiveRate",
       "value": 0.07142857142857142,
       "numerator": 1,
       "denominator": 14,
@@ -157,12 +297,12 @@
         "low": 0.012721886112291636,
         "high": 0.3146926955395781
       },
-      "definition": "FP / (FP + TN): share of defect-free cases where the test still failed.",
-      "source": "eval/dataset/functional.json executed through the Phase 2 workflow"
+      "definition": "FP / (FP + TN) for ui tests.",
+      "source": "eval/dataset/functional.json executed through the Phase 2 workflow (layer ui)"
     },
     {
       "id": "functional.diagnosis.truePositives",
-      "value": 2,
+      "value": 9,
       "unit": "count",
       "kind": "measured",
       "higherIsBetter": true,
@@ -173,7 +313,7 @@
     },
     {
       "id": "functional.diagnosis.falseNegatives",
-      "value": 9,
+      "value": 11,
       "unit": "count",
       "kind": "measured",
       "higherIsBetter": false,
@@ -195,7 +335,7 @@
     },
     {
       "id": "functional.diagnosis.trueNegatives",
-      "value": 1,
+      "value": 5,
       "unit": "count",
       "kind": "measured",
       "higherIsBetter": true,
@@ -206,34 +346,34 @@
     },
     {
       "id": "functional.agreementWithReference",
-      "value": 0.8275862068965517,
-      "numerator": 24,
-      "denominator": 29,
+      "value": 0.8548387096774194,
+      "numerator": 53,
+      "denominator": 62,
       "unit": "ratio",
       "kind": "measured",
       "higherIsBetter": true,
       "gate": "exact",
       "status": "ok",
       "interval": {
-        "low": 0.6545119942718488,
-        "high": 0.9240225472852007
+        "low": 0.7465637464683084,
+        "high": 0.92170676943653
       },
       "definition": "Cases whose pass/fail outcome equals the reference expected outcome / decided cases.",
       "source": "eval/dataset/functional.json executed through the Phase 2 workflow"
     },
     {
       "id": "functional.passOnDefectFreeControl",
-      "value": 0.9090909090909091,
-      "numerator": 10,
-      "denominator": 11,
+      "value": 0.9,
+      "numerator": 18,
+      "denominator": 20,
       "unit": "ratio",
       "kind": "measured",
       "higherIsBetter": true,
       "gate": "exact",
       "status": "ok",
       "interval": {
-        "low": 0.6226353745137962,
-        "high": 0.9837682477371741
+        "low": 0.6989617935882066,
+        "high": 0.9721341060158468
       },
       "definition": "Tests passing on the standard (defect-free) account / tests run on it.",
       "source": "eval/dataset/functional.json executed through the Phase 2 workflow"
@@ -253,7 +393,7 @@
     },
     {
       "id": "cost.workflows",
-      "value": 10,
+      "value": 17,
       "unit": "count",
       "kind": "measured",
       "higherIsBetter": null,
@@ -264,7 +404,7 @@
     },
     {
       "id": "cost.modelCalls",
-      "value": 20,
+      "value": 34,
       "unit": "count",
       "kind": "measured",
       "higherIsBetter": null,
@@ -277,7 +417,7 @@
       "id": "cost.retryOverhead",
       "value": 0,
       "numerator": 0,
-      "denominator": 20,
+      "denominator": 34,
       "unit": "ratio",
       "kind": "measured",
       "higherIsBetter": false,
@@ -285,7 +425,7 @@
       "status": "ok",
       "interval": {
         "low": 0,
-        "high": 0.16113012549493322
+        "high": 0.10151790621961015
       },
       "definition": "Retry attempts / all model call attempts.",
       "source": "llm-usage.json"
@@ -294,7 +434,7 @@
       "id": "cost.workflowFailureRate",
       "value": 0,
       "numerator": 0,
-      "denominator": 10,
+      "denominator": 17,
       "unit": "ratio",
       "kind": "measured",
       "higherIsBetter": false,
@@ -302,14 +442,14 @@
       "status": "ok",
       "interval": {
         "low": 0,
-        "high": 0.2775401687666166
+        "high": 0.18432366037156456
       },
       "definition": "Workflows that did not complete / workflows.",
       "source": "workflow measurements"
     },
     {
       "id": "latency.totalMedianMs",
-      "value": 8500,
+      "value": 8108,
       "unit": "ms",
       "kind": "measured",
       "higherIsBetter": false,
@@ -320,7 +460,7 @@
     },
     {
       "id": "latency.totalP90Ms",
-      "value": 12108,
+      "value": 12977,
       "unit": "ms",
       "kind": "measured",
       "higherIsBetter": false,
@@ -342,7 +482,7 @@
     },
     {
       "id": "latency.playwrightMedianMs",
-      "value": 7764,
+      "value": 6935,
       "unit": "ms",
       "kind": "measured",
       "higherIsBetter": false,
@@ -350,6 +490,28 @@
       "status": "insufficient-data",
       "definition": "Median Playwright runner wall-clock per executed workflow.",
       "source": "evidence.json startedAt/finishedAt"
+    },
+    {
+      "id": "latency.validationMedianMs",
+      "value": 908,
+      "unit": "ms",
+      "kind": "measured",
+      "higherIsBetter": false,
+      "gate": "none",
+      "status": "insufficient-data",
+      "definition": "Median static-validation time (path, AST, type-check, lint) per workflow.",
+      "source": "manifest step timestamps (generate -> validate-artifacts)"
+    },
+    {
+      "id": "latency.analysisMedianMs",
+      "value": 1,
+      "unit": "ms",
+      "kind": "measured",
+      "higherIsBetter": false,
+      "gate": "none",
+      "status": "insufficient-data",
+      "definition": "Median failure-analysis time per workflow (rule-based; no model analysis in this mode).",
+      "source": "manifest step timestamps (collect-evidence -> analyse-failures)"
     },
     {
       "id": "cost.inputTokens",
@@ -401,6 +563,8 @@
       "cases": [
         {
           "suiteId": "FS-SORT",
+          "application": "storefront",
+          "layer": "ui",
           "variant": "standard",
           "scenarioId": "REQ-301-SC-01",
           "relevantDefect": false,
@@ -413,6 +577,8 @@
         },
         {
           "suiteId": "FS-SORT",
+          "application": "storefront",
+          "layer": "ui",
           "variant": "standard",
           "scenarioId": "REQ-301-SC-02",
           "relevantDefect": false,
@@ -425,6 +591,8 @@
         },
         {
           "suiteId": "FS-SORT",
+          "application": "storefront",
+          "layer": "ui",
           "variant": "standard",
           "scenarioId": "REQ-301-SC-03",
           "relevantDefect": false,
@@ -449,6 +617,8 @@
         },
         {
           "suiteId": "FS-SORT",
+          "application": "storefront",
+          "layer": "ui",
           "variant": "problem",
           "scenarioId": "REQ-301-SC-01",
           "relevantDefect": true,
@@ -466,6 +636,8 @@
         },
         {
           "suiteId": "FS-SORT",
+          "application": "storefront",
+          "layer": "ui",
           "variant": "problem",
           "scenarioId": "REQ-301-SC-02",
           "relevantDefect": true,
@@ -483,6 +655,8 @@
         },
         {
           "suiteId": "FS-SORT",
+          "application": "storefront",
+          "layer": "ui",
           "variant": "problem",
           "scenarioId": "REQ-301-SC-03",
           "relevantDefect": true,
@@ -507,6 +681,8 @@
         },
         {
           "suiteId": "FS-SORT",
+          "application": "storefront",
+          "layer": "ui",
           "variant": "error",
           "scenarioId": "REQ-301-SC-01",
           "relevantDefect": true,
@@ -524,6 +700,8 @@
         },
         {
           "suiteId": "FS-SORT",
+          "application": "storefront",
+          "layer": "ui",
           "variant": "error",
           "scenarioId": "REQ-301-SC-02",
           "relevantDefect": true,
@@ -541,6 +719,8 @@
         },
         {
           "suiteId": "FS-SORT",
+          "application": "storefront",
+          "layer": "ui",
           "variant": "error",
           "scenarioId": "REQ-301-SC-03",
           "relevantDefect": true,
@@ -565,6 +745,8 @@
         },
         {
           "suiteId": "FS-CART",
+          "application": "storefront",
+          "layer": "ui",
           "variant": "standard",
           "scenarioId": "REQ-302-SC-01",
           "relevantDefect": false,
@@ -577,6 +759,8 @@
         },
         {
           "suiteId": "FS-CART",
+          "application": "storefront",
+          "layer": "ui",
           "variant": "standard",
           "scenarioId": "REQ-302-SC-02",
           "relevantDefect": false,
@@ -589,6 +773,8 @@
         },
         {
           "suiteId": "FS-CART",
+          "application": "storefront",
+          "layer": "ui",
           "variant": "standard",
           "scenarioId": "REQ-302-SC-03",
           "relevantDefect": false,
@@ -613,6 +799,8 @@
         },
         {
           "suiteId": "FS-CART",
+          "application": "storefront",
+          "layer": "ui",
           "variant": "standard",
           "scenarioId": "REQ-302-SC-04",
           "relevantDefect": false,
@@ -637,6 +825,8 @@
         },
         {
           "suiteId": "FS-CART",
+          "application": "storefront",
+          "layer": "ui",
           "variant": "problem",
           "scenarioId": "REQ-302-SC-01",
           "relevantDefect": true,
@@ -654,6 +844,8 @@
         },
         {
           "suiteId": "FS-CART",
+          "application": "storefront",
+          "layer": "ui",
           "variant": "problem",
           "scenarioId": "REQ-302-SC-02",
           "relevantDefect": false,
@@ -666,6 +858,8 @@
         },
         {
           "suiteId": "FS-CART",
+          "application": "storefront",
+          "layer": "ui",
           "variant": "problem",
           "scenarioId": "REQ-302-SC-03",
           "relevantDefect": true,
@@ -695,6 +889,8 @@
         },
         {
           "suiteId": "FS-CART",
+          "application": "storefront",
+          "layer": "ui",
           "variant": "problem",
           "scenarioId": "REQ-302-SC-04",
           "relevantDefect": true,
@@ -719,6 +915,8 @@
         },
         {
           "suiteId": "FS-CART",
+          "application": "storefront",
+          "layer": "ui",
           "variant": "error",
           "scenarioId": "REQ-302-SC-01",
           "relevantDefect": true,
@@ -736,6 +934,8 @@
         },
         {
           "suiteId": "FS-CART",
+          "application": "storefront",
+          "layer": "ui",
           "variant": "error",
           "scenarioId": "REQ-302-SC-02",
           "relevantDefect": false,
@@ -748,6 +948,8 @@
         },
         {
           "suiteId": "FS-CART",
+          "application": "storefront",
+          "layer": "ui",
           "variant": "error",
           "scenarioId": "REQ-302-SC-03",
           "relevantDefect": true,
@@ -777,6 +979,8 @@
         },
         {
           "suiteId": "FS-CART",
+          "application": "storefront",
+          "layer": "ui",
           "variant": "error",
           "scenarioId": "REQ-302-SC-04",
           "relevantDefect": true,
@@ -801,6 +1005,8 @@
         },
         {
           "suiteId": "FS-CHECKOUT",
+          "application": "storefront",
+          "layer": "ui",
           "variant": "standard",
           "scenarioId": "REQ-303-SC-01",
           "relevantDefect": false,
@@ -813,6 +1019,8 @@
         },
         {
           "suiteId": "FS-CHECKOUT",
+          "application": "storefront",
+          "layer": "ui",
           "variant": "standard",
           "scenarioId": "REQ-303-SC-02",
           "relevantDefect": false,
@@ -825,6 +1033,8 @@
         },
         {
           "suiteId": "FS-CHECKOUT",
+          "application": "storefront",
+          "layer": "ui",
           "variant": "problem",
           "scenarioId": "REQ-303-SC-01",
           "relevantDefect": true,
@@ -842,6 +1052,8 @@
         },
         {
           "suiteId": "FS-CHECKOUT",
+          "application": "storefront",
+          "layer": "ui",
           "variant": "problem",
           "scenarioId": "REQ-303-SC-02",
           "relevantDefect": false,
@@ -854,6 +1066,8 @@
         },
         {
           "suiteId": "FS-CHECKOUT",
+          "application": "storefront",
+          "layer": "ui",
           "variant": "error",
           "scenarioId": "REQ-303-SC-01",
           "relevantDefect": true,
@@ -871,6 +1085,8 @@
         },
         {
           "suiteId": "FS-CHECKOUT",
+          "application": "storefront",
+          "layer": "ui",
           "variant": "error",
           "scenarioId": "REQ-303-SC-02",
           "relevantDefect": true,
@@ -888,6 +1104,8 @@
         },
         {
           "suiteId": "FS-LOGIN",
+          "application": "storefront",
+          "layer": "ui",
           "variant": "standard",
           "scenarioId": "REQ-304-SC-01",
           "relevantDefect": false,
@@ -900,6 +1118,8 @@
         },
         {
           "suiteId": "FS-LOGIN",
+          "application": "storefront",
+          "layer": "ui",
           "variant": "standard",
           "scenarioId": "REQ-304-SC-02",
           "relevantDefect": false,
@@ -926,16 +1146,675 @@
               "uncertainty": "medium"
             }
           ]
+        },
+        {
+          "suiteId": "FS-NOTESAPI",
+          "application": "notes",
+          "layer": "api",
+          "variant": "standard",
+          "scenarioId": "REQ-411-SC-01",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-NOTESAPI",
+          "application": "notes",
+          "layer": "api",
+          "variant": "standard",
+          "scenarioId": "REQ-411-SC-02",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-NOTESAPI",
+          "application": "notes",
+          "layer": "api",
+          "variant": "standard",
+          "scenarioId": "REQ-411-SC-03",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-NOTESAPI",
+          "application": "notes",
+          "layer": "api",
+          "variant": "standard",
+          "scenarioId": "REQ-411-SC-04",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-NOTESAPI",
+          "application": "notes",
+          "layer": "api",
+          "variant": "standard",
+          "scenarioId": "REQ-411-SC-05",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": [
+            {
+              "scenarioId": "REQ-411-SC-05",
+              "requirementId": "REQ-411",
+              "rule": "AQ_API_NO_STATUS",
+              "expectedBehavior": "Given a title longer than 120 characters, when the user creates a note, then the API answers 400 with error code \"validation_error\".",
+              "observedAssertion": "expect(r1.headers()[\"content-type\"]).toContain(\"application/json\")",
+              "weakness": "the status of notes.create (r1) is never checked",
+              "evidence": "no expectStatus on r1",
+              "method": "deterministic-rule",
+              "uncertainty": "low"
+            }
+          ]
+        },
+        {
+          "suiteId": "FS-NOTESAPI",
+          "application": "notes",
+          "layer": "api",
+          "variant": "standard",
+          "scenarioId": "REQ-411-SC-06",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "failed",
+          "testStatus": "failed",
+          "diagnosis": {
+            "category": "api_contract",
+            "confidence": "medium",
+            "sufficientEvidence": false
+          },
+          "matchesReference": false,
+          "assertionFindings": [
+            {
+              "scenarioId": "REQ-411-SC-06",
+              "requirementId": "REQ-411",
+              "rule": "AQ_API_STATUS_NOT_IN_CRITERIA",
+              "expectedBehavior": "Given a valid token, when the user creates a note with a title, then the API answers 201 and returns the note with the caller as owner.",
+              "observedAssertion": "expect(r1.status()).toBe(200); expect(r1.owner).toBe(\"alice\")",
+              "weakness": "the expected status differs from the status the criteria state",
+              "evidence": "expects 200; criteria state 201",
+              "method": "deterministic-rule",
+              "uncertainty": "medium"
+            }
+          ]
+        },
+        {
+          "suiteId": "FS-NOTESAPI",
+          "application": "notes",
+          "layer": "api",
+          "variant": "broken-create",
+          "scenarioId": "REQ-411-SC-01",
+          "relevantDefect": true,
+          "defectId": "D-NOTES-CREATE",
+          "expectedTestOutcome": "fail",
+          "observedState": "failed",
+          "testStatus": "failed",
+          "diagnosis": {
+            "category": "product_behavior",
+            "confidence": "medium",
+            "sufficientEvidence": false
+          },
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-NOTESAPI",
+          "application": "notes",
+          "layer": "api",
+          "variant": "broken-create",
+          "scenarioId": "REQ-411-SC-02",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-NOTESAPI",
+          "application": "notes",
+          "layer": "api",
+          "variant": "broken-create",
+          "scenarioId": "REQ-411-SC-03",
+          "relevantDefect": true,
+          "defectId": "D-NOTES-CREATE",
+          "expectedTestOutcome": "fail",
+          "observedState": "failed",
+          "testStatus": "failed",
+          "diagnosis": {
+            "category": "product_behavior",
+            "confidence": "medium",
+            "sufficientEvidence": false
+          },
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-NOTESAPI",
+          "application": "notes",
+          "layer": "api",
+          "variant": "broken-create",
+          "scenarioId": "REQ-411-SC-04",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-NOTESAPI",
+          "application": "notes",
+          "layer": "api",
+          "variant": "broken-create",
+          "scenarioId": "REQ-411-SC-05",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": [
+            {
+              "scenarioId": "REQ-411-SC-05",
+              "requirementId": "REQ-411",
+              "rule": "AQ_API_NO_STATUS",
+              "expectedBehavior": "Given a title longer than 120 characters, when the user creates a note, then the API answers 400 with error code \"validation_error\".",
+              "observedAssertion": "expect(r1.headers()[\"content-type\"]).toContain(\"application/json\")",
+              "weakness": "the status of notes.create (r1) is never checked",
+              "evidence": "no expectStatus on r1",
+              "method": "deterministic-rule",
+              "uncertainty": "low"
+            }
+          ]
+        },
+        {
+          "suiteId": "FS-NOTESAPI",
+          "application": "notes",
+          "layer": "api",
+          "variant": "broken-create",
+          "scenarioId": "REQ-411-SC-06",
+          "relevantDefect": true,
+          "defectId": "D-NOTES-CREATE",
+          "expectedTestOutcome": "fail",
+          "observedState": "failed",
+          "testStatus": "failed",
+          "diagnosis": {
+            "category": "product_behavior",
+            "confidence": "medium",
+            "sufficientEvidence": false
+          },
+          "matchesReference": true,
+          "assertionFindings": [
+            {
+              "scenarioId": "REQ-411-SC-06",
+              "requirementId": "REQ-411",
+              "rule": "AQ_API_STATUS_NOT_IN_CRITERIA",
+              "expectedBehavior": "Given a valid token, when the user creates a note with a title, then the API answers 201 and returns the note with the caller as owner.",
+              "observedAssertion": "expect(r1.status()).toBe(200); expect(r1.owner).toBe(\"alice\")",
+              "weakness": "the expected status differs from the status the criteria state",
+              "evidence": "expects 200; criteria state 201",
+              "method": "deterministic-rule",
+              "uncertainty": "medium"
+            }
+          ]
+        },
+        {
+          "suiteId": "FS-NOTESAPI",
+          "application": "notes",
+          "layer": "api",
+          "variant": "auth-bypass",
+          "scenarioId": "REQ-411-SC-01",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-NOTESAPI",
+          "application": "notes",
+          "layer": "api",
+          "variant": "auth-bypass",
+          "scenarioId": "REQ-411-SC-02",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-NOTESAPI",
+          "application": "notes",
+          "layer": "api",
+          "variant": "auth-bypass",
+          "scenarioId": "REQ-411-SC-03",
+          "relevantDefect": true,
+          "defectId": "D-NOTES-AUTHZ",
+          "expectedTestOutcome": "fail",
+          "observedState": "failed",
+          "testStatus": "failed",
+          "diagnosis": {
+            "category": "product_behavior",
+            "confidence": "medium",
+            "sufficientEvidence": false
+          },
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-NOTESAPI",
+          "application": "notes",
+          "layer": "api",
+          "variant": "auth-bypass",
+          "scenarioId": "REQ-411-SC-04",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-NOTESAPI",
+          "application": "notes",
+          "layer": "api",
+          "variant": "auth-bypass",
+          "scenarioId": "REQ-411-SC-05",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": [
+            {
+              "scenarioId": "REQ-411-SC-05",
+              "requirementId": "REQ-411",
+              "rule": "AQ_API_NO_STATUS",
+              "expectedBehavior": "Given a title longer than 120 characters, when the user creates a note, then the API answers 400 with error code \"validation_error\".",
+              "observedAssertion": "expect(r1.headers()[\"content-type\"]).toContain(\"application/json\")",
+              "weakness": "the status of notes.create (r1) is never checked",
+              "evidence": "no expectStatus on r1",
+              "method": "deterministic-rule",
+              "uncertainty": "low"
+            }
+          ]
+        },
+        {
+          "suiteId": "FS-NOTESAPI",
+          "application": "notes",
+          "layer": "api",
+          "variant": "auth-bypass",
+          "scenarioId": "REQ-411-SC-06",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "failed",
+          "testStatus": "failed",
+          "diagnosis": {
+            "category": "api_contract",
+            "confidence": "medium",
+            "sufficientEvidence": false
+          },
+          "matchesReference": false,
+          "assertionFindings": [
+            {
+              "scenarioId": "REQ-411-SC-06",
+              "requirementId": "REQ-411",
+              "rule": "AQ_API_STATUS_NOT_IN_CRITERIA",
+              "expectedBehavior": "Given a valid token, when the user creates a note with a title, then the API answers 201 and returns the note with the caller as owner.",
+              "observedAssertion": "expect(r1.status()).toBe(200); expect(r1.owner).toBe(\"alice\")",
+              "weakness": "the expected status differs from the status the criteria state",
+              "evidence": "expects 200; criteria state 201",
+              "method": "deterministic-rule",
+              "uncertainty": "medium"
+            }
+          ]
+        },
+        {
+          "suiteId": "FS-NOTESAPI",
+          "application": "notes",
+          "layer": "api",
+          "variant": "no-title-limit",
+          "scenarioId": "REQ-411-SC-01",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-NOTESAPI",
+          "application": "notes",
+          "layer": "api",
+          "variant": "no-title-limit",
+          "scenarioId": "REQ-411-SC-02",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-NOTESAPI",
+          "application": "notes",
+          "layer": "api",
+          "variant": "no-title-limit",
+          "scenarioId": "REQ-411-SC-03",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-NOTESAPI",
+          "application": "notes",
+          "layer": "api",
+          "variant": "no-title-limit",
+          "scenarioId": "REQ-411-SC-04",
+          "relevantDefect": true,
+          "defectId": "D-NOTES-TITLELEN",
+          "expectedTestOutcome": "fail",
+          "observedState": "failed",
+          "testStatus": "failed",
+          "diagnosis": {
+            "category": "product_behavior",
+            "confidence": "medium",
+            "sufficientEvidence": false
+          },
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-NOTESAPI",
+          "application": "notes",
+          "layer": "api",
+          "variant": "no-title-limit",
+          "scenarioId": "REQ-411-SC-05",
+          "relevantDefect": true,
+          "defectId": "D-NOTES-TITLELEN",
+          "expectedTestOutcome": "fail",
+          "observedState": "failed",
+          "testStatus": "failed",
+          "diagnosis": {
+            "category": "api_contract",
+            "confidence": "medium",
+            "sufficientEvidence": false
+          },
+          "matchesReference": true,
+          "assertionFindings": [
+            {
+              "scenarioId": "REQ-411-SC-05",
+              "requirementId": "REQ-411",
+              "rule": "AQ_API_NO_STATUS",
+              "expectedBehavior": "Given a title longer than 120 characters, when the user creates a note, then the API answers 400 with error code \"validation_error\".",
+              "observedAssertion": "expect(r1.headers()[\"content-type\"]).toContain(\"application/json\")",
+              "weakness": "the status of notes.create (r1) is never checked",
+              "evidence": "no expectStatus on r1",
+              "method": "deterministic-rule",
+              "uncertainty": "low"
+            }
+          ]
+        },
+        {
+          "suiteId": "FS-NOTESAPI",
+          "application": "notes",
+          "layer": "api",
+          "variant": "no-title-limit",
+          "scenarioId": "REQ-411-SC-06",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "failed",
+          "testStatus": "failed",
+          "diagnosis": {
+            "category": "api_contract",
+            "confidence": "medium",
+            "sufficientEvidence": false
+          },
+          "matchesReference": false,
+          "assertionFindings": [
+            {
+              "scenarioId": "REQ-411-SC-06",
+              "requirementId": "REQ-411",
+              "rule": "AQ_API_STATUS_NOT_IN_CRITERIA",
+              "expectedBehavior": "Given a valid token, when the user creates a note with a title, then the API answers 201 and returns the note with the caller as owner.",
+              "observedAssertion": "expect(r1.status()).toBe(200); expect(r1.owner).toBe(\"alice\")",
+              "weakness": "the expected status differs from the status the criteria state",
+              "evidence": "expects 200; criteria state 201",
+              "method": "deterministic-rule",
+              "uncertainty": "medium"
+            }
+          ]
+        },
+        {
+          "suiteId": "FS-NOTESUI",
+          "application": "notes",
+          "layer": "combined",
+          "variant": "standard",
+          "scenarioId": "REQ-412-SC-01",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-NOTESUI",
+          "application": "notes",
+          "layer": "combined",
+          "variant": "standard",
+          "scenarioId": "REQ-412-SC-02",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-NOTESUI",
+          "application": "notes",
+          "layer": "combined",
+          "variant": "standard",
+          "scenarioId": "REQ-412-SC-03",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": [
+            {
+              "scenarioId": "REQ-412-SC-03",
+              "requirementId": "REQ-412",
+              "rule": "AQ_UNTRACED",
+              "expectedBehavior": "Given another user's note, when a user opens the notes page, then that note is not listed.",
+              "observedAssertion": "expect(notesPage.note).toHaveCount(0)",
+              "weakness": "the expected value is not stated in the linked acceptance criteria",
+              "evidence": "not found in criteria: 0",
+              "method": "deterministic-rule",
+              "uncertainty": "medium"
+            }
+          ]
+        },
+        {
+          "suiteId": "FS-NOTESUI",
+          "application": "notes",
+          "layer": "combined",
+          "variant": "broken-create",
+          "scenarioId": "REQ-412-SC-01",
+          "relevantDefect": true,
+          "defectId": "D-NOTES-CREATE",
+          "expectedTestOutcome": "fail",
+          "observedState": "failed",
+          "testStatus": "failed",
+          "diagnosis": {
+            "category": "product_behavior",
+            "confidence": "medium",
+            "sufficientEvidence": false
+          },
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-NOTESUI",
+          "application": "notes",
+          "layer": "combined",
+          "variant": "broken-create",
+          "scenarioId": "REQ-412-SC-02",
+          "relevantDefect": true,
+          "defectId": "D-NOTES-CREATE",
+          "expectedTestOutcome": "fail",
+          "observedState": "failed",
+          "testStatus": "failed",
+          "diagnosis": {
+            "category": "locator",
+            "confidence": "medium",
+            "sufficientEvidence": false
+          },
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-NOTESUI",
+          "application": "notes",
+          "layer": "combined",
+          "variant": "broken-create",
+          "scenarioId": "REQ-412-SC-03",
+          "relevantDefect": true,
+          "defectId": "D-NOTES-CREATE",
+          "expectedTestOutcome": "fail",
+          "observedState": "failed",
+          "testStatus": "failed",
+          "diagnosis": {
+            "category": "product_behavior",
+            "confidence": "medium",
+            "sufficientEvidence": false
+          },
+          "matchesReference": true,
+          "assertionFindings": [
+            {
+              "scenarioId": "REQ-412-SC-03",
+              "requirementId": "REQ-412",
+              "rule": "AQ_UNTRACED",
+              "expectedBehavior": "Given another user's note, when a user opens the notes page, then that note is not listed.",
+              "observedAssertion": "expect(notesPage.note).toHaveCount(0)",
+              "weakness": "the expected value is not stated in the linked acceptance criteria",
+              "evidence": "not found in criteria: 0",
+              "method": "deterministic-rule",
+              "uncertainty": "medium"
+            }
+          ]
+        },
+        {
+          "suiteId": "FS-NOTESUI",
+          "application": "notes",
+          "layer": "combined",
+          "variant": "renamed-add-button",
+          "scenarioId": "REQ-412-SC-01",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-NOTESUI",
+          "application": "notes",
+          "layer": "combined",
+          "variant": "renamed-add-button",
+          "scenarioId": "REQ-412-SC-02",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "failed",
+          "testStatus": "failed",
+          "diagnosis": {
+            "category": "locator",
+            "confidence": "medium",
+            "sufficientEvidence": false
+          },
+          "matchesReference": false,
+          "assertionFindings": []
+        },
+        {
+          "suiteId": "FS-NOTESUI",
+          "application": "notes",
+          "layer": "combined",
+          "variant": "renamed-add-button",
+          "scenarioId": "REQ-412-SC-03",
+          "relevantDefect": false,
+          "defectId": null,
+          "expectedTestOutcome": "pass",
+          "observedState": "passed",
+          "testStatus": "passed",
+          "matchesReference": true,
+          "assertionFindings": [
+            {
+              "scenarioId": "REQ-412-SC-03",
+              "requirementId": "REQ-412",
+              "rule": "AQ_UNTRACED",
+              "expectedBehavior": "Given another user's note, when a user opens the notes page, then that note is not listed.",
+              "observedAssertion": "expect(notesPage.note).toHaveCount(0)",
+              "weakness": "the expected value is not stated in the linked acceptance criteria",
+              "evidence": "not found in criteria: 0",
+              "method": "deterministic-rule",
+              "uncertainty": "medium"
+            }
+          ]
         }
       ],
       "workflows": [
         {
           "suiteId": "FS-SORT",
           "variant": "standard",
-          "runId": "20261019T081218Z-REQ-301-liq9c4",
+          "runId": "20261019T121447Z-REQ-301-wkuc0u",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261019T081218Z-REQ-301-liq9c4",
+            "workflowId": "20261019T121447Z-REQ-301-wkuc0u",
             "caseId": "FS-SORT/standard",
             "usage": [
               {
@@ -954,25 +1833,29 @@
                 "provider": "mock",
                 "model": "mock",
                 "attempts": 1,
-                "latencyMs": 27,
+                "latencyMs": 26,
                 "inputTokens": 0,
                 "outputTokens": 0,
                 "tokensAvailable": false,
                 "outcome": "ok"
               }
             ],
-            "totalMs": 5643,
-            "playwrightMs": 3457,
-            "succeeded": true
+            "totalMs": 6394,
+            "playwrightMs": 4056,
+            "succeeded": true,
+            "phases": {
+              "validationMs": 2284,
+              "analysisMs": 1
+            }
           }
         },
         {
           "suiteId": "FS-SORT",
           "variant": "problem",
-          "runId": "20261019T081218Z-REQ-301-r5821j",
+          "runId": "20261019T121447Z-REQ-301-368ah7",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261019T081218Z-REQ-301-r5821j",
+            "workflowId": "20261019T121447Z-REQ-301-368ah7",
             "caseId": "FS-SORT/problem",
             "usage": [
               {
@@ -991,25 +1874,29 @@
                 "provider": "mock",
                 "model": "mock",
                 "attempts": 1,
-                "latencyMs": 14,
+                "latencyMs": 13,
                 "inputTokens": 0,
                 "outputTokens": 0,
                 "tokensAvailable": false,
                 "outcome": "ok"
               }
             ],
-            "totalMs": 11452,
-            "playwrightMs": 9250,
-            "succeeded": true
+            "totalMs": 12309,
+            "playwrightMs": 9937,
+            "succeeded": true,
+            "phases": {
+              "validationMs": 1568,
+              "analysisMs": 2
+            }
           }
         },
         {
           "suiteId": "FS-SORT",
           "variant": "error",
-          "runId": "20261019T081218Z-REQ-301-q214l5",
+          "runId": "20261019T121447Z-REQ-301-arhqnz",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261019T081218Z-REQ-301-q214l5",
+            "workflowId": "20261019T121447Z-REQ-301-arhqnz",
             "caseId": "FS-SORT/error",
             "usage": [
               {
@@ -1035,18 +1922,22 @@
                 "outcome": "ok"
               }
             ],
-            "totalMs": 12108,
-            "playwrightMs": 9902,
-            "succeeded": true
+            "totalMs": 12977,
+            "playwrightMs": 10617,
+            "succeeded": true,
+            "phases": {
+              "validationMs": 942,
+              "analysisMs": 1
+            }
           }
         },
         {
           "suiteId": "FS-CART",
           "variant": "standard",
-          "runId": "20261019T081224Z-REQ-302-ojh9yy",
+          "runId": "20261019T121454Z-REQ-302-paifeh",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261019T081224Z-REQ-302-ojh9yy",
+            "workflowId": "20261019T121454Z-REQ-302-paifeh",
             "caseId": "FS-CART/standard",
             "usage": [
               {
@@ -1072,18 +1963,22 @@
                 "outcome": "ok"
               }
             ],
-            "totalMs": 3095,
-            "playwrightMs": 2591,
-            "succeeded": true
+            "totalMs": 4048,
+            "playwrightMs": 3426,
+            "succeeded": true,
+            "phases": {
+              "validationMs": 600,
+              "analysisMs": 1
+            }
           }
         },
         {
           "suiteId": "FS-CART",
           "variant": "problem",
-          "runId": "20261019T081227Z-REQ-302-kqyfv8",
+          "runId": "20261019T121458Z-REQ-302-ftybr1",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261019T081227Z-REQ-302-kqyfv8",
+            "workflowId": "20261019T121458Z-REQ-302-ftybr1",
             "caseId": "FS-CART/problem",
             "usage": [
               {
@@ -1102,25 +1997,29 @@
                 "provider": "mock",
                 "model": "mock",
                 "attempts": 1,
-                "latencyMs": 1,
+                "latencyMs": 0,
                 "inputTokens": 0,
                 "outputTokens": 0,
                 "tokensAvailable": false,
                 "outcome": "ok"
               }
             ],
-            "totalMs": 9134,
-            "playwrightMs": 8575,
-            "succeeded": true
+            "totalMs": 10155,
+            "playwrightMs": 9234,
+            "succeeded": true,
+            "phases": {
+              "validationMs": 893,
+              "analysisMs": 1
+            }
           }
         },
         {
           "suiteId": "FS-CART",
           "variant": "error",
-          "runId": "20261019T081230Z-REQ-302-6ml0lq",
+          "runId": "20261019T121459Z-REQ-302-nqhdxk",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261019T081230Z-REQ-302-6ml0lq",
+            "workflowId": "20261019T121459Z-REQ-302-nqhdxk",
             "caseId": "FS-CART/error",
             "usage": [
               {
@@ -1146,18 +2045,22 @@
                 "outcome": "ok"
               }
             ],
-            "totalMs": 9893,
-            "playwrightMs": 8764,
-            "succeeded": true
+            "totalMs": 10695,
+            "playwrightMs": 9278,
+            "succeeded": true,
+            "phases": {
+              "validationMs": 1368,
+              "analysisMs": 2
+            }
           }
         },
         {
           "suiteId": "FS-CHECKOUT",
           "variant": "standard",
-          "runId": "20261019T081230Z-REQ-303-kdz6h0",
+          "runId": "20261019T121500Z-REQ-303-jkt2au",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261019T081230Z-REQ-303-kdz6h0",
+            "workflowId": "20261019T121500Z-REQ-303-jkt2au",
             "caseId": "FS-CHECKOUT/standard",
             "usage": [
               {
@@ -1183,18 +2086,22 @@
                 "outcome": "ok"
               }
             ],
-            "totalMs": 3319,
-            "playwrightMs": 2835,
-            "succeeded": true
+            "totalMs": 4123,
+            "playwrightMs": 3367,
+            "succeeded": true,
+            "phases": {
+              "validationMs": 728,
+              "analysisMs": 1
+            }
           }
         },
         {
           "suiteId": "FS-CHECKOUT",
           "variant": "problem",
-          "runId": "20261019T081234Z-REQ-303-u2l5w9",
+          "runId": "20261019T121504Z-REQ-303-5kljyk",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261019T081234Z-REQ-303-u2l5w9",
+            "workflowId": "20261019T121504Z-REQ-303-5kljyk",
             "caseId": "FS-CHECKOUT/problem",
             "usage": [
               {
@@ -1220,18 +2127,22 @@
                 "outcome": "ok"
               }
             ],
-            "totalMs": 13063,
-            "playwrightMs": 12573,
-            "succeeded": true
+            "totalMs": 13526,
+            "playwrightMs": 12977,
+            "succeeded": true,
+            "phases": {
+              "validationMs": 526,
+              "analysisMs": 1
+            }
           }
         },
         {
           "suiteId": "FS-CHECKOUT",
           "variant": "error",
-          "runId": "20261019T081236Z-REQ-303-5mnxpu",
+          "runId": "20261019T121508Z-REQ-303-rgi33j",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261019T081236Z-REQ-303-5mnxpu",
+            "workflowId": "20261019T121508Z-REQ-303-rgi33j",
             "caseId": "FS-CHECKOUT/error",
             "usage": [
               {
@@ -1257,19 +2168,64 @@
                 "outcome": "ok"
               }
             ],
-            "totalMs": 8500,
-            "playwrightMs": 7764,
-            "succeeded": true
+            "totalMs": 8366,
+            "playwrightMs": 7874,
+            "succeeded": true,
+            "phases": {
+              "validationMs": 472,
+              "analysisMs": 0
+            }
           }
         },
         {
           "suiteId": "FS-LOGIN",
           "variant": "standard",
-          "runId": "20261019T081240Z-REQ-304-o82sa5",
+          "runId": "20261019T121510Z-REQ-304-vwfb46",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261019T081240Z-REQ-304-o82sa5",
+            "workflowId": "20261019T121510Z-REQ-304-vwfb46",
             "caseId": "FS-LOGIN/standard",
+            "usage": [
+              {
+                "useCase": "test-plan",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 1,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              },
+              {
+                "useCase": "test-generation",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 1,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              }
+            ],
+            "totalMs": 8920,
+            "playwrightMs": 7955,
+            "succeeded": true,
+            "phases": {
+              "validationMs": 908,
+              "analysisMs": 1
+            }
+          }
+        },
+        {
+          "suiteId": "FS-NOTESAPI",
+          "variant": "standard",
+          "runId": "20261019T121516Z-REQ-411-vk556c",
+          "status": "executed",
+          "measurement": {
+            "workflowId": "20261019T121516Z-REQ-411-vk556c",
+            "caseId": "FS-NOTESAPI/standard",
             "usage": [
               {
                 "useCase": "test-plan",
@@ -1294,9 +2250,259 @@
                 "outcome": "ok"
               }
             ],
-            "totalMs": 7699,
-            "playwrightMs": 7202,
-            "succeeded": true
+            "totalMs": 2417,
+            "playwrightMs": 1821,
+            "succeeded": true,
+            "phases": {
+              "validationMs": 562,
+              "analysisMs": 1
+            }
+          }
+        },
+        {
+          "suiteId": "FS-NOTESAPI",
+          "variant": "broken-create",
+          "runId": "20261019T121518Z-REQ-411-6sim1g",
+          "status": "executed",
+          "measurement": {
+            "workflowId": "20261019T121518Z-REQ-411-6sim1g",
+            "caseId": "FS-NOTESAPI/broken-create",
+            "usage": [
+              {
+                "useCase": "test-plan",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 0,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              },
+              {
+                "useCase": "test-generation",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 0,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              }
+            ],
+            "totalMs": 4739,
+            "playwrightMs": 2964,
+            "succeeded": true,
+            "phases": {
+              "validationMs": 1742,
+              "analysisMs": 1
+            }
+          }
+        },
+        {
+          "suiteId": "FS-NOTESAPI",
+          "variant": "auth-bypass",
+          "runId": "20261019T121518Z-REQ-411-79mzu6",
+          "status": "executed",
+          "measurement": {
+            "workflowId": "20261019T121518Z-REQ-411-79mzu6",
+            "caseId": "FS-NOTESAPI/auth-bypass",
+            "usage": [
+              {
+                "useCase": "test-plan",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 1,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              },
+              {
+                "useCase": "test-generation",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 0,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              }
+            ],
+            "totalMs": 2642,
+            "playwrightMs": 1606,
+            "succeeded": true,
+            "phases": {
+              "validationMs": 1011,
+              "analysisMs": 2
+            }
+          }
+        },
+        {
+          "suiteId": "FS-NOTESAPI",
+          "variant": "no-title-limit",
+          "runId": "20261019T121519Z-REQ-411-5fj49l",
+          "status": "executed",
+          "measurement": {
+            "workflowId": "20261019T121519Z-REQ-411-5fj49l",
+            "caseId": "FS-NOTESAPI/no-title-limit",
+            "usage": [
+              {
+                "useCase": "test-plan",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 0,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              },
+              {
+                "useCase": "test-generation",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 1,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              }
+            ],
+            "totalMs": 2809,
+            "playwrightMs": 2302,
+            "succeeded": true,
+            "phases": {
+              "validationMs": 485,
+              "analysisMs": 1
+            }
+          }
+        },
+        {
+          "suiteId": "FS-NOTESUI",
+          "variant": "standard",
+          "runId": "20261019T121521Z-REQ-412-ufpyfk",
+          "status": "executed",
+          "measurement": {
+            "workflowId": "20261019T121521Z-REQ-412-ufpyfk",
+            "caseId": "FS-NOTESUI/standard",
+            "usage": [
+              {
+                "useCase": "test-plan",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 0,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              },
+              {
+                "useCase": "test-generation",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 1,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              }
+            ],
+            "totalMs": 3979,
+            "playwrightMs": 2104,
+            "succeeded": true,
+            "phases": {
+              "validationMs": 1842,
+              "analysisMs": 0
+            }
+          }
+        },
+        {
+          "suiteId": "FS-NOTESUI",
+          "variant": "broken-create",
+          "runId": "20261019T121522Z-REQ-412-1gzdao",
+          "status": "executed",
+          "measurement": {
+            "workflowId": "20261019T121522Z-REQ-412-1gzdao",
+            "caseId": "FS-NOTESUI/broken-create",
+            "usage": [
+              {
+                "useCase": "test-plan",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 0,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              },
+              {
+                "useCase": "test-generation",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 0,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              }
+            ],
+            "totalMs": 8108,
+            "playwrightMs": 6935,
+            "succeeded": true,
+            "phases": {
+              "validationMs": 1150,
+              "analysisMs": 0
+            }
+          }
+        },
+        {
+          "suiteId": "FS-NOTESUI",
+          "variant": "renamed-add-button",
+          "runId": "20261019T121522Z-REQ-412-yui2m5",
+          "status": "executed",
+          "measurement": {
+            "workflowId": "20261019T121522Z-REQ-412-yui2m5",
+            "caseId": "FS-NOTESUI/renamed-add-button",
+            "usage": [
+              {
+                "useCase": "test-plan",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 0,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              },
+              {
+                "useCase": "test-generation",
+                "provider": "mock",
+                "model": "mock",
+                "attempts": 1,
+                "latencyMs": 0,
+                "inputTokens": 0,
+                "outputTokens": 0,
+                "tokensAvailable": false,
+                "outcome": "ok"
+              }
+            ],
+            "totalMs": 12462,
+            "playwrightMs": 11912,
+            "succeeded": true,
+            "phases": {
+              "validationMs": 528,
+              "analysisMs": 1
+            }
           }
         }
       ],
@@ -1304,97 +2510,228 @@
         "detection": {
           "positiveClass": "a relevant seeded defect exists",
           "predictedPositive": "the generated test failed",
-          "tp": 11,
-          "fp": 1,
-          "tn": 13,
+          "tp": 20,
+          "fp": 5,
+          "tn": 33,
           "fn": 4,
           "inconclusive": 0,
           "recall": {
-            "n": 11,
-            "d": 15,
-            "value": 0.7333333333333333
+            "n": 20,
+            "d": 24,
+            "value": 0.8333333333333334
           },
           "precision": {
-            "n": 11,
-            "d": 12,
-            "value": 0.9166666666666666
+            "n": 20,
+            "d": 25,
+            "value": 0.8
           },
           "falsePositiveRate": {
-            "n": 1,
-            "d": 14,
-            "value": 0.07142857142857142
+            "n": 5,
+            "d": 38,
+            "value": 0.13157894736842105
           },
           "falseNegativeRate": {
             "n": 4,
-            "d": 15,
-            "value": 0.26666666666666666
+            "d": 24,
+            "value": 0.16666666666666666
           },
           "rateStatus": "ok",
           "intervals": {
             "recall": {
-              "low": 0.4804911034231324,
-              "high": 0.8910272389681718
+              "low": 0.6414652961213058,
+              "high": 0.9332143199927109
             },
             "falsePositiveRate": {
-              "low": 0.012721886112291636,
-              "high": 0.3146926955395781
+              "low": 0.05753782875731436,
+              "high": 0.2732717005149887
+            }
+          }
+        },
+        "detectionPrecision": {
+          "n": 20,
+          "d": 25,
+          "value": 0.8
+        },
+        "detectionByLayer": {
+          "api": {
+            "positiveClass": "a relevant seeded defect exists",
+            "predictedPositive": "the generated test failed",
+            "tp": 6,
+            "fp": 3,
+            "tn": 15,
+            "fn": 0,
+            "inconclusive": 0,
+            "recall": {
+              "n": 6,
+              "d": 6,
+              "value": 1
+            },
+            "precision": {
+              "n": 6,
+              "d": 9,
+              "value": 0.6666666666666666
+            },
+            "falsePositiveRate": {
+              "n": 3,
+              "d": 18,
+              "value": 0.16666666666666666
+            },
+            "falseNegativeRate": {
+              "n": 0,
+              "d": 6,
+              "value": 0
+            },
+            "rateStatus": "insufficient-data",
+            "intervals": {
+              "recall": {
+                "low": 0.6096569663469354,
+                "high": 0.9999999999999999
+              },
+              "falsePositiveRate": {
+                "low": 0.05836470400465757,
+                "high": 0.39222499638359243
+              }
+            }
+          },
+          "combined": {
+            "positiveClass": "a relevant seeded defect exists",
+            "predictedPositive": "the generated test failed",
+            "tp": 3,
+            "fp": 1,
+            "tn": 5,
+            "fn": 0,
+            "inconclusive": 0,
+            "recall": {
+              "n": 3,
+              "d": 3,
+              "value": 1
+            },
+            "precision": {
+              "n": 3,
+              "d": 4,
+              "value": 0.75
+            },
+            "falsePositiveRate": {
+              "n": 1,
+              "d": 6,
+              "value": 0.16666666666666666
+            },
+            "falseNegativeRate": {
+              "n": 0,
+              "d": 3,
+              "value": 0
+            },
+            "rateStatus": "insufficient-data",
+            "intervals": {
+              "recall": {
+                "low": 0.43849391955098227,
+                "high": 1
+              },
+              "falsePositiveRate": {
+                "low": 0.03005258587173032,
+                "high": 0.563509436563646
+              }
+            }
+          },
+          "ui": {
+            "positiveClass": "a relevant seeded defect exists",
+            "predictedPositive": "the generated test failed",
+            "tp": 11,
+            "fp": 1,
+            "tn": 13,
+            "fn": 4,
+            "inconclusive": 0,
+            "recall": {
+              "n": 11,
+              "d": 15,
+              "value": 0.7333333333333333
+            },
+            "precision": {
+              "n": 11,
+              "d": 12,
+              "value": 0.9166666666666666
+            },
+            "falsePositiveRate": {
+              "n": 1,
+              "d": 14,
+              "value": 0.07142857142857142
+            },
+            "falseNegativeRate": {
+              "n": 4,
+              "d": 15,
+              "value": 0.26666666666666666
+            },
+            "rateStatus": "ok",
+            "intervals": {
+              "recall": {
+                "low": 0.4804911034231324,
+                "high": 0.8910272389681718
+              },
+              "falsePositiveRate": {
+                "low": 0.012721886112291636,
+                "high": 0.3146926955395781
+              }
             }
           }
         },
         "diagnosis": {
           "positiveClass": "the failure is caused by a seeded product defect",
           "predictedPositive": "the analysis says product_behavior",
-          "tp": 2,
+          "tp": 9,
           "fp": 0,
-          "tn": 1,
-          "fn": 9,
+          "tn": 5,
+          "fn": 11,
           "inconclusive": 0,
           "recall": {
-            "n": 2,
-            "d": 11,
-            "value": 0.18181818181818182
+            "n": 9,
+            "d": 20,
+            "value": 0.45
           },
           "precision": {
-            "n": 2,
-            "d": 2,
+            "n": 9,
+            "d": 9,
             "value": 1
           },
           "falsePositiveRate": {
             "n": 0,
-            "d": 1,
+            "d": 5,
             "value": 0
           },
           "falseNegativeRate": {
-            "n": 9,
-            "d": 11,
-            "value": 0.8181818181818182
+            "n": 11,
+            "d": 20,
+            "value": 0.55
           },
           "rateStatus": "insufficient-data",
           "intervals": {
             "recall": {
-              "low": 0.05136660067100063,
-              "high": 0.4769861375782448
+              "low": 0.25819502085709295,
+              "high": 0.6579179916924003
             },
             "falsePositiveRate": {
               "low": 0,
-              "high": 0.7934567085261071
+              "high": 0.43449149475208104
             }
           }
         },
         "functional": {
           "agreementWithReference": {
-            "n": 24,
-            "d": 29,
-            "value": 0.8275862068965517
+            "n": 53,
+            "d": 62,
+            "value": 0.8548387096774194
           },
           "passOnDefectFreeControl": {
-            "n": 10,
-            "d": 11,
-            "value": 0.9090909090909091
+            "n": 18,
+            "d": 20,
+            "value": 0.9
           },
           "inconclusive": 0,
           "falsePositiveFailures": [
-            "FS-LOGIN/standard/REQ-304-SC-02"
+            "FS-LOGIN/standard/REQ-304-SC-02",
+            "FS-NOTESAPI/standard/REQ-411-SC-06",
+            "FS-NOTESAPI/auth-bypass/REQ-411-SC-06",
+            "FS-NOTESAPI/no-title-limit/REQ-411-SC-06",
+            "FS-NOTESUI/renamed-add-button/REQ-412-SC-02"
           ],
           "falseNegatives": [
             "FS-SORT/problem/REQ-301-SC-03",
@@ -1460,21 +2797,45 @@
           ],
           "behavior": "Finish does not complete the order.",
           "verifiedBy": "eval/probes/seeded-defects.ts"
+        },
+        {
+          "id": "D-NOTES-CREATE",
+          "variants": [
+            "broken-create"
+          ],
+          "behavior": "Creating a note (API or form) fails with 500.",
+          "verifiedBy": "eval/probes/seeded-defects.ts"
+        },
+        {
+          "id": "D-NOTES-AUTHZ",
+          "variants": [
+            "auth-bypass"
+          ],
+          "behavior": "Any signed-in user can read, change and delete other users' notes (200 instead of 403).",
+          "verifiedBy": "eval/probes/seeded-defects.ts"
+        },
+        {
+          "id": "D-NOTES-TITLELEN",
+          "variants": [
+            "no-title-limit"
+          ],
+          "behavior": "Titles longer than 120 characters are accepted (201 instead of 400).",
+          "verifiedBy": "eval/probes/seeded-defects.ts"
         }
       ]
     },
     "costLatency": {
       "summary": {
-        "workflows": 10,
-        "modelCalls": 20,
+        "workflows": 17,
+        "modelCalls": 34,
         "failureRate": {
           "n": 0,
-          "d": 10,
+          "d": 17,
           "value": 0
         },
         "retryOverhead": {
           "n": 0,
-          "d": 20,
+          "d": 34,
           "value": 0
         },
         "providerErrors": 0,
@@ -1486,27 +2847,43 @@
         },
         "latencyMs": {
           "total": {
-            "n": 10,
-            "mean": 8390.6,
-            "median": 8500,
-            "p90": 12108,
-            "max": 13063,
+            "n": 17,
+            "mean": 7568.764705882353,
+            "median": 8108,
+            "p90": 12977,
+            "max": 13526,
             "sufficientForPercentiles": false
           },
           "model": {
-            "n": 10,
-            "mean": 4.5,
+            "n": 17,
+            "mean": 2.764705882352941,
             "median": 0,
-            "p90": 14,
-            "max": 28,
+            "p90": 13,
+            "max": 27,
             "sufficientForPercentiles": false
           },
           "playwright": {
-            "n": 10,
-            "mean": 7291.3,
-            "median": 7764,
-            "p90": 9902,
-            "max": 12573,
+            "n": 17,
+            "mean": 6374.411764705882,
+            "median": 6935,
+            "p90": 11912,
+            "max": 12977,
+            "sufficientForPercentiles": false
+          },
+          "validation": {
+            "n": 17,
+            "mean": 1035.8235294117646,
+            "median": 908,
+            "p90": 1842,
+            "max": 2284,
+            "sufficientForPercentiles": false
+          },
+          "analysis": {
+            "n": 17,
+            "mean": 1,
+            "median": 1,
+            "p90": 2,
+            "max": 2,
             "sufficientForPercentiles": false
           }
         },
@@ -1522,7 +2899,7 @@
       },
       "workflows": [
         {
-          "workflowId": "20261019T081218Z-REQ-301-liq9c4",
+          "workflowId": "20261019T121447Z-REQ-301-wkuc0u",
           "caseId": "FS-SORT/standard",
           "usage": [
             {
@@ -1541,19 +2918,23 @@
               "provider": "mock",
               "model": "mock",
               "attempts": 1,
-              "latencyMs": 27,
+              "latencyMs": 26,
               "inputTokens": 0,
               "outputTokens": 0,
               "tokensAvailable": false,
               "outcome": "ok"
             }
           ],
-          "totalMs": 5643,
-          "playwrightMs": 3457,
-          "succeeded": true
+          "totalMs": 6394,
+          "playwrightMs": 4056,
+          "succeeded": true,
+          "phases": {
+            "validationMs": 2284,
+            "analysisMs": 1
+          }
         },
         {
-          "workflowId": "20261019T081218Z-REQ-301-r5821j",
+          "workflowId": "20261019T121447Z-REQ-301-368ah7",
           "caseId": "FS-SORT/problem",
           "usage": [
             {
@@ -1572,19 +2953,23 @@
               "provider": "mock",
               "model": "mock",
               "attempts": 1,
-              "latencyMs": 14,
+              "latencyMs": 13,
               "inputTokens": 0,
               "outputTokens": 0,
               "tokensAvailable": false,
               "outcome": "ok"
             }
           ],
-          "totalMs": 11452,
-          "playwrightMs": 9250,
-          "succeeded": true
+          "totalMs": 12309,
+          "playwrightMs": 9937,
+          "succeeded": true,
+          "phases": {
+            "validationMs": 1568,
+            "analysisMs": 2
+          }
         },
         {
-          "workflowId": "20261019T081218Z-REQ-301-q214l5",
+          "workflowId": "20261019T121447Z-REQ-301-arhqnz",
           "caseId": "FS-SORT/error",
           "usage": [
             {
@@ -1610,12 +2995,16 @@
               "outcome": "ok"
             }
           ],
-          "totalMs": 12108,
-          "playwrightMs": 9902,
-          "succeeded": true
+          "totalMs": 12977,
+          "playwrightMs": 10617,
+          "succeeded": true,
+          "phases": {
+            "validationMs": 942,
+            "analysisMs": 1
+          }
         },
         {
-          "workflowId": "20261019T081224Z-REQ-302-ojh9yy",
+          "workflowId": "20261019T121454Z-REQ-302-paifeh",
           "caseId": "FS-CART/standard",
           "usage": [
             {
@@ -1641,12 +3030,16 @@
               "outcome": "ok"
             }
           ],
-          "totalMs": 3095,
-          "playwrightMs": 2591,
-          "succeeded": true
+          "totalMs": 4048,
+          "playwrightMs": 3426,
+          "succeeded": true,
+          "phases": {
+            "validationMs": 600,
+            "analysisMs": 1
+          }
         },
         {
-          "workflowId": "20261019T081227Z-REQ-302-kqyfv8",
+          "workflowId": "20261019T121458Z-REQ-302-ftybr1",
           "caseId": "FS-CART/problem",
           "usage": [
             {
@@ -1665,19 +3058,23 @@
               "provider": "mock",
               "model": "mock",
               "attempts": 1,
-              "latencyMs": 1,
+              "latencyMs": 0,
               "inputTokens": 0,
               "outputTokens": 0,
               "tokensAvailable": false,
               "outcome": "ok"
             }
           ],
-          "totalMs": 9134,
-          "playwrightMs": 8575,
-          "succeeded": true
+          "totalMs": 10155,
+          "playwrightMs": 9234,
+          "succeeded": true,
+          "phases": {
+            "validationMs": 893,
+            "analysisMs": 1
+          }
         },
         {
-          "workflowId": "20261019T081230Z-REQ-302-6ml0lq",
+          "workflowId": "20261019T121459Z-REQ-302-nqhdxk",
           "caseId": "FS-CART/error",
           "usage": [
             {
@@ -1703,12 +3100,16 @@
               "outcome": "ok"
             }
           ],
-          "totalMs": 9893,
-          "playwrightMs": 8764,
-          "succeeded": true
+          "totalMs": 10695,
+          "playwrightMs": 9278,
+          "succeeded": true,
+          "phases": {
+            "validationMs": 1368,
+            "analysisMs": 2
+          }
         },
         {
-          "workflowId": "20261019T081230Z-REQ-303-kdz6h0",
+          "workflowId": "20261019T121500Z-REQ-303-jkt2au",
           "caseId": "FS-CHECKOUT/standard",
           "usage": [
             {
@@ -1734,12 +3135,16 @@
               "outcome": "ok"
             }
           ],
-          "totalMs": 3319,
-          "playwrightMs": 2835,
-          "succeeded": true
+          "totalMs": 4123,
+          "playwrightMs": 3367,
+          "succeeded": true,
+          "phases": {
+            "validationMs": 728,
+            "analysisMs": 1
+          }
         },
         {
-          "workflowId": "20261019T081234Z-REQ-303-u2l5w9",
+          "workflowId": "20261019T121504Z-REQ-303-5kljyk",
           "caseId": "FS-CHECKOUT/problem",
           "usage": [
             {
@@ -1765,12 +3170,16 @@
               "outcome": "ok"
             }
           ],
-          "totalMs": 13063,
-          "playwrightMs": 12573,
-          "succeeded": true
+          "totalMs": 13526,
+          "playwrightMs": 12977,
+          "succeeded": true,
+          "phases": {
+            "validationMs": 526,
+            "analysisMs": 1
+          }
         },
         {
-          "workflowId": "20261019T081236Z-REQ-303-5mnxpu",
+          "workflowId": "20261019T121508Z-REQ-303-rgi33j",
           "caseId": "FS-CHECKOUT/error",
           "usage": [
             {
@@ -1796,13 +3205,52 @@
               "outcome": "ok"
             }
           ],
-          "totalMs": 8500,
-          "playwrightMs": 7764,
-          "succeeded": true
+          "totalMs": 8366,
+          "playwrightMs": 7874,
+          "succeeded": true,
+          "phases": {
+            "validationMs": 472,
+            "analysisMs": 0
+          }
         },
         {
-          "workflowId": "20261019T081240Z-REQ-304-o82sa5",
+          "workflowId": "20261019T121510Z-REQ-304-vwfb46",
           "caseId": "FS-LOGIN/standard",
+          "usage": [
+            {
+              "useCase": "test-plan",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 1,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            },
+            {
+              "useCase": "test-generation",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 1,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            }
+          ],
+          "totalMs": 8920,
+          "playwrightMs": 7955,
+          "succeeded": true,
+          "phases": {
+            "validationMs": 908,
+            "analysisMs": 1
+          }
+        },
+        {
+          "workflowId": "20261019T121516Z-REQ-411-vk556c",
+          "caseId": "FS-NOTESAPI/standard",
           "usage": [
             {
               "useCase": "test-plan",
@@ -1827,272 +3275,255 @@
               "outcome": "ok"
             }
           ],
-          "totalMs": 7699,
-          "playwrightMs": 7202,
-          "succeeded": true
+          "totalMs": 2417,
+          "playwrightMs": 1821,
+          "succeeded": true,
+          "phases": {
+            "validationMs": 562,
+            "analysisMs": 1
+          }
+        },
+        {
+          "workflowId": "20261019T121518Z-REQ-411-6sim1g",
+          "caseId": "FS-NOTESAPI/broken-create",
+          "usage": [
+            {
+              "useCase": "test-plan",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 0,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            },
+            {
+              "useCase": "test-generation",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 0,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            }
+          ],
+          "totalMs": 4739,
+          "playwrightMs": 2964,
+          "succeeded": true,
+          "phases": {
+            "validationMs": 1742,
+            "analysisMs": 1
+          }
+        },
+        {
+          "workflowId": "20261019T121518Z-REQ-411-79mzu6",
+          "caseId": "FS-NOTESAPI/auth-bypass",
+          "usage": [
+            {
+              "useCase": "test-plan",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 1,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            },
+            {
+              "useCase": "test-generation",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 0,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            }
+          ],
+          "totalMs": 2642,
+          "playwrightMs": 1606,
+          "succeeded": true,
+          "phases": {
+            "validationMs": 1011,
+            "analysisMs": 2
+          }
+        },
+        {
+          "workflowId": "20261019T121519Z-REQ-411-5fj49l",
+          "caseId": "FS-NOTESAPI/no-title-limit",
+          "usage": [
+            {
+              "useCase": "test-plan",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 0,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            },
+            {
+              "useCase": "test-generation",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 1,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            }
+          ],
+          "totalMs": 2809,
+          "playwrightMs": 2302,
+          "succeeded": true,
+          "phases": {
+            "validationMs": 485,
+            "analysisMs": 1
+          }
+        },
+        {
+          "workflowId": "20261019T121521Z-REQ-412-ufpyfk",
+          "caseId": "FS-NOTESUI/standard",
+          "usage": [
+            {
+              "useCase": "test-plan",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 0,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            },
+            {
+              "useCase": "test-generation",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 1,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            }
+          ],
+          "totalMs": 3979,
+          "playwrightMs": 2104,
+          "succeeded": true,
+          "phases": {
+            "validationMs": 1842,
+            "analysisMs": 0
+          }
+        },
+        {
+          "workflowId": "20261019T121522Z-REQ-412-1gzdao",
+          "caseId": "FS-NOTESUI/broken-create",
+          "usage": [
+            {
+              "useCase": "test-plan",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 0,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            },
+            {
+              "useCase": "test-generation",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 0,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            }
+          ],
+          "totalMs": 8108,
+          "playwrightMs": 6935,
+          "succeeded": true,
+          "phases": {
+            "validationMs": 1150,
+            "analysisMs": 0
+          }
+        },
+        {
+          "workflowId": "20261019T121522Z-REQ-412-yui2m5",
+          "caseId": "FS-NOTESUI/renamed-add-button",
+          "usage": [
+            {
+              "useCase": "test-plan",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 0,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            },
+            {
+              "useCase": "test-generation",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 0,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            }
+          ],
+          "totalMs": 12462,
+          "playwrightMs": 11912,
+          "succeeded": true,
+          "phases": {
+            "validationMs": 528,
+            "analysisMs": 1
+          }
         }
       ]
-    },
-    "comparison": {
-      "before": {
-        "runId": "eval-20261018T215601Z-functional-vhmai4",
-        "datasetVersion": "2.0.0",
-        "commit": "2fbfb3a0bb248643e93be8ee309aa94a88ece55c",
-        "mode": "functional"
-      },
-      "after": {
-        "runId": "eval-20261019T081218Z-functional-6dskdt",
-        "datasetVersion": "2.0.1",
-        "commit": "dd141616fcaa8f751f9f22fca9f52a7ceacdc304",
-        "mode": "functional"
-      },
-      "comparable": true,
-      "notes": [
-        "dataset changed 2.0.0 -> 2.0.1: differences may come from the dataset"
-      ],
-      "changes": [
-        {
-          "id": "cost.inputTokens",
-          "kind": "measured",
-          "gate": "none",
-          "before": null,
-          "after": null,
-          "delta": null,
-          "direction": "unchanged"
-        },
-        {
-          "id": "cost.medianPerWorkflowUsd",
-          "kind": "measured",
-          "gate": "none",
-          "before": null,
-          "after": null,
-          "delta": null,
-          "direction": "unchanged"
-        },
-        {
-          "id": "cost.modelCalls",
-          "kind": "measured",
-          "gate": "none",
-          "before": 20,
-          "after": 20,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "cost.outputTokens",
-          "kind": "measured",
-          "gate": "none",
-          "before": null,
-          "after": null,
-          "delta": null,
-          "direction": "unchanged"
-        },
-        {
-          "id": "cost.perSuccessfulWorkflowUsd",
-          "kind": "measured",
-          "gate": "none",
-          "before": null,
-          "after": null,
-          "delta": null,
-          "direction": "unchanged"
-        },
-        {
-          "id": "cost.retryOverhead",
-          "kind": "measured",
-          "gate": "none",
-          "before": 0,
-          "after": 0,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "cost.workflowFailureRate",
-          "kind": "measured",
-          "gate": "none",
-          "before": 0,
-          "after": 0,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "cost.workflows",
-          "kind": "measured",
-          "gate": "none",
-          "before": 10,
-          "after": 10,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "functional.agreementWithReference",
-          "kind": "measured",
-          "gate": "exact",
-          "before": 0.8275862068965517,
-          "after": 0.8275862068965517,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "functional.detection.falseNegatives",
-          "kind": "measured",
-          "gate": "exact",
-          "before": 4,
-          "after": 4,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "functional.detection.falsePositiveRate",
-          "kind": "measured",
-          "gate": "none",
-          "before": 0.07142857142857142,
-          "after": 0.07142857142857142,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "functional.detection.falsePositives",
-          "kind": "measured",
-          "gate": "exact",
-          "before": 1,
-          "after": 1,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "functional.detection.inconclusive",
-          "kind": "measured",
-          "gate": "exact",
-          "before": 0,
-          "after": 0,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "functional.detection.recall",
-          "kind": "measured",
-          "gate": "none",
-          "before": 0.7333333333333333,
-          "after": 0.7333333333333333,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "functional.detection.trueNegatives",
-          "kind": "measured",
-          "gate": "exact",
-          "before": 13,
-          "after": 13,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "functional.detection.truePositives",
-          "kind": "measured",
-          "gate": "exact",
-          "before": 11,
-          "after": 11,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "functional.diagnosis.falseNegatives",
-          "kind": "measured",
-          "gate": "exact",
-          "before": 9,
-          "after": 9,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "functional.diagnosis.falsePositives",
-          "kind": "measured",
-          "gate": "exact",
-          "before": 0,
-          "after": 0,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "functional.diagnosis.trueNegatives",
-          "kind": "measured",
-          "gate": "exact",
-          "before": 1,
-          "after": 1,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "functional.diagnosis.truePositives",
-          "kind": "measured",
-          "gate": "exact",
-          "before": 2,
-          "after": 2,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "functional.falseNegativesFlaggedByAssertionRules",
-          "kind": "deterministic",
-          "gate": "exact",
-          "before": 1,
-          "after": 1,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "functional.passOnDefectFreeControl",
-          "kind": "measured",
-          "gate": "exact",
-          "before": 0.9090909090909091,
-          "after": 0.9090909090909091,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "latency.modelMedianMs",
-          "kind": "measured",
-          "gate": "none",
-          "before": null,
-          "after": null,
-          "delta": null,
-          "direction": "unchanged"
-        },
-        {
-          "id": "latency.playwrightMedianMs",
-          "kind": "measured",
-          "gate": "none",
-          "before": 7662,
-          "after": 7764,
-          "delta": 102,
-          "direction": "regressed"
-        },
-        {
-          "id": "latency.totalMedianMs",
-          "kind": "measured",
-          "gate": "none",
-          "before": 8404,
-          "after": 8500,
-          "delta": 96,
-          "direction": "regressed"
-        },
-        {
-          "id": "latency.totalP90Ms",
-          "kind": "measured",
-          "gate": "none",
-          "before": 12575,
-          "after": 12108,
-          "delta": -467,
-          "direction": "improved"
-        }
-      ],
-      "gatedRegressions": []
     }
   },
   "findings": [
     {
       "type": "false-positive-failure",
       "id": "FS-LOGIN/standard/REQ-304-SC-02",
+      "detail": "failed on a target where the behaviour under test is correct",
+      "source": "measured"
+    },
+    {
+      "type": "false-positive-failure",
+      "id": "FS-NOTESAPI/standard/REQ-411-SC-06",
+      "detail": "failed on a target where the behaviour under test is correct",
+      "source": "measured"
+    },
+    {
+      "type": "false-positive-failure",
+      "id": "FS-NOTESAPI/auth-bypass/REQ-411-SC-06",
+      "detail": "failed on a target where the behaviour under test is correct",
+      "source": "measured"
+    },
+    {
+      "type": "false-positive-failure",
+      "id": "FS-NOTESAPI/no-title-limit/REQ-411-SC-06",
+      "detail": "failed on a target where the behaviour under test is correct",
+      "source": "measured"
+    },
+    {
+      "type": "false-positive-failure",
+      "id": "FS-NOTESUI/renamed-add-button/REQ-412-SC-02",
       "detail": "failed on a target where the behaviour under test is correct",
       "source": "measured"
     },
@@ -2173,9 +3604,35 @@
       "id": "FS-CHECKOUT/error/REQ-303-SC-02",
       "detail": "seeded defect D-LASTNAME-VALIDATION, analysis said locator",
       "source": "measured"
+    },
+    {
+      "type": "incorrect-diagnosis",
+      "id": "FS-NOTESAPI/no-title-limit/REQ-411-SC-05",
+      "detail": "seeded defect D-NOTES-TITLELEN, analysis said api_contract",
+      "source": "measured"
+    },
+    {
+      "type": "incorrect-diagnosis",
+      "id": "FS-NOTESUI/broken-create/REQ-412-SC-02",
+      "detail": "seeded defect D-NOTES-CREATE, analysis said locator",
+      "source": "measured"
     }
   ],
   "gates": [
+    {
+      "name": "gate:functional.detection-recall",
+      "severity": "quality",
+      "threshold": "functional.detection.recall >= 0.6 (provisional)",
+      "status": "pass",
+      "detail": "functional.detection.recall >= 0.6 (provisional): observed 0.8333333333333334 (20/24)"
+    },
+    {
+      "name": "gate:functional.false-positive-rate",
+      "severity": "quality",
+      "threshold": "functional.detection.falsePositiveRate <= 0.3 (provisional)",
+      "status": "pass",
+      "detail": "functional.detection.falsePositiveRate <= 0.3 (provisional): observed 0.13157894736842105 (5/38)"
+    },
     {
       "name": "functional-target-available",
       "status": "pass",
@@ -2183,8 +3640,8 @@
     },
     {
       "name": "baseline-regression",
-      "status": "pass",
-      "detail": "no gated regressions vs eval-20261018T215601Z-functional-vhmai4"
+      "status": "not-applicable",
+      "detail": "no baseline given"
     },
     {
       "name": "report-schema",
@@ -2193,7 +3650,7 @@
     }
   ],
   "limitations": [
-    "0 of 62 reference labels are human-reviewed; the rest are author-assigned (by the AI assistant that built the framework) and pending review.",
+    "0 of 104 reference labels are human-reviewed; the rest are author-assigned (by the AI assistant that built the framework) and pending review.",
     "Datasets are small: rates with fewer than 10 cases in the denominator are marked insufficient-data, and percentiles from fewer than 20 samples are not distributions.",
     "The test target is a public demo site with no version identifier; seeded defects are its intentionally broken accounts, verified by eval/probes/seeded-defects.ts.",
     "The failure classifier treats an expected value as coming from the requirement when it appears anywhere in the criterion text (substring), which can turn an incorrect assertion into a product_behavior diagnosis.",

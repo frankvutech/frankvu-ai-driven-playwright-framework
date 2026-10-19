@@ -1,0 +1,716 @@
+{
+ "provenance": "Each case pairs a deterministic failure mode of example-app/server.ts with a recorded model reply. Causes are known because they were injected; reference outcomes follow the documented healing policy. Recorded replies cite evidence by role (@error, @snapshot), which the harness maps to run-time observation ids. Labels are pending human review.",
+ "cases": [
+  {
+   "id": "HE-01",
+   "description": "UI drift, correct locator repair",
+   "target": {
+    "kind": "trusted",
+    "file": "tests/integration/notes.spec.ts",
+    "title": "a note added in the UI is returned by the API"
+   },
+   "variant": "renamed-add-button",
+   "recorded": {
+    "kind": "proposal",
+    "proposal": {
+     "decision": "propose",
+     "failureExplanation": "The locator waited for an element that is no longer on the page; the page snapshot shows its replacement.",
+     "intendedBehavior": "Submit the new-note form and check the note through the API.",
+     "evidenceIds": [
+      "@error",
+      "@snapshot"
+     ],
+     "changes": [
+      {
+       "kind": "replaceLocator",
+       "pageObject": "NotesPage",
+       "member": "addNoteButton",
+       "locator": {
+        "by": "role",
+        "role": "button",
+        "name": "Save note",
+        "exact": true
+       }
+      }
+     ]
+    }
+   },
+   "reproduceRuns": 1,
+   "verifyRuns": 2,
+   "reference": {
+    "cause": "locator-drift",
+    "repairExpected": true,
+    "proposalCorrect": true,
+    "expectedOutcome": "verified_pending_review",
+    "correctFix": [
+     {
+      "kind": "replaceLocator",
+      "pageObject": "NotesPage",
+      "member": "addNoteButton",
+      "locator": {
+       "by": "role",
+       "role": "button",
+       "name": "Save note",
+       "exact": true
+      }
+     }
+    ]
+   },
+   "labels": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   }
+  },
+  {
+   "id": "HE-02",
+   "description": "UI drift, plausible but wrong element (Sign out)",
+   "target": {
+    "kind": "trusted",
+    "file": "tests/integration/notes.spec.ts",
+    "title": "a note added in the UI is returned by the API"
+   },
+   "variant": "renamed-add-button",
+   "recorded": {
+    "kind": "proposal",
+    "proposal": {
+     "decision": "propose",
+     "failureExplanation": "The locator waited for an element that is no longer on the page; the page snapshot shows its replacement.",
+     "intendedBehavior": "Submit the new-note form and check the note through the API.",
+     "evidenceIds": [
+      "@error",
+      "@snapshot"
+     ],
+     "changes": [
+      {
+       "kind": "replaceLocator",
+       "pageObject": "NotesPage",
+       "member": "addNoteButton",
+       "locator": {
+        "by": "role",
+        "role": "button",
+        "name": "Sign out",
+        "exact": true
+       }
+      }
+     ]
+    }
+   },
+   "reproduceRuns": 1,
+   "verifyRuns": 2,
+   "reference": {
+    "cause": "locator-drift",
+    "repairExpected": true,
+    "proposalCorrect": false,
+    "expectedOutcome": "verification_failed",
+    "correctFix": [
+     {
+      "kind": "replaceLocator",
+      "pageObject": "NotesPage",
+      "member": "addNoteButton",
+      "locator": {
+       "by": "role",
+       "role": "button",
+       "name": "Save note",
+       "exact": true
+      }
+     }
+    ]
+   },
+   "labels": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   }
+  },
+  {
+   "id": "HE-03",
+   "description": "UI drift, element not on the page",
+   "target": {
+    "kind": "trusted",
+    "file": "tests/integration/notes.spec.ts",
+    "title": "a note added in the UI is returned by the API"
+   },
+   "variant": "renamed-add-button",
+   "recorded": {
+    "kind": "proposal",
+    "proposal": {
+     "decision": "propose",
+     "failureExplanation": "The locator waited for an element that is no longer on the page; the page snapshot shows its replacement.",
+     "intendedBehavior": "Submit the new-note form and check the note through the API.",
+     "evidenceIds": [
+      "@error",
+      "@snapshot"
+     ],
+     "changes": [
+      {
+       "kind": "replaceLocator",
+       "pageObject": "NotesPage",
+       "member": "addNoteButton",
+       "locator": {
+        "by": "role",
+        "role": "button",
+        "name": "Publish",
+        "exact": true
+       }
+      }
+     ]
+    }
+   },
+   "reproduceRuns": 1,
+   "verifyRuns": 2,
+   "reference": {
+    "cause": "locator-drift",
+    "repairExpected": true,
+    "proposalCorrect": false,
+    "expectedOutcome": "validation_failed",
+    "correctFix": [
+     {
+      "kind": "replaceLocator",
+      "pageObject": "NotesPage",
+      "member": "addNoteButton",
+      "locator": {
+       "by": "role",
+       "role": "button",
+       "name": "Save note",
+       "exact": true
+      }
+     }
+    ]
+   },
+   "labels": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   }
+  },
+  {
+   "id": "HE-04",
+   "description": "UI drift, different role (heading)",
+   "target": {
+    "kind": "trusted",
+    "file": "tests/integration/notes.spec.ts",
+    "title": "a note added in the UI is returned by the API"
+   },
+   "variant": "renamed-add-button",
+   "recorded": {
+    "kind": "proposal",
+    "proposal": {
+     "decision": "propose",
+     "failureExplanation": "The locator waited for an element that is no longer on the page; the page snapshot shows its replacement.",
+     "intendedBehavior": "Submit the new-note form and check the note through the API.",
+     "evidenceIds": [
+      "@error",
+      "@snapshot"
+     ],
+     "changes": [
+      {
+       "kind": "replaceLocator",
+       "pageObject": "NotesPage",
+       "member": "addNoteButton",
+       "locator": {
+        "by": "role",
+        "role": "heading",
+        "name": "Notes",
+        "exact": true
+       }
+      }
+     ]
+    }
+   },
+   "reproduceRuns": 1,
+   "verifyRuns": 2,
+   "reference": {
+    "cause": "locator-drift",
+    "repairExpected": true,
+    "proposalCorrect": false,
+    "expectedOutcome": "validation_failed",
+    "correctFix": [
+     {
+      "kind": "replaceLocator",
+      "pageObject": "NotesPage",
+      "member": "addNoteButton",
+      "locator": {
+       "by": "role",
+       "role": "button",
+       "name": "Save note",
+       "exact": true
+      }
+     }
+    ]
+   },
+   "labels": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   }
+  },
+  {
+   "id": "HE-05",
+   "description": "UI drift, model declines",
+   "target": {
+    "kind": "trusted",
+    "file": "tests/integration/notes.spec.ts",
+    "title": "a note added in the UI is returned by the API"
+   },
+   "variant": "renamed-add-button",
+   "recorded": {
+    "kind": "proposal",
+    "proposal": {
+     "decision": "decline",
+     "failureExplanation": "Not sure which element is meant.",
+     "intendedBehavior": "Submit the new-note form and check the note through the API.",
+     "evidenceIds": [
+      "@error"
+     ],
+     "changes": []
+    }
+   },
+   "reproduceRuns": 1,
+   "verifyRuns": 2,
+   "reference": {
+    "cause": "locator-drift",
+    "repairExpected": true,
+    "proposalCorrect": null,
+    "expectedOutcome": "insufficient_evidence",
+    "correctFix": [
+     {
+      "kind": "replaceLocator",
+      "pageObject": "NotesPage",
+      "member": "addNoteButton",
+      "locator": {
+       "by": "role",
+       "role": "button",
+       "name": "Save note",
+       "exact": true
+      }
+     }
+    ]
+   },
+   "labels": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   }
+  },
+  {
+   "id": "HE-06",
+   "description": "UI drift, malformed model output",
+   "target": {
+    "kind": "trusted",
+    "file": "tests/integration/notes.spec.ts",
+    "title": "a note added in the UI is returned by the API"
+   },
+   "variant": "renamed-add-button",
+   "recorded": {
+    "kind": "raw",
+    "text": "{\"decision\": \"propose\", "
+   },
+   "reproduceRuns": 1,
+   "verifyRuns": 2,
+   "reference": {
+    "cause": "locator-drift",
+    "repairExpected": true,
+    "proposalCorrect": null,
+    "expectedOutcome": "proposal_failed",
+    "correctFix": [
+     {
+      "kind": "replaceLocator",
+      "pageObject": "NotesPage",
+      "member": "addNoteButton",
+      "locator": {
+       "by": "role",
+       "role": "button",
+       "name": "Save note",
+       "exact": true
+      }
+     }
+    ]
+   },
+   "labels": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   }
+  },
+  {
+   "id": "HE-07",
+   "description": "UI drift, provider times out on every attempt",
+   "target": {
+    "kind": "trusted",
+    "file": "tests/integration/notes.spec.ts",
+    "title": "a note added in the UI is returned by the API"
+   },
+   "variant": "renamed-add-button",
+   "recorded": {
+    "kind": "provider-error",
+    "error": "timeout"
+   },
+   "reproduceRuns": 1,
+   "verifyRuns": 2,
+   "reference": {
+    "cause": "locator-drift",
+    "repairExpected": true,
+    "proposalCorrect": null,
+    "expectedOutcome": "proposal_failed",
+    "correctFix": [
+     {
+      "kind": "replaceLocator",
+      "pageObject": "NotesPage",
+      "member": "addNoteButton",
+      "locator": {
+       "by": "role",
+       "role": "button",
+       "name": "Save note",
+       "exact": true
+      }
+     }
+    ]
+   },
+   "labels": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   }
+  },
+  {
+   "id": "HE-08",
+   "description": "UI drift, proposal tries to delete an assertion",
+   "target": {
+    "kind": "trusted",
+    "file": "tests/integration/notes.spec.ts",
+    "title": "a note added in the UI is returned by the API"
+   },
+   "variant": "renamed-add-button",
+   "recorded": {
+    "kind": "proposal",
+    "proposal": {
+     "decision": "propose",
+     "failureExplanation": "The locator waited for an element that is no longer on the page; the page snapshot shows its replacement.",
+     "intendedBehavior": "Submit the new-note form and check the note through the API.",
+     "evidenceIds": [
+      "@error",
+      "@snapshot"
+     ],
+     "changes": [
+      {
+       "kind": "removeStep",
+       "step": 3
+      }
+     ]
+    }
+   },
+   "reproduceRuns": 1,
+   "verifyRuns": 2,
+   "reference": {
+    "cause": "locator-drift",
+    "repairExpected": true,
+    "proposalCorrect": false,
+    "expectedOutcome": "proposal_failed",
+    "correctFix": [
+     {
+      "kind": "replaceLocator",
+      "pageObject": "NotesPage",
+      "member": "addNoteButton",
+      "locator": {
+       "by": "role",
+       "role": "button",
+       "name": "Save note",
+       "exact": true
+      }
+     }
+    ]
+   },
+   "labels": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   }
+  },
+  {
+   "id": "HE-09",
+   "description": "Product defect: create returns 500",
+   "target": {
+    "kind": "trusted",
+    "file": "tests/api/notes.spec.ts",
+    "title": "creates a note (201, Location header, schema)"
+   },
+   "variant": "broken-create",
+   "recorded": {
+    "kind": "none"
+   },
+   "reproduceRuns": 1,
+   "verifyRuns": 2,
+   "reference": {
+    "cause": "product-defect",
+    "repairExpected": false,
+    "proposalCorrect": null,
+    "expectedOutcome": "not_applicable"
+   },
+   "labels": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   }
+  },
+  {
+   "id": "HE-10",
+   "description": "Product defect: authorization bypass",
+   "target": {
+    "kind": "trusted",
+    "file": "tests/api/notes.spec.ts",
+    "title": "another user's note is forbidden (403) for read, update and delete"
+   },
+   "variant": "auth-bypass",
+   "recorded": {
+    "kind": "none"
+   },
+   "reproduceRuns": 1,
+   "verifyRuns": 2,
+   "reference": {
+    "cause": "product-defect",
+    "repairExpected": false,
+    "proposalCorrect": null,
+    "expectedOutcome": "not_applicable"
+   },
+   "labels": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   }
+  },
+  {
+   "id": "HE-11",
+   "description": "Product defect: title length not validated",
+   "target": {
+    "kind": "trusted",
+    "file": "tests/api/notes.spec.ts",
+    "title": "rejects an 121-character title with 400"
+   },
+   "variant": "no-title-limit",
+   "recorded": {
+    "kind": "none"
+   },
+   "reproduceRuns": 1,
+   "verifyRuns": 2,
+   "reference": {
+    "cause": "product-defect",
+    "repairExpected": false,
+    "proposalCorrect": null,
+    "expectedOutcome": "not_applicable"
+   },
+   "labels": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   }
+  },
+  {
+   "id": "HE-12",
+   "description": "Slow list, generated test, correct bounded wait",
+   "target": {
+    "kind": "generated",
+    "suite": "FS-NOTESUI",
+    "scenarioId": "REQ-412-SC-01"
+   },
+   "variant": "intermittent-slow-list",
+   "recorded": {
+    "kind": "proposal",
+    "proposal": {
+     "decision": "propose",
+     "failureExplanation": "The note list was still hidden when the assertion timed out; it appears later.",
+     "intendedBehavior": "The note created through the API is listed for its owner.",
+     "evidenceIds": [
+      "@error"
+     ],
+     "changes": [
+      {
+       "kind": "addWait",
+       "beforeStep": 4,
+       "target": "notesPage.note",
+       "locatorArgs": [
+        {
+         "kind": "prefixed",
+         "suffix": "From the API"
+        }
+       ],
+       "timeoutMs": 10000
+      }
+     ]
+    }
+   },
+   "reproduceRuns": 2,
+   "verifyRuns": 2,
+   "reference": {
+    "cause": "timing",
+    "repairExpected": true,
+    "proposalCorrect": true,
+    "expectedOutcome": "verified_pending_review",
+    "correctFix": [
+     {
+      "kind": "addWait",
+      "beforeStep": 4,
+      "target": "notesPage.note",
+      "locatorArgs": [
+       {
+        "kind": "prefixed",
+        "suffix": "From the API"
+       }
+      ],
+      "timeoutMs": 10000
+     }
+    ]
+   },
+   "labels": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   }
+  },
+  {
+   "id": "HE-13",
+   "description": "Slow list, generated test, wait after the failing step",
+   "target": {
+    "kind": "generated",
+    "suite": "FS-NOTESUI",
+    "scenarioId": "REQ-412-SC-01"
+   },
+   "variant": "intermittent-slow-list",
+   "recorded": {
+    "kind": "proposal",
+    "proposal": {
+     "decision": "propose",
+     "failureExplanation": "The list appears late.",
+     "intendedBehavior": "The note is listed.",
+     "evidenceIds": [
+      "@error"
+     ],
+     "changes": [
+      {
+       "kind": "addWait",
+       "beforeStep": 5,
+       "target": "notesPage.note",
+       "locatorArgs": [
+        {
+         "kind": "prefixed",
+         "suffix": "From the API"
+        }
+       ],
+       "timeoutMs": 10000
+      }
+     ]
+    }
+   },
+   "reproduceRuns": 1,
+   "verifyRuns": 2,
+   "reference": {
+    "cause": "timing",
+    "repairExpected": true,
+    "proposalCorrect": false,
+    "expectedOutcome": "validation_failed",
+    "correctFix": [
+     {
+      "kind": "addWait",
+      "beforeStep": 4,
+      "target": "notesPage.note",
+      "locatorArgs": [
+       {
+        "kind": "prefixed",
+        "suffix": "From the API"
+       }
+      ],
+      "timeoutMs": 10000
+     }
+    ]
+   },
+   "labels": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   }
+  },
+  {
+   "id": "HE-14",
+   "description": "Slow list, hand-written test (timing repairs are not automatic there)",
+   "target": {
+    "kind": "trusted",
+    "file": "tests/integration/notes.spec.ts",
+    "title": "a note created through the API is shown in the UI"
+   },
+   "variant": "intermittent-slow-list",
+   "recorded": {
+    "kind": "none"
+   },
+   "reproduceRuns": 1,
+   "verifyRuns": 2,
+   "reference": {
+    "cause": "timing",
+    "repairExpected": false,
+    "proposalCorrect": null,
+    "expectedOutcome": "not_applicable"
+   },
+   "labels": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    },
+    "notes": "Policy: waits are only added to generated tests; a person repairs hand-written ones."
+   }
+  },
+  {
+   "id": "HE-15",
+   "description": "No failure: the test passes",
+   "target": {
+    "kind": "trusted",
+    "file": "tests/integration/notes.spec.ts",
+    "title": "a note added in the UI is returned by the API"
+   },
+   "variant": "standard",
+   "recorded": {
+    "kind": "none"
+   },
+   "reproduceRuns": 1,
+   "verifyRuns": 2,
+   "reference": {
+    "cause": "no-failure",
+    "repairExpected": false,
+    "proposalCorrect": null,
+    "expectedOutcome": "insufficient_evidence"
+   },
+   "labels": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   }
+  }
+ ]
+}

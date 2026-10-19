@@ -1,0 +1,474 @@
+{
+  "config": {
+    "argv": [
+      "<home>/.local/share/mise/installs/node/22.23.2/bin/node",
+      "<repo>/node_modules/@playwright/test/cli.js",
+      "test",
+      "--config",
+      "playwright.agent.config.ts",
+      "--project",
+      "agent-generated-notes",
+      "--retries",
+      "0",
+      "--workers",
+      "2",
+      "--timeout",
+      "15000",
+      "generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-01.notes.spec.ts",
+      "generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-02.notes.spec.ts",
+      "generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-03.notes.spec.ts"
+    ],
+    "configFile": "<repo>/playwright.agent.config.ts",
+    "rootDir": "<repo>/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 2
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "<repo>/.agent/runs/20261019T115926Z-REQ-412-xpo2yt/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "agent-generated-notes",
+        "name": "agent-generated-notes",
+        "testDir": "<repo>/generated",
+        "testIgnore": [],
+        "testMatch": [
+          "/^\\/Users\\/frankvu\\/Projects\\/frankvu-ai-driven-playwright-framework\\/generated\\/20261019T115926Z-REQ-412-xpo2yt\\/REQ-412-SC-01\\.notes\\.spec\\.ts$/",
+          "/^\\/Users\\/frankvu\\/Projects\\/frankvu-ai-driven-playwright-framework\\/generated\\/20261019T115926Z-REQ-412-xpo2yt\\/REQ-412-SC-02\\.notes\\.spec\\.ts$/",
+          "/^\\/Users\\/frankvu\\/Projects\\/frankvu-ai-driven-playwright-framework\\/generated\\/20261019T115926Z-REQ-412-xpo2yt\\/REQ-412-SC-03\\.notes\\.spec\\.ts$/"
+        ],
+        "timeout": 15000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "<repo>/.agent/runs/20261019T115926Z-REQ-412-xpo2yt/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "name": "agent-generated-notes",
+        "testDir": "<repo>/generated",
+        "snapshotDir": "<repo>/generated",
+        "testIgnore": [],
+        "testMatch": [
+          {},
+          {},
+          {}
+        ],
+        "timeout": 15000,
+        "use": {
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure",
+          "video": "off",
+          "actionTimeout": 10000,
+          "navigationTimeout": 15000,
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "testIdAttribute": "data-test"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "agent-generated-notes"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json",
+        {
+          "outputFile": "<repo>/.agent/runs/20261019T115926Z-REQ-412-xpo2yt/playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 2,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "../generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-01.notes.spec.ts",
+      "file": "../generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-01.notes.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "a note created through the API is listed on the notes page",
+          "ok": true,
+          "tags": [
+            "generated"
+          ],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [
+                {
+                  "type": "requirement",
+                  "description": "REQ-412",
+                  "location": {
+                    "file": "<repo>/generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-01.notes.spec.ts",
+                    "line": 6,
+                    "column": 5
+                  }
+                },
+                {
+                  "type": "scenario",
+                  "description": "REQ-412-SC-01",
+                  "location": {
+                    "file": "<repo>/generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-01.notes.spec.ts",
+                    "line": 6,
+                    "column": 5
+                  }
+                },
+                {
+                  "type": "agent-run",
+                  "description": "20261019T115926Z-REQ-412-xpo2yt",
+                  "location": {
+                    "file": "<repo>/generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-01.notes.spec.ts",
+                    "line": 6,
+                    "column": 5
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "agent-generated-notes",
+              "projectName": "agent-generated-notes",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 211,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-19T11:59:28.134Z",
+                  "annotations": [
+                    {
+                      "type": "requirement",
+                      "description": "REQ-412",
+                      "location": {
+                        "file": "<repo>/generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-01.notes.spec.ts",
+                        "line": 6,
+                        "column": 5
+                      }
+                    },
+                    {
+                      "type": "scenario",
+                      "description": "REQ-412-SC-01",
+                      "location": {
+                        "file": "<repo>/generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-01.notes.spec.ts",
+                        "line": 6,
+                        "column": 5
+                      }
+                    },
+                    {
+                      "type": "agent-run",
+                      "description": "20261019T115926Z-REQ-412-xpo2yt",
+                      "location": {
+                        "file": "<repo>/generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-01.notes.spec.ts",
+                        "line": 6,
+                        "column": 5
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ebb94e1977fd996b16c9-30d519ed02f860ea20fa",
+          "file": "../generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-01.notes.spec.ts",
+          "line": 6,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "../generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-02.notes.spec.ts",
+      "file": "../generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-02.notes.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "a note added on the notes page is returned by the API",
+          "ok": false,
+          "tags": [
+            "generated"
+          ],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [
+                {
+                  "type": "requirement",
+                  "description": "REQ-412",
+                  "location": {
+                    "file": "<repo>/generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-02.notes.spec.ts",
+                    "line": 8,
+                    "column": 5
+                  }
+                },
+                {
+                  "type": "scenario",
+                  "description": "REQ-412-SC-02",
+                  "location": {
+                    "file": "<repo>/generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-02.notes.spec.ts",
+                    "line": 8,
+                    "column": 5
+                  }
+                },
+                {
+                  "type": "agent-run",
+                  "description": "20261019T115926Z-REQ-412-xpo2yt",
+                  "location": {
+                    "file": "<repo>/generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-02.notes.spec.ts",
+                    "line": 8,
+                    "column": 5
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "agent-generated-notes",
+              "projectName": "agent-generated-notes",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "failed",
+                  "duration": 10287,
+                  "error": {
+                    "message": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('form', { name: 'New note' }).getByRole('button', { name: 'Add note' })\u001b[22m\n",
+                    "stack": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('form', { name: 'New note' }).getByRole('button', { name: 'Add note' })\u001b[22m\n\n    at NotesPage.addNote (<repo>/src/pages/example-app/NotesPage.ts:43:30)\n    at <repo>/generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-02.notes.spec.ts:21:5",
+                    "location": {
+                      "file": "<repo>/src/pages/example-app/NotesPage.ts",
+                      "column": 30,
+                      "line": 43
+                    },
+                    "snippet": "   at ../src/pages/example-app/NotesPage.ts:43\n\n  41 |     await this.titleInput.fill(title);\n  42 |     await this.bodyInput.fill(body);\n> 43 |     await this.addNoteButton.click();\n     |                              ^\n  44 |   }\n  45 |\n  46 |   async signOut(): Promise<void> {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "<repo>/src/pages/example-app/NotesPage.ts",
+                        "column": 30,
+                        "line": 43
+                      },
+                      "message": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('form', { name: 'New note' }).getByRole('button', { name: 'Add note' })\u001b[22m\n\n\n   at ../src/pages/example-app/NotesPage.ts:43\n\n  41 |     await this.titleInput.fill(title);\n  42 |     await this.bodyInput.fill(body);\n> 43 |     await this.addNoteButton.click();\n     |                              ^\n  44 |   }\n  45 |\n  46 |   async signOut(): Promise<void> {\n    at NotesPage.addNote (<repo>/src/pages/example-app/NotesPage.ts:43:30)\n    at <repo>/generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-02.notes.spec.ts:21:5"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-19T11:59:28.131Z",
+                  "annotations": [
+                    {
+                      "type": "requirement",
+                      "description": "REQ-412",
+                      "location": {
+                        "file": "<repo>/generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-02.notes.spec.ts",
+                        "line": 8,
+                        "column": 5
+                      }
+                    },
+                    {
+                      "type": "scenario",
+                      "description": "REQ-412-SC-02",
+                      "location": {
+                        "file": "<repo>/generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-02.notes.spec.ts",
+                        "line": 8,
+                        "column": 5
+                      }
+                    },
+                    {
+                      "type": "agent-run",
+                      "description": "20261019T115926Z-REQ-412-xpo2yt",
+                      "location": {
+                        "file": "<repo>/generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-02.notes.spec.ts",
+                        "line": 8,
+                        "column": 5
+                      }
+                    }
+                  ],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "<repo>/.agent/runs/20261019T115926Z-REQ-412-xpo2yt/artifacts/20261019T115926Z-REQ-412-x-eb4df-page-is-returned-by-the-API-agent-generated-notes/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "<repo>/.agent/runs/20261019T115926Z-REQ-412-xpo2yt/artifacts/20261019T115926Z-REQ-412-x-eb4df-page-is-returned-by-the-API-agent-generated-notes/error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "<repo>/.agent/runs/20261019T115926Z-REQ-412-xpo2yt/artifacts/20261019T115926Z-REQ-412-x-eb4df-page-is-returned-by-the-API-agent-generated-notes/trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "<repo>/src/pages/example-app/NotesPage.ts",
+                    "column": 30,
+                    "line": 43
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "88435f9cdc4c931dc5c4-c46596328cae2bd694c4",
+          "file": "../generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-02.notes.spec.ts",
+          "line": 8,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "../generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-03.notes.spec.ts",
+      "file": "../generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-03.notes.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "another user's note is not listed",
+          "ok": true,
+          "tags": [
+            "generated"
+          ],
+          "tests": [
+            {
+              "timeout": 15000,
+              "annotations": [
+                {
+                  "type": "requirement",
+                  "description": "REQ-412",
+                  "location": {
+                    "file": "<repo>/generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-03.notes.spec.ts",
+                    "line": 6,
+                    "column": 5
+                  }
+                },
+                {
+                  "type": "scenario",
+                  "description": "REQ-412-SC-03",
+                  "location": {
+                    "file": "<repo>/generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-03.notes.spec.ts",
+                    "line": 6,
+                    "column": 5
+                  }
+                },
+                {
+                  "type": "agent-run",
+                  "description": "20261019T115926Z-REQ-412-xpo2yt",
+                  "location": {
+                    "file": "<repo>/generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-03.notes.spec.ts",
+                    "line": 6,
+                    "column": 5
+                  }
+                }
+              ],
+              "expectedStatus": "passed",
+              "projectId": "agent-generated-notes",
+              "projectName": "agent-generated-notes",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 134,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-19T11:59:28.511Z",
+                  "annotations": [
+                    {
+                      "type": "requirement",
+                      "description": "REQ-412",
+                      "location": {
+                        "file": "<repo>/generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-03.notes.spec.ts",
+                        "line": 6,
+                        "column": 5
+                      }
+                    },
+                    {
+                      "type": "scenario",
+                      "description": "REQ-412-SC-03",
+                      "location": {
+                        "file": "<repo>/generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-03.notes.spec.ts",
+                        "line": 6,
+                        "column": 5
+                      }
+                    },
+                    {
+                      "type": "agent-run",
+                      "description": "20261019T115926Z-REQ-412-xpo2yt",
+                      "location": {
+                        "file": "<repo>/generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-03.notes.spec.ts",
+                        "line": 6,
+                        "column": 5
+                      }
+                    }
+                  ],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "35ea8069935a4d765d4f-2e063de3190fb915a2e6",
+          "file": "../generated/20261019T115926Z-REQ-412-xpo2yt/REQ-412-SC-03.notes.spec.ts",
+          "line": 6,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-19T11:59:27.758Z",
+    "duration": 10871.499,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

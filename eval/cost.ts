@@ -15,8 +15,9 @@ export const PricingSchema = z
   .strict();
 export type Pricing = z.infer<typeof PricingSchema>;
 
-export function loadPricing(): Pricing {
-  return PricingSchema.parse(JSON.parse(readFileSync(path.join(__dirname, 'pricing.json'), 'utf8')));
+/** Pricing metadata: eval/pricing.json by default, or a file given with --pricing. Prices change; nothing here is assumed fixed. */
+export function loadPricing(file?: string): Pricing {
+  return PricingSchema.parse(JSON.parse(readFileSync(file ?? path.join(__dirname, 'pricing.json'), 'utf8')));
 }
 
 export type CostResult = { available: true; usd: number } | { available: false; reason: string };
@@ -39,6 +40,22 @@ export interface WorkflowMeasurement {
   /** Playwright runner wall-clock (adapter start to finish); null when nothing was executed. */
   playwrightMs: number | null;
   succeeded: boolean;
+  /** Phase durations derived from the run's own step timestamps (null when the phase did not run). */
+  phases?: { validationMs: number | null; analysisMs: number | null };
+}
+
+/** Phase durations from manifest step timestamps: no extra instrumentation, so they include only what the workflow records. */
+export function phaseDurations(steps: Array<{ step: string; at: string }>): { validationMs: number | null; analysisMs: number | null } {
+  const at = (name: string) => {
+    const s = steps.find((x) => x.step === name);
+    return s ? Date.parse(s.at) : null;
+  };
+  const between = (from: string, to: string) => {
+    const a = at(from);
+    const b = at(to);
+    return a === null || b === null ? null : b - a;
+  };
+  return { validationMs: between('generate', 'validate-artifacts'), analysisMs: between('collect-evidence', 'analyse-failures') };
 }
 
 export interface CostLatencySummary {
@@ -49,7 +66,7 @@ export interface CostLatencySummary {
   retryOverhead: Ratio;
   providerErrors: number;
   tokens: { available: boolean; input: number | null; output: number | null; workflowsWithCompleteTokens: number };
-  latencyMs: { total: Distribution; model: Distribution; playwright: Distribution };
+  latencyMs: { total: Distribution; model: Distribution; playwright: Distribution; validation: Distribution; analysis: Distribution };
   cost: {
     status: 'ok' | 'unavailable';
     reason?: string;
@@ -95,6 +112,8 @@ export function summarizeCostLatency(ms: WorkflowMeasurement[], pricing: Pricing
       total: distribution(ms.map((m) => m.totalMs)),
       model: distribution(ms.map((m) => m.usage.reduce((n, u) => n + u.latencyMs, 0))),
       playwright: distribution(ms.flatMap((m) => (m.playwrightMs === null ? [] : [m.playwrightMs]))),
+      validation: distribution(ms.flatMap((m) => (m.phases?.validationMs == null ? [] : [m.phases.validationMs]))),
+      analysis: distribution(ms.flatMap((m) => (m.phases?.analysisMs == null ? [] : [m.phases.analysisMs]))),
     },
     cost: {
       status: allCostAvailable ? 'ok' : 'unavailable',

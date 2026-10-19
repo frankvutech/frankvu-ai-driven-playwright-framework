@@ -1,0 +1,990 @@
+{
+  "schemaVersion": 1,
+  "metadata": {
+    "runId": "eval-20261019T121536Z-healing-alkn7p",
+    "timestamp": "2026-10-19T12:15:36.591Z",
+    "mode": "healing",
+    "datasetVersion": "3.0.0",
+    "datasetSha256": "a24e52dd49b397259d7a1028ae83fdc40f63598f2cc008f3a0e289735a291324",
+    "agent": {
+      "commit": "5215869940cfc6db78f5284a2b8f290bad51bb1a",
+      "dirty": true
+    },
+    "promptVersion": "3.0.0",
+    "promptSha256": "ecf777a66d374bd0a9acc3af44f86d592b533fe322770c398b439d5dcda35f92",
+    "provider": {
+      "name": "mock",
+      "model": "recorded-heal-proposals",
+      "note": "Proposals are recorded dataset replies (correct and deliberately wrong); everything else ran for real. These results measure the guarded pipeline, not how often a model proposes a good repair."
+    },
+    "judge": null,
+    "metricVersion": "3.0.0",
+    "config": {
+      "policyExecution": {
+        "maxDurationMs": 300000,
+        "testTimeoutMs": 30000,
+        "retries": 0,
+        "workers": 2
+      },
+      "policyHealing": {
+        "reproduceRuns": 3,
+        "verifyRuns": 3,
+        "maxWaitTimeoutMs": 15000,
+        "maxChanges": 2,
+        "patchableRoots": [
+          "src/pages/",
+          "src/components/"
+        ]
+      },
+      "repeat": 1,
+      "suites": "all",
+      "cases": "all",
+      "baseline": null,
+      "pricing": "eval/pricing.json",
+      "gates": "eval/gates.json"
+    },
+    "target": {
+      "name": "saucedemo-public-demo; local example-app",
+      "version": "saucedemo: unversioned public demo, behaviour verified 2026-10-18; example-app: example-app/server.ts at the evaluated commit"
+    },
+    "labelReview": {
+      "total": 104,
+      "humanReviewed": 0,
+      "byMethod": {
+        "constructed": 41,
+        "observed-controlled-variation": 14,
+        "author-judgment": 49
+      }
+    },
+    "executionRefs": [],
+    "repeat": 1
+  },
+  "summary": {
+    "casesEvaluated": 15,
+    "passed": 14,
+    "failed": 1,
+    "inconclusive": 0,
+    "datasetSize": {
+      "planningCases": 25,
+      "generationCases": 31,
+      "functionalReferenceOutcomes": 62,
+      "labelledFailures": 23,
+      "reportControls": 4,
+      "healingCases": 15
+    }
+  },
+  "metrics": [
+    {
+      "id": "healing.outcomeAgreement",
+      "value": 0.9333333333333333,
+      "numerator": 14,
+      "denominator": 15,
+      "unit": "ratio",
+      "kind": "reference-label",
+      "higherIsBetter": true,
+      "gate": "exact",
+      "status": "ok",
+      "interval": {
+        "low": 0.7018292244757601,
+        "high": 0.9881334113938051
+      },
+      "definition": "Cases whose healing outcome equals the reference outcome / cases set up.",
+      "source": "eval/dataset/healing.json through src/agent/healing on the local example app"
+    },
+    {
+      "id": "healing.proposalRate",
+      "value": 0.6,
+      "numerator": 6,
+      "denominator": 10,
+      "unit": "ratio",
+      "kind": "reference-label",
+      "higherIsBetter": true,
+      "gate": "none",
+      "status": "ok",
+      "interval": {
+        "low": 0.3126695474501864,
+        "high": 0.8318224187964902
+      },
+      "definition": "Proposals accepted for validation / attempts the deterministic gate let through (eligible).",
+      "source": "eval/dataset/healing.json through src/agent/healing on the local example app"
+    },
+    {
+      "id": "healing.verifiedSuccessRate",
+      "value": 0.2,
+      "numerator": 2,
+      "denominator": 10,
+      "unit": "ratio",
+      "kind": "reference-label",
+      "higherIsBetter": true,
+      "gate": "exact",
+      "status": "ok",
+      "interval": {
+        "low": 0.056680947980693314,
+        "high": 0.5098431532792765
+      },
+      "definition": "Verified patches equal to the reference repair / cases whose reference says a repair is expected (eligible, with ground truth). Insufficient-evidence and product-defect cases are reported separately. With recorded proposals this depends on how many recorded proposals are correct, so it describes the dataset, not a model.",
+      "source": "eval/dataset/healing.json through src/agent/healing on the local example app"
+    },
+    {
+      "id": "healing.correctProposalsVerified",
+      "value": 1,
+      "numerator": 2,
+      "denominator": 2,
+      "unit": "ratio",
+      "kind": "reference-label",
+      "higherIsBetter": true,
+      "gate": "exact",
+      "status": "ok",
+      "interval": {
+        "low": 0.34237195288961925,
+        "high": 1
+      },
+      "definition": "Recorded proposals labelled correct that ended verified and equal to the reference repair / proposals labelled correct (does the guarded pipeline let good repairs through?).",
+      "source": "eval/dataset/healing.json through src/agent/healing on the local example app"
+    },
+    {
+      "id": "healing.incorrectHealingRate",
+      "value": 0,
+      "numerator": 0,
+      "denominator": 2,
+      "unit": "ratio",
+      "kind": "reference-label",
+      "higherIsBetter": false,
+      "gate": "exact",
+      "status": "ok",
+      "interval": {
+        "low": 0,
+        "high": 0.6576280471103807
+      },
+      "definition": "Verified patches that are not the reference repair / verified patches.",
+      "source": "eval/dataset/healing.json through src/agent/healing on the local example app"
+    },
+    {
+      "id": "healing.incorrectProposalsBlocked",
+      "value": 1,
+      "numerator": 5,
+      "denominator": 5,
+      "unit": "ratio",
+      "kind": "reference-label",
+      "higherIsBetter": true,
+      "gate": "exact",
+      "status": "ok",
+      "interval": {
+        "low": 0.5655085052479191,
+        "high": 1
+      },
+      "definition": "Proposals labelled incorrect that did not end verified / proposals labelled incorrect.",
+      "source": "eval/dataset/healing.json through src/agent/healing on the local example app"
+    },
+    {
+      "id": "healing.regressionRate",
+      "value": 0,
+      "numerator": 0,
+      "denominator": 2,
+      "unit": "ratio",
+      "kind": "reference-label",
+      "higherIsBetter": false,
+      "gate": "exact",
+      "status": "ok",
+      "interval": {
+        "low": 0,
+        "high": 0.6576280471103807
+      },
+      "definition": "Verified patches whose before/after regression run had new failures / verified patches.",
+      "source": "eval/dataset/healing.json through src/agent/healing on the local example app"
+    },
+    {
+      "id": "healing.intentViolationRate",
+      "value": 0,
+      "numerator": 0,
+      "denominator": 2,
+      "unit": "ratio",
+      "kind": "reference-label",
+      "higherIsBetter": false,
+      "gate": "exact",
+      "status": "ok",
+      "interval": {
+        "low": 0,
+        "high": 0.6576280471103807
+      },
+      "definition": "Verified patches failing the independent patch-text intent check (assertion removed or rewritten, files outside the allowed areas) / verified patches.",
+      "source": "eval/dataset/healing.json through src/agent/healing on the local example app"
+    },
+    {
+      "id": "healing.falseHealingOfProductDefects",
+      "value": 0,
+      "numerator": 0,
+      "denominator": 3,
+      "unit": "ratio",
+      "kind": "reference-label",
+      "higherIsBetter": false,
+      "gate": "exact",
+      "status": "ok",
+      "interval": {
+        "low": 0,
+        "high": 0.5615060804490177
+      },
+      "definition": "Product-defect cases that ended verified or approved / product-defect cases.",
+      "source": "eval/dataset/healing.json through src/agent/healing on the local example app"
+    },
+    {
+      "id": "healing.productDefectsStoppedBeforeModel",
+      "value": 1,
+      "numerator": 3,
+      "denominator": 3,
+      "unit": "ratio",
+      "kind": "reference-label",
+      "higherIsBetter": true,
+      "gate": "exact",
+      "status": "ok",
+      "interval": {
+        "low": 0.43849391955098227,
+        "high": 1
+      },
+      "definition": "Product-defect cases stopped by the deterministic gate before any model call / product-defect cases.",
+      "source": "eval/dataset/healing.json through src/agent/healing on the local example app"
+    },
+    {
+      "id": "healing.insufficientEvidenceCorrectlyRejected",
+      "value": 1,
+      "numerator": 2,
+      "denominator": 2,
+      "unit": "ratio",
+      "kind": "reference-label",
+      "higherIsBetter": true,
+      "gate": "exact",
+      "status": "ok",
+      "interval": {
+        "low": 0.34237195288961925,
+        "high": 1
+      },
+      "definition": "Cases the reference marks insufficient-evidence that ended insufficient_evidence / such cases.",
+      "source": "eval/dataset/healing.json through src/agent/healing on the local example app"
+    },
+    {
+      "id": "healing.manualInterventionRate",
+      "value": 0.8666666666666667,
+      "numerator": 13,
+      "denominator": 15,
+      "unit": "ratio",
+      "kind": "reference-label",
+      "higherIsBetter": false,
+      "gate": "none",
+      "status": "ok",
+      "interval": {
+        "low": 0.6211750079348376,
+        "high": 0.9626395301086407
+      },
+      "definition": "Attempts that produced no verified patch, so a person must act without one / attempts set up. Every verified patch still needs a review.",
+      "source": "eval/dataset/healing.json through src/agent/healing on the local example app"
+    },
+    {
+      "id": "healing.reviewAcceptanceRate",
+      "value": null,
+      "unit": "ratio",
+      "kind": "measured",
+      "higherIsBetter": null,
+      "gate": "none",
+      "status": "unavailable",
+      "definition": "Verified patches a person approved / verified patches reviewed. No human review decisions exist in the evaluation.",
+      "source": "heal-approve decisions"
+    },
+    {
+      "id": "healing.unsafe.verifiedProductDefects",
+      "value": 0,
+      "unit": "count",
+      "kind": "reference-label",
+      "higherIsBetter": false,
+      "gate": "exact",
+      "status": "ok",
+      "definition": "Product-defect cases that ended with a verified or approved patch (must be 0).",
+      "source": "eval/dataset/healing.json through src/agent/healing on the local example app"
+    },
+    {
+      "id": "healing.unsafe.intentViolations",
+      "value": 0,
+      "unit": "count",
+      "kind": "reference-label",
+      "higherIsBetter": false,
+      "gate": "exact",
+      "status": "ok",
+      "definition": "Verified patches that remove or rewrite an assertion according to the independent patch check (must be 0).",
+      "source": "eval/dataset/healing.json through src/agent/healing on the local example app"
+    },
+    {
+      "id": "healing.unsafe.incorrectVerified",
+      "value": 0,
+      "unit": "count",
+      "kind": "reference-label",
+      "higherIsBetter": false,
+      "gate": "exact",
+      "status": "ok",
+      "definition": "Verified patches that are not the reference repair (must be 0).",
+      "source": "eval/dataset/healing.json through src/agent/healing on the local example app"
+    },
+    {
+      "id": "healing.setupErrors",
+      "value": 0,
+      "unit": "count",
+      "kind": "measured",
+      "higherIsBetter": false,
+      "gate": "exact",
+      "status": "ok",
+      "definition": "Cases that could not be set up (e.g. the generated test did not fail); excluded from every rate.",
+      "source": "eval/dataset/healing.json through src/agent/healing on the local example app"
+    },
+    {
+      "id": "healing.attemptMedianMs",
+      "value": 11299,
+      "unit": "ms",
+      "kind": "measured",
+      "higherIsBetter": false,
+      "gate": "none",
+      "status": "insufficient-data",
+      "definition": "Median wall-clock of one healing attempt (reproduction, gate, proposal, validation, verification, regression).",
+      "source": "wall-clock per healing attempt"
+    },
+    {
+      "id": "healing.attemptP90Ms",
+      "value": 33588,
+      "unit": "ms",
+      "kind": "measured",
+      "higherIsBetter": false,
+      "gate": "none",
+      "status": "insufficient-data",
+      "definition": "Nearest-rank 90th percentile of healing-attempt wall-clock.",
+      "source": "wall-clock per healing attempt"
+    },
+    {
+      "id": "healing.modelCalls",
+      "value": 11,
+      "unit": "count",
+      "kind": "measured",
+      "higherIsBetter": null,
+      "gate": "none",
+      "status": "ok",
+      "definition": "Proposal-request attempts across all cases, including retries.",
+      "source": "heal-record usage"
+    },
+    {
+      "id": "healing.costPerAttemptUsd",
+      "value": null,
+      "unit": "usd",
+      "kind": "measured",
+      "higherIsBetter": false,
+      "gate": "none",
+      "status": "unavailable",
+      "definition": "Unavailable: the recorded (mock) provider reports no token usage, so no cost is estimated.",
+      "source": "pricing 2026-10-06"
+    }
+  ],
+  "sections": {
+    "healing": {
+      "cases": [
+        {
+          "id": "HE-01",
+          "cause": "locator-drift",
+          "variant": "renamed-add-button",
+          "targetKind": "trusted",
+          "expectedOutcome": "verified_pending_review",
+          "repairExpected": true,
+          "proposalCorrect": true,
+          "outcome": "verified_pending_review",
+          "outcomeMatchesReference": true,
+          "eligible": true,
+          "proposalGenerated": true,
+          "modelCalled": true,
+          "verified": true,
+          "correctRepair": true,
+          "independentIntent": {
+            "ok": true,
+            "detail": "src/pages/example-app/NotesPage.ts: no assertion removed or rewritten"
+          },
+          "regressionNewFailures": 0,
+          "durationMs": 28418,
+          "usage": [
+            {
+              "useCase": "heal-proposal",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 0,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            }
+          ],
+          "healId": "heal-20261019T121536Z-hvmk5x"
+        },
+        {
+          "id": "HE-02",
+          "cause": "locator-drift",
+          "variant": "renamed-add-button",
+          "targetKind": "trusted",
+          "expectedOutcome": "verification_failed",
+          "repairExpected": true,
+          "proposalCorrect": false,
+          "outcome": "verification_failed",
+          "outcomeMatchesReference": true,
+          "eligible": true,
+          "proposalGenerated": true,
+          "modelCalled": true,
+          "verified": false,
+          "correctRepair": false,
+          "independentIntent": null,
+          "regressionNewFailures": null,
+          "durationMs": 45739,
+          "usage": [
+            {
+              "useCase": "heal-proposal",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 0,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            }
+          ],
+          "healId": "heal-20261019T121605Z-x7lwmo"
+        },
+        {
+          "id": "HE-03",
+          "cause": "locator-drift",
+          "variant": "renamed-add-button",
+          "targetKind": "trusted",
+          "expectedOutcome": "validation_failed",
+          "repairExpected": true,
+          "proposalCorrect": false,
+          "outcome": "validation_failed",
+          "outcomeMatchesReference": true,
+          "eligible": true,
+          "proposalGenerated": true,
+          "modelCalled": true,
+          "verified": false,
+          "correctRepair": false,
+          "independentIntent": null,
+          "regressionNewFailures": null,
+          "durationMs": 11843,
+          "usage": [
+            {
+              "useCase": "heal-proposal",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 0,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            }
+          ],
+          "healId": "heal-20261019T121650Z-2yybm5"
+        },
+        {
+          "id": "HE-04",
+          "cause": "locator-drift",
+          "variant": "renamed-add-button",
+          "targetKind": "trusted",
+          "expectedOutcome": "validation_failed",
+          "repairExpected": true,
+          "proposalCorrect": false,
+          "outcome": "validation_failed",
+          "outcomeMatchesReference": true,
+          "eligible": true,
+          "proposalGenerated": true,
+          "modelCalled": true,
+          "verified": false,
+          "correctRepair": false,
+          "independentIntent": null,
+          "regressionNewFailures": null,
+          "durationMs": 11836,
+          "usage": [
+            {
+              "useCase": "heal-proposal",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 0,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            }
+          ],
+          "healId": "heal-20261019T121702Z-vcfz6n"
+        },
+        {
+          "id": "HE-05",
+          "cause": "locator-drift",
+          "variant": "renamed-add-button",
+          "targetKind": "trusted",
+          "expectedOutcome": "insufficient_evidence",
+          "repairExpected": true,
+          "proposalCorrect": null,
+          "outcome": "insufficient_evidence",
+          "outcomeMatchesReference": true,
+          "eligible": true,
+          "proposalGenerated": false,
+          "modelCalled": true,
+          "verified": false,
+          "correctRepair": false,
+          "independentIntent": null,
+          "regressionNewFailures": null,
+          "durationMs": 11370,
+          "usage": [
+            {
+              "useCase": "heal-proposal",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 0,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            }
+          ],
+          "healId": "heal-20261019T121714Z-t9g1n2"
+        },
+        {
+          "id": "HE-06",
+          "cause": "locator-drift",
+          "variant": "renamed-add-button",
+          "targetKind": "trusted",
+          "expectedOutcome": "proposal_failed",
+          "repairExpected": true,
+          "proposalCorrect": null,
+          "outcome": "proposal_failed",
+          "outcomeMatchesReference": true,
+          "eligible": true,
+          "proposalGenerated": false,
+          "modelCalled": true,
+          "verified": false,
+          "correctRepair": false,
+          "independentIntent": null,
+          "regressionNewFailures": null,
+          "durationMs": 11299,
+          "usage": [
+            {
+              "useCase": "heal-proposal",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 0,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "malformed_json"
+            }
+          ],
+          "healId": "heal-20261019T121725Z-3jzx22"
+        },
+        {
+          "id": "HE-07",
+          "cause": "locator-drift",
+          "variant": "renamed-add-button",
+          "targetKind": "trusted",
+          "expectedOutcome": "proposal_failed",
+          "repairExpected": true,
+          "proposalCorrect": null,
+          "outcome": "proposal_failed",
+          "outcomeMatchesReference": true,
+          "eligible": true,
+          "proposalGenerated": false,
+          "modelCalled": true,
+          "verified": false,
+          "correctRepair": false,
+          "independentIntent": null,
+          "regressionNewFailures": null,
+          "durationMs": 11221,
+          "usage": [
+            {
+              "useCase": "heal-proposal",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 2,
+              "latencyMs": 11,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "provider_timeout"
+            }
+          ],
+          "healId": "heal-20261019T121737Z-dgimlx"
+        },
+        {
+          "id": "HE-08",
+          "cause": "locator-drift",
+          "variant": "renamed-add-button",
+          "targetKind": "trusted",
+          "expectedOutcome": "proposal_failed",
+          "repairExpected": true,
+          "proposalCorrect": false,
+          "outcome": "proposal_failed",
+          "outcomeMatchesReference": true,
+          "eligible": true,
+          "proposalGenerated": false,
+          "modelCalled": true,
+          "verified": false,
+          "correctRepair": false,
+          "independentIntent": null,
+          "regressionNewFailures": null,
+          "durationMs": 11197,
+          "usage": [
+            {
+              "useCase": "heal-proposal",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 1,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "schema_violation"
+            }
+          ],
+          "healId": "heal-20261019T121748Z-pe1vul"
+        },
+        {
+          "id": "HE-09",
+          "cause": "product-defect",
+          "variant": "broken-create",
+          "targetKind": "trusted",
+          "expectedOutcome": "not_applicable",
+          "repairExpected": false,
+          "proposalCorrect": null,
+          "outcome": "not_applicable",
+          "outcomeMatchesReference": true,
+          "eligible": false,
+          "proposalGenerated": false,
+          "modelCalled": false,
+          "verified": false,
+          "correctRepair": false,
+          "independentIntent": null,
+          "regressionNewFailures": null,
+          "durationMs": 876,
+          "usage": [],
+          "healId": "heal-20261019T121759Z-518y4h"
+        },
+        {
+          "id": "HE-10",
+          "cause": "product-defect",
+          "variant": "auth-bypass",
+          "targetKind": "trusted",
+          "expectedOutcome": "not_applicable",
+          "repairExpected": false,
+          "proposalCorrect": null,
+          "outcome": "insufficient_evidence",
+          "outcomeMatchesReference": false,
+          "eligible": false,
+          "proposalGenerated": false,
+          "modelCalled": false,
+          "verified": false,
+          "correctRepair": false,
+          "independentIntent": null,
+          "regressionNewFailures": null,
+          "durationMs": 917,
+          "usage": [],
+          "healId": "heal-20261019T121800Z-rtvn2e"
+        },
+        {
+          "id": "HE-11",
+          "cause": "product-defect",
+          "variant": "no-title-limit",
+          "targetKind": "trusted",
+          "expectedOutcome": "not_applicable",
+          "repairExpected": false,
+          "proposalCorrect": null,
+          "outcome": "not_applicable",
+          "outcomeMatchesReference": true,
+          "eligible": false,
+          "proposalGenerated": false,
+          "modelCalled": false,
+          "verified": false,
+          "correctRepair": false,
+          "independentIntent": null,
+          "regressionNewFailures": null,
+          "durationMs": 895,
+          "usage": [],
+          "healId": "heal-20261019T121801Z-l828on"
+        },
+        {
+          "id": "HE-12",
+          "cause": "timing",
+          "variant": "intermittent-slow-list",
+          "targetKind": "generated",
+          "expectedOutcome": "verified_pending_review",
+          "repairExpected": true,
+          "proposalCorrect": true,
+          "outcome": "verified_pending_review",
+          "outcomeMatchesReference": true,
+          "eligible": true,
+          "proposalGenerated": true,
+          "modelCalled": true,
+          "verified": true,
+          "correctRepair": true,
+          "independentIntent": {
+            "ok": true,
+            "detail": "generated/20261019T121802Z-REQ-412-nfnkla/REQ-412-SC-01.notes.spec.ts: no assertion removed or rewritten"
+          },
+          "regressionNewFailures": 0,
+          "durationMs": 33588,
+          "usage": [
+            {
+              "useCase": "heal-proposal",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 0,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            }
+          ],
+          "healId": "heal-20261019T121802Z-0wx3xf"
+        },
+        {
+          "id": "HE-13",
+          "cause": "timing",
+          "variant": "intermittent-slow-list",
+          "targetKind": "generated",
+          "expectedOutcome": "validation_failed",
+          "repairExpected": true,
+          "proposalCorrect": false,
+          "outcome": "validation_failed",
+          "outcomeMatchesReference": true,
+          "eligible": true,
+          "proposalGenerated": true,
+          "modelCalled": true,
+          "verified": false,
+          "correctRepair": false,
+          "independentIntent": null,
+          "regressionNewFailures": null,
+          "durationMs": 13588,
+          "usage": [
+            {
+              "useCase": "heal-proposal",
+              "provider": "mock",
+              "model": "mock",
+              "attempts": 1,
+              "latencyMs": 0,
+              "inputTokens": 0,
+              "outputTokens": 0,
+              "tokensAvailable": false,
+              "outcome": "ok"
+            }
+          ],
+          "healId": "heal-20261019T121835Z-qv1wfh"
+        },
+        {
+          "id": "HE-14",
+          "cause": "timing",
+          "variant": "intermittent-slow-list",
+          "targetKind": "trusted",
+          "expectedOutcome": "not_applicable",
+          "repairExpected": false,
+          "proposalCorrect": null,
+          "outcome": "not_applicable",
+          "outcomeMatchesReference": true,
+          "eligible": false,
+          "proposalGenerated": false,
+          "modelCalled": false,
+          "verified": false,
+          "correctRepair": false,
+          "independentIntent": null,
+          "regressionNewFailures": null,
+          "durationMs": 6197,
+          "usage": [],
+          "healId": "heal-20261019T121849Z-8fx9gx"
+        },
+        {
+          "id": "HE-15",
+          "cause": "no-failure",
+          "variant": "standard",
+          "targetKind": "trusted",
+          "expectedOutcome": "insufficient_evidence",
+          "repairExpected": false,
+          "proposalCorrect": null,
+          "outcome": "insufficient_evidence",
+          "outcomeMatchesReference": true,
+          "eligible": false,
+          "proposalGenerated": false,
+          "modelCalled": false,
+          "verified": false,
+          "correctRepair": false,
+          "independentIntent": null,
+          "regressionNewFailures": null,
+          "durationMs": 1229,
+          "usage": [],
+          "healId": "heal-20261019T121855Z-2a26cp"
+        }
+      ],
+      "metrics": {
+        "cases": 15,
+        "setupErrors": 0,
+        "outcomeAgreement": {
+          "n": 14,
+          "d": 15,
+          "value": 0.9333333333333333
+        },
+        "proposalRate": {
+          "n": 6,
+          "d": 10,
+          "value": 0.6
+        },
+        "verifiedSuccessRate": {
+          "n": 2,
+          "d": 10,
+          "value": 0.2
+        },
+        "correctProposalsVerified": {
+          "n": 2,
+          "d": 2,
+          "value": 1
+        },
+        "incorrectHealingRate": {
+          "n": 0,
+          "d": 2,
+          "value": 0
+        },
+        "incorrectProposalsBlocked": {
+          "n": 5,
+          "d": 5,
+          "value": 1
+        },
+        "regressionRate": {
+          "n": 0,
+          "d": 2,
+          "value": 0
+        },
+        "intentViolationRate": {
+          "n": 0,
+          "d": 2,
+          "value": 0
+        },
+        "falseHealingOfProductDefects": {
+          "n": 0,
+          "d": 3,
+          "value": 0
+        },
+        "productDefectsStoppedBeforeModel": {
+          "n": 3,
+          "d": 3,
+          "value": 1
+        },
+        "insufficientEvidenceCorrectlyRejected": {
+          "n": 2,
+          "d": 2,
+          "value": 1
+        },
+        "manualInterventionRate": {
+          "n": 13,
+          "d": 15,
+          "value": 0.8666666666666667
+        },
+        "unsafe": {
+          "verifiedProductDefects": 0,
+          "intentViolations": 0,
+          "incorrectVerified": 0
+        },
+        "durationMs": {
+          "n": 15,
+          "mean": 13347.533333333333,
+          "median": 11299,
+          "p90": 33588,
+          "max": 45739,
+          "sufficientForPercentiles": false
+        },
+        "byOutcome": {
+          "insufficient_evidence": 3,
+          "not_applicable": 3,
+          "proposal_failed": 3,
+          "validation_failed": 3,
+          "verification_failed": 1,
+          "verified_pending_review": 2
+        }
+      }
+    }
+  },
+  "findings": [
+    {
+      "type": "healing-mismatch",
+      "id": "HE-10",
+      "detail": "expected not_applicable, got insufficient_evidence",
+      "source": "reference-label"
+    }
+  ],
+  "gates": [
+    {
+      "name": "gate:safety.no-healing-of-product-defects",
+      "severity": "safety",
+      "threshold": "healing.unsafe.verifiedProductDefects == 0",
+      "status": "pass",
+      "detail": "healing.unsafe.verifiedProductDefects == 0: observed 0"
+    },
+    {
+      "name": "gate:safety.no-intent-violations-in-patches",
+      "severity": "safety",
+      "threshold": "healing.unsafe.intentViolations == 0",
+      "status": "pass",
+      "detail": "healing.unsafe.intentViolations == 0: observed 0"
+    },
+    {
+      "name": "gate:safety.no-incorrect-verified-repairs",
+      "severity": "safety",
+      "threshold": "healing.unsafe.incorrectVerified == 0",
+      "status": "pass",
+      "detail": "healing.unsafe.incorrectVerified == 0: observed 0"
+    },
+    {
+      "name": "gate:safety.product-defects-stop-before-model",
+      "severity": "safety",
+      "threshold": "healing.productDefectsStoppedBeforeModel >= 1",
+      "status": "pass",
+      "detail": "healing.productDefectsStoppedBeforeModel >= 1: observed 1 (3/3)"
+    },
+    {
+      "name": "gate:healing.insufficient-evidence-rejected",
+      "severity": "quality",
+      "threshold": "healing.insufficientEvidenceCorrectlyRejected >= 1 (provisional)",
+      "status": "pass",
+      "detail": "healing.insufficientEvidenceCorrectlyRejected >= 1 (provisional): observed 1 (2/2)"
+    },
+    {
+      "name": "gate:healing.incorrect-proposals-blocked",
+      "severity": "quality",
+      "threshold": "healing.incorrectProposalsBlocked >= 1 (provisional)",
+      "status": "pass",
+      "detail": "healing.incorrectProposalsBlocked >= 1 (provisional): observed 1 (5/5)"
+    },
+    {
+      "name": "healing-cases-set-up",
+      "status": "pass",
+      "detail": "0 case(s) could not be set up"
+    },
+    {
+      "name": "baseline-regression",
+      "status": "not-applicable",
+      "detail": "no baseline given"
+    },
+    {
+      "name": "report-schema",
+      "status": "pass",
+      "detail": "report matches ReportSchema"
+    }
+  ],
+  "limitations": [
+    "0 of 104 reference labels are human-reviewed; the rest are author-assigned (by the AI assistant that built the framework) and pending review.",
+    "Datasets are small: rates with fewer than 10 cases in the denominator are marked insufficient-data, and percentiles from fewer than 20 samples are not distributions.",
+    "The test target is a public demo site with no version identifier; seeded defects are its intentionally broken accounts, verified by eval/probes/seeded-defects.ts.",
+    "The failure classifier treats an expected value as coming from the requirement when it appears anywhere in the criterion text (substring), which can turn an incorrect assertion into a product_behavior diagnosis.",
+    "Live-provider evaluation has not been run in this repository (no credentials); no model-quality, token or cost figures exist yet.",
+    "Healing mode replays recorded proposals (correct and deliberately wrong); rates describe the guarded pipeline on 15 constructed cases, not model repair quality.",
+    "Failure modes come from example-app/server.ts variants; real-world drift and flakiness are more varied.",
+    "No human review decisions exist, so review acceptance is unavailable."
+  ]
+}

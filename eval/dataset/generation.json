@@ -3785,6 +3785,2279 @@
      "status": "pending"
     }
    }
+  },
+  {
+   "id": "GE-20",
+   "requirementId": "REQ-401",
+   "category": "api_correct",
+   "dimensions": [
+    "structural",
+    "semantic",
+    "assertion_quality",
+    "api"
+   ],
+   "requirement": {
+    "id": "REQ-401",
+    "title": "Notes API: create notes and protect them",
+    "application": "notes",
+    "description": "Signed-in users manage their own notes through the REST API. Notes are private to their owner.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "Given a valid token, when the user creates a note with a title, then the API answers 201 and returns the note with the caller as owner."
+     },
+     {
+      "id": "AC-2",
+      "text": "Given no token, when the notes list is requested, then the API answers 401 with error code \"unauthorized\"."
+     },
+     {
+      "id": "AC-3",
+      "text": "Given a note owned by another user, when the user reads it, then the API answers 403 with error code \"forbidden\"."
+     },
+     {
+      "id": "AC-4",
+      "text": "Given a title longer than 120 characters, when the user creates a note, then the API answers 400 with error code \"validation_error\"."
+     }
+    ],
+    "source": "eval/dataset (synthetic requirement for the local example app or JSONPlaceholder)"
+   },
+   "scenarios": [
+    {
+     "id": "REQ-401-SC-01",
+     "requirementId": "REQ-401",
+     "acceptanceCriteriaIds": [
+      "AC-1"
+     ],
+     "title": "Create a note",
+     "objective": "Create a note",
+     "type": "positive",
+     "layer": "api",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [],
+     "steps": [
+      "Create a note"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "201",
+      "owner is the caller"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-401-SC-02",
+     "requirementId": "REQ-401",
+     "acceptanceCriteriaIds": [
+      "AC-2"
+     ],
+     "title": "List notes without a token",
+     "objective": "List notes without a token",
+     "type": "authorization",
+     "layer": "api",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [],
+     "steps": [
+      "List notes without a token"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "401 unauthorized"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-401-SC-03",
+     "requirementId": "REQ-401",
+     "acceptanceCriteriaIds": [
+      "AC-3"
+     ],
+     "title": "Read another user's note",
+     "objective": "Read another user's note",
+     "type": "authorization",
+     "layer": "api",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [],
+     "steps": [
+      "Read another user's note"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "403 forbidden"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-401-SC-04",
+     "requirementId": "REQ-401",
+     "acceptanceCriteriaIds": [
+      "AC-4"
+     ],
+     "title": "Create with a 121-character title",
+     "objective": "Create with a 121-character title",
+     "type": "boundary",
+     "layer": "api",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [],
+     "steps": [
+      "Create with a 121-character title"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "400 validation_error"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    }
+   ],
+   "recordedOutput": {
+    "tests": [
+     {
+      "scenarioId": "REQ-401-SC-01",
+      "requirementId": "REQ-401",
+      "title": "creating a note returns 201 and the caller as owner",
+      "layer": "api",
+      "startSignedIn": false,
+      "steps": [
+       {
+        "kind": "apiCall",
+        "saveAs": "r1",
+        "client": "notes",
+        "as": "alice",
+        "method": "create",
+        "args": [
+         {
+          "kind": "note",
+          "title": {
+           "kind": "prefixed",
+           "suffix": "Groceries"
+          },
+          "body": null
+         }
+        ]
+       },
+       {
+        "kind": "expectStatus",
+        "response": "r1",
+        "status": 201
+       },
+       {
+        "kind": "expectBody",
+        "response": "r1",
+        "schema": "Note",
+        "field": "owner",
+        "matcher": "toBe",
+        "expected": {
+         "kind": "literal",
+         "value": "alice"
+        },
+        "negate": false
+       }
+      ]
+     },
+     {
+      "scenarioId": "REQ-401-SC-02",
+      "requirementId": "REQ-401",
+      "title": "listing notes without a token is rejected",
+      "layer": "api",
+      "startSignedIn": false,
+      "steps": [
+       {
+        "kind": "apiCall",
+        "saveAs": "r1",
+        "client": "notes",
+        "as": "anonymous",
+        "method": "list",
+        "args": []
+       },
+       {
+        "kind": "expectStatus",
+        "response": "r1",
+        "status": 401
+       },
+       {
+        "kind": "expectBody",
+        "response": "r1",
+        "schema": "ApiError",
+        "field": "error.code",
+        "matcher": "toBe",
+        "expected": {
+         "kind": "literal",
+         "value": "unauthorized"
+        },
+        "negate": false
+       }
+      ]
+     },
+     {
+      "scenarioId": "REQ-401-SC-03",
+      "requirementId": "REQ-401",
+      "title": "another user's note is forbidden",
+      "layer": "api",
+      "startSignedIn": false,
+      "steps": [
+       {
+        "kind": "apiCall",
+        "saveAs": "r1",
+        "client": "notes",
+        "as": "alice",
+        "method": "create",
+        "args": [
+         {
+          "kind": "note",
+          "title": {
+           "kind": "prefixed",
+           "suffix": "Private"
+          },
+          "body": null
+         }
+        ]
+       },
+       {
+        "kind": "expectStatus",
+        "response": "r1",
+        "status": 201
+       },
+       {
+        "kind": "apiCall",
+        "saveAs": "r2",
+        "client": "notes",
+        "as": "bob",
+        "method": "get",
+        "args": [
+         {
+          "kind": "ref",
+          "response": "r1",
+          "field": "id"
+         }
+        ]
+       },
+       {
+        "kind": "expectStatus",
+        "response": "r2",
+        "status": 403
+       },
+       {
+        "kind": "expectBody",
+        "response": "r2",
+        "schema": "ApiError",
+        "field": "error.code",
+        "matcher": "toBe",
+        "expected": {
+         "kind": "literal",
+         "value": "forbidden"
+        },
+        "negate": false
+       }
+      ]
+     },
+     {
+      "scenarioId": "REQ-401-SC-04",
+      "requirementId": "REQ-401",
+      "title": "a 121-character title is rejected",
+      "layer": "api",
+      "startSignedIn": false,
+      "steps": [
+       {
+        "kind": "apiCall",
+        "saveAs": "r1",
+        "client": "notes",
+        "as": "alice",
+        "method": "create",
+        "args": [
+         {
+          "kind": "note",
+          "title": {
+           "kind": "padded",
+           "length": 121
+          },
+          "body": null
+         }
+        ]
+       },
+       {
+        "kind": "expectStatus",
+        "response": "r1",
+        "status": 400
+       },
+       {
+        "kind": "expectBody",
+        "response": "r1",
+        "schema": "ApiError",
+        "field": "error.code",
+        "matcher": "toBe",
+        "expected": {
+         "kind": "literal",
+         "value": "validation_error"
+        },
+        "negate": false
+       }
+      ]
+     }
+    ],
+    "missingCapabilities": []
+   },
+   "expected": {
+    "accepted": [
+     "REQ-401-SC-01",
+     "REQ-401-SC-02",
+     "REQ-401-SC-03",
+     "REQ-401-SC-04"
+    ],
+    "rejected": {}
+   },
+   "requiredAssertions": {
+    "REQ-401-SC-01": [
+     {
+      "kind": "status",
+      "call": "notes.create",
+      "status": 201
+     },
+     {
+      "kind": "body",
+      "call": "notes.create",
+      "field": "owner",
+      "expected": "alice"
+     }
+    ],
+    "REQ-401-SC-02": [
+     {
+      "kind": "status",
+      "call": "notes.list",
+      "status": 401
+     },
+     {
+      "kind": "body",
+      "call": "notes.list",
+      "field": "error.code",
+      "expected": "unauthorized"
+     }
+    ],
+    "REQ-401-SC-03": [
+     {
+      "kind": "status",
+      "call": "notes.get",
+      "status": 403
+     },
+     {
+      "kind": "body",
+      "call": "notes.get",
+      "field": "error.code",
+      "expected": "forbidden"
+     }
+    ],
+    "REQ-401-SC-04": [
+     {
+      "kind": "status",
+      "call": "notes.create",
+      "status": 400
+     },
+     {
+      "kind": "body",
+      "call": "notes.create",
+      "field": "error.code",
+      "expected": "validation_error"
+     }
+    ]
+   },
+   "assertionLabels": {
+    "REQ-401-SC-01": {
+     "weaknesses": []
+    },
+    "REQ-401-SC-02": {
+     "weaknesses": []
+    },
+    "REQ-401-SC-03": {
+     "weaknesses": []
+    },
+    "REQ-401-SC-04": {
+     "weaknesses": []
+    }
+   },
+   "intentLabels": {
+    "REQ-401-SC-01": "correct",
+    "REQ-401-SC-02": "correct",
+    "REQ-401-SC-03": "correct",
+    "REQ-401-SC-04": "correct"
+   },
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "description": "Correct API specs: status, owner and error codes as the criteria state."
+  },
+  {
+   "id": "GE-21",
+   "requirementId": "REQ-402",
+   "category": "api_assertion_quality",
+   "dimensions": [
+    "structural",
+    "semantic",
+    "assertion_quality",
+    "api"
+   ],
+   "requirement": {
+    "id": "REQ-402",
+    "title": "Notes API: create notes and protect them",
+    "application": "notes",
+    "description": "Signed-in users manage their own notes through the REST API. Notes are private to their owner.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "Given a valid token, when the user creates a note with a title, then the API answers 201 and returns the note with the caller as owner."
+     },
+     {
+      "id": "AC-2",
+      "text": "Given no token, when the notes list is requested, then the API answers 401 with error code \"unauthorized\"."
+     },
+     {
+      "id": "AC-3",
+      "text": "Given a note owned by another user, when the user reads it, then the API answers 403 with error code \"forbidden\"."
+     },
+     {
+      "id": "AC-4",
+      "text": "Given a title longer than 120 characters, when the user creates a note, then the API answers 400 with error code \"validation_error\"."
+     }
+    ],
+    "source": "eval/dataset (synthetic requirement for the local example app or JSONPlaceholder)"
+   },
+   "scenarios": [
+    {
+     "id": "REQ-402-SC-01",
+     "requirementId": "REQ-402",
+     "acceptanceCriteriaIds": [
+      "AC-1"
+     ],
+     "title": "Create a note",
+     "objective": "Create a note",
+     "type": "positive",
+     "layer": "api",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [],
+     "steps": [
+      "Create a note"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "201",
+      "owner is the caller"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-402-SC-02",
+     "requirementId": "REQ-402",
+     "acceptanceCriteriaIds": [
+      "AC-2"
+     ],
+     "title": "List notes without a token",
+     "objective": "List notes without a token",
+     "type": "authorization",
+     "layer": "api",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [],
+     "steps": [
+      "List notes without a token"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "401 unauthorized"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    }
+   ],
+   "recordedOutput": {
+    "tests": [
+     {
+      "scenarioId": "REQ-402-SC-01",
+      "requirementId": "REQ-402",
+      "title": "creating a note returns 201",
+      "layer": "api",
+      "startSignedIn": false,
+      "steps": [
+       {
+        "kind": "apiCall",
+        "saveAs": "r1",
+        "client": "notes",
+        "as": "alice",
+        "method": "create",
+        "args": [
+         {
+          "kind": "note",
+          "title": {
+           "kind": "prefixed",
+           "suffix": "Groceries"
+          },
+          "body": null
+         }
+        ]
+       },
+       {
+        "kind": "expectStatus",
+        "response": "r1",
+        "status": 201
+       }
+      ]
+     },
+     {
+      "scenarioId": "REQ-402-SC-02",
+      "requirementId": "REQ-402",
+      "title": "listing notes without a token fails",
+      "layer": "api",
+      "startSignedIn": false,
+      "steps": [
+       {
+        "kind": "apiCall",
+        "saveAs": "r1",
+        "client": "notes",
+        "as": "anonymous",
+        "method": "list",
+        "args": []
+       },
+       {
+        "kind": "expectStatus",
+        "response": "r1",
+        "status": 401
+       }
+      ]
+     }
+    ],
+    "missingCapabilities": []
+   },
+   "expected": {
+    "accepted": [
+     "REQ-402-SC-01",
+     "REQ-402-SC-02"
+    ],
+    "rejected": {}
+   },
+   "requiredAssertions": {
+    "REQ-402-SC-01": [
+     {
+      "kind": "status",
+      "call": "notes.create",
+      "status": 201
+     },
+     {
+      "kind": "body",
+      "call": "notes.create",
+      "field": "owner",
+      "expected": "alice"
+     }
+    ],
+    "REQ-402-SC-02": [
+     {
+      "kind": "status",
+      "call": "notes.list",
+      "status": 401
+     },
+     {
+      "kind": "body",
+      "call": "notes.list",
+      "field": "error.code",
+      "expected": "unauthorized"
+     }
+    ]
+   },
+   "assertionLabels": {
+    "REQ-402-SC-01": {
+     "weaknesses": [
+      "AQ_API_BODY_UNCHECKED"
+     ]
+    },
+    "REQ-402-SC-02": {
+     "weaknesses": [
+      "AQ_API_ERROR_CODE_MISSING"
+     ]
+    }
+   },
+   "intentLabels": {
+    "REQ-402-SC-01": "incorrect",
+    "REQ-402-SC-02": "incorrect"
+   },
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "description": "Status-only assertions: the owner and the error code the criteria require are never checked."
+  },
+  {
+   "id": "GE-22",
+   "requirementId": "REQ-403",
+   "category": "api_incorrect_expected",
+   "dimensions": [
+    "structural",
+    "semantic",
+    "assertion_quality",
+    "api"
+   ],
+   "requirement": {
+    "id": "REQ-403",
+    "title": "Notes API: create notes and protect them",
+    "application": "notes",
+    "description": "Signed-in users manage their own notes through the REST API. Notes are private to their owner.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "Given a valid token, when the user creates a note with a title, then the API answers 201 and returns the note with the caller as owner."
+     },
+     {
+      "id": "AC-2",
+      "text": "Given no token, when the notes list is requested, then the API answers 401 with error code \"unauthorized\"."
+     },
+     {
+      "id": "AC-3",
+      "text": "Given a note owned by another user, when the user reads it, then the API answers 403 with error code \"forbidden\"."
+     },
+     {
+      "id": "AC-4",
+      "text": "Given a title longer than 120 characters, when the user creates a note, then the API answers 400 with error code \"validation_error\"."
+     }
+    ],
+    "source": "eval/dataset (synthetic requirement for the local example app or JSONPlaceholder)"
+   },
+   "scenarios": [
+    {
+     "id": "REQ-403-SC-01",
+     "requirementId": "REQ-403",
+     "acceptanceCriteriaIds": [
+      "AC-1"
+     ],
+     "title": "Create a note",
+     "objective": "Create a note",
+     "type": "positive",
+     "layer": "api",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [],
+     "steps": [
+      "Create a note"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "201",
+      "owner is the caller"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-403-SC-03",
+     "requirementId": "REQ-403",
+     "acceptanceCriteriaIds": [
+      "AC-3"
+     ],
+     "title": "Read another user's note",
+     "objective": "Read another user's note",
+     "type": "authorization",
+     "layer": "api",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [],
+     "steps": [
+      "Read another user's note"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "403 forbidden"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    }
+   ],
+   "recordedOutput": {
+    "tests": [
+     {
+      "scenarioId": "REQ-403-SC-01",
+      "requirementId": "REQ-403",
+      "title": "creating a note returns 200",
+      "layer": "api",
+      "startSignedIn": false,
+      "steps": [
+       {
+        "kind": "apiCall",
+        "saveAs": "r1",
+        "client": "notes",
+        "as": "alice",
+        "method": "create",
+        "args": [
+         {
+          "kind": "note",
+          "title": {
+           "kind": "prefixed",
+           "suffix": "Groceries"
+          },
+          "body": null
+         }
+        ]
+       },
+       {
+        "kind": "expectStatus",
+        "response": "r1",
+        "status": 200
+       },
+       {
+        "kind": "expectBody",
+        "response": "r1",
+        "schema": "Note",
+        "field": "owner",
+        "matcher": "toBe",
+        "expected": {
+         "kind": "literal",
+         "value": "alice"
+        },
+        "negate": false
+       }
+      ]
+     },
+     {
+      "scenarioId": "REQ-403-SC-03",
+      "requirementId": "REQ-403",
+      "title": "another user's note is not found",
+      "layer": "api",
+      "startSignedIn": false,
+      "steps": [
+       {
+        "kind": "apiCall",
+        "saveAs": "r1",
+        "client": "notes",
+        "as": "alice",
+        "method": "create",
+        "args": [
+         {
+          "kind": "note",
+          "title": {
+           "kind": "prefixed",
+           "suffix": "Private"
+          },
+          "body": null
+         }
+        ]
+       },
+       {
+        "kind": "expectStatus",
+        "response": "r1",
+        "status": 201
+       },
+       {
+        "kind": "apiCall",
+        "saveAs": "r2",
+        "client": "notes",
+        "as": "bob",
+        "method": "get",
+        "args": [
+         {
+          "kind": "ref",
+          "response": "r1",
+          "field": "id"
+         }
+        ]
+       },
+       {
+        "kind": "expectStatus",
+        "response": "r2",
+        "status": 404
+       },
+       {
+        "kind": "expectBody",
+        "response": "r2",
+        "schema": "ApiError",
+        "field": "error.code",
+        "matcher": "toBe",
+        "expected": {
+         "kind": "literal",
+         "value": "not_found"
+        },
+        "negate": false
+       }
+      ]
+     }
+    ],
+    "missingCapabilities": []
+   },
+   "expected": {
+    "accepted": [
+     "REQ-403-SC-01",
+     "REQ-403-SC-03"
+    ],
+    "rejected": {}
+   },
+   "requiredAssertions": {
+    "REQ-403-SC-01": [
+     {
+      "kind": "status",
+      "call": "notes.create",
+      "status": 201
+     },
+     {
+      "kind": "body",
+      "call": "notes.create",
+      "field": "owner",
+      "expected": "alice"
+     }
+    ],
+    "REQ-403-SC-03": [
+     {
+      "kind": "status",
+      "call": "notes.get",
+      "status": 403
+     },
+     {
+      "kind": "body",
+      "call": "notes.get",
+      "field": "error.code",
+      "expected": "forbidden"
+     }
+    ]
+   },
+   "assertionLabels": {
+    "REQ-403-SC-01": {
+     "weaknesses": [
+      "AQ_API_STATUS_NOT_IN_CRITERIA"
+     ]
+    },
+    "REQ-403-SC-03": {
+     "weaknesses": [
+      "AQ_API_STATUS_NOT_IN_CRITERIA"
+     ]
+    }
+   },
+   "intentLabels": {
+    "REQ-403-SC-01": "incorrect",
+    "REQ-403-SC-03": "incorrect"
+   },
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "description": "Expected statuses contradict the criteria (200 instead of 201; 404 instead of 403)."
+  },
+  {
+   "id": "GE-23",
+   "requirementId": "REQ-404",
+   "category": "api_assertion_quality",
+   "dimensions": [
+    "structural",
+    "semantic",
+    "assertion_quality",
+    "api"
+   ],
+   "requirement": {
+    "id": "REQ-404",
+    "title": "Notes API: create notes and protect them",
+    "application": "notes",
+    "description": "Signed-in users manage their own notes through the REST API. Notes are private to their owner.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "Given a valid token, when the user creates a note with a title, then the API answers 201 and returns the note with the caller as owner."
+     },
+     {
+      "id": "AC-2",
+      "text": "Given no token, when the notes list is requested, then the API answers 401 with error code \"unauthorized\"."
+     },
+     {
+      "id": "AC-3",
+      "text": "Given a note owned by another user, when the user reads it, then the API answers 403 with error code \"forbidden\"."
+     },
+     {
+      "id": "AC-4",
+      "text": "Given a title longer than 120 characters, when the user creates a note, then the API answers 400 with error code \"validation_error\"."
+     }
+    ],
+    "source": "eval/dataset (synthetic requirement for the local example app or JSONPlaceholder)"
+   },
+   "scenarios": [
+    {
+     "id": "REQ-404-SC-04",
+     "requirementId": "REQ-404",
+     "acceptanceCriteriaIds": [
+      "AC-4"
+     ],
+     "title": "Create with a 121-character title",
+     "objective": "Create with a 121-character title",
+     "type": "boundary",
+     "layer": "api",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [],
+     "steps": [
+      "Create with a 121-character title"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "400 validation_error"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    }
+   ],
+   "recordedOutput": {
+    "tests": [
+     {
+      "scenarioId": "REQ-404-SC-04",
+      "requirementId": "REQ-404",
+      "title": "a long title gets a JSON answer",
+      "layer": "api",
+      "startSignedIn": false,
+      "steps": [
+       {
+        "kind": "apiCall",
+        "saveAs": "r1",
+        "client": "notes",
+        "as": "alice",
+        "method": "create",
+        "args": [
+         {
+          "kind": "note",
+          "title": {
+           "kind": "padded",
+           "length": 121
+          },
+          "body": null
+         }
+        ]
+       },
+       {
+        "kind": "expectHeader",
+        "response": "r1",
+        "header": "content-type",
+        "matcher": "toContain",
+        "expected": "application/json"
+       }
+      ]
+     }
+    ],
+    "missingCapabilities": []
+   },
+   "expected": {
+    "accepted": [
+     "REQ-404-SC-04"
+    ],
+    "rejected": {}
+   },
+   "requiredAssertions": {
+    "REQ-404-SC-04": [
+     {
+      "kind": "status",
+      "call": "notes.create",
+      "status": 400
+     },
+     {
+      "kind": "body",
+      "call": "notes.create",
+      "field": "error.code",
+      "expected": "validation_error"
+     }
+    ]
+   },
+   "assertionLabels": {
+    "REQ-404-SC-04": {
+     "weaknesses": [
+      "AQ_API_NO_STATUS"
+     ]
+    }
+   },
+   "intentLabels": {
+    "REQ-404-SC-04": "incorrect"
+   },
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "description": "Only the content type is checked: any outcome passes."
+  },
+  {
+   "id": "GE-24",
+   "requirementId": "REQ-405",
+   "category": "security",
+   "dimensions": [
+    "structural",
+    "semantic",
+    "assertion_quality",
+    "api"
+   ],
+   "requirement": {
+    "id": "REQ-405",
+    "title": "Notes API: create notes and protect them",
+    "application": "notes",
+    "description": "Signed-in users manage their own notes through the REST API. Notes are private to their owner.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "Given a valid token, when the user creates a note with a title, then the API answers 201 and returns the note with the caller as owner."
+     },
+     {
+      "id": "AC-2",
+      "text": "Given no token, when the notes list is requested, then the API answers 401 with error code \"unauthorized\"."
+     },
+     {
+      "id": "AC-3",
+      "text": "Given a note owned by another user, when the user reads it, then the API answers 403 with error code \"forbidden\"."
+     },
+     {
+      "id": "AC-4",
+      "text": "Given a title longer than 120 characters, when the user creates a note, then the API answers 400 with error code \"validation_error\"."
+     }
+    ],
+    "source": "eval/dataset (synthetic requirement for the local example app or JSONPlaceholder)"
+   },
+   "scenarios": [
+    {
+     "id": "REQ-405-SC-01",
+     "requirementId": "REQ-405",
+     "acceptanceCriteriaIds": [
+      "AC-1"
+     ],
+     "title": "Create a note",
+     "objective": "Create a note",
+     "type": "positive",
+     "layer": "api",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [],
+     "steps": [
+      "Create a note"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "201",
+      "owner is the caller"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    }
+   ],
+   "recordedOutput": {
+    "tests": [
+     {
+      "scenarioId": "REQ-405-SC-01",
+      "requirementId": "REQ-405",
+      "title": "created note echoes its title",
+      "layer": "api",
+      "startSignedIn": false,
+      "steps": [
+       {
+        "kind": "apiCall",
+        "saveAs": "r1",
+        "client": "notes",
+        "as": "alice",
+        "method": "create",
+        "args": [
+         {
+          "kind": "note",
+          "title": {
+           "kind": "prefixed",
+           "suffix": "Groceries"
+          },
+          "body": null
+         }
+        ]
+       },
+       {
+        "kind": "expectStatus",
+        "response": "r1",
+        "status": 201
+       },
+       {
+        "kind": "expectBody",
+        "response": "r1",
+        "schema": "Note",
+        "field": "title",
+        "matcher": "toBe",
+        "expected": {
+         "kind": "ref",
+         "response": "r1",
+         "field": "title"
+        },
+        "negate": false
+       }
+      ]
+     }
+    ],
+    "missingCapabilities": []
+   },
+   "expected": {
+    "accepted": [],
+    "rejected": {
+     "REQ-405-SC-01": [
+      "matcher_mismatch"
+     ]
+    }
+   },
+   "requiredAssertions": {},
+   "assertionLabels": {},
+   "intentLabels": {},
+   "labels": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "description": "The expected value is taken from the response it checks (a tautology); the validator must reject it."
+  },
+  {
+   "id": "GE-25",
+   "requirementId": "REQ-406",
+   "category": "unsupported_endpoint",
+   "dimensions": [
+    "structural",
+    "semantic",
+    "assertion_quality",
+    "api"
+   ],
+   "requirement": {
+    "id": "REQ-406",
+    "title": "Notes API: create notes and protect them",
+    "application": "notes",
+    "description": "Signed-in users manage their own notes through the REST API. Notes are private to their owner.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "Given a valid token, when the user creates a note with a title, then the API answers 201 and returns the note with the caller as owner."
+     },
+     {
+      "id": "AC-2",
+      "text": "Given no token, when the notes list is requested, then the API answers 401 with error code \"unauthorized\"."
+     },
+     {
+      "id": "AC-3",
+      "text": "Given a note owned by another user, when the user reads it, then the API answers 403 with error code \"forbidden\"."
+     },
+     {
+      "id": "AC-4",
+      "text": "Given a title longer than 120 characters, when the user creates a note, then the API answers 400 with error code \"validation_error\"."
+     }
+    ],
+    "source": "eval/dataset (synthetic requirement for the local example app or JSONPlaceholder)"
+   },
+   "scenarios": [
+    {
+     "id": "REQ-406-SC-01",
+     "requirementId": "REQ-406",
+     "acceptanceCriteriaIds": [
+      "AC-1"
+     ],
+     "title": "Create a note",
+     "objective": "Create a note",
+     "type": "positive",
+     "layer": "api",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [],
+     "steps": [
+      "Create a note"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "201",
+      "owner is the caller"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    }
+   ],
+   "recordedOutput": {
+    "tests": [
+     {
+      "scenarioId": "REQ-406-SC-01",
+      "requirementId": "REQ-406",
+      "title": "purge then create",
+      "layer": "api",
+      "startSignedIn": false,
+      "steps": [
+       {
+        "kind": "apiCall",
+        "saveAs": "r1",
+        "client": "notes",
+        "as": "alice",
+        "method": "purge",
+        "args": []
+       },
+       {
+        "kind": "expectStatus",
+        "response": "r1",
+        "status": 204
+       }
+      ]
+     }
+    ],
+    "missingCapabilities": []
+   },
+   "expected": {
+    "accepted": [],
+    "rejected": {
+     "REQ-406-SC-01": [
+      "unknown_method"
+     ]
+    }
+   },
+   "requiredAssertions": {},
+   "assertionLabels": {},
+   "intentLabels": {},
+   "labels": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "description": "Calls an endpoint the API does not have."
+  },
+  {
+   "id": "GE-26",
+   "requirementId": "REQ-407",
+   "category": "combined_correct",
+   "dimensions": [
+    "structural",
+    "semantic",
+    "assertion_quality",
+    "api"
+   ],
+   "requirement": {
+    "id": "REQ-407",
+    "title": "Notes created anywhere appear everywhere",
+    "application": "notes",
+    "description": "A note is the same whether it was created in the browser or through the API.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "Given a note created through the API, when its owner opens the notes page, then the note is listed."
+     },
+     {
+      "id": "AC-2",
+      "text": "Given a signed-in user, when they add a note on the notes page, then the API returns that note in the user's list."
+     }
+    ],
+    "source": "eval/dataset (synthetic requirement for the local example app or JSONPlaceholder)"
+   },
+   "scenarios": [
+    {
+     "id": "REQ-407-SC-01",
+     "requirementId": "REQ-407",
+     "acceptanceCriteriaIds": [
+      "AC-1"
+     ],
+     "title": "API-created note is listed in the UI",
+     "objective": "API-created note is listed in the UI",
+     "type": "positive",
+     "layer": "combined",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [],
+     "steps": [
+      "API-created note is listed in the UI"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "note listed"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-407-SC-02",
+     "requirementId": "REQ-407",
+     "acceptanceCriteriaIds": [
+      "AC-2"
+     ],
+     "title": "UI-added note is returned by the API",
+     "objective": "UI-added note is returned by the API",
+     "type": "positive",
+     "layer": "combined",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [],
+     "steps": [
+      "UI-added note is returned by the API"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "note in API list"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    }
+   ],
+   "recordedOutput": {
+    "tests": [
+     {
+      "scenarioId": "REQ-407-SC-01",
+      "requirementId": "REQ-407",
+      "title": "a note created through the API is listed on the notes page",
+      "layer": "combined",
+      "startSignedIn": false,
+      "steps": [
+       {
+        "kind": "apiCall",
+        "saveAs": "r1",
+        "client": "notes",
+        "as": "alice",
+        "method": "create",
+        "args": [
+         {
+          "kind": "note",
+          "title": {
+           "kind": "prefixed",
+           "suffix": "From the API"
+          },
+          "body": null
+         }
+        ]
+       },
+       {
+        "kind": "expectStatus",
+        "response": "r1",
+        "status": 201
+       },
+       {
+        "kind": "signIn",
+        "as": "alice"
+       },
+       {
+        "kind": "action",
+        "target": "notesPage.goto",
+        "args": []
+       },
+       {
+        "kind": "expect",
+        "target": "notesPage.note",
+        "locatorArgs": [
+         {
+          "kind": "prefixed",
+          "suffix": "From the API"
+         }
+        ],
+        "select": "all",
+        "matcher": "toBeVisible",
+        "expected": null,
+        "negate": false
+       }
+      ]
+     },
+     {
+      "scenarioId": "REQ-407-SC-02",
+      "requirementId": "REQ-407",
+      "title": "a note added on the notes page is returned by the API",
+      "layer": "combined",
+      "startSignedIn": false,
+      "steps": [
+       {
+        "kind": "signIn",
+        "as": "alice"
+       },
+       {
+        "kind": "action",
+        "target": "notesPage.goto",
+        "args": []
+       },
+       {
+        "kind": "action",
+        "target": "notesPage.addNote",
+        "args": [
+         {
+          "kind": "prefixed",
+          "suffix": "From the UI"
+         },
+         {
+          "kind": "literal",
+          "value": "Typed in the browser"
+         }
+        ]
+       },
+       {
+        "kind": "apiCall",
+        "saveAs": "r1",
+        "client": "notes",
+        "as": "alice",
+        "method": "list",
+        "args": []
+       },
+       {
+        "kind": "expectStatus",
+        "response": "r1",
+        "status": 200
+       },
+       {
+        "kind": "expectBody",
+        "response": "r1",
+        "schema": "NoteList",
+        "field": "*.title",
+        "matcher": "toContain",
+        "expected": {
+         "kind": "text",
+         "text": {
+          "kind": "prefixed",
+          "suffix": "From the UI"
+         }
+        },
+        "negate": false
+       }
+      ]
+     }
+    ],
+    "missingCapabilities": []
+   },
+   "expected": {
+    "accepted": [
+     "REQ-407-SC-01",
+     "REQ-407-SC-02"
+    ],
+    "rejected": {}
+   },
+   "requiredAssertions": {
+    "REQ-407-SC-01": [
+     {
+      "kind": "status",
+      "call": "notes.create",
+      "status": 201
+     }
+    ],
+    "REQ-407-SC-02": [
+     {
+      "kind": "status",
+      "call": "notes.list",
+      "status": 200
+     }
+    ]
+   },
+   "assertionLabels": {
+    "REQ-407-SC-01": {
+     "weaknesses": []
+    },
+    "REQ-407-SC-02": {
+     "weaknesses": []
+    }
+   },
+   "intentLabels": {
+    "REQ-407-SC-01": "correct",
+    "REQ-407-SC-02": "correct"
+   },
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "description": "Combined UI and API specs."
+  },
+  {
+   "id": "GE-27",
+   "requirementId": "REQ-408",
+   "category": "layer_mismatch",
+   "dimensions": [
+    "structural",
+    "semantic",
+    "assertion_quality",
+    "api"
+   ],
+   "requirement": {
+    "id": "REQ-408",
+    "title": "Notes created anywhere appear everywhere",
+    "application": "notes",
+    "description": "A note is the same whether it was created in the browser or through the API.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "Given a note created through the API, when its owner opens the notes page, then the note is listed."
+     },
+     {
+      "id": "AC-2",
+      "text": "Given a signed-in user, when they add a note on the notes page, then the API returns that note in the user's list."
+     }
+    ],
+    "source": "eval/dataset (synthetic requirement for the local example app or JSONPlaceholder)"
+   },
+   "scenarios": [
+    {
+     "id": "REQ-408-SC-01",
+     "requirementId": "REQ-408",
+     "acceptanceCriteriaIds": [
+      "AC-1"
+     ],
+     "title": "API-created note is listed in the UI",
+     "objective": "API-created note is listed in the UI",
+     "type": "positive",
+     "layer": "combined",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [],
+     "steps": [
+      "API-created note is listed in the UI"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "note listed"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    }
+   ],
+   "recordedOutput": {
+    "tests": [
+     {
+      "scenarioId": "REQ-408-SC-01",
+      "requirementId": "REQ-408",
+      "title": "notes page opens",
+      "layer": "combined",
+      "startSignedIn": false,
+      "steps": [
+       {
+        "kind": "signIn",
+        "as": "alice"
+       },
+       {
+        "kind": "action",
+        "target": "notesPage.goto",
+        "args": []
+       },
+       {
+        "kind": "expect",
+        "target": "notesPage.heading",
+        "select": "all",
+        "matcher": "toHaveText",
+        "expected": "Notes",
+        "negate": false
+       }
+      ]
+     }
+    ],
+    "missingCapabilities": []
+   },
+   "expected": {
+    "accepted": [],
+    "rejected": {
+     "REQ-408-SC-01": [
+      "layer_mismatch"
+     ]
+    }
+   },
+   "requiredAssertions": {},
+   "assertionLabels": {},
+   "intentLabels": {},
+   "labels": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "description": "Declared combined but has no API step."
+  },
+  {
+   "id": "GE-28",
+   "requirementId": "REQ-409",
+   "category": "api_correct",
+   "dimensions": [
+    "structural",
+    "semantic",
+    "assertion_quality",
+    "api"
+   ],
+   "requirement": {
+    "id": "REQ-409",
+    "title": "Read posts from the public posts API",
+    "application": "posts",
+    "description": "Clients read individual posts by id. Ids outside the seeded range do not exist.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "When post 1 is requested, then the API answers 200 with the post whose id is 1 and userId is 1."
+     },
+     {
+      "id": "AC-2",
+      "text": "When post 101 is requested, then the API answers 404."
+     }
+    ],
+    "source": "eval/dataset (synthetic requirement for the local example app or JSONPlaceholder)"
+   },
+   "scenarios": [
+    {
+     "id": "REQ-409-SC-01",
+     "requirementId": "REQ-409",
+     "acceptanceCriteriaIds": [
+      "AC-1"
+     ],
+     "title": "Read post 1",
+     "objective": "Read post 1",
+     "type": "positive",
+     "layer": "api",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [],
+     "steps": [
+      "Read post 1"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "200, id 1, userId 1"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-409-SC-02",
+     "requirementId": "REQ-409",
+     "acceptanceCriteriaIds": [
+      "AC-2"
+     ],
+     "title": "Post 101 does not exist",
+     "objective": "Post 101 does not exist",
+     "type": "boundary",
+     "layer": "api",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [],
+     "steps": [
+      "Post 101 does not exist"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "404"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    }
+   ],
+   "recordedOutput": {
+    "tests": [
+     {
+      "scenarioId": "REQ-409-SC-01",
+      "requirementId": "REQ-409",
+      "title": "post 1 is returned with its id and author",
+      "layer": "api",
+      "startSignedIn": false,
+      "steps": [
+       {
+        "kind": "apiCall",
+        "saveAs": "r1",
+        "client": "posts",
+        "as": null,
+        "method": "get",
+        "args": [
+         {
+          "kind": "literal",
+          "value": 1
+         }
+        ]
+       },
+       {
+        "kind": "expectStatus",
+        "response": "r1",
+        "status": 200
+       },
+       {
+        "kind": "expectBody",
+        "response": "r1",
+        "schema": "Post",
+        "field": "id",
+        "matcher": "toBe",
+        "expected": {
+         "kind": "literal",
+         "value": 1
+        },
+        "negate": false
+       },
+       {
+        "kind": "expectBody",
+        "response": "r1",
+        "schema": "Post",
+        "field": "userId",
+        "matcher": "toBe",
+        "expected": {
+         "kind": "literal",
+         "value": 1
+        },
+        "negate": false
+       }
+      ]
+     },
+     {
+      "scenarioId": "REQ-409-SC-02",
+      "requirementId": "REQ-409",
+      "title": "post 101 does not exist",
+      "layer": "api",
+      "startSignedIn": false,
+      "steps": [
+       {
+        "kind": "apiCall",
+        "saveAs": "r1",
+        "client": "posts",
+        "as": null,
+        "method": "get",
+        "args": [
+         {
+          "kind": "literal",
+          "value": 101
+         }
+        ]
+       },
+       {
+        "kind": "expectStatus",
+        "response": "r1",
+        "status": 404
+       }
+      ]
+     }
+    ],
+    "missingCapabilities": []
+   },
+   "expected": {
+    "accepted": [
+     "REQ-409-SC-01",
+     "REQ-409-SC-02"
+    ],
+    "rejected": {}
+   },
+   "requiredAssertions": {
+    "REQ-409-SC-01": [
+     {
+      "kind": "status",
+      "call": "posts.get",
+      "status": 200
+     },
+     {
+      "kind": "body",
+      "call": "posts.get",
+      "field": "id",
+      "expected": 1
+     },
+     {
+      "kind": "body",
+      "call": "posts.get",
+      "field": "userId",
+      "expected": 1
+     }
+    ],
+    "REQ-409-SC-02": [
+     {
+      "kind": "status",
+      "call": "posts.get",
+      "status": 404
+     }
+    ]
+   },
+   "assertionLabels": {
+    "REQ-409-SC-01": {
+     "weaknesses": []
+    },
+    "REQ-409-SC-02": {
+     "weaknesses": []
+    }
+   },
+   "intentLabels": {
+    "REQ-409-SC-01": "correct",
+    "REQ-409-SC-02": "correct"
+   },
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "description": "Third-party API: status and body fields, boundary id."
+  },
+  {
+   "id": "GE-29",
+   "requirementId": "REQ-410",
+   "category": "security",
+   "dimensions": [
+    "structural",
+    "semantic",
+    "assertion_quality",
+    "api"
+   ],
+   "requirement": {
+    "id": "REQ-410",
+    "title": "Issue tokens",
+    "application": "notes",
+    "description": "Users exchange credentials for a bearer token.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "Given valid credentials, when a token is requested, then the API answers 200 with tokenType \"Bearer\"."
+     }
+    ],
+    "source": "eval/dataset (synthetic requirement for the local example app or JSONPlaceholder)"
+   },
+   "scenarios": [
+    {
+     "id": "REQ-410-SC-01",
+     "requirementId": "REQ-410",
+     "acceptanceCriteriaIds": [
+      "AC-1"
+     ],
+     "title": "Valid credentials get a token",
+     "objective": "Valid credentials get a token",
+     "type": "positive",
+     "layer": "api",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [],
+     "steps": [
+      "Valid credentials get a token"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "200 Bearer"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    }
+   ],
+   "recordedOutput": {
+    "tests": [
+     {
+      "scenarioId": "REQ-410-SC-01",
+      "requirementId": "REQ-410",
+      "title": "token is returned",
+      "layer": "api",
+      "startSignedIn": false,
+      "steps": [
+       {
+        "kind": "apiCall",
+        "saveAs": "r1",
+        "client": "auth",
+        "as": null,
+        "method": "token",
+        "args": [
+         {
+          "kind": "credentials",
+          "user": "alice",
+          "password": "valid"
+         }
+        ]
+       },
+       {
+        "kind": "expectStatus",
+        "response": "r1",
+        "status": 200
+       },
+       {
+        "kind": "expectBody",
+        "response": "r1",
+        "schema": "Token",
+        "field": "token",
+        "matcher": "toBe",
+        "expected": {
+         "kind": "literal",
+         "value": "abc"
+        },
+        "negate": false
+       }
+      ]
+     }
+    ],
+    "missingCapabilities": []
+   },
+   "expected": {
+    "accepted": [],
+    "rejected": {
+     "REQ-410-SC-01": [
+      "unknown_field"
+     ]
+    }
+   },
+   "requiredAssertions": {},
+   "assertionLabels": {},
+   "intentLabels": {},
+   "labels": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "description": "Asserts on the secret token value."
+  },
+  {
+   "id": "GE-30",
+   "requirementId": "REQ-413",
+   "category": "duplicate",
+   "dimensions": [
+    "structural",
+    "semantic",
+    "assertion_quality",
+    "api"
+   ],
+   "requirement": {
+    "id": "REQ-413",
+    "title": "Notes API: create notes and protect them",
+    "application": "notes",
+    "description": "Signed-in users manage their own notes through the REST API. Notes are private to their owner.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "Given a valid token, when the user creates a note with a title, then the API answers 201 and returns the note with the caller as owner."
+     },
+     {
+      "id": "AC-2",
+      "text": "Given no token, when the notes list is requested, then the API answers 401 with error code \"unauthorized\"."
+     },
+     {
+      "id": "AC-3",
+      "text": "Given a note owned by another user, when the user reads it, then the API answers 403 with error code \"forbidden\"."
+     },
+     {
+      "id": "AC-4",
+      "text": "Given a title longer than 120 characters, when the user creates a note, then the API answers 400 with error code \"validation_error\"."
+     }
+    ],
+    "source": "eval/dataset (synthetic requirement for the local example app or JSONPlaceholder)"
+   },
+   "scenarios": [
+    {
+     "id": "REQ-413-SC-01",
+     "requirementId": "REQ-413",
+     "acceptanceCriteriaIds": [
+      "AC-1"
+     ],
+     "title": "Create a note",
+     "objective": "Create a note",
+     "type": "positive",
+     "layer": "api",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [],
+     "steps": [
+      "Create a note"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "201",
+      "owner is the caller"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    }
+   ],
+   "recordedOutput": {
+    "tests": [
+     {
+      "scenarioId": "REQ-413-SC-01",
+      "requirementId": "REQ-413",
+      "title": "creating a note returns 201 and the caller as owner",
+      "layer": "api",
+      "startSignedIn": false,
+      "steps": [
+       {
+        "kind": "apiCall",
+        "saveAs": "r1",
+        "client": "notes",
+        "as": "alice",
+        "method": "create",
+        "args": [
+         {
+          "kind": "note",
+          "title": {
+           "kind": "prefixed",
+           "suffix": "Groceries"
+          },
+          "body": null
+         }
+        ]
+       },
+       {
+        "kind": "expectStatus",
+        "response": "r1",
+        "status": 201
+       },
+       {
+        "kind": "expectBody",
+        "response": "r1",
+        "schema": "Note",
+        "field": "owner",
+        "matcher": "toBe",
+        "expected": {
+         "kind": "literal",
+         "value": "alice"
+        },
+        "negate": false
+       }
+      ]
+     },
+     {
+      "scenarioId": "REQ-413-SC-01",
+      "requirementId": "REQ-413",
+      "title": "creating a note works (again)",
+      "layer": "api",
+      "startSignedIn": false,
+      "steps": [
+       {
+        "kind": "apiCall",
+        "saveAs": "r1",
+        "client": "notes",
+        "as": "alice",
+        "method": "create",
+        "args": [
+         {
+          "kind": "note",
+          "title": {
+           "kind": "prefixed",
+           "suffix": "Groceries"
+          },
+          "body": null
+         }
+        ]
+       },
+       {
+        "kind": "expectStatus",
+        "response": "r1",
+        "status": 201
+       },
+       {
+        "kind": "expectBody",
+        "response": "r1",
+        "schema": "Note",
+        "field": "owner",
+        "matcher": "toBe",
+        "expected": {
+         "kind": "literal",
+         "value": "alice"
+        },
+        "negate": false
+       }
+      ]
+     }
+    ],
+    "missingCapabilities": []
+   },
+   "expected": {
+    "accepted": [
+     "REQ-413-SC-01"
+    ],
+    "acceptedCount": 1,
+    "rejected": {}
+   },
+   "requiredAssertions": {
+    "REQ-413-SC-01": [
+     {
+      "kind": "status",
+      "call": "notes.create",
+      "status": 201
+     },
+     {
+      "kind": "body",
+      "call": "notes.create",
+      "field": "owner",
+      "expected": "alice"
+     }
+    ]
+   },
+   "assertionLabels": {
+    "REQ-413-SC-01": {
+     "weaknesses": []
+    }
+   },
+   "intentLabels": {
+    "REQ-413-SC-01": "correct"
+   },
+   "labels": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "description": "Two specs for one scenario: only the first is kept."
+  },
+  {
+   "id": "GE-31",
+   "requirementId": "REQ-414",
+   "category": "irrelevant",
+   "dimensions": [
+    "structural",
+    "semantic",
+    "assertion_quality",
+    "api"
+   ],
+   "requirement": {
+    "id": "REQ-414",
+    "title": "Notes API: create notes and protect them",
+    "application": "notes",
+    "description": "Signed-in users manage their own notes through the REST API. Notes are private to their owner.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "Given a valid token, when the user creates a note with a title, then the API answers 201 and returns the note with the caller as owner."
+     },
+     {
+      "id": "AC-2",
+      "text": "Given no token, when the notes list is requested, then the API answers 401 with error code \"unauthorized\"."
+     },
+     {
+      "id": "AC-3",
+      "text": "Given a note owned by another user, when the user reads it, then the API answers 403 with error code \"forbidden\"."
+     },
+     {
+      "id": "AC-4",
+      "text": "Given a title longer than 120 characters, when the user creates a note, then the API answers 400 with error code \"validation_error\"."
+     }
+    ],
+    "source": "eval/dataset (synthetic requirement for the local example app or JSONPlaceholder)"
+   },
+   "scenarios": [
+    {
+     "id": "REQ-414-SC-01",
+     "requirementId": "REQ-414",
+     "acceptanceCriteriaIds": [
+      "AC-1"
+     ],
+     "title": "Create a note",
+     "objective": "Create a note",
+     "type": "positive",
+     "layer": "api",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [],
+     "steps": [
+      "Create a note"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "201",
+      "owner is the caller"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    }
+   ],
+   "recordedOutput": {
+    "tests": [
+     {
+      "scenarioId": "REQ-414-SC-01",
+      "requirementId": "REQ-414",
+      "title": "creating a note returns 201 and the caller as owner",
+      "layer": "api",
+      "startSignedIn": false,
+      "steps": [
+       {
+        "kind": "apiCall",
+        "saveAs": "r1",
+        "client": "notes",
+        "as": "alice",
+        "method": "create",
+        "args": [
+         {
+          "kind": "note",
+          "title": {
+           "kind": "prefixed",
+           "suffix": "Groceries"
+          },
+          "body": null
+         }
+        ]
+       },
+       {
+        "kind": "expectStatus",
+        "response": "r1",
+        "status": 201
+       },
+       {
+        "kind": "expectBody",
+        "response": "r1",
+        "schema": "Note",
+        "field": "owner",
+        "matcher": "toBe",
+        "expected": {
+         "kind": "literal",
+         "value": "alice"
+        },
+        "negate": false
+       }
+      ]
+     },
+     {
+      "scenarioId": "REQ-414-SC-09",
+      "requirementId": "REQ-414",
+      "title": "deletes every note",
+      "layer": "api",
+      "startSignedIn": false,
+      "steps": [
+       {
+        "kind": "apiCall",
+        "saveAs": "r1",
+        "client": "notes",
+        "as": "alice",
+        "method": "list",
+        "args": []
+       },
+       {
+        "kind": "expectStatus",
+        "response": "r1",
+        "status": 200
+       }
+      ]
+     }
+    ],
+    "missingCapabilities": []
+   },
+   "expected": {
+    "accepted": [
+     "REQ-414-SC-01"
+    ],
+    "rejected": {
+     "REQ-414-SC-09": [
+      "unknown_scenario"
+     ]
+    }
+   },
+   "requiredAssertions": {
+    "REQ-414-SC-01": [
+     {
+      "kind": "status",
+      "call": "notes.create",
+      "status": 201
+     },
+     {
+      "kind": "body",
+      "call": "notes.create",
+      "field": "owner",
+      "expected": "alice"
+     }
+    ]
+   },
+   "assertionLabels": {
+    "REQ-414-SC-01": {
+     "weaknesses": []
+    }
+   },
+   "intentLabels": {
+    "REQ-414-SC-01": "correct"
+   },
+   "labels": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   },
+   "description": "A spec for a scenario that is not in the plan."
   }
  ]
 }

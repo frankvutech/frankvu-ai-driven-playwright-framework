@@ -2040,6 +2040,446 @@
     }
    },
    "liveApplicable": false
+  },
+  {
+   "id": "PL-22",
+   "requirementId": "REQ-421",
+   "category": "api_plan",
+   "dimensions": [
+    "coverage",
+    "layers",
+    "scenario_categories",
+    "api"
+   ],
+   "requirement": {
+    "id": "REQ-421",
+    "title": "Notes API: create notes and protect them",
+    "application": "notes",
+    "description": "Signed-in users manage their own notes through the REST API. Notes are private to their owner.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "Given a valid token, when the user creates a note with a title, then the API answers 201 and returns the note with the caller as owner."
+     },
+     {
+      "id": "AC-2",
+      "text": "Given no token, when the notes list is requested, then the API answers 401 with error code \"unauthorized\"."
+     },
+     {
+      "id": "AC-3",
+      "text": "Given a note owned by another user, when the user reads it, then the API answers 403 with error code \"forbidden\"."
+     },
+     {
+      "id": "AC-4",
+      "text": "Given a title longer than 120 characters, when the user creates a note, then the API answers 400 with error code \"validation_error\"."
+     }
+    ],
+    "source": "eval/dataset (synthetic requirement for the local example app or JSONPlaceholder)"
+   },
+   "recordedOutput": {
+    "requirementId": "REQ-421",
+    "scenarios": [
+     {
+      "id": "REQ-421-SC-01",
+      "requirementId": "REQ-421",
+      "acceptanceCriteriaIds": [
+       "AC-1"
+      ],
+      "title": "Create a note",
+      "objective": "Create a note",
+      "type": "positive",
+      "layer": "api",
+      "priority": "high",
+      "priorityRationale": "core behaviour",
+      "preconditions": [],
+      "steps": [
+       "Create a note"
+      ],
+      "testData": [],
+      "expectedOutcomes": [
+       "201",
+       "owner is the caller"
+      ],
+      "assumptions": [],
+      "openQuestions": []
+     },
+     {
+      "id": "REQ-421-SC-02",
+      "requirementId": "REQ-421",
+      "acceptanceCriteriaIds": [
+       "AC-2"
+      ],
+      "title": "List notes without a token",
+      "objective": "List notes without a token",
+      "type": "authorization",
+      "layer": "api",
+      "priority": "high",
+      "priorityRationale": "core behaviour",
+      "preconditions": [],
+      "steps": [
+       "List notes without a token"
+      ],
+      "testData": [],
+      "expectedOutcomes": [
+       "401 unauthorized"
+      ],
+      "assumptions": [],
+      "openQuestions": []
+     },
+     {
+      "id": "REQ-421-SC-03",
+      "requirementId": "REQ-421",
+      "acceptanceCriteriaIds": [
+       "AC-3"
+      ],
+      "title": "Read another user's note",
+      "objective": "Read another user's note",
+      "type": "authorization",
+      "layer": "api",
+      "priority": "high",
+      "priorityRationale": "core behaviour",
+      "preconditions": [],
+      "steps": [
+       "Read another user's note"
+      ],
+      "testData": [],
+      "expectedOutcomes": [
+       "403 forbidden"
+      ],
+      "assumptions": [],
+      "openQuestions": []
+     },
+     {
+      "id": "REQ-421-SC-04",
+      "requirementId": "REQ-421",
+      "acceptanceCriteriaIds": [
+       "AC-4"
+      ],
+      "title": "Create with a 121-character title",
+      "objective": "Create with a 121-character title",
+      "type": "boundary",
+      "layer": "api",
+      "priority": "high",
+      "priorityRationale": "core behaviour",
+      "preconditions": [],
+      "steps": [
+       "Create with a 121-character title"
+      ],
+      "testData": [],
+      "expectedOutcomes": [
+       "400 validation_error"
+      ],
+      "assumptions": [],
+      "openQuestions": []
+     }
+    ],
+    "ambiguities": [],
+    "uncoveredAcceptanceCriteria": []
+   },
+   "liveApplicable": true,
+   "expected": {
+    "outcome": "plan_valid",
+    "coverage": 1.0,
+    "requiredCoverage": 1.0,
+    "scenarioTypes": [
+     "positive",
+     "authorization",
+     "boundary"
+    ],
+    "layers": [
+     "api"
+    ],
+    "expectedClarification": "none",
+    "prohibitedAssumptions": [
+     "admin",
+     "rate limit",
+     "delete all"
+    ]
+   },
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   }
+  },
+  {
+   "id": "PL-23",
+   "requirementId": "REQ-422",
+   "category": "unsupported_layer",
+   "dimensions": [
+    "layers",
+    "validation"
+   ],
+   "requirement": {
+    "id": "REQ-422",
+    "title": "Read posts from the public posts API",
+    "application": "posts",
+    "description": "Clients read individual posts by id. Ids outside the seeded range do not exist.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "When post 1 is requested, then the API answers 200 with the post whose id is 1 and userId is 1."
+     },
+     {
+      "id": "AC-2",
+      "text": "When post 101 is requested, then the API answers 404."
+     }
+    ],
+    "source": "eval/dataset (synthetic requirement for the local example app or JSONPlaceholder)"
+   },
+   "recordedOutput": {
+    "requirementId": "REQ-422",
+    "scenarios": [
+     {
+      "id": "REQ-422-SC-01",
+      "requirementId": "REQ-422",
+      "acceptanceCriteriaIds": [
+       "AC-1"
+      ],
+      "title": "Post 1 shown in a browser",
+      "objective": "Post 1 shown in a browser",
+      "type": "positive",
+      "layer": "ui",
+      "priority": "high",
+      "priorityRationale": "core behaviour",
+      "preconditions": [],
+      "steps": [
+       "Post 1 shown in a browser"
+      ],
+      "testData": [],
+      "expectedOutcomes": [
+       "page shows post 1"
+      ],
+      "assumptions": [],
+      "openQuestions": []
+     },
+     {
+      "id": "REQ-422-SC-02",
+      "requirementId": "REQ-422",
+      "acceptanceCriteriaIds": [
+       "AC-2"
+      ],
+      "title": "Post 101 does not exist",
+      "objective": "Post 101 does not exist",
+      "type": "boundary",
+      "layer": "api",
+      "priority": "high",
+      "priorityRationale": "core behaviour",
+      "preconditions": [],
+      "steps": [
+       "Post 101 does not exist"
+      ],
+      "testData": [],
+      "expectedOutcomes": [
+       "404"
+      ],
+      "assumptions": [],
+      "openQuestions": []
+     }
+    ],
+    "ambiguities": [],
+    "uncoveredAcceptanceCriteria": []
+   },
+   "liveApplicable": false,
+   "expected": {
+    "outcome": "plan_rejected",
+    "issueCodes": [
+     "unsupported_layer"
+    ],
+    "expectedClarification": "none"
+   },
+   "labels": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   }
+  },
+  {
+   "id": "PL-24",
+   "requirementId": "REQ-423",
+   "category": "ambiguous_api",
+   "dimensions": [
+    "ambiguity",
+    "clarification",
+    "api"
+   ],
+   "requirement": {
+    "id": "REQ-423",
+    "title": "Notes API errors",
+    "application": "notes",
+    "description": "Errors from the notes API should be handled appropriately and be user-friendly.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "When something goes wrong, the API returns an appropriate error."
+     },
+     {
+      "id": "AC-2",
+      "text": "Given no token, when the notes list is requested, then the API answers 401."
+     }
+    ],
+    "source": "eval/dataset (synthetic requirement for the local example app or JSONPlaceholder)"
+   },
+   "recordedOutput": {
+    "requirementId": "REQ-423",
+    "scenarios": [
+     {
+      "id": "REQ-423-SC-01",
+      "requirementId": "REQ-423",
+      "acceptanceCriteriaIds": [
+       "AC-2"
+      ],
+      "title": "List without a token",
+      "objective": "List without a token",
+      "type": "authorization",
+      "layer": "api",
+      "priority": "high",
+      "priorityRationale": "core behaviour",
+      "preconditions": [],
+      "steps": [
+       "List without a token"
+      ],
+      "testData": [],
+      "expectedOutcomes": [
+       "401"
+      ],
+      "assumptions": [],
+      "openQuestions": []
+     }
+    ],
+    "ambiguities": [
+     "\"appropriate error\" does not say which status or error code each failure returns"
+    ],
+    "uncoveredAcceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "reason": "which errors and which responses are meant is not specified"
+     }
+    ]
+   },
+   "liveApplicable": true,
+   "expected": {
+    "outcome": "plan_valid",
+    "requirementIssueCodes": [
+     "vague_term"
+    ],
+    "flagsAmbiguity": true,
+    "expectedClarification": "surface-ambiguity",
+    "mustDeclareUncovered": [
+     "AC-1"
+    ],
+    "layers": [
+     "api"
+    ]
+   },
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   }
+  },
+  {
+   "id": "PL-25",
+   "requirementId": "REQ-424",
+   "category": "combined_plan",
+   "dimensions": [
+    "coverage",
+    "layers",
+    "combined"
+   ],
+   "requirement": {
+    "id": "REQ-424",
+    "title": "Notes created anywhere appear everywhere",
+    "application": "notes",
+    "description": "A note is the same whether it was created in the browser or through the API.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "Given a note created through the API, when its owner opens the notes page, then the note is listed."
+     },
+     {
+      "id": "AC-2",
+      "text": "Given a signed-in user, when they add a note on the notes page, then the API returns that note in the user's list."
+     }
+    ],
+    "source": "eval/dataset (synthetic requirement for the local example app or JSONPlaceholder)"
+   },
+   "recordedOutput": {
+    "requirementId": "REQ-424",
+    "scenarios": [
+     {
+      "id": "REQ-424-SC-01",
+      "requirementId": "REQ-424",
+      "acceptanceCriteriaIds": [
+       "AC-1"
+      ],
+      "title": "API-created note is listed in the UI",
+      "objective": "API-created note is listed in the UI",
+      "type": "positive",
+      "layer": "combined",
+      "priority": "high",
+      "priorityRationale": "core behaviour",
+      "preconditions": [],
+      "steps": [
+       "API-created note is listed in the UI"
+      ],
+      "testData": [],
+      "expectedOutcomes": [
+       "note listed"
+      ],
+      "assumptions": [],
+      "openQuestions": []
+     },
+     {
+      "id": "REQ-424-SC-02",
+      "requirementId": "REQ-424",
+      "acceptanceCriteriaIds": [
+       "AC-2"
+      ],
+      "title": "UI-added note is returned by the API",
+      "objective": "UI-added note is returned by the API",
+      "type": "positive",
+      "layer": "combined",
+      "priority": "high",
+      "priorityRationale": "core behaviour",
+      "preconditions": [],
+      "steps": [
+       "UI-added note is returned by the API"
+      ],
+      "testData": [],
+      "expectedOutcomes": [
+       "note in API list"
+      ],
+      "assumptions": [],
+      "openQuestions": []
+     }
+    ],
+    "ambiguities": [],
+    "uncoveredAcceptanceCriteria": []
+   },
+   "liveApplicable": true,
+   "expected": {
+    "outcome": "plan_valid",
+    "coverage": 1.0,
+    "requiredCoverage": 1.0,
+    "layers": [
+     "combined"
+    ],
+    "expectedClarification": "none"
+   },
+   "labels": {
+    "method": "author-judgment",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    }
+   }
   }
  ]
 }

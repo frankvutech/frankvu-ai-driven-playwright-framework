@@ -342,6 +342,176 @@
     },
     "notes": "Failure deliberately constructed; label follows the construction."
    }
+  },
+  {
+   "id": "F-16",
+   "report": "playwright-report.notes-api-broken-create.json",
+   "title": "creating a note returns 201 and the caller as owner",
+   "expectedStatus": "failed",
+   "expectedScenarioId": "REQ-411-SC-01",
+   "label": "product_regression",
+   "acceptanceCriteria": "Given a valid token, when the user creates a note with a title, then the API answers 201 and returns the note with the caller as owner.",
+   "rationale": "The broken-create variant answers 500 to every create; the test's expectations follow the criterion.",
+   "provenance": {
+    "method": "observed-controlled-variation",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    },
+    "notes": "The failure mode was injected with an example-app variant; eval/probes/seeded-defects.ts verifies the variant independently."
+   },
+   "evidenceSufficient": true
+  },
+  {
+   "id": "F-17",
+   "report": "playwright-report.notes-api-auth-bypass.json",
+   "title": "another user's note is forbidden",
+   "expectedStatus": "failed",
+   "expectedScenarioId": "REQ-411-SC-03",
+   "label": "product_regression",
+   "acceptanceCriteria": "Given a note owned by another user, when the user reads it, then the API answers 403 with error code \"forbidden\".",
+   "rationale": "The auth-bypass variant returns another user's note with 200 where the criterion requires 403.",
+   "provenance": {
+    "method": "observed-controlled-variation",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    },
+    "notes": "The failure mode was injected with an example-app variant; eval/probes/seeded-defects.ts verifies the variant independently."
+   },
+   "evidenceSufficient": true
+  },
+  {
+   "id": "F-18",
+   "report": "playwright-report.notes-api-auth-bypass.json",
+   "title": "creating a note returns 200",
+   "expectedStatus": "failed",
+   "expectedScenarioId": "REQ-411-SC-06",
+   "label": "incorrect_assertion",
+   "acceptanceCriteria": "Given a valid token, when the user creates a note with a title, then the API answers 201 and returns the note with the caller as owner.",
+   "rationale": "The test expects 200 but the criterion states 201; the API is correct.",
+   "provenance": {
+    "method": "constructed",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    },
+    "notes": "Deliberately wrong pinned spec (FS-NOTESAPI SC-06)."
+   },
+   "evidenceSufficient": true
+  },
+  {
+   "id": "F-19",
+   "report": "playwright-report.notes-api-no-title-limit.json",
+   "title": "a 121-character title is rejected",
+   "expectedStatus": "failed",
+   "expectedScenarioId": "REQ-411-SC-04",
+   "label": "product_regression",
+   "acceptanceCriteria": "Given a title longer than 120 characters, when the user creates a note, then the API answers 400 with error code \"validation_error\".",
+   "rationale": "The no-title-limit variant accepts a 121-character title (201) where the criterion requires 400.",
+   "provenance": {
+    "method": "observed-controlled-variation",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    },
+    "notes": "The failure mode was injected with an example-app variant; eval/probes/seeded-defects.ts verifies the variant independently."
+   },
+   "evidenceSufficient": true
+  },
+  {
+   "id": "F-20",
+   "report": "playwright-report.notes-api-no-title-limit.json",
+   "title": "a long title gets a JSON answer",
+   "expectedStatus": "failed",
+   "expectedScenarioId": "REQ-411-SC-05",
+   "label": "product_regression",
+   "acceptanceCriteria": "Given a title longer than 120 characters, when the user creates a note, then the API answers 400 with error code \"validation_error\".",
+   "rationale": "The test's own check is weak (content type only) and passes; the failure comes from the cleanup fixture, whose schema rejects the 121-character note the defective API stored. Root cause: the missing title validation.",
+   "provenance": {
+    "method": "observed-controlled-variation",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    },
+    "notes": "The failure mode was injected with an example-app variant; eval/probes/seeded-defects.ts verifies the variant independently."
+   },
+   "evidenceSufficient": true
+  },
+  {
+   "id": "F-21",
+   "report": "playwright-report.notes-ui-renamed-add-button.json",
+   "title": "a note added on the notes page is returned by the API",
+   "expectedStatus": "failed",
+   "expectedScenarioId": "REQ-412-SC-02",
+   "label": "locator",
+   "acceptanceCriteria": "Given a signed-in user, when they add a note on the notes page, then the API returns that note in the user's list.",
+   "rationale": "The submit button was renamed; the feature works, so the stale page-object locator is the cause.",
+   "provenance": {
+    "method": "observed-controlled-variation",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    },
+    "notes": "The failure mode was injected with an example-app variant; eval/probes/seeded-defects.ts verifies the variant independently."
+   },
+   "evidenceSufficient": true
+  },
+  {
+   "id": "F-22",
+   "report": "playwright-report.notes-ui-broken-create.json",
+   "title": "a note added on the notes page is returned by the API",
+   "expectedStatus": "failed",
+   "expectedScenarioId": "REQ-412-SC-02",
+   "label": "product_regression",
+   "acceptanceCriteria": "Given a signed-in user, when they add a note on the notes page, then the API returns that note in the user's list.",
+   "rationale": "Submitting the form fails with 500, so the note never appears; the UI symptom is a missing element.",
+   "provenance": {
+    "method": "observed-controlled-variation",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    },
+    "notes": "The failure mode was injected with an example-app variant; eval/probes/seeded-defects.ts verifies the variant independently."
+   },
+   "evidenceSufficient": false
+  },
+  {
+   "id": "F-23",
+   "report": "playwright-report.notes-ui-slow-list.json",
+   "title": "a note created through the API is listed on the notes page",
+   "expectedStatus": "failed",
+   "expectedScenarioId": "REQ-412-SC-01",
+   "label": "timeout",
+   "acceptanceCriteria": "Given a note created through the API, when its owner opens the notes page, then the note is listed.",
+   "rationale": "The intermittent-slow-list variant reveals the list after 6 s; the 5 s assertion timed out on an element that was present but hidden.",
+   "provenance": {
+    "method": "observed-controlled-variation",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    },
+    "notes": "The failure mode was injected with an example-app variant; eval/probes/seeded-defects.ts verifies the variant independently."
+   },
+   "evidenceSufficient": true
+  },
+  {
+   "id": "P-04",
+   "report": "playwright-report.notes-api-broken-create.json",
+   "title": "listing notes without a token is rejected",
+   "expectedStatus": "passed",
+   "expectedScenarioId": "REQ-411-SC-02",
+   "label": null,
+   "acceptanceCriteria": "",
+   "rationale": "Control: unaffected by the create defect; must be parsed as passed and not analysed.",
+   "provenance": {
+    "method": "observed-controlled-variation",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    },
+    "notes": "The failure mode was injected with an example-app variant; eval/probes/seeded-defects.ts verifies the variant independently."
+   }
   }
  ],
  "categories": [

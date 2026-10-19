@@ -35,7 +35,16 @@ export const MetricSchema = z
   .strict();
 export type Metric = z.infer<typeof MetricSchema>;
 
-export const GateSchema = z.object({ name: z.string(), status: z.enum(['pass', 'fail', 'not-applicable']), detail: z.string() }).strict();
+export const GateSchema = z
+  .object({
+    name: z.string(),
+    /** insufficient-data: the metric is missing or its sample is too small; distinct from a failure. */
+    status: z.enum(['pass', 'fail', 'not-applicable', 'insufficient-data']),
+    detail: z.string(),
+    severity: z.enum(['safety', 'quality', 'cost']).optional(),
+    threshold: z.string().optional(),
+  })
+  .strict();
 export type Gate = z.infer<typeof GateSchema>;
 
 export const FindingSchema = z
@@ -50,6 +59,8 @@ export const FindingSchema = z
       'false-positive-failure',
       'false-negative',
       'latency-outlier',
+      'unsafe-healing',
+      'healing-mismatch',
     ]),
     id: z.string(),
     detail: z.string(),
@@ -65,7 +76,7 @@ export const ReportSchema = z
       .object({
         runId: z.string(),
         timestamp: z.string(),
-        mode: z.enum(['deterministic', 'functional', 'live']),
+        mode: z.enum(['deterministic', 'functional', 'live', 'healing']),
         datasetVersion: z.string(),
         datasetSha256: z.string().regex(/^[0-9a-f]{64}$/),
         agent: z.object({ commit: z.string(), dirty: z.boolean() }).strict(),
@@ -164,9 +175,14 @@ export function renderSummary(r: EvaluationReport): string {
     '',
     `Cases evaluated ${r.summary.casesEvaluated}: ${r.summary.passed} met expectations, ${r.summary.failed} did not, ${r.summary.inconclusive} inconclusive.`,
     '',
+    // Safety gates first: no other result (or score) can hide them.
+    '## Safety gates',
+    '',
+    ...(r.gates.some((g) => g.severity === 'safety') ? r.gates.filter((g) => g.severity === 'safety').map((g) => `- **${g.status.toUpperCase()}** ${g.name}: ${g.detail}`) : ['- none apply to this mode']),
+    '',
     '## Gates',
     '',
-    ...r.gates.map((g) => `- **${g.status.toUpperCase()}** ${g.name}: ${g.detail}`),
+    ...r.gates.filter((g) => g.severity !== 'safety').map((g) => `- **${g.status.toUpperCase()}** ${g.name}: ${g.detail}`),
     '',
     '## Metrics',
     '',

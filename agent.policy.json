@@ -61,7 +61,9 @@
       "standard",
       "renamed-add-button",
       "intermittent-slow-list",
-      "broken-create"
+      "broken-create",
+      "auth-bypass",
+      "no-title-limit"
     ]
   },
   "healing": {

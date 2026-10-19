@@ -41,6 +41,10 @@ jobs:
         env:
           # Executes only the sha256-pinned dataset specs; the approver is the person whose push or PR triggered the run.
           AGENT_EVAL_APPROVER: ${{ github.actor }}
+      - name: Healing evaluation on the local example app (recorded proposals; safety gates; gated against eval/baselines/healing.json)
+        run: npm run eval:healing
+        env:
+          AGENT_EVAL_APPROVER: ${{ github.actor }}
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:

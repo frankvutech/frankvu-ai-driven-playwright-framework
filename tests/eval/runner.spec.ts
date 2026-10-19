@@ -18,19 +18,27 @@ test.beforeAll(() => {
 
 test.afterAll(() => rmSync(out, { recursive: true, force: true }));
 
+const d0 = loadDataset();
+
 test('deterministic run: all gates pass, report validates, metadata is complete', async () => {
   const { report, dir, exitCode } = await runEvaluation({ mode: 'deterministic', outDir: out });
   expect(exitCode).toBe(0);
   expect(ReportSchema.safeParse(JSON.parse(readFileSync(path.join(dir, 'report.json'), 'utf8'))).success).toBe(true);
   expect(readFileSync(path.join(dir, 'summary.md'), 'utf8')).toContain('## Limitations');
   expect(report.gates.filter((g) => g.status === 'fail')).toEqual([]);
-  expect(report.metadata).toMatchObject({ mode: 'deterministic', datasetVersion: '2.0.1', promptVersion: '3.0.0', metricVersion: '3.0.0', provider: { name: 'mock' } });
+  expect(report.metadata).toMatchObject({ mode: 'deterministic', datasetVersion: '3.0.0', promptVersion: '3.0.0', metricVersion: '3.0.0', provider: { name: 'mock' } });
   expect(report.metadata.agent.commit).toMatch(/^[0-9a-f]{40}$|^unknown$/);
   // Deterministic, fixed-input metrics are pinned exactly; timing is not gated.
   const byId = Object.fromEntries(report.metrics.map((m) => [m.id, m]));
   expect(byId['planning.structural.expectationsMet']).toMatchObject({ value: 1, gate: 'exact' });
   expect(byId['recovery.meanRecoveryLatencyMs'].gate).toBe('none');
   expect(byId['evidence.falsePasses'].value).toBe(0);
+  // Reproducibility metadata: configuration (no secrets), pricing and gate files, dataset sizes.
+  expect(report.metadata.config).toMatchObject({ pricing: 'eval/pricing.json', gates: 'eval/gates.json', policyHealing: expect.objectContaining({ reproduceRuns: expect.any(Number) }) });
+  expect(report.summary.datasetSize).toMatchObject({ healingCases: d0.healing.cases.length });
+  expect(JSON.stringify(report)).not.toMatch(/sk-ant-|ANTHROPIC_API_KEY=/);
+  // Configured gates are reported with their thresholds; safety gates are marked.
+  expect(report.gates.find((g) => g.name === 'gate:safety.no-false-passes')).toMatchObject({ status: 'pass', severity: 'safety' });
   // Failed reference comparisons surface as findings rather than disappearing into aggregates.
   expect(report.findings.some((f) => f.type === 'incorrect-diagnosis')).toBe(true);
   writeFileSync(path.join(out, 'baseline.json'), JSON.stringify(report));
@@ -58,7 +66,11 @@ test('live mode plumbing with a mock standing in for the model is labelled as su
   const provider = new MockProvider({ 'test-plan': plans, 'test-generation': gens, 'failure-analysis': Array(20).fill('not json') });
   const { report } = await runEvaluation({ mode: 'live', outDir: out, provider });
   expect(report.metadata.provider.note).toContain('not real model results');
-  expect(report.gates.filter((g) => g.name !== 'baseline-regression' && g.name !== 'report-schema')).toEqual([]);
+  // Without real model data the live threshold gates have nothing to judge: insufficient data, never a pass.
+  const configured = report.gates.filter((g) => g.name.startsWith('gate:'));
+  expect(configured.map((g) => g.status)).toEqual(configured.map(() => 'insufficient-data'));
+  expect(configured.length).toBeGreaterThan(0);
+  expect(report.gates.filter((g) => g.status === 'fail')).toEqual([]);
   expect(report.metrics.find((m) => m.id === 'latency.modelMedianMs')?.status).toBe('not-run');
   expect(report.metrics.filter((m) => m.kind === 'ai-judgment').every((m) => m.gate === 'none')).toBe(true);
   expect(report.metrics.find((m) => m.id === 'cost.medianPerWorkflowUsd')?.status).toBe('unavailable');

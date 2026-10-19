@@ -1,16 +1,34 @@
 {
-  "datasetVersion": "2.0.1",
+  "datasetVersion": "3.0.0",
   "description": "AI Test Agent evaluation dataset.",
   "files": {
     "planning": "planning.json",
     "generation": "generation.json",
     "functional": "functional.json",
-    "failures": "failures/labels.json"
+    "failures": "failures/labels.json",
+    "healing": "healing.json"
   },
   "labelPolicy": "Every label records how it was produced (constructed | observed-controlled-variation | author-judgment) and its review status. No label is human-reviewed yet: a person must review a case and set review.status to \"human-reviewed\" with reviewer and date. Reports count reviewed and pending labels separately.",
   "changelog": [
-    { "version": "1.0.0", "date": "2026-10-18", "changes": "Phase 2: 15 planning cases, 10 generation cases, 8 labelled report tests." },
-    { "version": "2.0.0", "date": "2026-10-18", "changes": "Phase 3: label provenance and review status; 6 planning cases (multiple criteria, input validation, conflicting, untestable); 9 assertion-quality cases; 4 seeded-defect functional suites (29 reference outcomes); 10 more real failure captures; failure taxonomy aligned with the Phase 3 categories." },
-    { "version": "2.0.1", "date": "2026-10-19", "changes": "Naming only: description no longer names a product. Recorded captures in failures/ keep their original paths and annotations as historical evidence. No case, label or expectation changed." }
+    {
+      "version": "1.0.0",
+      "date": "2026-10-18",
+      "changes": "Phase 2: 15 planning cases, 10 generation cases, 8 labelled report tests."
+    },
+    {
+      "version": "2.0.0",
+      "date": "2026-10-18",
+      "changes": "Phase 3: label provenance and review status; 6 planning cases (multiple criteria, input validation, conflicting, untestable); 9 assertion-quality cases; 4 seeded-defect functional suites (29 reference outcomes); 10 more real failure captures; failure taxonomy aligned with the Phase 3 categories."
+    },
+    {
+      "version": "2.0.1",
+      "date": "2026-10-19",
+      "changes": "Naming only: description no longer names a product. Recorded captures in failures/ keep their original paths and annotations as historical evidence. No case, label or expectation changed."
+    },
+    {
+      "version": "3.0.0",
+      "date": "2026-10-19",
+      "changes": "API and combined cases: 4 planning (PL-22..25), 12 generation (GE-20..31) with API required assertions and intent labels; notes-app functional suites FS-NOTESAPI and FS-NOTESUI with seeded defects D-NOTES-CREATE, D-NOTES-AUTHZ, D-NOTES-TITLELEN and the renamed-add-button drift variant; 15 healing cases (healing.json); real failure captures from the example app."
+    }
   ]
 }

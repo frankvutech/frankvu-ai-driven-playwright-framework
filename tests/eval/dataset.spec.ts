@@ -11,7 +11,8 @@ test.describe('evaluation dataset', () => {
     expect(d.generation.cases.length).toBeGreaterThanOrEqual(19);
     expect(d.functional.suites.length).toBeGreaterThanOrEqual(4);
     expect(d.failures.cases.filter((c) => c.label !== null).length).toBeGreaterThanOrEqual(15);
-    expect(d.labelReview.total).toBe(d.planning.cases.length + d.generation.cases.length + d.functional.suites.length + d.failures.cases.length);
+    expect(d.healing.cases.length).toBeGreaterThanOrEqual(15);
+    expect(d.labelReview.total).toBe(d.planning.cases.length + d.generation.cases.length + d.functional.suites.length + d.failures.cases.length + d.healing.cases.length);
   });
 
   test('the dataset covers the required case categories', () => {

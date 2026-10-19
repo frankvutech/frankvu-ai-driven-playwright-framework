@@ -6,15 +6,36 @@ import type { LlmProvider } from '../src/agent/llm/provider';
 import { callStructured, type UsageRecord } from '../src/agent/llm/structured';
 import { asData, DATA_RULE, JSON_RULE } from '../src/agent/prompts/common';
 import { describeAssertion } from './assertions';
+import type { RequiredAssertion } from './schema';
 
 /* ------------------- reference-based deterministic checks ------------------- */
 
-/** Is each required assertion (from reviewed reference properties) present, positive and exact? */
-export function requiredAssertionCoverage(spec: TestSpec, required: Array<{ target: string; expected: string | number | string[] }>) {
-  const missing = required.filter(
-    (r) => !spec.steps.some((s) => s.kind === 'expect' && !s.negate && s.target === r.target && JSON.stringify(s.expected) === JSON.stringify(r.expected)),
-  );
+/**
+ * Is each required assertion (from reference properties) present, positive and
+ * exact? UI: an expect on the target with that value. API: a status, or a body
+ * field with that literal value, on the response of the named client call.
+ */
+export function requiredAssertionCoverage(spec: TestSpec, required: RequiredAssertion[]) {
+  const responsesOf = (call: string) =>
+    spec.steps.flatMap((s) => (s.kind === 'apiCall' && `${s.client}.${s.method}` === call ? [s.saveAs] : []));
+  const present = (r: RequiredAssertion): boolean => {
+    if (!('kind' in r)) {
+      return spec.steps.some((s) => s.kind === 'expect' && !s.negate && s.target === r.target && JSON.stringify(s.expected) === JSON.stringify(r.expected));
+    }
+    const responses = responsesOf(r.call);
+    if (r.kind === 'status') return spec.steps.some((s) => s.kind === 'expectStatus' && responses.includes(s.response) && s.status === r.status);
+    return spec.steps.some(
+      (s) => s.kind === 'expectBody' && responses.includes(s.response) && !s.negate && s.field === r.field && s.expected?.kind === 'literal' && s.expected.value === r.expected,
+    );
+  };
+  const missing = required.filter((r) => !present(r));
   return { required: required.length, satisfied: required.length - missing.length, missing };
+}
+
+/** Human-readable form of a required assertion. */
+export function describeRequired(r: RequiredAssertion): string {
+  if (!('kind' in r)) return `${r.target} = ${JSON.stringify(r.expected)}`;
+  return r.kind === 'status' ? `${r.call} status ${r.status}` : `${r.call} ${r.field} = ${JSON.stringify(r.expected)}`;
 }
 
 /** Prohibited assumptions: phrases the reference says must not appear in the plan (a keyword proxy, not understanding). */

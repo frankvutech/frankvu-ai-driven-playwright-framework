@@ -2,6 +2,9 @@ import { z } from 'zod';
 import { RequirementSchema } from '../src/agent/domain/requirement';
 import { ScenarioSchema } from '../src/agent/domain/plan';
 import { TestSpecSchema, type TestSpec } from '../src/agent/domain/testSpec';
+import { LAYERS } from '../src/agent/domain/application';
+import { EXAMPLE_APP_VARIANTS } from '../example-app/server';
+import { HealChangeSchema, HEAL_OUTCOMES } from '../src/agent/healing/types';
 
 /**
  * Validates a recorded spec without transforming it. Pinned specs are hashed
@@ -61,6 +64,8 @@ export const PlanningCaseSchema = z
         assumptionScenarios: z.array(z.string()).optional(),
         modelCalls: z.number().int().optional(),
         prohibitedAssumptions: z.array(z.string().min(3)).optional(),
+        /** Layers the plan must contain (ui/api/combined). */
+        layers: z.array(z.enum(LAYERS)).optional(),
         expectedClarification: CLARIFICATION,
         mustDeclareUncovered: z.array(z.string()).optional(),
       })
@@ -81,12 +86,25 @@ export const ASSERTION_WEAKNESSES = [
   'AQ_CONTRADICTORY',
   'AQ_REDUNDANT',
   'AQ_UNSTABLE_URL',
+  // API assertion rules (Phase 3 v3)
+  'AQ_API_NO_STATUS',
+  'AQ_API_ERROR_CODE_MISSING',
+  'AQ_API_STATUS_NOT_IN_CRITERIA',
+  'AQ_API_BODY_UNCHECKED',
 ] as const;
 export type AssertionWeakness = (typeof ASSERTION_WEAKNESSES)[number];
 
-export const RequiredAssertionSchema = z
-  .object({ target: z.string(), expected: z.union([z.string(), z.number(), z.array(z.string())]) })
-  .strict();
+/**
+ * A reference assertion a correct test must contain. UI: a positive expect on
+ * a target with this exact value. API: a status on the response of a call, or
+ * a body field with this exact literal value.
+ */
+export const RequiredAssertionSchema = z.union([
+  z.object({ target: z.string(), expected: z.union([z.string(), z.number(), z.array(z.string())]) }).strict(),
+  z.object({ kind: z.literal('status'), call: z.string().regex(/^(notes|auth|posts)\.[a-z]+$/), status: z.number().int() }).strict(),
+  z.object({ kind: z.literal('body'), call: z.string().regex(/^(notes|auth|posts)\.[a-z]+$/), field: z.string(), expected: z.union([z.string(), z.number(), z.boolean()]) }).strict(),
+]);
+export type RequiredAssertion = z.infer<typeof RequiredAssertionSchema>;
 
 export const GenerationCaseSchema = z
   .object({
@@ -102,6 +120,8 @@ export const GenerationCaseSchema = z
       .object({
         failureKind: z.string().optional(),
         accepted: z.array(z.string()).optional(),
+        /** Total accepted specs (catches duplicates for one scenario). */
+        acceptedCount: z.number().int().optional(),
         rejected: z.record(z.string(), z.array(z.string())).optional(),
         missingCapabilities: z.number().int().optional(),
         contentAssertion: z.boolean().optional(),
@@ -110,6 +130,11 @@ export const GenerationCaseSchema = z
       .strict(),
     requiredAssertions: z.record(z.string(), z.array(RequiredAssertionSchema)),
     assertionLabels: z.record(z.string(), z.object({ weaknesses: z.array(z.enum(ASSERTION_WEAKNESSES)) }).strict()),
+    /**
+     * Reference judgement of each spec's intent: does it test the scenario's
+     * behaviour as the criteria state it? Independent of whether it compiles or passes.
+     */
+    intentLabels: z.record(z.string(), z.enum(['correct', 'incorrect'])).optional(),
     labels: ProvenanceSchema,
   })
   .strict();
@@ -146,7 +171,7 @@ export const FunctionalDatasetSchema = z
     provenance: z.string(),
     target: z.object({ name: z.string(), version: z.string() }).strict(),
     defects: z.array(
-      z.object({ id: z.string(), variants: z.array(z.enum(['problem', 'error'])), behavior: z.string(), verifiedBy: z.string() }).strict(),
+      z.object({ id: z.string(), variants: z.array(z.enum(['problem', 'error', ...EXAMPLE_APP_VARIANTS])), behavior: z.string(), verifiedBy: z.string() }).strict(),
     ),
     suites: z.array(FunctionalSuiteSchema).min(1),
   })
@@ -190,12 +215,58 @@ export const ManifestSchema = z
   .object({
     datasetVersion: z.string().regex(/^\d+\.\d+\.\d+$/),
     description: z.string(),
-    files: z.object({ planning: z.string(), generation: z.string(), functional: z.string(), failures: z.string() }).strict(),
+    files: z.object({ planning: z.string(), generation: z.string(), functional: z.string(), failures: z.string(), healing: z.string() }).strict(),
     labelPolicy: z.string(),
     changelog: z.array(z.object({ version: z.string(), date: z.string(), changes: z.string() }).strict()),
   })
   .strict();
 
+/* -------------------------------- healing -------------------------------- */
+
+/**
+ * One healing scenario: a failing test in a controlled failure mode, the
+ * proposal the (recorded) model returns, and the reference outcome. The
+ * reference states what a correct pipeline must do, independent of the agent.
+ */
+export const HealingCaseSchema = z
+  .object({
+    id: z.string().regex(/^HE-\d{2}$/),
+    description: z.string(),
+    target: z.discriminatedUnion('kind', [
+      z.object({ kind: z.literal('trusted'), file: z.string(), title: z.string() }).strict(),
+      /** A generated test: a functional suite's pinned spec, executed and failed first. */
+      z.object({ kind: z.literal('generated'), suite: z.string(), scenarioId: z.string() }).strict(),
+    ]),
+    variant: z.enum(EXAMPLE_APP_VARIANTS),
+    /** What the recorded model returns: a proposal object, a raw string (malformed output), or a provider error kind. */
+    recorded: z.discriminatedUnion('kind', [
+      z.object({ kind: z.literal('proposal'), proposal: z.unknown() }).strict(),
+      z.object({ kind: z.literal('raw'), text: z.string() }).strict(),
+      z.object({ kind: z.literal('provider-error'), error: z.enum(['timeout', 'rate_limit', 'server', 'auth']) }).strict(),
+      z.object({ kind: z.literal('none') }).strict(),
+    ]),
+    reproduceRuns: z.number().int().min(1).max(5),
+    verifyRuns: z.number().int().min(1).max(10),
+    reference: z
+      .object({
+        /** The cause established when the case was constructed. */
+        cause: z.enum(['locator-drift', 'timing', 'product-defect', 'no-failure']),
+        /** Should a correct pipeline produce a verified patch here? */
+        repairExpected: z.boolean(),
+        /** Is the recorded proposal itself a correct repair (null when there is none)? */
+        proposalCorrect: z.boolean().nullable(),
+        expectedOutcome: z.enum(HEAL_OUTCOMES),
+        /** The correct repair, when one exists. */
+        correctFix: z.array(HealChangeSchema).optional(),
+      })
+      .strict(),
+    labels: ProvenanceSchema,
+  })
+  .strict();
+
+export const HealingDatasetSchema = z.object({ provenance: z.string(), cases: z.array(HealingCaseSchema).min(1) }).strict();
+
+export type HealingCase = z.infer<typeof HealingCaseSchema>;
 export type PlanningCase = z.infer<typeof PlanningCaseSchema>;
 export type GenerationCase = z.infer<typeof GenerationCaseSchema>;
 export type FunctionalSuite = z.infer<typeof FunctionalSuiteSchema>;

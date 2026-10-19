@@ -14,7 +14,7 @@ test.describe('tool-error recovery', () => {
   test('every injected fault produces its expected safe behaviour', async () => {
     const { results, metrics } = await runFaultInjection(loadPolicy(REPO_ROOT));
     for (const r of results) expect(r.checks.filter((c) => !c.pass), `${r.id} ${r.fault}`).toEqual([]);
-    expect(results.map((r) => r.id)).toEqual(Array.from({ length: 17 }, (_, i) => `FI-${String(i + 1).padStart(2, '0')}`));
+    expect(results.map((r) => r.id)).toEqual(Array.from({ length: 26 }, (_, i) => `FI-${String(i + 1).padStart(2, '0')}`));
     expect(metrics.recoverySuccess).toEqual({ n: 2, d: 2, value: 1 });
     expect(metrics.retriesOnRecoverable).toEqual([{ id: 'FI-02', retries: 1 }, { id: 'FI-03', retries: 2 }]);
     expect(metrics.duplicateExecutionPrevented).toBe(true);
@@ -23,6 +23,10 @@ test.describe('tool-error recovery', () => {
     expect(byId['FI-05'].observed).toMatchObject({ errorKind: 'malformed_json', attempts: 1 });
     expect(byId['FI-04'].observed).toMatchObject({ errorKind: 'provider_server', attempts: 3 });
     expect(byId['FI-15'].observed).toMatchObject({ finalStatus: 'awaiting_approval', executions: 0 });
+    expect(byId['FI-21'].observed).toMatchObject({ finalStatus: 'config_error', executions: 0 });
+    expect(byId['FI-23'].observed).toMatchObject({ finalStatus: 'generation_failed', attempts: 3, retries: 2 });
+    expect(byId['FI-24'].observed).toMatchObject({ finalStatus: 'proposal_failed', attempts: 3 });
+    expect(byId['FI-25'].observed.finalStatus).toBe('insufficient_evidence');
   });
 
   test('recovery metrics from known results', () => {

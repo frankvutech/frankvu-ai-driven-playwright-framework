@@ -19,6 +19,7 @@
     "eval:live": "tsx eval/run.ts --mode live",
     "test:eval": "playwright test --project=eval-unit",
     "eval:functional": "tsx eval/run.ts --mode functional --baseline eval/baselines/functional.json",
+    "eval:healing": "tsx eval/run.ts --mode healing --baseline eval/baselines/healing.json",
     "eval:compare": "tsx eval/run.ts --compare",
     "eval:probe-defects": "tsx eval/probes/seeded-defects.ts"
   },

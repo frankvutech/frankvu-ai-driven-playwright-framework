@@ -1,8 +1,8 @@
 {
  "provenance": "Candidate specs are hand-written stand-ins for agent output (including deliberately weak and incorrect ones). Reference outcomes come from the defect catalog below. Labels pending human review.",
  "target": {
-  "name": "saucedemo-public-demo",
-  "version": "unversioned public demo site; behaviour verified 2026-10-18"
+  "name": "saucedemo-public-demo; local example-app",
+  "version": "saucedemo: unversioned public demo, behaviour verified 2026-10-18; example-app: example-app/server.ts at the evaluated commit"
  },
  "defects": [
   {
@@ -54,6 +54,30 @@
     "error"
    ],
    "behavior": "Finish does not complete the order.",
+   "verifiedBy": "eval/probes/seeded-defects.ts"
+  },
+  {
+   "id": "D-NOTES-CREATE",
+   "variants": [
+    "broken-create"
+   ],
+   "behavior": "Creating a note (API or form) fails with 500.",
+   "verifiedBy": "eval/probes/seeded-defects.ts"
+  },
+  {
+   "id": "D-NOTES-AUTHZ",
+   "variants": [
+    "auth-bypass"
+   ],
+   "behavior": "Any signed-in user can read, change and delete other users' notes (200 instead of 403).",
+   "verifiedBy": "eval/probes/seeded-defects.ts"
+  },
+  {
+   "id": "D-NOTES-TITLELEN",
+   "variants": [
+    "no-title-limit"
+   ],
+   "behavior": "Titles longer than 120 characters are accepted (201 instead of 400).",
    "verifiedBy": "eval/probes/seeded-defects.ts"
   }
  ],
@@ -1078,6 +1102,961 @@
      "status": "pending"
     },
     "notes": "relevantDefect follows the defect catalog, which eval/probes/seeded-defects.ts verifies against the live demo site independently of the agent's tests."
+   }
+  },
+  {
+   "id": "FS-NOTESAPI",
+   "requirement": {
+    "id": "REQ-411",
+    "title": "Notes API: create notes and protect them",
+    "application": "notes",
+    "description": "Signed-in users manage their own notes through the REST API. Notes are private to their owner.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "Given a valid token, when the user creates a note with a title, then the API answers 201 and returns the note with the caller as owner."
+     },
+     {
+      "id": "AC-2",
+      "text": "Given no token, when the notes list is requested, then the API answers 401 with error code \"unauthorized\"."
+     },
+     {
+      "id": "AC-3",
+      "text": "Given a note owned by another user, when the user reads it, then the API answers 403 with error code \"forbidden\"."
+     },
+     {
+      "id": "AC-4",
+      "text": "Given a title longer than 120 characters, when the user creates a note, then the API answers 400 with error code \"validation_error\"."
+     }
+    ],
+    "source": "eval/dataset (synthetic requirement for the local example app or JSONPlaceholder)"
+   },
+   "scenarios": [
+    {
+     "id": "REQ-411-SC-01",
+     "requirementId": "REQ-411",
+     "acceptanceCriteriaIds": [
+      "AC-1"
+     ],
+     "title": "Create a note",
+     "objective": "Create a note",
+     "type": "positive",
+     "layer": "api",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [],
+     "steps": [
+      "Create a note"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "201",
+      "owner is the caller"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-411-SC-02",
+     "requirementId": "REQ-411",
+     "acceptanceCriteriaIds": [
+      "AC-2"
+     ],
+     "title": "List notes without a token",
+     "objective": "List notes without a token",
+     "type": "authorization",
+     "layer": "api",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [],
+     "steps": [
+      "List notes without a token"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "401 unauthorized"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-411-SC-03",
+     "requirementId": "REQ-411",
+     "acceptanceCriteriaIds": [
+      "AC-3"
+     ],
+     "title": "Read another user's note",
+     "objective": "Read another user's note",
+     "type": "authorization",
+     "layer": "api",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [],
+     "steps": [
+      "Read another user's note"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "403 forbidden"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-411-SC-04",
+     "requirementId": "REQ-411",
+     "acceptanceCriteriaIds": [
+      "AC-4"
+     ],
+     "title": "Create with a 121-character title",
+     "objective": "Create with a 121-character title",
+     "type": "boundary",
+     "layer": "api",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [],
+     "steps": [
+      "Create with a 121-character title"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "400 validation_error"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-411-SC-05",
+     "requirementId": "REQ-411",
+     "acceptanceCriteriaIds": [
+      "AC-4"
+     ],
+     "title": "Create with a 121-character title (weak check)",
+     "objective": "Create with a 121-character title (weak check)",
+     "type": "boundary",
+     "layer": "api",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [],
+     "steps": [
+      "Create with a 121-character title (weak check)"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "400"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-411-SC-06",
+     "requirementId": "REQ-411",
+     "acceptanceCriteriaIds": [
+      "AC-1"
+     ],
+     "title": "Create a note (wrong expected status)",
+     "objective": "Create a note (wrong expected status)",
+     "type": "positive",
+     "layer": "api",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [],
+     "steps": [
+      "Create a note (wrong expected status)"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "201"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    }
+   ],
+   "specs": [
+    {
+     "scenarioId": "REQ-411-SC-01",
+     "requirementId": "REQ-411",
+     "title": "creating a note returns 201 and the caller as owner",
+     "layer": "api",
+     "startSignedIn": false,
+     "steps": [
+      {
+       "kind": "apiCall",
+       "saveAs": "r1",
+       "client": "notes",
+       "as": "alice",
+       "method": "create",
+       "args": [
+        {
+         "kind": "note",
+         "title": {
+          "kind": "prefixed",
+          "suffix": "Groceries"
+         },
+         "body": null
+        }
+       ]
+      },
+      {
+       "kind": "expectStatus",
+       "response": "r1",
+       "status": 201
+      },
+      {
+       "kind": "expectBody",
+       "response": "r1",
+       "schema": "Note",
+       "field": "owner",
+       "matcher": "toBe",
+       "expected": {
+        "kind": "literal",
+        "value": "alice"
+       },
+       "negate": false
+      }
+     ]
+    },
+    {
+     "scenarioId": "REQ-411-SC-02",
+     "requirementId": "REQ-411",
+     "title": "listing notes without a token is rejected",
+     "layer": "api",
+     "startSignedIn": false,
+     "steps": [
+      {
+       "kind": "apiCall",
+       "saveAs": "r1",
+       "client": "notes",
+       "as": "anonymous",
+       "method": "list",
+       "args": []
+      },
+      {
+       "kind": "expectStatus",
+       "response": "r1",
+       "status": 401
+      },
+      {
+       "kind": "expectBody",
+       "response": "r1",
+       "schema": "ApiError",
+       "field": "error.code",
+       "matcher": "toBe",
+       "expected": {
+        "kind": "literal",
+        "value": "unauthorized"
+       },
+       "negate": false
+      }
+     ]
+    },
+    {
+     "scenarioId": "REQ-411-SC-03",
+     "requirementId": "REQ-411",
+     "title": "another user's note is forbidden",
+     "layer": "api",
+     "startSignedIn": false,
+     "steps": [
+      {
+       "kind": "apiCall",
+       "saveAs": "r1",
+       "client": "notes",
+       "as": "alice",
+       "method": "create",
+       "args": [
+        {
+         "kind": "note",
+         "title": {
+          "kind": "prefixed",
+          "suffix": "Private"
+         },
+         "body": null
+        }
+       ]
+      },
+      {
+       "kind": "expectStatus",
+       "response": "r1",
+       "status": 201
+      },
+      {
+       "kind": "apiCall",
+       "saveAs": "r2",
+       "client": "notes",
+       "as": "bob",
+       "method": "get",
+       "args": [
+        {
+         "kind": "ref",
+         "response": "r1",
+         "field": "id"
+        }
+       ]
+      },
+      {
+       "kind": "expectStatus",
+       "response": "r2",
+       "status": 403
+      },
+      {
+       "kind": "expectBody",
+       "response": "r2",
+       "schema": "ApiError",
+       "field": "error.code",
+       "matcher": "toBe",
+       "expected": {
+        "kind": "literal",
+        "value": "forbidden"
+       },
+       "negate": false
+      }
+     ]
+    },
+    {
+     "scenarioId": "REQ-411-SC-04",
+     "requirementId": "REQ-411",
+     "title": "a 121-character title is rejected",
+     "layer": "api",
+     "startSignedIn": false,
+     "steps": [
+      {
+       "kind": "apiCall",
+       "saveAs": "r1",
+       "client": "notes",
+       "as": "alice",
+       "method": "create",
+       "args": [
+        {
+         "kind": "note",
+         "title": {
+          "kind": "padded",
+          "length": 121
+         },
+         "body": null
+        }
+       ]
+      },
+      {
+       "kind": "expectStatus",
+       "response": "r1",
+       "status": 400
+      },
+      {
+       "kind": "expectBody",
+       "response": "r1",
+       "schema": "ApiError",
+       "field": "error.code",
+       "matcher": "toBe",
+       "expected": {
+        "kind": "literal",
+        "value": "validation_error"
+       },
+       "negate": false
+      }
+     ]
+    },
+    {
+     "scenarioId": "REQ-411-SC-05",
+     "requirementId": "REQ-411",
+     "title": "a long title gets a JSON answer",
+     "layer": "api",
+     "startSignedIn": false,
+     "steps": [
+      {
+       "kind": "apiCall",
+       "saveAs": "r1",
+       "client": "notes",
+       "as": "alice",
+       "method": "create",
+       "args": [
+        {
+         "kind": "note",
+         "title": {
+          "kind": "padded",
+          "length": 121
+         },
+         "body": null
+        }
+       ]
+      },
+      {
+       "kind": "expectHeader",
+       "response": "r1",
+       "header": "content-type",
+       "matcher": "toContain",
+       "expected": "application/json"
+      }
+     ]
+    },
+    {
+     "scenarioId": "REQ-411-SC-06",
+     "requirementId": "REQ-411",
+     "title": "creating a note returns 200",
+     "layer": "api",
+     "startSignedIn": false,
+     "steps": [
+      {
+       "kind": "apiCall",
+       "saveAs": "r1",
+       "client": "notes",
+       "as": "alice",
+       "method": "create",
+       "args": [
+        {
+         "kind": "note",
+         "title": {
+          "kind": "prefixed",
+          "suffix": "Groceries"
+         },
+         "body": null
+        }
+       ]
+      },
+      {
+       "kind": "expectStatus",
+       "response": "r1",
+       "status": 200
+      },
+      {
+       "kind": "expectBody",
+       "response": "r1",
+       "schema": "Note",
+       "field": "owner",
+       "matcher": "toBe",
+       "expected": {
+        "kind": "literal",
+        "value": "alice"
+       },
+       "negate": false
+      }
+     ]
+    }
+   ],
+   "specSha256": {
+    "REQ-411-SC-01": "fb45db7edd98bf3d3cdd09eb096e25803e7133ef76cdb5810871c92e9afd4335",
+    "REQ-411-SC-02": "1cc3a05044924bb43c47ea7addd5f431e273f2b1fe1d4b5336d3fdf0a2167405",
+    "REQ-411-SC-03": "5850e93fdffc8ecfc386364539c058ab5a0f506843187eaf13645498d68c3a00",
+    "REQ-411-SC-04": "bf41add33a69c767bf85d890d66c1979a26fcef5327b6ecb31a4f3d36a123079",
+    "REQ-411-SC-05": "7247b67430158746d47db4a6c4131f634ef32da2c2b1ca54f569281a0880ebb5",
+    "REQ-411-SC-06": "71f28a1ca72ed64873898786e7611d721248ead304d9bc96ed13c6458acb396c"
+   },
+   "variants": {
+    "standard": [
+     {
+      "scenarioId": "REQ-411-SC-01",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     },
+     {
+      "scenarioId": "REQ-411-SC-02",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     },
+     {
+      "scenarioId": "REQ-411-SC-03",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     },
+     {
+      "scenarioId": "REQ-411-SC-04",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     },
+     {
+      "scenarioId": "REQ-411-SC-05",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     },
+     {
+      "scenarioId": "REQ-411-SC-06",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     }
+    ],
+    "broken-create": [
+     {
+      "scenarioId": "REQ-411-SC-01",
+      "relevantDefect": true,
+      "defectId": "D-NOTES-CREATE",
+      "expectedTestOutcome": "fail"
+     },
+     {
+      "scenarioId": "REQ-411-SC-02",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     },
+     {
+      "scenarioId": "REQ-411-SC-03",
+      "relevantDefect": true,
+      "defectId": "D-NOTES-CREATE",
+      "expectedTestOutcome": "fail"
+     },
+     {
+      "scenarioId": "REQ-411-SC-04",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     },
+     {
+      "scenarioId": "REQ-411-SC-05",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     },
+     {
+      "scenarioId": "REQ-411-SC-06",
+      "relevantDefect": true,
+      "defectId": "D-NOTES-CREATE",
+      "expectedTestOutcome": "fail"
+     }
+    ],
+    "auth-bypass": [
+     {
+      "scenarioId": "REQ-411-SC-01",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     },
+     {
+      "scenarioId": "REQ-411-SC-02",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     },
+     {
+      "scenarioId": "REQ-411-SC-03",
+      "relevantDefect": true,
+      "defectId": "D-NOTES-AUTHZ",
+      "expectedTestOutcome": "fail"
+     },
+     {
+      "scenarioId": "REQ-411-SC-04",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     },
+     {
+      "scenarioId": "REQ-411-SC-05",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     },
+     {
+      "scenarioId": "REQ-411-SC-06",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     }
+    ],
+    "no-title-limit": [
+     {
+      "scenarioId": "REQ-411-SC-01",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     },
+     {
+      "scenarioId": "REQ-411-SC-02",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     },
+     {
+      "scenarioId": "REQ-411-SC-03",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     },
+     {
+      "scenarioId": "REQ-411-SC-04",
+      "relevantDefect": true,
+      "defectId": "D-NOTES-TITLELEN",
+      "expectedTestOutcome": "fail"
+     },
+     {
+      "scenarioId": "REQ-411-SC-05",
+      "relevantDefect": true,
+      "defectId": "D-NOTES-TITLELEN",
+      "expectedTestOutcome": "fail"
+     },
+     {
+      "scenarioId": "REQ-411-SC-06",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     }
+    ]
+   },
+   "notes": "SC-05 is deliberately weak (checks only the content type) and SC-06 deliberately wrong (expects 200 where the criteria say 201): they show a false negative and false-positive failures. SC-03 and SC-06 create a note first, so broken-create makes them fail too; that failure exposes the seeded defect, so it is counted as relevant.",
+   "labels": {
+    "method": "observed-controlled-variation",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    },
+    "notes": "relevantDefect follows the defect catalog; eval/probes/seeded-defects.ts verifies each example-app variant independently of the agent's tests."
+   }
+  },
+  {
+   "id": "FS-NOTESUI",
+   "requirement": {
+    "id": "REQ-412",
+    "title": "Notes created anywhere appear everywhere",
+    "application": "notes",
+    "description": "A note is the same whether it was created in the browser or through the API. Users only see their own notes.",
+    "acceptanceCriteria": [
+     {
+      "id": "AC-1",
+      "text": "Given a note created through the API, when its owner opens the notes page, then the note is listed."
+     },
+     {
+      "id": "AC-2",
+      "text": "Given a signed-in user, when they add a note on the notes page, then the API returns that note in the user's list."
+     },
+     {
+      "id": "AC-3",
+      "text": "Given another user's note, when a user opens the notes page, then that note is not listed."
+     }
+    ],
+    "source": "eval/dataset (synthetic requirement for the local example app or JSONPlaceholder)"
+   },
+   "scenarios": [
+    {
+     "id": "REQ-412-SC-01",
+     "requirementId": "REQ-412",
+     "acceptanceCriteriaIds": [
+      "AC-1"
+     ],
+     "title": "API-created note is listed in the UI",
+     "objective": "API-created note is listed in the UI",
+     "type": "positive",
+     "layer": "combined",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [],
+     "steps": [
+      "API-created note is listed in the UI"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "note listed"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-412-SC-02",
+     "requirementId": "REQ-412",
+     "acceptanceCriteriaIds": [
+      "AC-2"
+     ],
+     "title": "UI-added note is returned by the API",
+     "objective": "UI-added note is returned by the API",
+     "type": "positive",
+     "layer": "combined",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [],
+     "steps": [
+      "UI-added note is returned by the API"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "note in API list"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    },
+    {
+     "id": "REQ-412-SC-03",
+     "requirementId": "REQ-412",
+     "acceptanceCriteriaIds": [
+      "AC-3"
+     ],
+     "title": "Other users' notes are not shown",
+     "objective": "Other users' notes are not shown",
+     "type": "authorization",
+     "layer": "combined",
+     "priority": "high",
+     "priorityRationale": "core behaviour",
+     "preconditions": [],
+     "steps": [
+      "Other users' notes are not shown"
+     ],
+     "testData": [],
+     "expectedOutcomes": [
+      "not listed"
+     ],
+     "assumptions": [],
+     "openQuestions": []
+    }
+   ],
+   "specs": [
+    {
+     "scenarioId": "REQ-412-SC-01",
+     "requirementId": "REQ-412",
+     "title": "a note created through the API is listed on the notes page",
+     "layer": "combined",
+     "startSignedIn": false,
+     "steps": [
+      {
+       "kind": "apiCall",
+       "saveAs": "r1",
+       "client": "notes",
+       "as": "alice",
+       "method": "create",
+       "args": [
+        {
+         "kind": "note",
+         "title": {
+          "kind": "prefixed",
+          "suffix": "From the API"
+         },
+         "body": null
+        }
+       ]
+      },
+      {
+       "kind": "expectStatus",
+       "response": "r1",
+       "status": 201
+      },
+      {
+       "kind": "signIn",
+       "as": "alice"
+      },
+      {
+       "kind": "action",
+       "target": "notesPage.goto",
+       "args": []
+      },
+      {
+       "kind": "expect",
+       "target": "notesPage.note",
+       "locatorArgs": [
+        {
+         "kind": "prefixed",
+         "suffix": "From the API"
+        }
+       ],
+       "select": "all",
+       "matcher": "toBeVisible",
+       "expected": null,
+       "negate": false
+      }
+     ]
+    },
+    {
+     "scenarioId": "REQ-412-SC-02",
+     "requirementId": "REQ-412",
+     "title": "a note added on the notes page is returned by the API",
+     "layer": "combined",
+     "startSignedIn": false,
+     "steps": [
+      {
+       "kind": "signIn",
+       "as": "alice"
+      },
+      {
+       "kind": "action",
+       "target": "notesPage.goto",
+       "args": []
+      },
+      {
+       "kind": "action",
+       "target": "notesPage.addNote",
+       "args": [
+        {
+         "kind": "prefixed",
+         "suffix": "From the UI"
+        },
+        {
+         "kind": "literal",
+         "value": "Typed in the browser"
+        }
+       ]
+      },
+      {
+       "kind": "expect",
+       "target": "notesPage.note",
+       "locatorArgs": [
+        {
+         "kind": "prefixed",
+         "suffix": "From the UI"
+        }
+       ],
+       "select": "all",
+       "matcher": "toBeVisible",
+       "expected": null,
+       "negate": false
+      },
+      {
+       "kind": "apiCall",
+       "saveAs": "r1",
+       "client": "notes",
+       "as": "alice",
+       "method": "list",
+       "args": []
+      },
+      {
+       "kind": "expectStatus",
+       "response": "r1",
+       "status": 200
+      },
+      {
+       "kind": "expectBody",
+       "response": "r1",
+       "schema": "NoteList",
+       "field": "*.title",
+       "matcher": "toContain",
+       "expected": {
+        "kind": "text",
+        "text": {
+         "kind": "prefixed",
+         "suffix": "From the UI"
+        }
+       },
+       "negate": false
+      }
+     ]
+    },
+    {
+     "scenarioId": "REQ-412-SC-03",
+     "requirementId": "REQ-412",
+     "title": "another user's note is not listed",
+     "layer": "combined",
+     "startSignedIn": false,
+     "steps": [
+      {
+       "kind": "apiCall",
+       "saveAs": "r1",
+       "client": "notes",
+       "as": "bob",
+       "method": "create",
+       "args": [
+        {
+         "kind": "note",
+         "title": {
+          "kind": "prefixed",
+          "suffix": "Bob only"
+         },
+         "body": null
+        }
+       ]
+      },
+      {
+       "kind": "expectStatus",
+       "response": "r1",
+       "status": 201
+      },
+      {
+       "kind": "signIn",
+       "as": "alice"
+      },
+      {
+       "kind": "action",
+       "target": "notesPage.goto",
+       "args": []
+      },
+      {
+       "kind": "expect",
+       "target": "notesPage.note",
+       "locatorArgs": [
+        {
+         "kind": "prefixed",
+         "suffix": "Bob only"
+        }
+       ],
+       "select": "all",
+       "matcher": "toHaveCount",
+       "expected": 0,
+       "negate": false
+      }
+     ]
+    }
+   ],
+   "specSha256": {
+    "REQ-412-SC-01": "0bfc6f91a5f8471573737f25f094b0387a141a89ebf4bef55807f769d42e7cfb",
+    "REQ-412-SC-02": "31ce38b732c47437bed15a454c4f594c240c57a7ba15f311fd1e5691e377b269",
+    "REQ-412-SC-03": "1905def6cf1ebd63ebbf39b7f5601ed61666dbf2ff688331ad558504a2b54266"
+   },
+   "variants": {
+    "standard": [
+     {
+      "scenarioId": "REQ-412-SC-01",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     },
+     {
+      "scenarioId": "REQ-412-SC-02",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     },
+     {
+      "scenarioId": "REQ-412-SC-03",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     }
+    ],
+    "broken-create": [
+     {
+      "scenarioId": "REQ-412-SC-01",
+      "relevantDefect": true,
+      "defectId": "D-NOTES-CREATE",
+      "expectedTestOutcome": "fail"
+     },
+     {
+      "scenarioId": "REQ-412-SC-02",
+      "relevantDefect": true,
+      "defectId": "D-NOTES-CREATE",
+      "expectedTestOutcome": "fail"
+     },
+     {
+      "scenarioId": "REQ-412-SC-03",
+      "relevantDefect": true,
+      "defectId": "D-NOTES-CREATE",
+      "expectedTestOutcome": "fail"
+     }
+    ],
+    "renamed-add-button": [
+     {
+      "scenarioId": "REQ-412-SC-01",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     },
+     {
+      "scenarioId": "REQ-412-SC-02",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     },
+     {
+      "scenarioId": "REQ-412-SC-03",
+      "relevantDefect": false,
+      "defectId": null,
+      "expectedTestOutcome": "pass"
+     }
+    ]
+   },
+   "notes": "renamed-add-button is UI drift, not a product defect: the feature works, so a failing test there is a false-positive failure caused by a stale locator.",
+   "labels": {
+    "method": "observed-controlled-variation",
+    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "review": {
+     "status": "pending"
+    },
+    "notes": "Variants are deterministic failure modes of example-app/server.ts; relevantDefect follows the defect catalog."
    }
   }
  ]

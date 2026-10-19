@@ -13,6 +13,14 @@ import type { RunEvidence } from '../src/agent/domain/result';
 import type { FailureAnalysis } from '../src/agent/analysis/types';
 import { countWhere, mean, ratio } from './metrics';
 import { REPO_ROOT } from './evaluate';
+import { createProvider, ProviderConfigError } from '../src/agent/config/llm';
+import { renderSpec } from '../src/agent/generation/render';
+import { validateArtifacts } from '../src/agent/validation/artifacts';
+import { GenerationOutputSchema } from '../src/agent/domain/testSpec';
+import { healDir, healTest, newHealId } from '../src/agent/healing/heal';
+import { summarize, type WorkspaceRun, type WorkspaceRunResult } from '../src/agent/healing/workspace';
+import { sha256File } from '../src/agent/execution/files';
+import { existsSync, mkdirSync } from 'node:fs';
 
 /**
  * Deterministic fault injection against the Phase 2 workflow. Faults are
@@ -286,8 +294,182 @@ export async function runFaultInjection(policy: Policy): Promise<{ results: Faul
       expect: { status: 'execution_refused', executions: 0, evidence: false, refusalIncludes: 'blocked pattern', limitMs: NO_RUN_LIMIT },
     },
   ];
+  execFaults.push(
+    {
+      id: 'FI-18', fault: 'API network error (service unreachable)', expected: 'failed, never passed, classified as an environment problem',
+      spawner: reportWriter((files) => syntheticReport(files, () => ({ retry: 0, status: 'failed', duration: 20, errors: [{ message: 'Error: apiRequestContext.get: connect ECONNREFUSED 127.0.0.1:9\nCall log:\n  - -> GET http://127.0.0.1:9/api/notes' }], attachments: [] }))),
+      expect: { status: 'executed', executions: 1, artifactStates: ['failed', 'failed', 'failed'], evidence: true, analysisCategory: 'environment', limitMs: NO_RUN_LIMIT },
+    },
+    {
+      id: 'FI-19', fault: 'invalid API response (body breaks the schema)', expected: 'failed, never passed, classified as an API contract failure',
+      spawner: reportWriter((files) => syntheticReport(files, () => ({ retry: 0, status: 'failed', duration: 20, errors: [{ message: 'Error: Response from /api/notes (HTTP 200) does not match the expected schema:\n  0.owner: Invalid input: expected string, received undefined' }], attachments: [] }))),
+      expect: { status: 'executed', executions: 1, artifactStates: ['failed', 'failed', 'failed'], evidence: true, analysisCategory: 'api_contract', limitMs: NO_RUN_LIMIT },
+    },
+    {
+      id: 'FI-20', fault: 'browser cannot start', expected: 'failed, never passed, classified as an environment problem',
+      spawner: reportWriter((files) => syntheticReport(files, () => ({ retry: 0, status: 'failed', duration: 5, errors: [{ message: "Error: browserType.launch: Executable doesn't exist at /ms-playwright/chromium/chrome" }], attachments: [] }))),
+      expect: { status: 'executed', executions: 1, artifactStates: ['failed', 'failed', 'failed'], evidence: true, analysisCategory: 'environment', limitMs: NO_RUN_LIMIT },
+    },
+  );
   for (const f of execFaults) results.push(await executionFault(f, policy));
+  results.push(missingCredentials(), await invalidGeneratedCode(), await interruptedGeneration(policy));
+  results.push(...(await healingFaults(policy)));
   return { results, metrics: faultMetrics(results) };
+}
+
+/* ---------------------------- configuration faults ---------------------------- */
+
+function missingCredentials(): FaultResult {
+  const started = Date.now();
+  let error: unknown;
+  try {
+    createProvider('anthropic', undefined, {});
+  } catch (e) {
+    error = e;
+  }
+  const elapsedMs = Date.now() - started;
+  const checks = [
+    { name: 'errorClassification', pass: error instanceof ProviderConfigError, detail: error instanceof Error ? error.message : 'no error' },
+    { name: 'noModelCall', pass: true, detail: 'the provider is never constructed, so no request can be sent' },
+    { name: 'terminatesWithinLimit', pass: elapsedMs <= 1_000, detail: `${elapsedMs}ms` },
+  ];
+  return {
+    id: 'FI-21', fault: 'missing provider credentials', expectedSafeBehaviour: 'a configuration error before any work or model call; not retried', recoverable: false,
+    observed: { finalStatus: error instanceof ProviderConfigError ? 'config_error' : 'no_error', errorKind: 'config', recovered: false, executions: 0, elapsedMs, limitMs: 1_000 },
+    checks, pass: checks.every((c) => c.pass),
+  };
+}
+
+/** Rendered code that no longer type-checks or lints (e.g. edited by hand) never reaches approval. */
+async function invalidGeneratedCode(): Promise<FaultResult> {
+  const scratch = `fi22-${Date.now().toString(36)}`;
+  const dir = path.join(REPO_ROOT, 'generated', scratch);
+  const started = Date.now();
+  mkdirSync(dir, { recursive: true });
+  try {
+    const spec = GenerationOutputSchema.parse(replies()['test-generation'][0]).tests[0];
+    const typeError = path.posix.join('generated', scratch, 'type-error.spec.ts');
+    const lintError = path.posix.join('generated', scratch, 'lint-error.spec.ts');
+    writeFileSync(path.join(REPO_ROOT, typeError), renderSpec(spec, scratch).replace('await loginPage.goto();', 'await loginPage.goto(42);'));
+    writeFileSync(path.join(REPO_ROOT, lintError), renderSpec(spec, scratch).replace('\ntest(\n', '\ntest.only(\n'));
+    const trace = { requirementId: spec.requirementId, scenarioId: spec.scenarioId };
+    const v = await validateArtifacts({ repoRoot: REPO_ROOT, generationArea: 'generated', files: { [typeError]: trace, [lintError]: trace }, workspaceBefore: [], workspaceAfter: [] });
+    const elapsedMs = Date.now() - started;
+    const checks = [
+      { name: 'rejected', pass: !v.ok, detail: v.ok ? 'accepted' : 'rejected' },
+      { name: 'errorClassification', pass: v.files[typeError].some((f) => f.check === 'typecheck') && v.files[lintError].some((f) => f.check === 'ast' || f.check === 'lint'), detail: [...v.files[typeError], ...v.files[lintError]].map((f) => f.check).join(',') },
+      { name: 'terminatesWithinLimit', pass: elapsedMs <= 60_000, detail: `${elapsedMs}ms` },
+    ];
+    return {
+      id: 'FI-22', fault: 'generated code fails type-check and lint', expectedSafeBehaviour: 'rejected by static validation; never approved or executed', recoverable: false,
+      observed: { finalStatus: v.ok ? 'accepted' : 'rejected', recovered: false, executions: 0, elapsedMs, limitMs: 60_000 },
+      checks, pass: checks.every((c) => c.pass),
+    };
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+}
+
+/** The provider fails mid-workflow (after a valid plan): nothing is left approvable or executable. */
+async function interruptedGeneration(policy: Policy): Promise<FaultResult> {
+  const pe = () => new ProviderError('network', 'injected network failure');
+  const provider = new MockProvider({ 'test-plan': [planReply()], 'test-generation': [pe(), pe(), pe(), pe()] });
+  const started = Date.now();
+  const manifest = await planAndGenerate(requirement(), { repoRoot: REPO_ROOT, policy, provider, retryPolicy: RETRY });
+  const elapsedMs = Date.now() - started;
+  const store = new RunStore(REPO_ROOT, policy.runsArea, manifest.runId);
+  const usage = store.read<UsageRecord[]>('llm-usage.json') ?? [];
+  const gen = usage.find((u) => u.useCase === 'test-generation');
+  try {
+    const checks = [
+      { name: 'finalStatus', pass: manifest.status === 'generation_failed', detail: manifest.status },
+      { name: 'errorClassification', pass: gen?.outcome === 'provider_network', detail: gen?.outcome },
+      { name: 'boundedAttempts', pass: gen?.attempts === RETRY.maxAttempts, detail: `${gen?.attempts} attempt(s)` },
+      { name: 'nothingApprovable', pass: manifest.artifacts.length === 0, detail: `${manifest.artifacts.length} artifact(s)` },
+      { name: 'terminatesWithinLimit', pass: elapsedMs <= 2 * modelLimit(RETRY), detail: `${elapsedMs}ms` },
+    ];
+    return {
+      id: 'FI-23', fault: 'generation interrupted by persistent provider failure', expectedSafeBehaviour: 'bounded retries, generation_failed, no candidate files to approve or run', recoverable: false,
+      observed: { finalStatus: manifest.status, errorKind: gen?.outcome, attempts: gen?.attempts, retries: gen ? gen.attempts - 1 : undefined, recovered: false, executions: 0, elapsedMs, limitMs: 2 * modelLimit(RETRY) },
+      checks, pass: checks.every((c) => c.pass),
+    };
+  } finally {
+    rmSync(path.join(REPO_ROOT, policy.generationArea, manifest.runId), { recursive: true, force: true });
+    rmSync(store.runDir, { recursive: true, force: true });
+  }
+}
+
+/* ------------------------------- healing faults ------------------------------- */
+
+const DRIFT_MESSAGE = "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n  - waiting for getByRole('form', { name: 'New note' }).getByRole('button', { name: 'Add note' })";
+const SNAPSHOT = '- form "New note" [ref=e8]:\n  - textbox "Title" [ref=e10]\n  - button "Save note" [ref=e13]';
+
+/** A Playwright stand-in for healing runs: scripted outcomes per run label. */
+function scriptedRuns(script: Record<string, 'drift' | 'pass' | 'no-report'>) {
+  return async (run: WorkspaceRun): Promise<WorkspaceRunResult> => {
+    const mode = script[run.label] ?? 'pass';
+    const attachments = [];
+    if (mode === 'drift') {
+      const rel = path.posix.join('.agent', 'heal-runs', run.label, 'error-context.md');
+      mkdirSync(path.dirname(path.join(run.workspace, rel)), { recursive: true });
+      writeFileSync(path.join(run.workspace, rel), `# Page snapshot\n\n\`\`\`yaml\n${SNAPSHOT}\n\`\`\`\n`);
+      attachments.push({ name: 'error-context', contentType: 'text/markdown', path: rel });
+    }
+    const tests = mode === 'no-report' ? [] : [{
+      testId: 't', title: run.title ?? 't', file: 'notes.spec.ts', project: run.project, status: mode === 'drift' ? 'timedOut' as const : 'passed' as const, durationMs: 1, retries: 0,
+      attempts: [{ retry: 0, status: mode === 'drift' ? 'timedOut' : 'passed', durationMs: 1, errors: mode === 'drift' ? [{ message: DRIFT_MESSAGE }] : [], attachments }], screenshotRefs: [],
+    }];
+    const evidence: RunEvidence = {
+      schemaVersion: 1, runId: run.label, startedAt: new Date().toISOString(), finishedAt: new Date().toISOString(),
+      environment: { targetName: 'fault', baseUrlHost: 'local', playwrightVersion: 'fault', node: process.version, platform: process.platform, ci: false },
+      runner: { exitCode: mode === 'no-report' ? null : 0, timedOut: mode === 'no-report', reportFound: mode !== 'no-report', globalErrors: [], stderrTail: mode === 'no-report' ? 'killed at the wall-clock limit' : '' },
+      tests,
+    };
+    return { summary: summarize(run, evidence, ['scripted'], 1), evidence };
+  };
+}
+
+async function healingFaults(policy: Policy): Promise<FaultResult[]> {
+  const target = { kind: 'trusted' as const, file: 'tests/integration/notes.spec.ts', title: 'a note added in the UI is returned by the API' };
+  const page = path.join(REPO_ROOT, 'src/pages/example-app/NotesPage.ts');
+  const proposal = (req: { prompt: string }) => JSON.stringify({
+    decision: 'propose', failureExplanation: 'renamed', intendedBehavior: 'submit the form',
+    evidenceIds: ['E2', /"id": "(E\d+)",\s*"source": "attachment\.page-snapshot"/.exec(req.prompt)?.[1] ?? 'E0'],
+    changes: [{ kind: 'replaceLocator', pageObject: 'NotesPage', member: 'addNoteButton', locator: { by: 'role', role: 'button', name: 'Save note', exact: true } }],
+  });
+  const cases: Array<{ id: string; fault: string; expected: string; provider: MockProvider; script: Record<string, 'drift' | 'pass' | 'no-report'>; outcome: string; attempts?: number }> = [
+    { id: 'FI-24', fault: 'heal proposal: provider times out on every attempt', expected: 'bounded attempts, proposal_failed, no patch, working tree untouched', provider: new MockProvider({ 'heal-proposal': [proposal, proposal, proposal] }, 1_000), script: { reproduce: 'drift' }, outcome: 'proposal_failed', attempts: RETRY.maxAttempts },
+    { id: 'FI-25', fault: 'healing interrupted: the reproduction run is killed (no report)', expected: 'insufficient_evidence, no model call, no patch', provider: new MockProvider({}), script: { reproduce: 'no-report' }, outcome: 'insufficient_evidence' },
+    { id: 'FI-26', fault: 'heal verification run crashes (no report)', expected: 'verification_failed, no patch', provider: new MockProvider({ 'heal-proposal': [proposal] }), script: { reproduce: 'drift', 'regression-before': 'pass', verify: 'no-report' }, outcome: 'verification_failed' },
+  ];
+  const results: FaultResult[] = [];
+  for (const c of cases) {
+    const healId = newHealId();
+    const before = sha256File(page);
+    const started = Date.now();
+    try {
+      const record = await healTest(target, { repoRoot: REPO_ROOT, policy, env: {}, provider: c.provider, healId, reproduceRuns: 1, verifyRuns: 1, retryPolicy: RETRY, runTests: scriptedRuns(c.script) });
+      const elapsedMs = Date.now() - started;
+      const attempts = record.usage[0]?.attempts;
+      const checks = [
+        { name: 'finalStatus', pass: record.outcome === c.outcome, detail: record.outcome },
+        { name: 'noPatch', pass: record.patch === undefined, detail: record.patch ? record.patch.file : 'none' },
+        { name: 'workingTreeUntouched', pass: sha256File(page) === before },
+        { name: 'recordPreserved', pass: existsSync(path.join(healDir(REPO_ROOT, healId), 'heal-record.json')) },
+        { name: 'terminatesWithinLimit', pass: elapsedMs <= 30_000 + modelLimit(RETRY), detail: `${elapsedMs}ms` },
+      ];
+      if (c.attempts !== undefined) checks.push({ name: 'boundedAttempts', pass: attempts === c.attempts, detail: `${attempts} attempt(s)` });
+      if (c.outcome === 'insufficient_evidence') checks.push({ name: 'noModelCall', pass: c.provider.calls.length === 0, detail: `${c.provider.calls.length} call(s)` });
+      results.push({
+        id: c.id, fault: c.fault, expectedSafeBehaviour: c.expected, recoverable: false,
+        observed: { finalStatus: record.outcome, attempts, retries: attempts === undefined ? undefined : attempts - 1, recovered: false, executions: 0, elapsedMs, limitMs: 30_000 + modelLimit(RETRY) },
+        checks, pass: checks.every((x) => x.pass),
+      });
+    } finally {
+      rmSync(healDir(REPO_ROOT, healId), { recursive: true, force: true });
+    }
+  }
+  return results;
 }
 
 export function faultMetrics(results: FaultResult[]) {

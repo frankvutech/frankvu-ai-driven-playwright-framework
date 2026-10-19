@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
   "metadata": {
-    "runId": "eval-20261019T081120Z-deterministic-8qaigs",
-    "timestamp": "2026-10-19T08:11:20.034Z",
+    "runId": "eval-20261019T121424Z-deterministic-nk3of9",
+    "timestamp": "2026-10-19T12:14:24.871Z",
     "mode": "deterministic",
-    "datasetVersion": "2.0.1",
-    "datasetSha256": "eb88dee33d630989ed392ced0e6831a3e207df6d3c3fa29e54703704bd3c9e77",
+    "datasetVersion": "3.0.0",
+    "datasetSha256": "a24e52dd49b397259d7a1028ae83fdc40f63598f2cc008f3a0e289735a291324",
     "agent": {
-      "commit": "dd141616fcaa8f751f9f22fca9f52a7ceacdc304",
+      "commit": "5215869940cfc6db78f5284a2b8f290bad51bb1a",
       "dirty": true
     },
     "promptVersion": "3.0.0",
-    "promptSha256": "52f2781252dddc0ed7bba2c77bac3c61283f86d17859f76017a3d14481262b94",
+    "promptSha256": "ecf777a66d374bd0a9acc3af44f86d592b533fe322770c398b439d5dcda35f92",
     "provider": {
       "name": "mock",
       "model": "recorded-dataset-outputs",
@@ -26,45 +26,59 @@
         "retries": 0,
         "workers": 2
       },
+      "policyHealing": {
+        "reproduceRuns": 3,
+        "verifyRuns": 3,
+        "maxWaitTimeoutMs": 15000,
+        "maxChanges": 2,
+        "patchableRoots": [
+          "src/pages/",
+          "src/components/"
+        ]
+      },
       "repeat": 1,
       "suites": "all",
-      "baseline": "eval/baselines/deterministic.json"
+      "cases": "all",
+      "baseline": null,
+      "pricing": "eval/pricing.json",
+      "gates": "eval/gates.json"
     },
     "target": {
-      "name": "saucedemo-public-demo",
-      "version": "unversioned public demo site; behaviour verified 2026-10-18"
+      "name": "saucedemo-public-demo; local example-app",
+      "version": "saucedemo: unversioned public demo, behaviour verified 2026-10-18; example-app: example-app/server.ts at the evaluated commit"
     },
     "labelReview": {
-      "total": 62,
+      "total": 104,
       "humanReviewed": 0,
       "byMethod": {
-        "constructed": 18,
-        "observed-controlled-variation": 4,
-        "author-judgment": 40
+        "constructed": 41,
+        "observed-controlled-variation": 14,
+        "author-judgment": 49
       }
     },
     "executionRefs": [],
     "repeat": 1
   },
   "summary": {
-    "casesEvaluated": 75,
-    "passed": 75,
+    "casesEvaluated": 109,
+    "passed": 109,
     "failed": 0,
     "inconclusive": 0,
     "datasetSize": {
-      "planningCases": 21,
-      "generationCases": 19,
-      "functionalReferenceOutcomes": 29,
-      "labelledFailures": 15,
-      "reportControls": 3
+      "planningCases": 25,
+      "generationCases": 31,
+      "functionalReferenceOutcomes": 62,
+      "labelledFailures": 23,
+      "reportControls": 4,
+      "healingCases": 15
     }
   },
   "metrics": [
     {
       "id": "planning.structural.expectationsMet",
       "value": 1,
-      "numerator": 21,
-      "denominator": 21,
+      "numerator": 25,
+      "denominator": 25,
       "unit": "ratio",
       "kind": "deterministic",
       "higherIsBetter": true,
@@ -76,8 +90,8 @@
     {
       "id": "planning.structural.outcomeAccuracy",
       "value": 1,
-      "numerator": 21,
-      "denominator": 21,
+      "numerator": 25,
+      "denominator": 25,
       "unit": "ratio",
       "kind": "deterministic",
       "higherIsBetter": true,
@@ -88,9 +102,9 @@
     },
     {
       "id": "planning.structural.scenarioTraceability",
-      "value": 0.8974358974358975,
-      "numerator": 35,
-      "denominator": 39,
+      "value": 0.9166666666666666,
+      "numerator": 44,
+      "denominator": 48,
       "unit": "ratio",
       "kind": "deterministic",
       "higherIsBetter": true,
@@ -102,8 +116,8 @@
     {
       "id": "planning.structural.ambiguityDetection",
       "value": 1,
-      "numerator": 3,
-      "denominator": 3,
+      "numerator": 4,
+      "denominator": 4,
       "unit": "ratio",
       "kind": "deterministic",
       "higherIsBetter": true,
@@ -127,9 +141,9 @@
     },
     {
       "id": "planning.semantic.requiredCoverageMet",
-      "value": 0.6666666666666666,
-      "numerator": 2,
-      "denominator": 3,
+      "value": 0.8,
+      "numerator": 4,
+      "denominator": 5,
       "unit": "ratio",
       "kind": "deterministic",
       "higherIsBetter": true,
@@ -140,9 +154,9 @@
     },
     {
       "id": "planning.semantic.expectedScenarioCategoriesPresent",
-      "value": 0.8,
-      "numerator": 4,
-      "denominator": 5,
+      "value": 0.8333333333333334,
+      "numerator": 5,
+      "denominator": 6,
       "unit": "ratio",
       "kind": "deterministic",
       "higherIsBetter": true,
@@ -153,9 +167,9 @@
     },
     {
       "id": "planning.semantic.plansFreeOfProhibitedAssumptions",
-      "value": 0.75,
-      "numerator": 3,
-      "denominator": 4,
+      "value": 0.8,
+      "numerator": 4,
+      "denominator": 5,
       "unit": "ratio",
       "kind": "deterministic",
       "higherIsBetter": true,
@@ -166,9 +180,9 @@
     },
     {
       "id": "planning.semantic.clarificationBehaviourCorrect",
-      "value": 0.5714285714285714,
-      "numerator": 4,
-      "denominator": 7,
+      "value": 0.625,
+      "numerator": 5,
+      "denominator": 8,
       "unit": "ratio",
       "kind": "deterministic",
       "higherIsBetter": true,
@@ -180,8 +194,8 @@
     {
       "id": "generation.structural.expectationsMet",
       "value": 1,
-      "numerator": 19,
-      "denominator": 19,
+      "numerator": 31,
+      "denominator": 31,
       "unit": "ratio",
       "kind": "deterministic",
       "higherIsBetter": true,
@@ -192,9 +206,9 @@
     },
     {
       "id": "generation.structural.schemaValidity",
-      "value": 0.9473684210526315,
-      "numerator": 18,
-      "denominator": 19,
+      "value": 0.967741935483871,
+      "numerator": 30,
+      "denominator": 31,
       "unit": "ratio",
       "kind": "deterministic",
       "higherIsBetter": true,
@@ -206,8 +220,8 @@
     {
       "id": "generation.structural.typescriptValidity",
       "value": 1,
-      "numerator": 15,
-      "denominator": 15,
+      "numerator": 30,
+      "denominator": 30,
       "unit": "ratio",
       "kind": "deterministic",
       "higherIsBetter": true,
@@ -219,8 +233,8 @@
     {
       "id": "generation.structural.conventionCompliance",
       "value": 1,
-      "numerator": 15,
-      "denominator": 15,
+      "numerator": 30,
+      "denominator": 30,
       "unit": "ratio",
       "kind": "deterministic",
       "higherIsBetter": true,
@@ -232,8 +246,8 @@
     {
       "id": "generation.structural.traceability",
       "value": 1,
-      "numerator": 15,
-      "denominator": 15,
+      "numerator": 30,
+      "denominator": 30,
       "unit": "ratio",
       "kind": "deterministic",
       "higherIsBetter": true,
@@ -244,9 +258,9 @@
     },
     {
       "id": "generation.semantic.requiredAssertionsSatisfied",
-      "value": 0.6,
-      "numerator": 9,
-      "denominator": 15,
+      "value": 0.6976744186046512,
+      "numerator": 30,
+      "denominator": 43,
       "unit": "ratio",
       "kind": "deterministic",
       "higherIsBetter": true,
@@ -257,9 +271,9 @@
     },
     {
       "id": "generation.semantic.specsWithoutAssertionFindings",
-      "value": 0.4,
-      "numerator": 6,
-      "denominator": 15,
+      "value": 0.5333333333333333,
+      "numerator": 16,
+      "denominator": 30,
       "unit": "ratio",
       "kind": "deterministic",
       "higherIsBetter": true,
@@ -269,17 +283,198 @@
       "source": "eval/dataset/generation.json via generateSpecs + renderSpec + validateArtifacts"
     },
     {
-      "id": "assertion.rules.exactAgreementWithLabels",
+      "id": "generation.structural.unsupportedOrDuplicateRejected",
       "value": 1,
-      "numerator": 15,
-      "denominator": 15,
+      "numerator": 11,
+      "denominator": 11,
+      "unit": "ratio",
+      "kind": "deterministic",
+      "higherIsBetter": true,
+      "gate": "exact",
+      "status": "ok",
+      "definition": "Specs the reference marks unsupported, duplicate, irrelevant or unsafe that the validators rejected / such specs.",
+      "source": "eval/dataset/generation.json via generateSpecs + renderSpec + validateArtifacts"
+    },
+    {
+      "id": "generation.layer.api.typescriptValidity",
+      "value": 1,
+      "numerator": 13,
+      "denominator": 13,
+      "unit": "ratio",
+      "kind": "deterministic",
+      "higherIsBetter": true,
+      "gate": "exact",
+      "status": "ok",
+      "definition": "Rendered api files with no TypeScript errors / rendered api files (compiles; says nothing about intent).",
+      "source": "eval/dataset/generation.json via generateSpecs + renderSpec + validateArtifacts (layer api)"
+    },
+    {
+      "id": "generation.layer.api.requiredAssertionsMet",
+      "value": 0.6153846153846154,
+      "numerator": 8,
+      "denominator": 13,
+      "unit": "ratio",
+      "kind": "deterministic",
+      "higherIsBetter": true,
+      "gate": "exact",
+      "status": "ok",
+      "definition": "Accepted api specs containing every reference assertion (status, body field or UI value) / accepted api specs with reference assertions.",
+      "source": "eval/dataset/generation.json via generateSpecs + renderSpec + validateArtifacts (layer api)"
+    },
+    {
+      "id": "generation.layer.api.intentCorrectByReference",
+      "value": 0.6153846153846154,
+      "numerator": 8,
+      "denominator": 13,
       "unit": "ratio",
       "kind": "reference-label",
       "higherIsBetter": true,
       "gate": "exact",
       "status": "ok",
       "interval": {
-        "low": 0.7961107336956521,
+        "low": 0.35522480972268555,
+        "high": 0.8229055341876319
+      },
+      "definition": "Accepted api specs whose reference intent label is \"correct\" / labelled accepted api specs (reference judgement, independent of compiling or passing).",
+      "source": "eval/dataset/generation.json via generateSpecs + renderSpec + validateArtifacts (layer api)"
+    },
+    {
+      "id": "generation.layer.api.incorrectIntentDetected",
+      "value": 1,
+      "numerator": 5,
+      "denominator": 5,
+      "unit": "ratio",
+      "kind": "reference-label",
+      "higherIsBetter": true,
+      "gate": "exact",
+      "status": "ok",
+      "interval": {
+        "low": 0.5655085052479191,
+        "high": 1
+      },
+      "definition": "Specs labelled \"incorrect\" that the deterministic rules or the required-assertion check flag / specs labelled incorrect.",
+      "source": "eval/dataset/generation.json via generateSpecs + renderSpec + validateArtifacts (layer api)"
+    },
+    {
+      "id": "generation.layer.combined.typescriptValidity",
+      "value": 1,
+      "numerator": 2,
+      "denominator": 2,
+      "unit": "ratio",
+      "kind": "deterministic",
+      "higherIsBetter": true,
+      "gate": "exact",
+      "status": "ok",
+      "definition": "Rendered combined files with no TypeScript errors / rendered combined files (compiles; says nothing about intent).",
+      "source": "eval/dataset/generation.json via generateSpecs + renderSpec + validateArtifacts (layer combined)"
+    },
+    {
+      "id": "generation.layer.combined.requiredAssertionsMet",
+      "value": 1,
+      "numerator": 2,
+      "denominator": 2,
+      "unit": "ratio",
+      "kind": "deterministic",
+      "higherIsBetter": true,
+      "gate": "exact",
+      "status": "ok",
+      "definition": "Accepted combined specs containing every reference assertion (status, body field or UI value) / accepted combined specs with reference assertions.",
+      "source": "eval/dataset/generation.json via generateSpecs + renderSpec + validateArtifacts (layer combined)"
+    },
+    {
+      "id": "generation.layer.combined.intentCorrectByReference",
+      "value": 1,
+      "numerator": 2,
+      "denominator": 2,
+      "unit": "ratio",
+      "kind": "reference-label",
+      "higherIsBetter": true,
+      "gate": "exact",
+      "status": "ok",
+      "interval": {
+        "low": 0.34237195288961925,
+        "high": 1
+      },
+      "definition": "Accepted combined specs whose reference intent label is \"correct\" / labelled accepted combined specs (reference judgement, independent of compiling or passing).",
+      "source": "eval/dataset/generation.json via generateSpecs + renderSpec + validateArtifacts (layer combined)"
+    },
+    {
+      "id": "generation.layer.combined.incorrectIntentDetected",
+      "value": null,
+      "numerator": 0,
+      "denominator": 0,
+      "unit": "ratio",
+      "kind": "reference-label",
+      "higherIsBetter": true,
+      "gate": "exact",
+      "status": "unavailable",
+      "definition": "Specs labelled \"incorrect\" that the deterministic rules or the required-assertion check flag / specs labelled incorrect.",
+      "source": "eval/dataset/generation.json via generateSpecs + renderSpec + validateArtifacts (layer combined)"
+    },
+    {
+      "id": "generation.layer.ui.typescriptValidity",
+      "value": 1,
+      "numerator": 15,
+      "denominator": 15,
+      "unit": "ratio",
+      "kind": "deterministic",
+      "higherIsBetter": true,
+      "gate": "exact",
+      "status": "ok",
+      "definition": "Rendered ui files with no TypeScript errors / rendered ui files (compiles; says nothing about intent).",
+      "source": "eval/dataset/generation.json via generateSpecs + renderSpec + validateArtifacts (layer ui)"
+    },
+    {
+      "id": "generation.layer.ui.requiredAssertionsMet",
+      "value": 0.6,
+      "numerator": 9,
+      "denominator": 15,
+      "unit": "ratio",
+      "kind": "deterministic",
+      "higherIsBetter": true,
+      "gate": "exact",
+      "status": "ok",
+      "definition": "Accepted ui specs containing every reference assertion (status, body field or UI value) / accepted ui specs with reference assertions.",
+      "source": "eval/dataset/generation.json via generateSpecs + renderSpec + validateArtifacts (layer ui)"
+    },
+    {
+      "id": "generation.layer.ui.intentCorrectByReference",
+      "value": null,
+      "numerator": 0,
+      "denominator": 0,
+      "unit": "ratio",
+      "kind": "reference-label",
+      "higherIsBetter": true,
+      "gate": "exact",
+      "status": "unavailable",
+      "definition": "Accepted ui specs whose reference intent label is \"correct\" / labelled accepted ui specs (reference judgement, independent of compiling or passing).",
+      "source": "eval/dataset/generation.json via generateSpecs + renderSpec + validateArtifacts (layer ui)"
+    },
+    {
+      "id": "generation.layer.ui.incorrectIntentDetected",
+      "value": null,
+      "numerator": 0,
+      "denominator": 0,
+      "unit": "ratio",
+      "kind": "reference-label",
+      "higherIsBetter": true,
+      "gate": "exact",
+      "status": "unavailable",
+      "definition": "Specs labelled \"incorrect\" that the deterministic rules or the required-assertion check flag / specs labelled incorrect.",
+      "source": "eval/dataset/generation.json via generateSpecs + renderSpec + validateArtifacts (layer ui)"
+    },
+    {
+      "id": "assertion.rules.exactAgreementWithLabels",
+      "value": 1,
+      "numerator": 30,
+      "denominator": 30,
+      "unit": "ratio",
+      "kind": "reference-label",
+      "higherIsBetter": true,
+      "gate": "exact",
+      "status": "ok",
+      "interval": {
+        "low": 0.8864829086095221,
         "high": 1
       },
       "definition": "Specs where the set of rule findings equals the reference weakness labels / labelled specs.",
@@ -288,15 +483,15 @@
     {
       "id": "evidence.statusInterpretation",
       "value": 1,
-      "numerator": 18,
-      "denominator": 18,
+      "numerator": 27,
+      "denominator": 27,
       "unit": "ratio",
       "kind": "reference-label",
       "higherIsBetter": true,
       "gate": "exact",
       "status": "ok",
       "interval": {
-        "low": 0.8241154494176252,
+        "low": 0.8754409628553641,
         "high": 1
       },
       "definition": "Report tests whose parsed status equals the labelled status / tests.",
@@ -305,15 +500,15 @@
     {
       "id": "evidence.requirementAssociation",
       "value": 1,
-      "numerator": 18,
-      "denominator": 18,
+      "numerator": 27,
+      "denominator": 27,
       "unit": "ratio",
       "kind": "reference-label",
       "higherIsBetter": true,
       "gate": "exact",
       "status": "ok",
       "interval": {
-        "low": 0.8241154494176252,
+        "low": 0.8754409628553641,
         "high": 1
       },
       "definition": "Report tests associated with the labelled scenario / tests.",
@@ -343,24 +538,24 @@
     },
     {
       "id": "analysis.rules.accuracy",
-      "value": 0.5333333333333333,
-      "numerator": 8,
-      "denominator": 15,
+      "value": 0.5652173913043478,
+      "numerator": 13,
+      "denominator": 23,
       "unit": "ratio",
       "kind": "reference-label",
       "higherIsBetter": true,
       "gate": "exact",
       "status": "insufficient-data",
       "interval": {
-        "low": 0.3011663015105079,
-        "high": 0.7519077474025355
+        "low": 0.3681104930501695,
+        "high": 0.7436563166780135
       },
       "definition": "Labelled failures whose predicted category equals the labelled category (classifier vocabulary) / labelled failures.",
       "source": "eval/dataset/failures/*.json via collectEvidence + classifyFailure"
     },
     {
       "id": "analysis.rules.macroRecall",
-      "value": 0.5208333333333333,
+      "value": 0.5833333333333333,
       "unit": "ratio",
       "kind": "reference-label",
       "higherIsBetter": true,
@@ -371,17 +566,17 @@
     },
     {
       "id": "analysis.rules.labelInTopOrAlternatives",
-      "value": 0.7333333333333333,
-      "numerator": 11,
-      "denominator": 15,
+      "value": 0.8260869565217391,
+      "numerator": 19,
+      "denominator": 23,
       "unit": "ratio",
       "kind": "reference-label",
       "higherIsBetter": true,
       "gate": "exact",
       "status": "ok",
       "interval": {
-        "low": 0.4804911034231324,
-        "high": 0.8910272389681718
+        "low": 0.6286194521470433,
+        "high": 0.9302145964938723
       },
       "definition": "Failures whose label is the predicted category or one of the listed alternatives / labelled failures.",
       "source": "eval/dataset/failures/*.json via collectEvidence + classifyFailure"
@@ -389,15 +584,15 @@
     {
       "id": "analysis.rules.evidenceRelevance",
       "value": 1,
-      "numerator": 14,
-      "denominator": 14,
+      "numerator": 22,
+      "denominator": 22,
       "unit": "ratio",
       "kind": "reference-label",
       "higherIsBetter": true,
       "gate": "exact",
       "status": "ok",
       "interval": {
-        "low": 0.7846829880728186,
+        "low": 0.8513404742740388,
         "high": 1
       },
       "definition": "Analyses citing at least one error or run observation (not only the status line) / analyses produced.",
@@ -405,17 +600,17 @@
     },
     {
       "id": "analysis.rules.uncertaintyIdentified",
-      "value": 0.9,
-      "numerator": 9,
-      "denominator": 10,
+      "value": 0.9090909090909091,
+      "numerator": 10,
+      "denominator": 11,
       "unit": "ratio",
       "kind": "reference-label",
       "higherIsBetter": true,
       "gate": "exact",
       "status": "ok",
       "interval": {
-        "low": 0.5958436145024278,
-        "high": 0.9821242504842788
+        "low": 0.6226353745137962,
+        "high": 0.9837682477371741
       },
       "definition": "Failures labelled \"evidence insufficient\" where the analysis also said evidence was insufficient / such failures.",
       "source": "eval/dataset/failures/*.json via collectEvidence + classifyFailure"
@@ -451,8 +646,8 @@
     {
       "id": "recovery.scenariosMeetingExpectations",
       "value": 1,
-      "numerator": 17,
-      "denominator": 17,
+      "numerator": 26,
+      "denominator": 26,
       "unit": "ratio",
       "kind": "deterministic",
       "higherIsBetter": true,
@@ -464,8 +659,8 @@
     {
       "id": "recovery.errorClassificationCorrect",
       "value": 1,
-      "numerator": 11,
-      "denominator": 11,
+      "numerator": 17,
+      "denominator": 17,
       "unit": "ratio",
       "kind": "deterministic",
       "higherIsBetter": true,
@@ -490,8 +685,8 @@
     {
       "id": "recovery.unrecoverablePropagated",
       "value": 1,
-      "numerator": 15,
-      "denominator": 15,
+      "numerator": 24,
+      "denominator": 24,
       "unit": "ratio",
       "kind": "deterministic",
       "higherIsBetter": true,
@@ -503,8 +698,8 @@
     {
       "id": "recovery.terminatedWithinLimits",
       "value": 1,
-      "numerator": 17,
-      "denominator": 17,
+      "numerator": 26,
+      "denominator": 26,
       "unit": "ratio",
       "kind": "deterministic",
       "higherIsBetter": true,
@@ -515,7 +710,7 @@
     },
     {
       "id": "recovery.meanRecoveryLatencyMs",
-      "value": 24,
+      "value": 22.5,
       "unit": "ms",
       "kind": "measured",
       "higherIsBetter": false,
@@ -530,24 +725,24 @@
       "metrics": {
         "structural": {
           "expectationsMet": {
-            "n": 21,
-            "d": 21,
+            "n": 25,
+            "d": 25,
             "value": 1
           },
           "outcomeAccuracy": {
-            "n": 21,
-            "d": 21,
+            "n": 25,
+            "d": 25,
             "value": 1
           },
           "scenarioTraceability": {
-            "n": 35,
-            "d": 39,
-            "value": 0.8974358974358975
+            "n": 44,
+            "d": 48,
+            "value": 0.9166666666666666
           },
           "meanCoverageOfValidPlans": 0.8333333333333334,
           "ambiguityDetection": {
-            "n": 3,
-            "d": 3,
+            "n": 4,
+            "d": 4,
             "value": 1
           },
           "unsupportedAssumptionRejection": {
@@ -558,24 +753,24 @@
         },
         "semantic": {
           "requiredCoverageMet": {
-            "n": 2,
-            "d": 3,
-            "value": 0.6666666666666666
-          },
-          "expectedScenarioCategoriesPresent": {
             "n": 4,
             "d": 5,
             "value": 0.8
           },
+          "expectedScenarioCategoriesPresent": {
+            "n": 5,
+            "d": 6,
+            "value": 0.8333333333333334
+          },
           "plansFreeOfProhibitedAssumptions": {
-            "n": 3,
-            "d": 4,
-            "value": 0.75
+            "n": 4,
+            "d": 5,
+            "value": 0.8
           },
           "clarificationBehaviourCorrect": {
-            "n": 4,
-            "d": 7,
-            "value": 0.5714285714285714
+            "n": 5,
+            "d": 8,
+            "value": 0.625
           }
         }
       },
@@ -624,7 +819,7 @@
             "provider": "mock",
             "model": "mock",
             "attempts": 1,
-            "latencyMs": 0,
+            "latencyMs": 1,
             "inputTokens": 0,
             "outputTokens": 0,
             "tokensAvailable": false,
@@ -1641,7 +1836,7 @@
             "provider": "mock",
             "model": "mock",
             "attempts": 1,
-            "latencyMs": 1,
+            "latencyMs": 0,
             "inputTokens": 0,
             "outputTokens": 0,
             "tokensAvailable": false,
@@ -2010,7 +2205,7 @@
             "provider": "mock",
             "model": "mock",
             "attempts": 1,
-            "latencyMs": 1,
+            "latencyMs": 0,
             "inputTokens": 0,
             "outputTokens": 0,
             "tokensAvailable": false,
@@ -2421,6 +2616,466 @@
               "detail": "undeclared: AC-1"
             }
           }
+        },
+        {
+          "id": "PL-22",
+          "category": "api_plan",
+          "outcome": "plan_valid",
+          "checks": [
+            {
+              "name": "outcome",
+              "dimension": "structural",
+              "pass": true,
+              "detail": "expected plan_valid, got plan_valid"
+            },
+            {
+              "name": "coverage",
+              "dimension": "structural",
+              "pass": true,
+              "detail": "1.00"
+            },
+            {
+              "name": "layer:api",
+              "dimension": "structural",
+              "pass": true,
+              "detail": "api"
+            }
+          ],
+          "pass": true,
+          "coverage": 1,
+          "scenarios": {
+            "total": 4,
+            "traceable": 4,
+            "types": [
+              "positive",
+              "authorization",
+              "boundary"
+            ]
+          },
+          "flaggedAmbiguity": false,
+          "prohibitedHits": [],
+          "clarificationOk": true,
+          "modelCalls": 1,
+          "usage": {
+            "useCase": "test-plan",
+            "provider": "mock",
+            "model": "mock",
+            "attempts": 1,
+            "latencyMs": 0,
+            "inputTokens": 0,
+            "outputTokens": 0,
+            "tokensAvailable": false,
+            "outcome": "ok"
+          },
+          "planned": {
+            "requirement": {
+              "id": "REQ-421",
+              "title": "Notes API: create notes and protect them",
+              "description": "Signed-in users manage their own notes through the REST API. Notes are private to their owner.",
+              "acceptanceCriteria": [
+                {
+                  "id": "AC-1",
+                  "text": "Given a valid token, when the user creates a note with a title, then the API answers 201 and returns the note with the caller as owner."
+                },
+                {
+                  "id": "AC-2",
+                  "text": "Given no token, when the notes list is requested, then the API answers 401 with error code \"unauthorized\"."
+                },
+                {
+                  "id": "AC-3",
+                  "text": "Given a note owned by another user, when the user reads it, then the API answers 403 with error code \"forbidden\"."
+                },
+                {
+                  "id": "AC-4",
+                  "text": "Given a title longer than 120 characters, when the user creates a note, then the API answers 400 with error code \"validation_error\"."
+                }
+              ],
+              "application": "notes",
+              "source": "eval/dataset (synthetic requirement for the local example app or JSONPlaceholder)"
+            },
+            "traceableScenarios": [
+              {
+                "id": "REQ-421-SC-01",
+                "requirementId": "REQ-421",
+                "acceptanceCriteriaIds": [
+                  "AC-1"
+                ],
+                "title": "Create a note",
+                "objective": "Create a note",
+                "type": "positive",
+                "layer": "api",
+                "priority": "high",
+                "priorityRationale": "core behaviour",
+                "preconditions": [],
+                "steps": [
+                  "Create a note"
+                ],
+                "testData": [],
+                "expectedOutcomes": [
+                  "201",
+                  "owner is the caller"
+                ],
+                "assumptions": [],
+                "openQuestions": []
+              },
+              {
+                "id": "REQ-421-SC-02",
+                "requirementId": "REQ-421",
+                "acceptanceCriteriaIds": [
+                  "AC-2"
+                ],
+                "title": "List notes without a token",
+                "objective": "List notes without a token",
+                "type": "authorization",
+                "layer": "api",
+                "priority": "high",
+                "priorityRationale": "core behaviour",
+                "preconditions": [],
+                "steps": [
+                  "List notes without a token"
+                ],
+                "testData": [],
+                "expectedOutcomes": [
+                  "401 unauthorized"
+                ],
+                "assumptions": [],
+                "openQuestions": []
+              },
+              {
+                "id": "REQ-421-SC-03",
+                "requirementId": "REQ-421",
+                "acceptanceCriteriaIds": [
+                  "AC-3"
+                ],
+                "title": "Read another user's note",
+                "objective": "Read another user's note",
+                "type": "authorization",
+                "layer": "api",
+                "priority": "high",
+                "priorityRationale": "core behaviour",
+                "preconditions": [],
+                "steps": [
+                  "Read another user's note"
+                ],
+                "testData": [],
+                "expectedOutcomes": [
+                  "403 forbidden"
+                ],
+                "assumptions": [],
+                "openQuestions": []
+              },
+              {
+                "id": "REQ-421-SC-04",
+                "requirementId": "REQ-421",
+                "acceptanceCriteriaIds": [
+                  "AC-4"
+                ],
+                "title": "Create with a 121-character title",
+                "objective": "Create with a 121-character title",
+                "type": "boundary",
+                "layer": "api",
+                "priority": "high",
+                "priorityRationale": "core behaviour",
+                "preconditions": [],
+                "steps": [
+                  "Create with a 121-character title"
+                ],
+                "testData": [],
+                "expectedOutcomes": [
+                  "400 validation_error"
+                ],
+                "assumptions": [],
+                "openQuestions": []
+              }
+            ]
+          },
+          "semantic": {
+            "requiredCoverage": true,
+            "scenarioTypes": true,
+            "prohibited": true,
+            "clarification": {
+              "ok": true,
+              "detail": "no clarification expected"
+            }
+          }
+        },
+        {
+          "id": "PL-23",
+          "category": "unsupported_layer",
+          "outcome": "plan_rejected",
+          "checks": [
+            {
+              "name": "outcome",
+              "dimension": "structural",
+              "pass": true,
+              "detail": "expected plan_rejected, got plan_rejected"
+            },
+            {
+              "name": "planIssue:unsupported_layer",
+              "dimension": "structural",
+              "pass": true
+            }
+          ],
+          "pass": true,
+          "coverage": 1,
+          "scenarios": {
+            "total": 2,
+            "traceable": 2,
+            "types": [
+              "positive",
+              "boundary"
+            ]
+          },
+          "flaggedAmbiguity": false,
+          "prohibitedHits": [],
+          "clarificationOk": true,
+          "modelCalls": 1,
+          "usage": {
+            "useCase": "test-plan",
+            "provider": "mock",
+            "model": "mock",
+            "attempts": 1,
+            "latencyMs": 0,
+            "inputTokens": 0,
+            "outputTokens": 0,
+            "tokensAvailable": false,
+            "outcome": "ok"
+          },
+          "semantic": {
+            "prohibited": true,
+            "clarification": {
+              "ok": true,
+              "detail": "no clarification expected"
+            }
+          }
+        },
+        {
+          "id": "PL-24",
+          "category": "ambiguous_api",
+          "outcome": "plan_valid",
+          "checks": [
+            {
+              "name": "outcome",
+              "dimension": "structural",
+              "pass": true,
+              "detail": "expected plan_valid, got plan_valid"
+            },
+            {
+              "name": "requirementIssue:vague_term",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "layer:api",
+              "dimension": "structural",
+              "pass": true,
+              "detail": "api"
+            },
+            {
+              "name": "flagsAmbiguity",
+              "dimension": "structural",
+              "pass": true
+            }
+          ],
+          "pass": true,
+          "coverage": 0.5,
+          "scenarios": {
+            "total": 1,
+            "traceable": 1,
+            "types": [
+              "authorization"
+            ]
+          },
+          "flaggedAmbiguity": true,
+          "prohibitedHits": [],
+          "clarificationOk": true,
+          "modelCalls": 1,
+          "usage": {
+            "useCase": "test-plan",
+            "provider": "mock",
+            "model": "mock",
+            "attempts": 1,
+            "latencyMs": 0,
+            "inputTokens": 0,
+            "outputTokens": 0,
+            "tokensAvailable": false,
+            "outcome": "ok"
+          },
+          "planned": {
+            "requirement": {
+              "id": "REQ-423",
+              "title": "Notes API errors",
+              "description": "Errors from the notes API should be handled appropriately and be user-friendly.",
+              "acceptanceCriteria": [
+                {
+                  "id": "AC-1",
+                  "text": "When something goes wrong, the API returns an appropriate error."
+                },
+                {
+                  "id": "AC-2",
+                  "text": "Given no token, when the notes list is requested, then the API answers 401."
+                }
+              ],
+              "application": "notes",
+              "source": "eval/dataset (synthetic requirement for the local example app or JSONPlaceholder)"
+            },
+            "traceableScenarios": [
+              {
+                "id": "REQ-423-SC-01",
+                "requirementId": "REQ-423",
+                "acceptanceCriteriaIds": [
+                  "AC-2"
+                ],
+                "title": "List without a token",
+                "objective": "List without a token",
+                "type": "authorization",
+                "layer": "api",
+                "priority": "high",
+                "priorityRationale": "core behaviour",
+                "preconditions": [],
+                "steps": [
+                  "List without a token"
+                ],
+                "testData": [],
+                "expectedOutcomes": [
+                  "401"
+                ],
+                "assumptions": [],
+                "openQuestions": []
+              }
+            ]
+          },
+          "semantic": {
+            "prohibited": true,
+            "clarification": {
+              "ok": true,
+              "detail": "1 ambiguity/question(s); undeclared: none"
+            }
+          }
+        },
+        {
+          "id": "PL-25",
+          "category": "combined_plan",
+          "outcome": "plan_valid",
+          "checks": [
+            {
+              "name": "outcome",
+              "dimension": "structural",
+              "pass": true,
+              "detail": "expected plan_valid, got plan_valid"
+            },
+            {
+              "name": "coverage",
+              "dimension": "structural",
+              "pass": true,
+              "detail": "1.00"
+            },
+            {
+              "name": "layer:combined",
+              "dimension": "structural",
+              "pass": true,
+              "detail": "combined"
+            }
+          ],
+          "pass": true,
+          "coverage": 1,
+          "scenarios": {
+            "total": 2,
+            "traceable": 2,
+            "types": [
+              "positive"
+            ]
+          },
+          "flaggedAmbiguity": false,
+          "prohibitedHits": [],
+          "clarificationOk": true,
+          "modelCalls": 1,
+          "usage": {
+            "useCase": "test-plan",
+            "provider": "mock",
+            "model": "mock",
+            "attempts": 1,
+            "latencyMs": 0,
+            "inputTokens": 0,
+            "outputTokens": 0,
+            "tokensAvailable": false,
+            "outcome": "ok"
+          },
+          "planned": {
+            "requirement": {
+              "id": "REQ-424",
+              "title": "Notes created anywhere appear everywhere",
+              "description": "A note is the same whether it was created in the browser or through the API.",
+              "acceptanceCriteria": [
+                {
+                  "id": "AC-1",
+                  "text": "Given a note created through the API, when its owner opens the notes page, then the note is listed."
+                },
+                {
+                  "id": "AC-2",
+                  "text": "Given a signed-in user, when they add a note on the notes page, then the API returns that note in the user's list."
+                }
+              ],
+              "application": "notes",
+              "source": "eval/dataset (synthetic requirement for the local example app or JSONPlaceholder)"
+            },
+            "traceableScenarios": [
+              {
+                "id": "REQ-424-SC-01",
+                "requirementId": "REQ-424",
+                "acceptanceCriteriaIds": [
+                  "AC-1"
+                ],
+                "title": "API-created note is listed in the UI",
+                "objective": "API-created note is listed in the UI",
+                "type": "positive",
+                "layer": "combined",
+                "priority": "high",
+                "priorityRationale": "core behaviour",
+                "preconditions": [],
+                "steps": [
+                  "API-created note is listed in the UI"
+                ],
+                "testData": [],
+                "expectedOutcomes": [
+                  "note listed"
+                ],
+                "assumptions": [],
+                "openQuestions": []
+              },
+              {
+                "id": "REQ-424-SC-02",
+                "requirementId": "REQ-424",
+                "acceptanceCriteriaIds": [
+                  "AC-2"
+                ],
+                "title": "UI-added note is returned by the API",
+                "objective": "UI-added note is returned by the API",
+                "type": "positive",
+                "layer": "combined",
+                "priority": "high",
+                "priorityRationale": "core behaviour",
+                "preconditions": [],
+                "steps": [
+                  "UI-added note is returned by the API"
+                ],
+                "testData": [],
+                "expectedOutcomes": [
+                  "note in API list"
+                ],
+                "assumptions": [],
+                "openQuestions": []
+              }
+            ]
+          },
+          "semantic": {
+            "requiredCoverage": true,
+            "prohibited": true,
+            "clarification": {
+              "ok": true,
+              "detail": "no clarification expected"
+            }
+          }
         }
       ]
     },
@@ -2428,54 +3083,54 @@
       "metrics": {
         "structural": {
           "expectationsMet": {
-            "n": 19,
-            "d": 19,
+            "n": 31,
+            "d": 31,
             "value": 1
           },
           "schemaValidity": {
-            "n": 18,
-            "d": 19,
-            "value": 0.9473684210526315
+            "n": 30,
+            "d": 31,
+            "value": 0.967741935483871
           },
           "specDecisionAccuracy": {
-            "n": 20,
-            "d": 20,
+            "n": 40,
+            "d": 40,
             "value": 1
           },
           "typescriptValidity": {
-            "n": 15,
-            "d": 15,
+            "n": 30,
+            "d": 30,
             "value": 1
           },
           "conventionCompliance": {
-            "n": 15,
-            "d": 15,
+            "n": 30,
+            "d": 30,
             "value": 1
           },
           "traceability": {
-            "n": 15,
-            "d": 15,
+            "n": 30,
+            "d": 30,
             "value": 1
           }
         },
         "semantic": {
           "requiredAssertionsSatisfied": {
-            "n": 9,
-            "d": 15,
-            "value": 0.6
+            "n": 30,
+            "d": 43,
+            "value": 0.6976744186046512
           },
           "specsWithoutAssertionFindings": {
-            "n": 6,
-            "d": 15,
-            "value": 0.4
+            "n": 16,
+            "d": 30,
+            "value": 0.5333333333333333
           }
         }
       },
       "assertionRuleAgreement": {
-        "specsLabelled": 15,
+        "specsLabelled": 30,
         "exactAgreement": {
-          "n": 15,
-          "d": 15,
+          "n": 30,
+          "d": 30,
           "value": 1
         },
         "perRule": [
@@ -2617,6 +3272,74 @@
           },
           {
             "rule": "AQ_UNSTABLE_URL",
+            "labelled": 1,
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "precision": {
+              "n": 1,
+              "d": 1,
+              "value": 1
+            },
+            "recall": {
+              "n": 1,
+              "d": 1,
+              "value": 1
+            }
+          },
+          {
+            "rule": "AQ_API_NO_STATUS",
+            "labelled": 1,
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "precision": {
+              "n": 1,
+              "d": 1,
+              "value": 1
+            },
+            "recall": {
+              "n": 1,
+              "d": 1,
+              "value": 1
+            }
+          },
+          {
+            "rule": "AQ_API_ERROR_CODE_MISSING",
+            "labelled": 1,
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "precision": {
+              "n": 1,
+              "d": 1,
+              "value": 1
+            },
+            "recall": {
+              "n": 1,
+              "d": 1,
+              "value": 1
+            }
+          },
+          {
+            "rule": "AQ_API_STATUS_NOT_IN_CRITERIA",
+            "labelled": 2,
+            "tp": 2,
+            "fp": 0,
+            "fn": 0,
+            "precision": {
+              "n": 2,
+              "d": 2,
+              "value": 1
+            },
+            "recall": {
+              "n": 2,
+              "d": 2,
+              "value": 1
+            }
+          },
+          {
+            "rule": "AQ_API_BODY_UNCHECKED",
             "labelled": 1,
             "tp": 1,
             "fp": 0,
@@ -2727,6 +3450,7 @@
           "rendered": [
             {
               "scenarioId": "REQ-101-SC-01",
+              "layer": "ui",
               "typecheckClean": true,
               "conventionClean": true,
               "traceable": true,
@@ -2734,6 +3458,7 @@
             },
             {
               "scenarioId": "REQ-101-SC-02",
+              "layer": "ui",
               "typecheckClean": true,
               "conventionClean": true,
               "traceable": true,
@@ -2741,6 +3466,7 @@
             },
             {
               "scenarioId": "REQ-101-SC-03",
+              "layer": "ui",
               "typecheckClean": true,
               "conventionClean": true,
               "traceable": true,
@@ -2774,12 +3500,39 @@
             "satisfied": 3,
             "missing": []
           },
+          "specs": [
+            {
+              "scenarioId": "REQ-101-SC-01",
+              "layer": "ui",
+              "requiredMet": true,
+              "hasRequired": true,
+              "findings": 0
+            },
+            {
+              "scenarioId": "REQ-101-SC-02",
+              "layer": "ui",
+              "requiredMet": true,
+              "hasRequired": true,
+              "findings": 0
+            },
+            {
+              "scenarioId": "REQ-101-SC-03",
+              "layer": "ui",
+              "requiredMet": true,
+              "hasRequired": true,
+              "findings": 0
+            }
+          ],
+          "rejections": {
+            "expected": 0,
+            "rejected": 0
+          },
           "usage": {
             "useCase": "test-generation",
             "provider": "mock",
             "model": "mock",
             "attempts": 1,
-            "latencyMs": 1,
+            "latencyMs": 0,
             "inputTokens": 0,
             "outputTokens": 0,
             "tokensAvailable": false,
@@ -2829,6 +3582,7 @@
           "rendered": [
             {
               "scenarioId": "REQ-101-SC-02",
+              "layer": "ui",
               "typecheckClean": true,
               "conventionClean": true,
               "traceable": true,
@@ -2851,6 +3605,19 @@
             "required": 1,
             "satisfied": 1,
             "missing": []
+          },
+          "specs": [
+            {
+              "scenarioId": "REQ-101-SC-02",
+              "layer": "ui",
+              "requiredMet": true,
+              "hasRequired": true,
+              "findings": 0
+            }
+          ],
+          "rejections": {
+            "expected": 1,
+            "rejected": 1
           },
           "usage": {
             "useCase": "test-generation",
@@ -2889,6 +3656,11 @@
             "satisfied": 0,
             "missing": []
           },
+          "specs": [],
+          "rejections": {
+            "expected": 1,
+            "rejected": 1
+          },
           "usage": {
             "useCase": "test-generation",
             "provider": "mock",
@@ -2925,6 +3697,11 @@
             "required": 0,
             "satisfied": 0,
             "missing": []
+          },
+          "specs": [],
+          "rejections": {
+            "expected": 1,
+            "rejected": 1
           },
           "usage": {
             "useCase": "test-generation",
@@ -2963,6 +3740,11 @@
             "satisfied": 0,
             "missing": []
           },
+          "specs": [],
+          "rejections": {
+            "expected": 1,
+            "rejected": 1
+          },
           "usage": {
             "useCase": "test-generation",
             "provider": "mock",
@@ -2999,6 +3781,11 @@
             "required": 0,
             "satisfied": 0,
             "missing": []
+          },
+          "specs": [],
+          "rejections": {
+            "expected": 1,
+            "rejected": 1
           },
           "usage": {
             "useCase": "test-generation",
@@ -3086,6 +3873,7 @@
           "rendered": [
             {
               "scenarioId": "REQ-101-SC-01",
+              "layer": "ui",
               "typecheckClean": true,
               "conventionClean": true,
               "traceable": true,
@@ -3108,6 +3896,19 @@
             "required": 1,
             "satisfied": 1,
             "missing": []
+          },
+          "specs": [
+            {
+              "scenarioId": "REQ-101-SC-01",
+              "layer": "ui",
+              "requiredMet": true,
+              "hasRequired": true,
+              "findings": 0
+            }
+          ],
+          "rejections": {
+            "expected": 0,
+            "rejected": 0
           },
           "usage": {
             "useCase": "test-generation",
@@ -3145,12 +3946,17 @@
             "satisfied": 0,
             "missing": []
           },
+          "specs": [],
+          "rejections": {
+            "expected": 0,
+            "rejected": 0
+          },
           "usage": {
             "useCase": "test-generation",
             "provider": "mock",
             "model": "mock",
             "attempts": 1,
-            "latencyMs": 1,
+            "latencyMs": 0,
             "inputTokens": 0,
             "outputTokens": 0,
             "tokensAvailable": false,
@@ -3194,6 +4000,7 @@
           "rendered": [
             {
               "scenarioId": "REQ-101-SC-01",
+              "layer": "ui",
               "typecheckClean": true,
               "conventionClean": true,
               "traceable": true,
@@ -3234,6 +4041,19 @@
             "missing": [
               "REQ-101-SC-01: inventoryPage.title = \"Products\""
             ]
+          },
+          "specs": [
+            {
+              "scenarioId": "REQ-101-SC-01",
+              "layer": "ui",
+              "requiredMet": false,
+              "hasRequired": true,
+              "findings": 1
+            }
+          ],
+          "rejections": {
+            "expected": 0,
+            "rejected": 0
           },
           "usage": {
             "useCase": "test-generation",
@@ -3284,6 +4104,7 @@
           "rendered": [
             {
               "scenarioId": "REQ-101-SC-01",
+              "layer": "ui",
               "typecheckClean": true,
               "conventionClean": true,
               "traceable": true,
@@ -3324,6 +4145,19 @@
             "missing": [
               "REQ-101-SC-01: inventoryPage.title = \"Products\""
             ]
+          },
+          "specs": [
+            {
+              "scenarioId": "REQ-101-SC-01",
+              "layer": "ui",
+              "requiredMet": false,
+              "hasRequired": true,
+              "findings": 1
+            }
+          ],
+          "rejections": {
+            "expected": 0,
+            "rejected": 0
           },
           "usage": {
             "useCase": "test-generation",
@@ -3374,6 +4208,7 @@
           "rendered": [
             {
               "scenarioId": "REQ-101-SC-01",
+              "layer": "ui",
               "typecheckClean": true,
               "conventionClean": true,
               "traceable": true,
@@ -3414,6 +4249,19 @@
             "missing": [
               "REQ-101-SC-01: inventoryPage.title = \"Products\""
             ]
+          },
+          "specs": [
+            {
+              "scenarioId": "REQ-101-SC-01",
+              "layer": "ui",
+              "requiredMet": false,
+              "hasRequired": true,
+              "findings": 1
+            }
+          ],
+          "rejections": {
+            "expected": 0,
+            "rejected": 0
           },
           "usage": {
             "useCase": "test-generation",
@@ -3464,6 +4312,7 @@
           "rendered": [
             {
               "scenarioId": "REQ-101-SC-02",
+              "layer": "ui",
               "typecheckClean": true,
               "conventionClean": true,
               "traceable": true,
@@ -3502,6 +4351,19 @@
             "required": 1,
             "satisfied": 1,
             "missing": []
+          },
+          "specs": [
+            {
+              "scenarioId": "REQ-101-SC-02",
+              "layer": "ui",
+              "requiredMet": true,
+              "hasRequired": true,
+              "findings": 1
+            }
+          ],
+          "rejections": {
+            "expected": 0,
+            "rejected": 0
           },
           "usage": {
             "useCase": "test-generation",
@@ -3552,6 +4414,7 @@
           "rendered": [
             {
               "scenarioId": "REQ-101-SC-02",
+              "layer": "ui",
               "typecheckClean": true,
               "conventionClean": true,
               "traceable": true,
@@ -3590,6 +4453,19 @@
             "required": 1,
             "satisfied": 1,
             "missing": []
+          },
+          "specs": [
+            {
+              "scenarioId": "REQ-101-SC-02",
+              "layer": "ui",
+              "requiredMet": true,
+              "hasRequired": true,
+              "findings": 1
+            }
+          ],
+          "rejections": {
+            "expected": 0,
+            "rejected": 0
           },
           "usage": {
             "useCase": "test-generation",
@@ -3640,6 +4516,7 @@
           "rendered": [
             {
               "scenarioId": "REQ-101-SC-02",
+              "layer": "ui",
               "typecheckClean": true,
               "conventionClean": true,
               "traceable": true,
@@ -3681,12 +4558,25 @@
               "REQ-101-SC-02: loginPage.errorMessage = \"Epic sadface: Sorry, this user has been locked out.\""
             ]
           },
+          "specs": [
+            {
+              "scenarioId": "REQ-101-SC-02",
+              "layer": "ui",
+              "requiredMet": false,
+              "hasRequired": true,
+              "findings": 1
+            }
+          ],
+          "rejections": {
+            "expected": 0,
+            "rejected": 0
+          },
           "usage": {
             "useCase": "test-generation",
             "provider": "mock",
             "model": "mock",
             "attempts": 1,
-            "latencyMs": 1,
+            "latencyMs": 0,
             "inputTokens": 0,
             "outputTokens": 0,
             "tokensAvailable": false,
@@ -3730,6 +4620,7 @@
           "rendered": [
             {
               "scenarioId": "REQ-101-SC-03",
+              "layer": "ui",
               "typecheckClean": true,
               "conventionClean": true,
               "traceable": true,
@@ -3784,6 +4675,19 @@
               "REQ-101-SC-03: loginPage.errorMessage = \"Epic sadface: Username and password do not match any user in this service\""
             ]
           },
+          "specs": [
+            {
+              "scenarioId": "REQ-101-SC-03",
+              "layer": "ui",
+              "requiredMet": false,
+              "hasRequired": true,
+              "findings": 2
+            }
+          ],
+          "rejections": {
+            "expected": 0,
+            "rejected": 0
+          },
           "usage": {
             "useCase": "test-generation",
             "provider": "mock",
@@ -3833,6 +4737,7 @@
           "rendered": [
             {
               "scenarioId": "REQ-101-SC-01",
+              "layer": "ui",
               "typecheckClean": true,
               "conventionClean": true,
               "traceable": true,
@@ -3871,6 +4776,19 @@
             "required": 1,
             "satisfied": 1,
             "missing": []
+          },
+          "specs": [
+            {
+              "scenarioId": "REQ-101-SC-01",
+              "layer": "ui",
+              "requiredMet": true,
+              "hasRequired": true,
+              "findings": 1
+            }
+          ],
+          "rejections": {
+            "expected": 0,
+            "rejected": 0
           },
           "usage": {
             "useCase": "test-generation",
@@ -3921,6 +4839,7 @@
           "rendered": [
             {
               "scenarioId": "REQ-101-SC-02",
+              "layer": "ui",
               "typecheckClean": true,
               "conventionClean": true,
               "traceable": true,
@@ -3961,6 +4880,19 @@
             "missing": [
               "REQ-101-SC-02: loginPage.errorMessage = \"Epic sadface: Sorry, this user has been locked out.\""
             ]
+          },
+          "specs": [
+            {
+              "scenarioId": "REQ-101-SC-02",
+              "layer": "ui",
+              "requiredMet": false,
+              "hasRequired": true,
+              "findings": 1
+            }
+          ],
+          "rejections": {
+            "expected": 0,
+            "rejected": 0
           },
           "usage": {
             "useCase": "test-generation",
@@ -4011,6 +4943,7 @@
           "rendered": [
             {
               "scenarioId": "REQ-101-SC-02",
+              "layer": "ui",
               "typecheckClean": true,
               "conventionClean": true,
               "traceable": true,
@@ -4034,6 +4967,1319 @@
             "satisfied": 1,
             "missing": []
           },
+          "specs": [
+            {
+              "scenarioId": "REQ-101-SC-02",
+              "layer": "ui",
+              "requiredMet": true,
+              "hasRequired": true,
+              "findings": 0
+            }
+          ],
+          "rejections": {
+            "expected": 0,
+            "rejected": 0
+          },
+          "usage": {
+            "useCase": "test-generation",
+            "provider": "mock",
+            "model": "mock",
+            "attempts": 1,
+            "latencyMs": 0,
+            "inputTokens": 0,
+            "outputTokens": 0,
+            "tokensAvailable": false,
+            "outcome": "ok"
+          }
+        },
+        {
+          "id": "GE-20",
+          "category": "api_correct",
+          "schemaValid": true,
+          "checks": [
+            {
+              "name": "accepted:REQ-401-SC-01",
+              "dimension": "structural",
+              "pass": true,
+              "detail": "[]"
+            },
+            {
+              "name": "accepted:REQ-401-SC-02",
+              "dimension": "structural",
+              "pass": true,
+              "detail": "[]"
+            },
+            {
+              "name": "accepted:REQ-401-SC-03",
+              "dimension": "structural",
+              "pass": true,
+              "detail": "[]"
+            },
+            {
+              "name": "accepted:REQ-401-SC-04",
+              "dimension": "structural",
+              "pass": true,
+              "detail": "[]"
+            },
+            {
+              "name": "typecheck:REQ-401-SC-01",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "convention:REQ-401-SC-01",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "titlePreserved:REQ-401-SC-01",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "typecheck:REQ-401-SC-02",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "convention:REQ-401-SC-02",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "titlePreserved:REQ-401-SC-02",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "typecheck:REQ-401-SC-03",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "convention:REQ-401-SC-03",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "titlePreserved:REQ-401-SC-03",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "typecheck:REQ-401-SC-04",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "convention:REQ-401-SC-04",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "titlePreserved:REQ-401-SC-04",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "assertionRules:REQ-401-SC-01",
+              "dimension": "reference",
+              "pass": true,
+              "detail": "labelled [] predicted []"
+            },
+            {
+              "name": "assertionRules:REQ-401-SC-02",
+              "dimension": "reference",
+              "pass": true,
+              "detail": "labelled [] predicted []"
+            },
+            {
+              "name": "assertionRules:REQ-401-SC-03",
+              "dimension": "reference",
+              "pass": true,
+              "detail": "labelled [] predicted []"
+            },
+            {
+              "name": "assertionRules:REQ-401-SC-04",
+              "dimension": "reference",
+              "pass": true,
+              "detail": "labelled [] predicted []"
+            }
+          ],
+          "pass": true,
+          "rendered": [
+            {
+              "scenarioId": "REQ-401-SC-01",
+              "layer": "api",
+              "typecheckClean": true,
+              "conventionClean": true,
+              "traceable": true,
+              "titlePreserved": true
+            },
+            {
+              "scenarioId": "REQ-401-SC-02",
+              "layer": "api",
+              "typecheckClean": true,
+              "conventionClean": true,
+              "traceable": true,
+              "titlePreserved": true
+            },
+            {
+              "scenarioId": "REQ-401-SC-03",
+              "layer": "api",
+              "typecheckClean": true,
+              "conventionClean": true,
+              "traceable": true,
+              "titlePreserved": true
+            },
+            {
+              "scenarioId": "REQ-401-SC-04",
+              "layer": "api",
+              "typecheckClean": true,
+              "conventionClean": true,
+              "traceable": true,
+              "titlePreserved": true
+            }
+          ],
+          "specDecisions": {
+            "correct": 4,
+            "total": 4
+          },
+          "assertionFindings": [],
+          "ruleVsLabel": [
+            {
+              "scenarioId": "REQ-401-SC-01",
+              "labelled": [],
+              "predicted": []
+            },
+            {
+              "scenarioId": "REQ-401-SC-02",
+              "labelled": [],
+              "predicted": []
+            },
+            {
+              "scenarioId": "REQ-401-SC-03",
+              "labelled": [],
+              "predicted": []
+            },
+            {
+              "scenarioId": "REQ-401-SC-04",
+              "labelled": [],
+              "predicted": []
+            }
+          ],
+          "requiredAssertions": {
+            "required": 8,
+            "satisfied": 8,
+            "missing": []
+          },
+          "specs": [
+            {
+              "scenarioId": "REQ-401-SC-01",
+              "layer": "api",
+              "intentLabel": "correct",
+              "requiredMet": true,
+              "hasRequired": true,
+              "findings": 0
+            },
+            {
+              "scenarioId": "REQ-401-SC-02",
+              "layer": "api",
+              "intentLabel": "correct",
+              "requiredMet": true,
+              "hasRequired": true,
+              "findings": 0
+            },
+            {
+              "scenarioId": "REQ-401-SC-03",
+              "layer": "api",
+              "intentLabel": "correct",
+              "requiredMet": true,
+              "hasRequired": true,
+              "findings": 0
+            },
+            {
+              "scenarioId": "REQ-401-SC-04",
+              "layer": "api",
+              "intentLabel": "correct",
+              "requiredMet": true,
+              "hasRequired": true,
+              "findings": 0
+            }
+          ],
+          "rejections": {
+            "expected": 0,
+            "rejected": 0
+          },
+          "usage": {
+            "useCase": "test-generation",
+            "provider": "mock",
+            "model": "mock",
+            "attempts": 1,
+            "latencyMs": 1,
+            "inputTokens": 0,
+            "outputTokens": 0,
+            "tokensAvailable": false,
+            "outcome": "ok"
+          }
+        },
+        {
+          "id": "GE-21",
+          "category": "api_assertion_quality",
+          "schemaValid": true,
+          "checks": [
+            {
+              "name": "accepted:REQ-402-SC-01",
+              "dimension": "structural",
+              "pass": true,
+              "detail": "[]"
+            },
+            {
+              "name": "accepted:REQ-402-SC-02",
+              "dimension": "structural",
+              "pass": true,
+              "detail": "[]"
+            },
+            {
+              "name": "typecheck:REQ-402-SC-01",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "convention:REQ-402-SC-01",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "titlePreserved:REQ-402-SC-01",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "typecheck:REQ-402-SC-02",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "convention:REQ-402-SC-02",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "titlePreserved:REQ-402-SC-02",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "assertionRules:REQ-402-SC-01",
+              "dimension": "reference",
+              "pass": true,
+              "detail": "labelled [AQ_API_BODY_UNCHECKED] predicted [AQ_API_BODY_UNCHECKED]"
+            },
+            {
+              "name": "assertionRules:REQ-402-SC-02",
+              "dimension": "reference",
+              "pass": true,
+              "detail": "labelled [AQ_API_ERROR_CODE_MISSING] predicted [AQ_API_ERROR_CODE_MISSING]"
+            }
+          ],
+          "pass": true,
+          "rendered": [
+            {
+              "scenarioId": "REQ-402-SC-01",
+              "layer": "api",
+              "typecheckClean": true,
+              "conventionClean": true,
+              "traceable": true,
+              "titlePreserved": true
+            },
+            {
+              "scenarioId": "REQ-402-SC-02",
+              "layer": "api",
+              "typecheckClean": true,
+              "conventionClean": true,
+              "traceable": true,
+              "titlePreserved": true
+            }
+          ],
+          "specDecisions": {
+            "correct": 2,
+            "total": 2
+          },
+          "assertionFindings": [
+            {
+              "scenarioId": "REQ-402-SC-01",
+              "requirementId": "REQ-402",
+              "rule": "AQ_API_BODY_UNCHECKED",
+              "expectedBehavior": "Given a valid token, when the user creates a note with a title, then the API answers 201 and returns the note with the caller as owner.",
+              "observedAssertion": "expect(r1.status()).toBe(201)",
+              "weakness": "a successful response is accepted without checking any body field",
+              "evidence": "r1 (notes.create) has no field assertion",
+              "method": "deterministic-rule",
+              "uncertainty": "medium"
+            },
+            {
+              "scenarioId": "REQ-402-SC-02",
+              "requirementId": "REQ-402",
+              "rule": "AQ_API_ERROR_CODE_MISSING",
+              "expectedBehavior": "Given no token, when the notes list is requested, then the API answers 401 with error code \"unauthorized\".",
+              "observedAssertion": "expect(r1.status()).toBe(401)",
+              "weakness": "an error status is checked but not which error it is",
+              "evidence": "r1 expects 401 without error.code",
+              "method": "deterministic-rule",
+              "uncertainty": "medium"
+            }
+          ],
+          "ruleVsLabel": [
+            {
+              "scenarioId": "REQ-402-SC-01",
+              "labelled": [
+                "AQ_API_BODY_UNCHECKED"
+              ],
+              "predicted": [
+                "AQ_API_BODY_UNCHECKED"
+              ]
+            },
+            {
+              "scenarioId": "REQ-402-SC-02",
+              "labelled": [
+                "AQ_API_ERROR_CODE_MISSING"
+              ],
+              "predicted": [
+                "AQ_API_ERROR_CODE_MISSING"
+              ]
+            }
+          ],
+          "requiredAssertions": {
+            "required": 4,
+            "satisfied": 2,
+            "missing": [
+              "REQ-402-SC-01: notes.create owner = \"alice\"",
+              "REQ-402-SC-02: notes.list error.code = \"unauthorized\""
+            ]
+          },
+          "specs": [
+            {
+              "scenarioId": "REQ-402-SC-01",
+              "layer": "api",
+              "intentLabel": "incorrect",
+              "requiredMet": false,
+              "hasRequired": true,
+              "findings": 1
+            },
+            {
+              "scenarioId": "REQ-402-SC-02",
+              "layer": "api",
+              "intentLabel": "incorrect",
+              "requiredMet": false,
+              "hasRequired": true,
+              "findings": 1
+            }
+          ],
+          "rejections": {
+            "expected": 0,
+            "rejected": 0
+          },
+          "usage": {
+            "useCase": "test-generation",
+            "provider": "mock",
+            "model": "mock",
+            "attempts": 1,
+            "latencyMs": 0,
+            "inputTokens": 0,
+            "outputTokens": 0,
+            "tokensAvailable": false,
+            "outcome": "ok"
+          }
+        },
+        {
+          "id": "GE-22",
+          "category": "api_incorrect_expected",
+          "schemaValid": true,
+          "checks": [
+            {
+              "name": "accepted:REQ-403-SC-01",
+              "dimension": "structural",
+              "pass": true,
+              "detail": "[]"
+            },
+            {
+              "name": "accepted:REQ-403-SC-03",
+              "dimension": "structural",
+              "pass": true,
+              "detail": "[]"
+            },
+            {
+              "name": "typecheck:REQ-403-SC-01",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "convention:REQ-403-SC-01",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "titlePreserved:REQ-403-SC-01",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "typecheck:REQ-403-SC-03",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "convention:REQ-403-SC-03",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "titlePreserved:REQ-403-SC-03",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "assertionRules:REQ-403-SC-01",
+              "dimension": "reference",
+              "pass": true,
+              "detail": "labelled [AQ_API_STATUS_NOT_IN_CRITERIA] predicted [AQ_API_STATUS_NOT_IN_CRITERIA]"
+            },
+            {
+              "name": "assertionRules:REQ-403-SC-03",
+              "dimension": "reference",
+              "pass": true,
+              "detail": "labelled [AQ_API_STATUS_NOT_IN_CRITERIA] predicted [AQ_API_STATUS_NOT_IN_CRITERIA]"
+            }
+          ],
+          "pass": true,
+          "rendered": [
+            {
+              "scenarioId": "REQ-403-SC-01",
+              "layer": "api",
+              "typecheckClean": true,
+              "conventionClean": true,
+              "traceable": true,
+              "titlePreserved": true
+            },
+            {
+              "scenarioId": "REQ-403-SC-03",
+              "layer": "api",
+              "typecheckClean": true,
+              "conventionClean": true,
+              "traceable": true,
+              "titlePreserved": true
+            }
+          ],
+          "specDecisions": {
+            "correct": 2,
+            "total": 2
+          },
+          "assertionFindings": [
+            {
+              "scenarioId": "REQ-403-SC-01",
+              "requirementId": "REQ-403",
+              "rule": "AQ_API_STATUS_NOT_IN_CRITERIA",
+              "expectedBehavior": "Given a valid token, when the user creates a note with a title, then the API answers 201 and returns the note with the caller as owner.",
+              "observedAssertion": "expect(r1.status()).toBe(200); expect(r1.owner).toBe(\"alice\")",
+              "weakness": "the expected status differs from the status the criteria state",
+              "evidence": "expects 200; criteria state 201",
+              "method": "deterministic-rule",
+              "uncertainty": "medium"
+            },
+            {
+              "scenarioId": "REQ-403-SC-03",
+              "requirementId": "REQ-403",
+              "rule": "AQ_API_STATUS_NOT_IN_CRITERIA",
+              "expectedBehavior": "Given a note owned by another user, when the user reads it, then the API answers 403 with error code \"forbidden\".",
+              "observedAssertion": "expect(r2.status()).toBe(404); expect(r2.error.code).toBe(\"not_found\")",
+              "weakness": "the expected status differs from the status the criteria state",
+              "evidence": "expects 404; criteria state 403",
+              "method": "deterministic-rule",
+              "uncertainty": "medium"
+            }
+          ],
+          "ruleVsLabel": [
+            {
+              "scenarioId": "REQ-403-SC-01",
+              "labelled": [
+                "AQ_API_STATUS_NOT_IN_CRITERIA"
+              ],
+              "predicted": [
+                "AQ_API_STATUS_NOT_IN_CRITERIA"
+              ]
+            },
+            {
+              "scenarioId": "REQ-403-SC-03",
+              "labelled": [
+                "AQ_API_STATUS_NOT_IN_CRITERIA"
+              ],
+              "predicted": [
+                "AQ_API_STATUS_NOT_IN_CRITERIA"
+              ]
+            }
+          ],
+          "requiredAssertions": {
+            "required": 4,
+            "satisfied": 1,
+            "missing": [
+              "REQ-403-SC-01: notes.create status 201",
+              "REQ-403-SC-03: notes.get status 403",
+              "REQ-403-SC-03: notes.get error.code = \"forbidden\""
+            ]
+          },
+          "specs": [
+            {
+              "scenarioId": "REQ-403-SC-01",
+              "layer": "api",
+              "intentLabel": "incorrect",
+              "requiredMet": false,
+              "hasRequired": true,
+              "findings": 1
+            },
+            {
+              "scenarioId": "REQ-403-SC-03",
+              "layer": "api",
+              "intentLabel": "incorrect",
+              "requiredMet": false,
+              "hasRequired": true,
+              "findings": 1
+            }
+          ],
+          "rejections": {
+            "expected": 0,
+            "rejected": 0
+          },
+          "usage": {
+            "useCase": "test-generation",
+            "provider": "mock",
+            "model": "mock",
+            "attempts": 1,
+            "latencyMs": 0,
+            "inputTokens": 0,
+            "outputTokens": 0,
+            "tokensAvailable": false,
+            "outcome": "ok"
+          }
+        },
+        {
+          "id": "GE-23",
+          "category": "api_assertion_quality",
+          "schemaValid": true,
+          "checks": [
+            {
+              "name": "accepted:REQ-404-SC-04",
+              "dimension": "structural",
+              "pass": true,
+              "detail": "[]"
+            },
+            {
+              "name": "typecheck:REQ-404-SC-04",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "convention:REQ-404-SC-04",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "titlePreserved:REQ-404-SC-04",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "assertionRules:REQ-404-SC-04",
+              "dimension": "reference",
+              "pass": true,
+              "detail": "labelled [AQ_API_NO_STATUS] predicted [AQ_API_NO_STATUS]"
+            }
+          ],
+          "pass": true,
+          "rendered": [
+            {
+              "scenarioId": "REQ-404-SC-04",
+              "layer": "api",
+              "typecheckClean": true,
+              "conventionClean": true,
+              "traceable": true,
+              "titlePreserved": true
+            }
+          ],
+          "specDecisions": {
+            "correct": 1,
+            "total": 1
+          },
+          "assertionFindings": [
+            {
+              "scenarioId": "REQ-404-SC-04",
+              "requirementId": "REQ-404",
+              "rule": "AQ_API_NO_STATUS",
+              "expectedBehavior": "Given a title longer than 120 characters, when the user creates a note, then the API answers 400 with error code \"validation_error\".",
+              "observedAssertion": "expect(r1.headers()[\"content-type\"]).toContain(\"application/json\")",
+              "weakness": "the status of notes.create (r1) is never checked",
+              "evidence": "no expectStatus on r1",
+              "method": "deterministic-rule",
+              "uncertainty": "low"
+            }
+          ],
+          "ruleVsLabel": [
+            {
+              "scenarioId": "REQ-404-SC-04",
+              "labelled": [
+                "AQ_API_NO_STATUS"
+              ],
+              "predicted": [
+                "AQ_API_NO_STATUS"
+              ]
+            }
+          ],
+          "requiredAssertions": {
+            "required": 2,
+            "satisfied": 0,
+            "missing": [
+              "REQ-404-SC-04: notes.create status 400",
+              "REQ-404-SC-04: notes.create error.code = \"validation_error\""
+            ]
+          },
+          "specs": [
+            {
+              "scenarioId": "REQ-404-SC-04",
+              "layer": "api",
+              "intentLabel": "incorrect",
+              "requiredMet": false,
+              "hasRequired": true,
+              "findings": 1
+            }
+          ],
+          "rejections": {
+            "expected": 0,
+            "rejected": 0
+          },
+          "usage": {
+            "useCase": "test-generation",
+            "provider": "mock",
+            "model": "mock",
+            "attempts": 1,
+            "latencyMs": 0,
+            "inputTokens": 0,
+            "outputTokens": 0,
+            "tokensAvailable": false,
+            "outcome": "ok"
+          }
+        },
+        {
+          "id": "GE-24",
+          "category": "security",
+          "schemaValid": true,
+          "checks": [
+            {
+              "name": "rejected:REQ-405-SC-01",
+              "dimension": "structural",
+              "pass": true,
+              "detail": "matcher_mismatch"
+            }
+          ],
+          "pass": true,
+          "rendered": [],
+          "specDecisions": {
+            "correct": 1,
+            "total": 1
+          },
+          "assertionFindings": [],
+          "ruleVsLabel": [],
+          "requiredAssertions": {
+            "required": 0,
+            "satisfied": 0,
+            "missing": []
+          },
+          "specs": [],
+          "rejections": {
+            "expected": 1,
+            "rejected": 1
+          },
+          "usage": {
+            "useCase": "test-generation",
+            "provider": "mock",
+            "model": "mock",
+            "attempts": 1,
+            "latencyMs": 1,
+            "inputTokens": 0,
+            "outputTokens": 0,
+            "tokensAvailable": false,
+            "outcome": "ok"
+          }
+        },
+        {
+          "id": "GE-25",
+          "category": "unsupported_endpoint",
+          "schemaValid": true,
+          "checks": [
+            {
+              "name": "rejected:REQ-406-SC-01",
+              "dimension": "structural",
+              "pass": true,
+              "detail": "unknown_method,unknown_response"
+            }
+          ],
+          "pass": true,
+          "rendered": [],
+          "specDecisions": {
+            "correct": 1,
+            "total": 1
+          },
+          "assertionFindings": [],
+          "ruleVsLabel": [],
+          "requiredAssertions": {
+            "required": 0,
+            "satisfied": 0,
+            "missing": []
+          },
+          "specs": [],
+          "rejections": {
+            "expected": 1,
+            "rejected": 1
+          },
+          "usage": {
+            "useCase": "test-generation",
+            "provider": "mock",
+            "model": "mock",
+            "attempts": 1,
+            "latencyMs": 0,
+            "inputTokens": 0,
+            "outputTokens": 0,
+            "tokensAvailable": false,
+            "outcome": "ok"
+          }
+        },
+        {
+          "id": "GE-26",
+          "category": "combined_correct",
+          "schemaValid": true,
+          "checks": [
+            {
+              "name": "accepted:REQ-407-SC-01",
+              "dimension": "structural",
+              "pass": true,
+              "detail": "[]"
+            },
+            {
+              "name": "accepted:REQ-407-SC-02",
+              "dimension": "structural",
+              "pass": true,
+              "detail": "[]"
+            },
+            {
+              "name": "typecheck:REQ-407-SC-01",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "convention:REQ-407-SC-01",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "titlePreserved:REQ-407-SC-01",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "typecheck:REQ-407-SC-02",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "convention:REQ-407-SC-02",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "titlePreserved:REQ-407-SC-02",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "assertionRules:REQ-407-SC-01",
+              "dimension": "reference",
+              "pass": true,
+              "detail": "labelled [] predicted []"
+            },
+            {
+              "name": "assertionRules:REQ-407-SC-02",
+              "dimension": "reference",
+              "pass": true,
+              "detail": "labelled [] predicted []"
+            }
+          ],
+          "pass": true,
+          "rendered": [
+            {
+              "scenarioId": "REQ-407-SC-01",
+              "layer": "combined",
+              "typecheckClean": true,
+              "conventionClean": true,
+              "traceable": true,
+              "titlePreserved": true
+            },
+            {
+              "scenarioId": "REQ-407-SC-02",
+              "layer": "combined",
+              "typecheckClean": true,
+              "conventionClean": true,
+              "traceable": true,
+              "titlePreserved": true
+            }
+          ],
+          "specDecisions": {
+            "correct": 2,
+            "total": 2
+          },
+          "assertionFindings": [],
+          "ruleVsLabel": [
+            {
+              "scenarioId": "REQ-407-SC-01",
+              "labelled": [],
+              "predicted": []
+            },
+            {
+              "scenarioId": "REQ-407-SC-02",
+              "labelled": [],
+              "predicted": []
+            }
+          ],
+          "requiredAssertions": {
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          "specs": [
+            {
+              "scenarioId": "REQ-407-SC-01",
+              "layer": "combined",
+              "intentLabel": "correct",
+              "requiredMet": true,
+              "hasRequired": true,
+              "findings": 0
+            },
+            {
+              "scenarioId": "REQ-407-SC-02",
+              "layer": "combined",
+              "intentLabel": "correct",
+              "requiredMet": true,
+              "hasRequired": true,
+              "findings": 0
+            }
+          ],
+          "rejections": {
+            "expected": 0,
+            "rejected": 0
+          },
+          "usage": {
+            "useCase": "test-generation",
+            "provider": "mock",
+            "model": "mock",
+            "attempts": 1,
+            "latencyMs": 0,
+            "inputTokens": 0,
+            "outputTokens": 0,
+            "tokensAvailable": false,
+            "outcome": "ok"
+          }
+        },
+        {
+          "id": "GE-27",
+          "category": "layer_mismatch",
+          "schemaValid": true,
+          "checks": [
+            {
+              "name": "rejected:REQ-408-SC-01",
+              "dimension": "structural",
+              "pass": true,
+              "detail": "layer_mismatch"
+            }
+          ],
+          "pass": true,
+          "rendered": [],
+          "specDecisions": {
+            "correct": 1,
+            "total": 1
+          },
+          "assertionFindings": [],
+          "ruleVsLabel": [],
+          "requiredAssertions": {
+            "required": 0,
+            "satisfied": 0,
+            "missing": []
+          },
+          "specs": [],
+          "rejections": {
+            "expected": 1,
+            "rejected": 1
+          },
+          "usage": {
+            "useCase": "test-generation",
+            "provider": "mock",
+            "model": "mock",
+            "attempts": 1,
+            "latencyMs": 1,
+            "inputTokens": 0,
+            "outputTokens": 0,
+            "tokensAvailable": false,
+            "outcome": "ok"
+          }
+        },
+        {
+          "id": "GE-28",
+          "category": "api_correct",
+          "schemaValid": true,
+          "checks": [
+            {
+              "name": "accepted:REQ-409-SC-01",
+              "dimension": "structural",
+              "pass": true,
+              "detail": "[]"
+            },
+            {
+              "name": "accepted:REQ-409-SC-02",
+              "dimension": "structural",
+              "pass": true,
+              "detail": "[]"
+            },
+            {
+              "name": "typecheck:REQ-409-SC-01",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "convention:REQ-409-SC-01",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "titlePreserved:REQ-409-SC-01",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "typecheck:REQ-409-SC-02",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "convention:REQ-409-SC-02",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "titlePreserved:REQ-409-SC-02",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "assertionRules:REQ-409-SC-01",
+              "dimension": "reference",
+              "pass": true,
+              "detail": "labelled [] predicted []"
+            },
+            {
+              "name": "assertionRules:REQ-409-SC-02",
+              "dimension": "reference",
+              "pass": true,
+              "detail": "labelled [] predicted []"
+            }
+          ],
+          "pass": true,
+          "rendered": [
+            {
+              "scenarioId": "REQ-409-SC-01",
+              "layer": "api",
+              "typecheckClean": true,
+              "conventionClean": true,
+              "traceable": true,
+              "titlePreserved": true
+            },
+            {
+              "scenarioId": "REQ-409-SC-02",
+              "layer": "api",
+              "typecheckClean": true,
+              "conventionClean": true,
+              "traceable": true,
+              "titlePreserved": true
+            }
+          ],
+          "specDecisions": {
+            "correct": 2,
+            "total": 2
+          },
+          "assertionFindings": [],
+          "ruleVsLabel": [
+            {
+              "scenarioId": "REQ-409-SC-01",
+              "labelled": [],
+              "predicted": []
+            },
+            {
+              "scenarioId": "REQ-409-SC-02",
+              "labelled": [],
+              "predicted": []
+            }
+          ],
+          "requiredAssertions": {
+            "required": 4,
+            "satisfied": 4,
+            "missing": []
+          },
+          "specs": [
+            {
+              "scenarioId": "REQ-409-SC-01",
+              "layer": "api",
+              "intentLabel": "correct",
+              "requiredMet": true,
+              "hasRequired": true,
+              "findings": 0
+            },
+            {
+              "scenarioId": "REQ-409-SC-02",
+              "layer": "api",
+              "intentLabel": "correct",
+              "requiredMet": true,
+              "hasRequired": true,
+              "findings": 0
+            }
+          ],
+          "rejections": {
+            "expected": 0,
+            "rejected": 0
+          },
+          "usage": {
+            "useCase": "test-generation",
+            "provider": "mock",
+            "model": "mock",
+            "attempts": 1,
+            "latencyMs": 0,
+            "inputTokens": 0,
+            "outputTokens": 0,
+            "tokensAvailable": false,
+            "outcome": "ok"
+          }
+        },
+        {
+          "id": "GE-29",
+          "category": "security",
+          "schemaValid": true,
+          "checks": [
+            {
+              "name": "rejected:REQ-410-SC-01",
+              "dimension": "structural",
+              "pass": true,
+              "detail": "unknown_field"
+            }
+          ],
+          "pass": true,
+          "rendered": [],
+          "specDecisions": {
+            "correct": 1,
+            "total": 1
+          },
+          "assertionFindings": [],
+          "ruleVsLabel": [],
+          "requiredAssertions": {
+            "required": 0,
+            "satisfied": 0,
+            "missing": []
+          },
+          "specs": [],
+          "rejections": {
+            "expected": 1,
+            "rejected": 1
+          },
+          "usage": {
+            "useCase": "test-generation",
+            "provider": "mock",
+            "model": "mock",
+            "attempts": 1,
+            "latencyMs": 1,
+            "inputTokens": 0,
+            "outputTokens": 0,
+            "tokensAvailable": false,
+            "outcome": "ok"
+          }
+        },
+        {
+          "id": "GE-30",
+          "category": "duplicate",
+          "schemaValid": true,
+          "checks": [
+            {
+              "name": "accepted:REQ-413-SC-01",
+              "dimension": "structural",
+              "pass": true,
+              "detail": "[{\"code\":\"unknown_scenario\",\"severity\":\"error\",\"message\":\"more than one spec for this scenario\"}]"
+            },
+            {
+              "name": "acceptedCount",
+              "dimension": "structural",
+              "pass": true,
+              "detail": "1 of 2"
+            },
+            {
+              "name": "typecheck:REQ-413-SC-01",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "convention:REQ-413-SC-01",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "titlePreserved:REQ-413-SC-01",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "assertionRules:REQ-413-SC-01",
+              "dimension": "reference",
+              "pass": true,
+              "detail": "labelled [] predicted []"
+            }
+          ],
+          "pass": true,
+          "rendered": [
+            {
+              "scenarioId": "REQ-413-SC-01",
+              "layer": "api",
+              "typecheckClean": true,
+              "conventionClean": true,
+              "traceable": true,
+              "titlePreserved": true
+            }
+          ],
+          "specDecisions": {
+            "correct": 1,
+            "total": 1
+          },
+          "assertionFindings": [],
+          "ruleVsLabel": [
+            {
+              "scenarioId": "REQ-413-SC-01",
+              "labelled": [],
+              "predicted": []
+            }
+          ],
+          "requiredAssertions": {
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          "specs": [
+            {
+              "scenarioId": "REQ-413-SC-01",
+              "layer": "api",
+              "intentLabel": "correct",
+              "requiredMet": true,
+              "hasRequired": true,
+              "findings": 0
+            }
+          ],
+          "rejections": {
+            "expected": 1,
+            "rejected": 1
+          },
+          "usage": {
+            "useCase": "test-generation",
+            "provider": "mock",
+            "model": "mock",
+            "attempts": 1,
+            "latencyMs": 0,
+            "inputTokens": 0,
+            "outputTokens": 0,
+            "tokensAvailable": false,
+            "outcome": "ok"
+          }
+        },
+        {
+          "id": "GE-31",
+          "category": "irrelevant",
+          "schemaValid": true,
+          "checks": [
+            {
+              "name": "accepted:REQ-414-SC-01",
+              "dimension": "structural",
+              "pass": true,
+              "detail": "[]"
+            },
+            {
+              "name": "rejected:REQ-414-SC-09",
+              "dimension": "structural",
+              "pass": true,
+              "detail": "unknown_scenario"
+            },
+            {
+              "name": "typecheck:REQ-414-SC-01",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "convention:REQ-414-SC-01",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "titlePreserved:REQ-414-SC-01",
+              "dimension": "structural",
+              "pass": true
+            },
+            {
+              "name": "assertionRules:REQ-414-SC-01",
+              "dimension": "reference",
+              "pass": true,
+              "detail": "labelled [] predicted []"
+            }
+          ],
+          "pass": true,
+          "rendered": [
+            {
+              "scenarioId": "REQ-414-SC-01",
+              "layer": "api",
+              "typecheckClean": true,
+              "conventionClean": true,
+              "traceable": true,
+              "titlePreserved": true
+            }
+          ],
+          "specDecisions": {
+            "correct": 2,
+            "total": 2
+          },
+          "assertionFindings": [],
+          "ruleVsLabel": [
+            {
+              "scenarioId": "REQ-414-SC-01",
+              "labelled": [],
+              "predicted": []
+            }
+          ],
+          "requiredAssertions": {
+            "required": 2,
+            "satisfied": 2,
+            "missing": []
+          },
+          "specs": [
+            {
+              "scenarioId": "REQ-414-SC-01",
+              "layer": "api",
+              "intentLabel": "correct",
+              "requiredMet": true,
+              "hasRequired": true,
+              "findings": 0
+            }
+          ],
+          "rejections": {
+            "expected": 1,
+            "rejected": 1
+          },
           "usage": {
             "useCase": "test-generation",
             "provider": "mock",
@@ -4050,10 +6296,10 @@
     },
     "assertionQuality": {
       "ruleAgreement": {
-        "specsLabelled": 15,
+        "specsLabelled": 30,
         "exactAgreement": {
-          "n": 15,
-          "d": 15,
+          "n": 30,
+          "d": 30,
           "value": 1
         },
         "perRule": [
@@ -4195,6 +6441,74 @@
           },
           {
             "rule": "AQ_UNSTABLE_URL",
+            "labelled": 1,
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "precision": {
+              "n": 1,
+              "d": 1,
+              "value": 1
+            },
+            "recall": {
+              "n": 1,
+              "d": 1,
+              "value": 1
+            }
+          },
+          {
+            "rule": "AQ_API_NO_STATUS",
+            "labelled": 1,
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "precision": {
+              "n": 1,
+              "d": 1,
+              "value": 1
+            },
+            "recall": {
+              "n": 1,
+              "d": 1,
+              "value": 1
+            }
+          },
+          {
+            "rule": "AQ_API_ERROR_CODE_MISSING",
+            "labelled": 1,
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "precision": {
+              "n": 1,
+              "d": 1,
+              "value": 1
+            },
+            "recall": {
+              "n": 1,
+              "d": 1,
+              "value": 1
+            }
+          },
+          {
+            "rule": "AQ_API_STATUS_NOT_IN_CRITERIA",
+            "labelled": 2,
+            "tp": 2,
+            "fp": 0,
+            "fn": 0,
+            "precision": {
+              "n": 2,
+              "d": 2,
+              "value": 1
+            },
+            "recall": {
+              "n": 2,
+              "d": 2,
+              "value": 1
+            }
+          },
+          {
+            "rule": "AQ_API_BODY_UNCHECKED",
             "labelled": 1,
             "tp": 1,
             "fp": 0,
@@ -4413,23 +6727,122 @@
           "falsePass": false,
           "schemaValid": true,
           "phantomRefs": 0
+        },
+        {
+          "id": "F-16",
+          "expectedStatus": "failed",
+          "parsedStatus": "failed",
+          "statusCorrect": true,
+          "associationCorrect": true,
+          "outcome": "failed",
+          "falsePass": false,
+          "schemaValid": true,
+          "phantomRefs": 0
+        },
+        {
+          "id": "F-17",
+          "expectedStatus": "failed",
+          "parsedStatus": "failed",
+          "statusCorrect": true,
+          "associationCorrect": true,
+          "outcome": "failed",
+          "falsePass": false,
+          "schemaValid": true,
+          "phantomRefs": 0
+        },
+        {
+          "id": "F-18",
+          "expectedStatus": "failed",
+          "parsedStatus": "failed",
+          "statusCorrect": true,
+          "associationCorrect": true,
+          "outcome": "failed",
+          "falsePass": false,
+          "schemaValid": true,
+          "phantomRefs": 0
+        },
+        {
+          "id": "F-19",
+          "expectedStatus": "failed",
+          "parsedStatus": "failed",
+          "statusCorrect": true,
+          "associationCorrect": true,
+          "outcome": "failed",
+          "falsePass": false,
+          "schemaValid": true,
+          "phantomRefs": 0
+        },
+        {
+          "id": "F-20",
+          "expectedStatus": "failed",
+          "parsedStatus": "failed",
+          "statusCorrect": true,
+          "associationCorrect": true,
+          "outcome": "failed",
+          "falsePass": false,
+          "schemaValid": true,
+          "phantomRefs": 0
+        },
+        {
+          "id": "F-21",
+          "expectedStatus": "failed",
+          "parsedStatus": "failed",
+          "statusCorrect": true,
+          "associationCorrect": true,
+          "outcome": "failed",
+          "falsePass": false,
+          "schemaValid": true,
+          "phantomRefs": 0
+        },
+        {
+          "id": "F-22",
+          "expectedStatus": "failed",
+          "parsedStatus": "failed",
+          "statusCorrect": true,
+          "associationCorrect": true,
+          "outcome": "failed",
+          "falsePass": false,
+          "schemaValid": true,
+          "phantomRefs": 0
+        },
+        {
+          "id": "F-23",
+          "expectedStatus": "failed",
+          "parsedStatus": "failed",
+          "statusCorrect": true,
+          "associationCorrect": true,
+          "outcome": "failed",
+          "falsePass": false,
+          "schemaValid": true,
+          "phantomRefs": 0
+        },
+        {
+          "id": "P-04",
+          "expectedStatus": "passed",
+          "parsedStatus": "passed",
+          "statusCorrect": true,
+          "associationCorrect": true,
+          "outcome": "passed",
+          "falsePass": false,
+          "schemaValid": true,
+          "phantomRefs": 0
         }
       ],
       "metrics": {
         "statusInterpretation": {
-          "n": 18,
-          "d": 18,
+          "n": 27,
+          "d": 27,
           "value": 1
         },
         "requirementAssociation": {
-          "n": 18,
-          "d": 18,
+          "n": 27,
+          "d": 27,
           "value": 1
         },
         "falsePasses": 0,
         "evidenceSchemaValid": {
-          "n": 18,
-          "d": 18,
+          "n": 27,
+          "d": 27,
           "value": 1
         },
         "phantomEvidenceRefs": 0
@@ -4660,55 +7073,175 @@
             "citesErrorEvidence": true,
             "unsupportedClaim": false,
             "labelInTopOrAlternatives": false
+          },
+          {
+            "id": "F-16",
+            "label": "product_regression",
+            "expected": "product_behavior",
+            "predicted": "product_behavior",
+            "method": "rules",
+            "confidence": "medium",
+            "sufficientEvidenceClaimed": false,
+            "evidenceSufficient": true,
+            "agree": true,
+            "grounded": true,
+            "citesErrorEvidence": true,
+            "unsupportedClaim": false,
+            "labelInTopOrAlternatives": true
+          },
+          {
+            "id": "F-17",
+            "label": "product_regression",
+            "expected": "product_behavior",
+            "predicted": "product_behavior",
+            "method": "rules",
+            "confidence": "medium",
+            "sufficientEvidenceClaimed": false,
+            "evidenceSufficient": true,
+            "agree": true,
+            "grounded": true,
+            "citesErrorEvidence": true,
+            "unsupportedClaim": false,
+            "labelInTopOrAlternatives": true
+          },
+          {
+            "id": "F-18",
+            "label": "incorrect_assertion",
+            "expected": "assertion_logic",
+            "predicted": "api_contract",
+            "method": "rules",
+            "confidence": "medium",
+            "sufficientEvidenceClaimed": false,
+            "evidenceSufficient": true,
+            "agree": false,
+            "grounded": true,
+            "citesErrorEvidence": true,
+            "unsupportedClaim": false,
+            "labelInTopOrAlternatives": true
+          },
+          {
+            "id": "F-19",
+            "label": "product_regression",
+            "expected": "product_behavior",
+            "predicted": "product_behavior",
+            "method": "rules",
+            "confidence": "medium",
+            "sufficientEvidenceClaimed": false,
+            "evidenceSufficient": true,
+            "agree": true,
+            "grounded": true,
+            "citesErrorEvidence": true,
+            "unsupportedClaim": false,
+            "labelInTopOrAlternatives": true
+          },
+          {
+            "id": "F-20",
+            "label": "product_regression",
+            "expected": "product_behavior",
+            "predicted": "api_contract",
+            "method": "rules",
+            "confidence": "medium",
+            "sufficientEvidenceClaimed": false,
+            "evidenceSufficient": true,
+            "agree": false,
+            "grounded": true,
+            "citesErrorEvidence": true,
+            "unsupportedClaim": false,
+            "labelInTopOrAlternatives": true
+          },
+          {
+            "id": "F-21",
+            "label": "locator",
+            "expected": "locator",
+            "predicted": "locator",
+            "method": "rules",
+            "confidence": "medium",
+            "sufficientEvidenceClaimed": false,
+            "evidenceSufficient": true,
+            "agree": true,
+            "grounded": true,
+            "citesErrorEvidence": true,
+            "unsupportedClaim": false,
+            "labelInTopOrAlternatives": true
+          },
+          {
+            "id": "F-22",
+            "label": "product_regression",
+            "expected": "product_behavior",
+            "predicted": "locator",
+            "method": "rules",
+            "confidence": "medium",
+            "sufficientEvidenceClaimed": false,
+            "evidenceSufficient": false,
+            "agree": false,
+            "grounded": true,
+            "citesErrorEvidence": true,
+            "unsupportedClaim": false,
+            "labelInTopOrAlternatives": true
+          },
+          {
+            "id": "F-23",
+            "label": "timeout",
+            "expected": "timeout_sync",
+            "predicted": "timeout_sync",
+            "method": "rules",
+            "confidence": "medium",
+            "sufficientEvidenceClaimed": false,
+            "evidenceSufficient": true,
+            "agree": true,
+            "grounded": true,
+            "citesErrorEvidence": true,
+            "unsupportedClaim": false,
+            "labelInTopOrAlternatives": true
           }
         ],
-        "n": 15,
+        "n": 23,
         "classification": {
           "classes": [
             {
               "label": "product_behavior",
+              "support": 8,
+              "precision": {
+                "n": 4,
+                "d": 4,
+                "value": 1
+              },
+              "recall": {
+                "n": 4,
+                "d": 8,
+                "value": 0.5
+              },
+              "f1": 0.6666666666666666
+            },
+            {
+              "label": "assertion_logic",
               "support": 3,
               "precision": {
                 "n": 1,
-                "d": 1,
-                "value": 1
+                "d": 2,
+                "value": 0.5
               },
               "recall": {
                 "n": 1,
                 "d": 3,
                 "value": 0.3333333333333333
               },
-              "f1": 0.5
-            },
-            {
-              "label": "assertion_logic",
-              "support": 2,
-              "precision": {
-                "n": 1,
-                "d": 2,
-                "value": 0.5
-              },
-              "recall": {
-                "n": 1,
-                "d": 2,
-                "value": 0.5
-              },
-              "f1": 0.5
+              "f1": 0.4
             },
             {
               "label": "locator",
-              "support": 2,
+              "support": 3,
               "precision": {
-                "n": 2,
-                "d": 7,
-                "value": 0.2857142857142857
+                "n": 3,
+                "d": 9,
+                "value": 0.3333333333333333
               },
               "recall": {
-                "n": 2,
-                "d": 2,
+                "n": 3,
+                "d": 3,
                 "value": 1
               },
-              "f1": 0.4444444444444445
+              "f1": 0.5
             },
             {
               "label": "test_data_setup",
@@ -4742,18 +7275,18 @@
             },
             {
               "label": "timeout_sync",
-              "support": 1,
+              "support": 2,
               "precision": {
-                "n": 0,
-                "d": 0,
-                "value": null
+                "n": 1,
+                "d": 1,
+                "value": 1
               },
               "recall": {
-                "n": 0,
-                "d": 1,
-                "value": 0
+                "n": 1,
+                "d": 2,
+                "value": 0.5
               },
-              "f1": null
+              "f1": 0.6666666666666666
             },
             {
               "label": "flaky",
@@ -4802,30 +7335,33 @@
             }
           ],
           "accuracy": {
-            "n": 8,
-            "d": 15,
-            "value": 0.5333333333333333
+            "n": 13,
+            "d": 23,
+            "value": 0.5652173913043478
           },
-          "macroRecall": 0.5208333333333333,
-          "macroF1": 0.4930555555555556
+          "macroRecall": 0.5833333333333333,
+          "macroF1": 0.5916666666666666
         },
         "confusion": {
           "assertion_logic": {
             "assertion_logic": 1,
-            "locator": 1
+            "locator": 1,
+            "api_contract": 1
           },
           "product_behavior": {
-            "product_behavior": 1,
-            "locator": 2
+            "product_behavior": 4,
+            "locator": 3,
+            "api_contract": 1
           },
           "locator": {
-            "locator": 2
+            "locator": 3
           },
           "environment": {
             "environment": 2
           },
           "timeout_sync": {
-            "locator": 1
+            "locator": 1,
+            "timeout_sync": 1
           },
           "test_data_setup": {
             "test_data_setup": 1,
@@ -4840,25 +7376,25 @@
           }
         },
         "labelInTopOrAlternatives": {
-          "n": 11,
-          "d": 15,
-          "value": 0.7333333333333333
+          "n": 19,
+          "d": 23,
+          "value": 0.8260869565217391
         },
         "evidenceGrounding": {
-          "n": 14,
-          "d": 14,
+          "n": 22,
+          "d": 22,
           "value": 1
         },
         "evidenceRelevance": {
-          "n": 14,
-          "d": 14,
+          "n": 22,
+          "d": 22,
           "value": 1
         },
         "unsupportedRootCauseClaims": 0,
         "uncertaintyIdentified": {
-          "n": 9,
-          "d": 10,
-          "value": 0.9
+          "n": 10,
+          "d": 11,
+          "value": 0.9090909090909091
         },
         "escalationOnInsufficientEvidence": {
           "n": 1,
@@ -4884,7 +7420,7 @@
             "retries": 2,
             "recovered": false,
             "executions": 0,
-            "elapsedMs": 641,
+            "elapsedMs": 637,
             "limitMs": 1680
           },
           "checks": [
@@ -4910,7 +7446,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "641ms <= 1680ms"
+              "detail": "637ms <= 1680ms"
             },
             {
               "name": "noGenerationAfterFailure",
@@ -4929,9 +7465,9 @@
             "attempts": 2,
             "retries": 1,
             "recovered": true,
-            "recoveryLatencyMs": 13,
+            "recoveryLatencyMs": 12,
             "executions": 0,
-            "elapsedMs": 14,
+            "elapsedMs": 12,
             "limitMs": 1680
           },
           "checks": [
@@ -4957,7 +7493,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "14ms <= 1680ms"
+              "detail": "12ms <= 1680ms"
             },
             {
               "name": "noGenerationAfterFailure",
@@ -4976,9 +7512,9 @@
             "attempts": 3,
             "retries": 2,
             "recovered": true,
-            "recoveryLatencyMs": 35,
+            "recoveryLatencyMs": 33,
             "executions": 0,
-            "elapsedMs": 35,
+            "elapsedMs": 33,
             "limitMs": 1680
           },
           "checks": [
@@ -5004,7 +7540,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "35ms <= 1680ms"
+              "detail": "33ms <= 1680ms"
             },
             {
               "name": "noGenerationAfterFailure",
@@ -5025,7 +7561,7 @@
             "retries": 2,
             "recovered": false,
             "executions": 0,
-            "elapsedMs": 34,
+            "elapsedMs": 32,
             "limitMs": 1680
           },
           "checks": [
@@ -5051,7 +7587,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "34ms <= 1680ms"
+              "detail": "32ms <= 1680ms"
             },
             {
               "name": "noGenerationAfterFailure",
@@ -5119,7 +7655,7 @@
             "retries": 0,
             "recovered": false,
             "executions": 0,
-            "elapsedMs": 0,
+            "elapsedMs": 1,
             "limitMs": 1680
           },
           "checks": [
@@ -5145,7 +7681,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "0ms <= 1680ms"
+              "detail": "1ms <= 1680ms"
             },
             {
               "name": "noGenerationAfterFailure",
@@ -5166,7 +7702,7 @@
             "retries": 0,
             "recovered": false,
             "executions": 0,
-            "elapsedMs": 0,
+            "elapsedMs": 1,
             "limitMs": 1680
           },
           "checks": [
@@ -5192,7 +7728,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "0ms <= 1680ms"
+              "detail": "1ms <= 1680ms"
             },
             {
               "name": "noGenerationAfterFailure",
@@ -5211,7 +7747,7 @@
             "recovered": false,
             "executions": 1,
             "evidencePreserved": true,
-            "elapsedMs": 3,
+            "elapsedMs": 7,
             "limitMs": 30000
           },
           "checks": [
@@ -5237,7 +7773,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "3ms <= 30000ms"
+              "detail": "7ms <= 30000ms"
             },
             {
               "name": "artifactStates",
@@ -5262,7 +7798,7 @@
             "recovered": false,
             "executions": 1,
             "evidencePreserved": true,
-            "elapsedMs": 336,
+            "elapsedMs": 342,
             "limitMs": 60000
           },
           "checks": [
@@ -5288,7 +7824,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "336ms <= 60000ms"
+              "detail": "342ms <= 60000ms"
             },
             {
               "name": "artifactStates",
@@ -5364,7 +7900,7 @@
             "recovered": false,
             "executions": 1,
             "evidencePreserved": true,
-            "elapsedMs": 1512,
+            "elapsedMs": 1505,
             "limitMs": 8500
           },
           "checks": [
@@ -5390,7 +7926,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "1512ms <= 8500ms"
+              "detail": "1505ms <= 8500ms"
             },
             {
               "name": "artifactStates",
@@ -5456,7 +7992,7 @@
             "recovered": false,
             "executions": 1,
             "evidencePreserved": true,
-            "elapsedMs": 5,
+            "elapsedMs": 2,
             "limitMs": 30000
           },
           "checks": [
@@ -5482,7 +8018,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "5ms <= 30000ms"
+              "detail": "2ms <= 30000ms"
             },
             {
               "name": "artifactStates",
@@ -5620,7 +8156,7 @@
             {
               "name": "errorClassification",
               "pass": true,
-              "detail": "generated/20261019T081133Z-REQ-101-yt17ed/REQ-101-SC-01.spec.ts changed after approval (hash mismatch)"
+              "detail": "generated/20261019T121442Z-REQ-101-8xvsz1/REQ-101-SC-01.spec.ts changed after approval (hash mismatch)"
             }
           ],
           "pass": true
@@ -5670,18 +8206,409 @@
             }
           ],
           "pass": true
+        },
+        {
+          "id": "FI-18",
+          "fault": "API network error (service unreachable)",
+          "expectedSafeBehaviour": "failed, never passed, classified as an environment problem",
+          "recoverable": false,
+          "observed": {
+            "finalStatus": "executed",
+            "recovered": false,
+            "executions": 1,
+            "evidencePreserved": true,
+            "elapsedMs": 2,
+            "limitMs": 30000
+          },
+          "checks": [
+            {
+              "name": "finalStatus",
+              "pass": true,
+              "detail": "executed"
+            },
+            {
+              "name": "executions",
+              "pass": true,
+              "detail": "1 runner start(s)"
+            },
+            {
+              "name": "neverPassedWithoutEvidence",
+              "pass": true
+            },
+            {
+              "name": "evidencePreserved",
+              "pass": true,
+              "detail": "reportFound=true"
+            },
+            {
+              "name": "terminatesWithinLimit",
+              "pass": true,
+              "detail": "2ms <= 30000ms"
+            },
+            {
+              "name": "artifactStates",
+              "pass": true,
+              "detail": "failed,failed,failed"
+            },
+            {
+              "name": "errorClassification",
+              "pass": true,
+              "detail": "environment,environment,environment"
+            }
+          ],
+          "pass": true
+        },
+        {
+          "id": "FI-19",
+          "fault": "invalid API response (body breaks the schema)",
+          "expectedSafeBehaviour": "failed, never passed, classified as an API contract failure",
+          "recoverable": false,
+          "observed": {
+            "finalStatus": "executed",
+            "recovered": false,
+            "executions": 1,
+            "evidencePreserved": true,
+            "elapsedMs": 3,
+            "limitMs": 30000
+          },
+          "checks": [
+            {
+              "name": "finalStatus",
+              "pass": true,
+              "detail": "executed"
+            },
+            {
+              "name": "executions",
+              "pass": true,
+              "detail": "1 runner start(s)"
+            },
+            {
+              "name": "neverPassedWithoutEvidence",
+              "pass": true
+            },
+            {
+              "name": "evidencePreserved",
+              "pass": true,
+              "detail": "reportFound=true"
+            },
+            {
+              "name": "terminatesWithinLimit",
+              "pass": true,
+              "detail": "3ms <= 30000ms"
+            },
+            {
+              "name": "artifactStates",
+              "pass": true,
+              "detail": "failed,failed,failed"
+            },
+            {
+              "name": "errorClassification",
+              "pass": true,
+              "detail": "api_contract,api_contract,api_contract"
+            }
+          ],
+          "pass": true
+        },
+        {
+          "id": "FI-20",
+          "fault": "browser cannot start",
+          "expectedSafeBehaviour": "failed, never passed, classified as an environment problem",
+          "recoverable": false,
+          "observed": {
+            "finalStatus": "executed",
+            "recovered": false,
+            "executions": 1,
+            "evidencePreserved": true,
+            "elapsedMs": 2,
+            "limitMs": 30000
+          },
+          "checks": [
+            {
+              "name": "finalStatus",
+              "pass": true,
+              "detail": "executed"
+            },
+            {
+              "name": "executions",
+              "pass": true,
+              "detail": "1 runner start(s)"
+            },
+            {
+              "name": "neverPassedWithoutEvidence",
+              "pass": true
+            },
+            {
+              "name": "evidencePreserved",
+              "pass": true,
+              "detail": "reportFound=true"
+            },
+            {
+              "name": "terminatesWithinLimit",
+              "pass": true,
+              "detail": "2ms <= 30000ms"
+            },
+            {
+              "name": "artifactStates",
+              "pass": true,
+              "detail": "failed,failed,failed"
+            },
+            {
+              "name": "errorClassification",
+              "pass": true,
+              "detail": "environment,environment,environment"
+            }
+          ],
+          "pass": true
+        },
+        {
+          "id": "FI-21",
+          "fault": "missing provider credentials",
+          "expectedSafeBehaviour": "a configuration error before any work or model call; not retried",
+          "recoverable": false,
+          "observed": {
+            "finalStatus": "config_error",
+            "errorKind": "config",
+            "recovered": false,
+            "executions": 0,
+            "elapsedMs": 0,
+            "limitMs": 1000
+          },
+          "checks": [
+            {
+              "name": "errorClassification",
+              "pass": true,
+              "detail": "ANTHROPIC_API_KEY is not set: export it, or use --provider mock with --mock-replies"
+            },
+            {
+              "name": "noModelCall",
+              "pass": true,
+              "detail": "the provider is never constructed, so no request can be sent"
+            },
+            {
+              "name": "terminatesWithinLimit",
+              "pass": true,
+              "detail": "0ms"
+            }
+          ],
+          "pass": true
+        },
+        {
+          "id": "FI-22",
+          "fault": "generated code fails type-check and lint",
+          "expectedSafeBehaviour": "rejected by static validation; never approved or executed",
+          "recoverable": false,
+          "observed": {
+            "finalStatus": "rejected",
+            "recovered": false,
+            "executions": 0,
+            "elapsedMs": 408,
+            "limitMs": 60000
+          },
+          "checks": [
+            {
+              "name": "rejected",
+              "pass": true,
+              "detail": "rejected"
+            },
+            {
+              "name": "errorClassification",
+              "pass": true,
+              "detail": "typecheck,ast,convention,ast,lint"
+            },
+            {
+              "name": "terminatesWithinLimit",
+              "pass": true,
+              "detail": "408ms"
+            }
+          ],
+          "pass": true
+        },
+        {
+          "id": "FI-23",
+          "fault": "generation interrupted by persistent provider failure",
+          "expectedSafeBehaviour": "bounded retries, generation_failed, no candidate files to approve or run",
+          "recoverable": false,
+          "observed": {
+            "finalStatus": "generation_failed",
+            "errorKind": "provider_network",
+            "attempts": 3,
+            "retries": 2,
+            "recovered": false,
+            "executions": 0,
+            "elapsedMs": 47,
+            "limitMs": 3360
+          },
+          "checks": [
+            {
+              "name": "finalStatus",
+              "pass": true,
+              "detail": "generation_failed"
+            },
+            {
+              "name": "errorClassification",
+              "pass": true,
+              "detail": "provider_network"
+            },
+            {
+              "name": "boundedAttempts",
+              "pass": true,
+              "detail": "3 attempt(s)"
+            },
+            {
+              "name": "nothingApprovable",
+              "pass": true,
+              "detail": "0 artifact(s)"
+            },
+            {
+              "name": "terminatesWithinLimit",
+              "pass": true,
+              "detail": "47ms"
+            }
+          ],
+          "pass": true
+        },
+        {
+          "id": "FI-24",
+          "fault": "heal proposal: provider times out on every attempt",
+          "expectedSafeBehaviour": "bounded attempts, proposal_failed, no patch, working tree untouched",
+          "recoverable": false,
+          "observed": {
+            "finalStatus": "proposal_failed",
+            "attempts": 3,
+            "retries": 2,
+            "recovered": false,
+            "executions": 0,
+            "elapsedMs": 659,
+            "limitMs": 31680
+          },
+          "checks": [
+            {
+              "name": "finalStatus",
+              "pass": true,
+              "detail": "proposal_failed"
+            },
+            {
+              "name": "noPatch",
+              "pass": true,
+              "detail": "none"
+            },
+            {
+              "name": "workingTreeUntouched",
+              "pass": true
+            },
+            {
+              "name": "recordPreserved",
+              "pass": true
+            },
+            {
+              "name": "terminatesWithinLimit",
+              "pass": true,
+              "detail": "659ms"
+            },
+            {
+              "name": "boundedAttempts",
+              "pass": true,
+              "detail": "3 attempt(s)"
+            }
+          ],
+          "pass": true
+        },
+        {
+          "id": "FI-25",
+          "fault": "healing interrupted: the reproduction run is killed (no report)",
+          "expectedSafeBehaviour": "insufficient_evidence, no model call, no patch",
+          "recoverable": false,
+          "observed": {
+            "finalStatus": "insufficient_evidence",
+            "recovered": false,
+            "executions": 0,
+            "elapsedMs": 31,
+            "limitMs": 31680
+          },
+          "checks": [
+            {
+              "name": "finalStatus",
+              "pass": true,
+              "detail": "insufficient_evidence"
+            },
+            {
+              "name": "noPatch",
+              "pass": true,
+              "detail": "none"
+            },
+            {
+              "name": "workingTreeUntouched",
+              "pass": true
+            },
+            {
+              "name": "recordPreserved",
+              "pass": true
+            },
+            {
+              "name": "terminatesWithinLimit",
+              "pass": true,
+              "detail": "31ms"
+            },
+            {
+              "name": "noModelCall",
+              "pass": true,
+              "detail": "0 call(s)"
+            }
+          ],
+          "pass": true
+        },
+        {
+          "id": "FI-26",
+          "fault": "heal verification run crashes (no report)",
+          "expectedSafeBehaviour": "verification_failed, no patch",
+          "recoverable": false,
+          "observed": {
+            "finalStatus": "verification_failed",
+            "attempts": 1,
+            "retries": 0,
+            "recovered": false,
+            "executions": 0,
+            "elapsedMs": 451,
+            "limitMs": 31680
+          },
+          "checks": [
+            {
+              "name": "finalStatus",
+              "pass": true,
+              "detail": "verification_failed"
+            },
+            {
+              "name": "noPatch",
+              "pass": true,
+              "detail": "none"
+            },
+            {
+              "name": "workingTreeUntouched",
+              "pass": true
+            },
+            {
+              "name": "recordPreserved",
+              "pass": true
+            },
+            {
+              "name": "terminatesWithinLimit",
+              "pass": true,
+              "detail": "451ms"
+            }
+          ],
+          "pass": true
         }
       ],
       "metrics": {
-        "scenarios": 17,
+        "scenarios": 26,
         "allExpectationsMet": {
-          "n": 17,
-          "d": 17,
+          "n": 26,
+          "d": 26,
           "value": 1
         },
         "errorClassificationCorrect": {
-          "n": 11,
-          "d": 11,
+          "n": 17,
+          "d": 17,
           "value": 1
         },
         "recoverySuccess": {
@@ -5689,7 +8616,7 @@
           "d": 2,
           "value": 1
         },
-        "meanRecoveryLatencyMs": 24,
+        "meanRecoveryLatencyMs": 22.5,
         "retriesOnRecoverable": [
           {
             "id": "FI-02",
@@ -5701,345 +8628,18 @@
           }
         ],
         "unrecoverablePropagated": {
-          "n": 15,
-          "d": 15,
+          "n": 24,
+          "d": 24,
           "value": 1
         },
         "terminatedWithinLimits": {
-          "n": 17,
-          "d": 17,
+          "n": 26,
+          "d": 26,
           "value": 1
         },
         "duplicateExecutionPrevented": true,
         "neverPassedWithoutEvidence": true
       }
-    },
-    "comparison": {
-      "before": {
-        "runId": "eval-20261018T215547Z-deterministic-v4yvpl",
-        "datasetVersion": "2.0.0",
-        "commit": "2fbfb3a0bb248643e93be8ee309aa94a88ece55c",
-        "mode": "deterministic"
-      },
-      "after": {
-        "runId": "eval-20261019T081120Z-deterministic-8qaigs",
-        "datasetVersion": "2.0.1",
-        "commit": "dd141616fcaa8f751f9f22fca9f52a7ceacdc304",
-        "mode": "deterministic"
-      },
-      "comparable": true,
-      "notes": [
-        "dataset changed 2.0.0 -> 2.0.1: differences may come from the dataset"
-      ],
-      "changes": [
-        {
-          "id": "analysis.rules.accuracy",
-          "kind": "reference-label",
-          "gate": "exact",
-          "before": 0.5333333333333333,
-          "after": 0.5333333333333333,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "analysis.rules.escalationOnInsufficientEvidence",
-          "kind": "reference-label",
-          "gate": "exact",
-          "before": 1,
-          "after": 1,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "analysis.rules.evidenceRelevance",
-          "kind": "reference-label",
-          "gate": "exact",
-          "before": 1,
-          "after": 1,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "analysis.rules.labelInTopOrAlternatives",
-          "kind": "reference-label",
-          "gate": "exact",
-          "before": 0.7333333333333333,
-          "after": 0.7333333333333333,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "analysis.rules.macroRecall",
-          "kind": "reference-label",
-          "gate": "exact",
-          "before": 0.5208333333333333,
-          "after": 0.5208333333333333,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "analysis.rules.uncertaintyIdentified",
-          "kind": "reference-label",
-          "gate": "exact",
-          "before": 0.9,
-          "after": 0.9,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "analysis.rules.unsupportedRootCauseClaims",
-          "kind": "reference-label",
-          "gate": "exact",
-          "before": 0,
-          "after": 0,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "assertion.rules.exactAgreementWithLabels",
-          "kind": "reference-label",
-          "gate": "exact",
-          "before": 1,
-          "after": 1,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "evidence.falsePasses",
-          "kind": "reference-label",
-          "gate": "exact",
-          "before": 0,
-          "after": 0,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "evidence.phantomReferences",
-          "kind": "deterministic",
-          "gate": "exact",
-          "before": 0,
-          "after": 0,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "evidence.requirementAssociation",
-          "kind": "reference-label",
-          "gate": "exact",
-          "before": 1,
-          "after": 1,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "evidence.statusInterpretation",
-          "kind": "reference-label",
-          "gate": "exact",
-          "before": 1,
-          "after": 1,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "generation.semantic.requiredAssertionsSatisfied",
-          "kind": "deterministic",
-          "gate": "exact",
-          "before": 0.6,
-          "after": 0.6,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "generation.semantic.specsWithoutAssertionFindings",
-          "kind": "deterministic",
-          "gate": "exact",
-          "before": 0.4,
-          "after": 0.4,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "generation.structural.conventionCompliance",
-          "kind": "deterministic",
-          "gate": "exact",
-          "before": 1,
-          "after": 1,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "generation.structural.expectationsMet",
-          "kind": "deterministic",
-          "gate": "exact",
-          "before": 1,
-          "after": 1,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "generation.structural.schemaValidity",
-          "kind": "deterministic",
-          "gate": "exact",
-          "before": 0.9473684210526315,
-          "after": 0.9473684210526315,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "generation.structural.traceability",
-          "kind": "deterministic",
-          "gate": "exact",
-          "before": 1,
-          "after": 1,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "generation.structural.typescriptValidity",
-          "kind": "deterministic",
-          "gate": "exact",
-          "before": 1,
-          "after": 1,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "planning.semantic.clarificationBehaviourCorrect",
-          "kind": "deterministic",
-          "gate": "exact",
-          "before": 0.5714285714285714,
-          "after": 0.5714285714285714,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "planning.semantic.expectedScenarioCategoriesPresent",
-          "kind": "deterministic",
-          "gate": "exact",
-          "before": 0.8,
-          "after": 0.8,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "planning.semantic.plansFreeOfProhibitedAssumptions",
-          "kind": "deterministic",
-          "gate": "exact",
-          "before": 0.75,
-          "after": 0.75,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "planning.semantic.requiredCoverageMet",
-          "kind": "deterministic",
-          "gate": "exact",
-          "before": 0.6666666666666666,
-          "after": 0.6666666666666666,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "planning.structural.ambiguityDetection",
-          "kind": "deterministic",
-          "gate": "exact",
-          "before": 1,
-          "after": 1,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "planning.structural.expectationsMet",
-          "kind": "deterministic",
-          "gate": "exact",
-          "before": 1,
-          "after": 1,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "planning.structural.outcomeAccuracy",
-          "kind": "deterministic",
-          "gate": "exact",
-          "before": 1,
-          "after": 1,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "planning.structural.scenarioTraceability",
-          "kind": "deterministic",
-          "gate": "exact",
-          "before": 0.8974358974358975,
-          "after": 0.8974358974358975,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "planning.structural.unsupportedAssumptionRejection",
-          "kind": "deterministic",
-          "gate": "exact",
-          "before": 1,
-          "after": 1,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "recovery.errorClassificationCorrect",
-          "kind": "deterministic",
-          "gate": "exact",
-          "before": 1,
-          "after": 1,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "recovery.meanRecoveryLatencyMs",
-          "kind": "measured",
-          "gate": "none",
-          "before": 21.5,
-          "after": 24,
-          "delta": 2.5,
-          "direction": "regressed"
-        },
-        {
-          "id": "recovery.recoverySuccess",
-          "kind": "deterministic",
-          "gate": "exact",
-          "before": 1,
-          "after": 1,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "recovery.scenariosMeetingExpectations",
-          "kind": "deterministic",
-          "gate": "exact",
-          "before": 1,
-          "after": 1,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "recovery.terminatedWithinLimits",
-          "kind": "deterministic",
-          "gate": "exact",
-          "before": 1,
-          "after": 1,
-          "delta": 0,
-          "direction": "unchanged"
-        },
-        {
-          "id": "recovery.unrecoverablePropagated",
-          "kind": "deterministic",
-          "gate": "exact",
-          "before": 1,
-          "after": 1,
-          "delta": 0,
-          "direction": "unchanged"
-        }
-      ],
-      "gatedRegressions": []
     }
   },
   "findings": [
@@ -6110,6 +8710,36 @@
       "source": "deterministic"
     },
     {
+      "type": "weak-assertion",
+      "id": "GE-21/REQ-402-SC-01/AQ_API_BODY_UNCHECKED",
+      "detail": "a successful response is accepted without checking any body field: expect(r1.status()).toBe(201) (r1 (notes.create) has no field assertion; uncertainty medium)",
+      "source": "deterministic"
+    },
+    {
+      "type": "weak-assertion",
+      "id": "GE-21/REQ-402-SC-02/AQ_API_ERROR_CODE_MISSING",
+      "detail": "an error status is checked but not which error it is: expect(r1.status()).toBe(401) (r1 expects 401 without error.code; uncertainty medium)",
+      "source": "deterministic"
+    },
+    {
+      "type": "weak-assertion",
+      "id": "GE-22/REQ-403-SC-01/AQ_API_STATUS_NOT_IN_CRITERIA",
+      "detail": "the expected status differs from the status the criteria state: expect(r1.status()).toBe(200); expect(r1.owner).toBe(\"alice\") (expects 200; criteria state 201; uncertainty medium)",
+      "source": "deterministic"
+    },
+    {
+      "type": "weak-assertion",
+      "id": "GE-22/REQ-403-SC-03/AQ_API_STATUS_NOT_IN_CRITERIA",
+      "detail": "the expected status differs from the status the criteria state: expect(r2.status()).toBe(404); expect(r2.error.code).toBe(\"not_found\") (expects 404; criteria state 403; uncertainty medium)",
+      "source": "deterministic"
+    },
+    {
+      "type": "weak-assertion",
+      "id": "GE-23/REQ-404-SC-04/AQ_API_NO_STATUS",
+      "detail": "the status of notes.create (r1) is never checked: expect(r1.headers()[\"content-type\"]).toContain(\"application/json\") (no expectStatus on r1; uncertainty low)",
+      "source": "deterministic"
+    },
+    {
       "type": "incorrect-diagnosis",
       "id": "F-05",
       "detail": "labelled timeout (timeout_sync), rules said locator with medium confidence",
@@ -6150,9 +8780,41 @@
       "id": "F-15",
       "detail": "labelled auth_setup (test_data_setup), rules said assertion_logic with medium confidence",
       "source": "reference-label"
+    },
+    {
+      "type": "incorrect-diagnosis",
+      "id": "F-18",
+      "detail": "labelled incorrect_assertion (assertion_logic), rules said api_contract with medium confidence",
+      "source": "reference-label"
+    },
+    {
+      "type": "incorrect-diagnosis",
+      "id": "F-20",
+      "detail": "labelled product_regression (product_behavior), rules said api_contract with medium confidence",
+      "source": "reference-label"
+    },
+    {
+      "type": "incorrect-diagnosis",
+      "id": "F-22",
+      "detail": "labelled product_regression (product_behavior), rules said locator with medium confidence",
+      "source": "reference-label"
     }
   ],
   "gates": [
+    {
+      "name": "gate:safety.no-false-passes",
+      "severity": "safety",
+      "threshold": "evidence.falsePasses == 0",
+      "status": "pass",
+      "detail": "evidence.falsePasses == 0: observed 0"
+    },
+    {
+      "name": "gate:reliability.fault-expectations",
+      "severity": "quality",
+      "threshold": "recovery.scenariosMeetingExpectations >= 1",
+      "status": "pass",
+      "detail": "recovery.scenariosMeetingExpectations >= 1: observed 1 (26/26)"
+    },
     {
       "name": "deterministic-expectations",
       "status": "pass",
@@ -6170,8 +8832,8 @@
     },
     {
       "name": "baseline-regression",
-      "status": "pass",
-      "detail": "no gated regressions vs eval-20261018T215547Z-deterministic-v4yvpl"
+      "status": "not-applicable",
+      "detail": "no baseline given"
     },
     {
       "name": "report-schema",
@@ -6180,7 +8842,7 @@
     }
   ],
   "limitations": [
-    "0 of 62 reference labels are human-reviewed; the rest are author-assigned (by the AI assistant that built the framework) and pending review.",
+    "0 of 104 reference labels are human-reviewed; the rest are author-assigned (by the AI assistant that built the framework) and pending review.",
     "Datasets are small: rates with fewer than 10 cases in the denominator are marked insufficient-data, and percentiles from fewer than 20 samples are not distributions.",
     "The test target is a public demo site with no version identifier; seeded defects are its intentionally broken accounts, verified by eval/probes/seeded-defects.ts.",
     "The failure classifier treats an expected value as coming from the requirement when it appears anywhere in the criterion text (substring), which can turn an incorrect assertion into a product_behavior diagnosis.",

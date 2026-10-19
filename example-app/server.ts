@@ -17,8 +17,10 @@ import type { AddressInfo } from 'node:net';
  * - renamed-add-button: the "Add note" button reads "Save note" (UI drift; same element)
  * - intermittent-slow-list: every other /notes page reveals its list only after 6 s (flaky timing)
  * - broken-create: creating a note fails with 500 (a product defect that must not be "healed")
+ * - auth-bypass: any signed-in user can read, change and delete other users' notes (authorization defect)
+ * - no-title-limit: titles longer than 120 characters are accepted (boundary-validation defect)
  */
-export const EXAMPLE_APP_VARIANTS = ['standard', 'renamed-add-button', 'intermittent-slow-list', 'broken-create'] as const;
+export const EXAMPLE_APP_VARIANTS = ['standard', 'renamed-add-button', 'intermittent-slow-list', 'broken-create', 'auth-bypass', 'no-title-limit'] as const;
 export type ExampleAppVariant = (typeof EXAMPLE_APP_VARIANTS)[number];
 export const SLOW_LIST_REVEAL_MS = 6_000;
 export interface ExampleAppUser {
@@ -136,7 +138,7 @@ export async function startExampleApp(options: {
     if (parts.length === 1) {
       if (method === 'GET') return sendJson(res, 200, ownedBy(user));
       if (method === 'POST') {
-        const input = noteInput(await readJson(req), 'create');
+        const input = noteInput(await readJson(req), 'create', variant === 'no-title-limit');
         const note = createNote(user, { title: input.title ?? '', body: input.body ?? '' });
         res.setHeader('Location', `/api/notes/${note.id}`);
         return sendJson(res, 201, note);
@@ -146,14 +148,14 @@ export async function startExampleApp(options: {
 
     const note = notes.get(parts[1]);
     if (!note) throw new HttpError(404, 'not_found', 'Note not found');
-    if (note.owner !== user) throw new HttpError(403, 'forbidden', 'You do not have access to this note');
+    if (note.owner !== user && variant !== 'auth-bypass') throw new HttpError(403, 'forbidden', 'You do not have access to this note');
 
     switch (method) {
       case 'GET':
         return sendJson(res, 200, note);
       case 'PUT':
       case 'PATCH': {
-        const input = noteInput(await readJson(req), method === 'PUT' ? 'replace' : 'update');
+        const input = noteInput(await readJson(req), method === 'PUT' ? 'replace' : 'update', variant === 'no-title-limit');
         const updated: Note = {
           ...note,
           title: input.title ?? note.title,
@@ -220,7 +222,7 @@ export async function startExampleApp(options: {
 
 // ---- validation ----
 
-function noteInput(body: Record<string, unknown>, mode: 'create' | 'replace' | 'update'): { title?: string; body?: string } {
+function noteInput(body: Record<string, unknown>, mode: 'create' | 'replace' | 'update', skipTitleLimit = false): { title?: string; body?: string } {
   const unknown = Object.keys(body).filter((k) => k !== 'title' && k !== 'body');
   if (unknown.length > 0) throw new HttpError(400, 'validation_error', `Unknown field(s): ${unknown.join(', ')}`);
   if (body.title !== undefined && typeof body.title !== 'string') throw new HttpError(400, 'validation_error', 'title must be a string');
@@ -229,16 +231,16 @@ function noteInput(body: Record<string, unknown>, mode: 'create' | 'replace' | '
   if (mode === 'update' && body.title === undefined && body.body === undefined) {
     throw new HttpError(400, 'validation_error', 'Provide title or body');
   }
-  const problem = validationProblem({ title: body.title as string | undefined, body: body.body as string | undefined });
+  const problem = validationProblem({ title: body.title as string | undefined, body: body.body as string | undefined }, skipTitleLimit);
   if (problem) throw new HttpError(400, 'validation_error', problem);
   return { title: body.title === undefined ? undefined : (body.title as string).trim(), body: body.body as string | undefined };
 }
 
-function validationProblem(input: { title?: string; body?: string }): string | undefined {
+function validationProblem(input: { title?: string; body?: string }, skipTitleLimit = false): string | undefined {
   if (input.title !== undefined) {
     const title = input.title.trim();
     if (title.length === 0) return 'title must not be empty';
-    if (title.length > TITLE_MAX) return `title must be at most ${TITLE_MAX} characters`;
+    if (title.length > TITLE_MAX && !skipTitleLimit) return `title must be at most ${TITLE_MAX} characters`;
   }
   if (input.body !== undefined && input.body.length > BODY_MAX) return `body must be at most ${BODY_MAX} characters`;
   return undefined;

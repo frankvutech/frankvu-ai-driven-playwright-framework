@@ -5,7 +5,8 @@ import type { LlmProvider } from '../src/agent/llm/provider';
 import { MockProvider } from '../src/agent/llm/mock';
 import type { RetryPolicy, UsageRecord } from '../src/agent/llm/structured';
 import { planRequirement, generateSpecs } from '../src/agent/workflow/generate';
-import { renderSpec } from '../src/agent/generation/render';
+import { FAMILY_SUFFIX, familyOf, renderSpec } from '../src/agent/generation/render';
+import type { ApplicationId } from '../src/agent/domain/application';
 import { validateArtifacts } from '../src/agent/validation/artifacts';
 import type { TestSpec } from '../src/agent/domain/testSpec';
 import type { Requirement } from '../src/agent/domain/requirement';
@@ -17,7 +18,7 @@ import { classifyFailure } from '../src/agent/analysis/classify';
 import { refineWithModel } from '../src/agent/analysis/modelAnalysis';
 import type { FailureAnalysis } from '../src/agent/analysis/types';
 import { assertionFindings, type AssertionFinding } from './assertions';
-import { clarificationBehaviour, prohibitedAssumptionHits, requiredAssertionCoverage } from './semantic';
+import { clarificationBehaviour, describeRequired, prohibitedAssumptionHits, requiredAssertionCoverage } from './semantic';
 import { ASSERTION_WEAKNESSES, type FailureCase, type FailureLabel, type GenerationCase, type PlanningCase } from './schema';
 import { DATASET_DIR } from './dataset';
 import { countWhere, mean, perClass, ratio, confusion } from './metrics';
@@ -89,6 +90,8 @@ export async function evaluatePlanningCase(c: PlanningCase, provider: LlmProvide
     for (const code of e.absentIssueCodes ?? []) add(`noPlanIssue:${code}`, 'structural', !planCodes.includes(code));
     for (const id of e.assumptionScenarios ?? []) add(`assumptionScenario:${id}`, 'structural', r.check.assumptionScenarioIds.includes(id));
     prohibitedHits = prohibitedAssumptionHits(r.plan, e.prohibitedAssumptions ?? []);
+    const planLayers = new Set(r.plan.scenarios.map((s) => s.layer ?? 'ui'));
+    for (const layer of e.layers ?? []) add(`layer:${layer}`, 'structural', planLayers.has(layer), [...planLayers].join(','));
   } else {
     for (const code of e.issueCodes ?? []) add(`planIssue:${code}`, 'structural', false, 'no plan');
   }
@@ -154,6 +157,7 @@ export function planningMetrics(cases: PlanningCase[], results: PlanningResult[]
 
 export interface RenderedResult {
   scenarioId: string;
+  layer: string;
   typecheckClean: boolean;
   conventionClean: boolean;
   traceable: boolean;
@@ -171,6 +175,10 @@ export interface GenerationResult {
   assertionFindings: AssertionFinding[];
   ruleVsLabel: Array<{ scenarioId: string; labelled: string[]; predicted: string[] }>;
   requiredAssertions: { required: number; satisfied: number; missing: string[] };
+  /** Per accepted spec: layer, reference intent label (if any), and whether all its required assertions are present. */
+  specs?: Array<{ scenarioId: string; layer: string; intentLabel?: 'correct' | 'incorrect'; requiredMet: boolean; hasRequired: boolean; findings: number }>;
+  /** Reference-labelled specs that the agent's validators should reject (unsupported, duplicate, unsafe). */
+  rejections?: { expected: number; rejected: number };
   usage?: UsageRecord;
 }
 
@@ -186,23 +194,25 @@ export function parsedTestTitle(source: string): string | undefined {
 }
 
 /** Render accepted specs into a scratch folder and run Phase 2's artifact validation on them. */
-export async function renderAndValidate(specs: TestSpec[], scratchId: string): Promise<RenderedResult[]> {
+export async function renderAndValidate(specs: TestSpec[], scratchId: string, application: ApplicationId = 'storefront'): Promise<RenderedResult[]> {
   if (specs.length === 0) return [];
   const dir = path.join('generated', scratchId);
   const files: Record<string, { requirementId: string; scenarioId: string }> = {};
+  const fileOf = (spec: TestSpec) => path.posix.join('generated', scratchId, `${spec.scenarioId}${FAMILY_SUFFIX[familyOf(application, spec.layer ?? 'ui')]}`);
   mkdirSync(path.join(REPO_ROOT, dir), { recursive: true });
   try {
     for (const spec of specs) {
-      const rel = path.posix.join('generated', scratchId, `${spec.scenarioId}.spec.ts`);
-      writeFileSync(path.join(REPO_ROOT, rel), renderSpec(spec, scratchId));
+      const rel = fileOf(spec);
+      writeFileSync(path.join(REPO_ROOT, rel), renderSpec(spec, scratchId, { application }));
       files[rel] = { requirementId: spec.requirementId, scenarioId: spec.scenarioId };
     }
     const v = await validateArtifacts({ repoRoot: REPO_ROOT, generationArea: 'generated', files, workspaceBefore: [], workspaceAfter: [] });
     return specs.map((spec) => {
-      const rel = path.posix.join('generated', scratchId, `${spec.scenarioId}.spec.ts`);
+      const rel = fileOf(spec);
       const findings = v.files[rel] ?? [];
       return {
         scenarioId: spec.scenarioId,
+        layer: spec.layer ?? 'ui',
         typecheckClean: !findings.some((f) => f.check === 'typecheck'),
         conventionClean: !findings.some((f) => ['ast', 'lint', 'convention', 'path'].includes(f.check)),
         traceable: !findings.some((f) => f.message.includes('annotation')),
@@ -244,8 +254,9 @@ export async function evaluateGenerationCase(c: GenerationCase, provider: LlmPro
     add(`rejected:${id}`, 'structural', ok, found.join(','));
   }
   if (e.missingCapabilities !== undefined) add('missingCapabilities', 'structural', out.output.missingCapabilities.length === e.missingCapabilities);
+  if (e.acceptedCount !== undefined) add('acceptedCount', 'structural', out.accepted.length === e.acceptedCount, `${out.accepted.length} of ${out.output.tests.length}`);
 
-  const rendered = await renderAndValidate(out.accepted, scratchId);
+  const rendered = await renderAndValidate(out.accepted, scratchId, c.requirement.application);
   for (const r of rendered) {
     add(`typecheck:${r.scenarioId}`, 'structural', r.typecheckClean);
     add(`convention:${r.scenarioId}`, 'structural', r.conventionClean);
@@ -256,6 +267,7 @@ export async function evaluateGenerationCase(c: GenerationCase, provider: LlmPro
   const findings: AssertionFinding[] = [];
   const ruleVsLabel: GenerationResult['ruleVsLabel'] = [];
   const req = { required: 0, satisfied: 0, missing: [] as string[] };
+  const specs: NonNullable<GenerationResult['specs']> = [];
   for (const spec of out.accepted) {
     const scenario = c.scenarios.find((s) => s.id === spec.scenarioId);
     const f = assertionFindings(spec, scenario, c.requirement);
@@ -265,8 +277,13 @@ export async function evaluateGenerationCase(c: GenerationCase, provider: LlmPro
     const cov = requiredAssertionCoverage(spec, c.requiredAssertions[spec.scenarioId] ?? []);
     req.required += cov.required;
     req.satisfied += cov.satisfied;
-    req.missing.push(...cov.missing.map((m) => `${spec.scenarioId}: ${m.target} = ${JSON.stringify(m.expected)}`));
+    req.missing.push(...cov.missing.map((m) => `${spec.scenarioId}: ${describeRequired(m)}`));
+    specs.push({ scenarioId: spec.scenarioId, layer: spec.layer ?? 'ui', intentLabel: c.intentLabels?.[spec.scenarioId], requiredMet: cov.missing.length === 0, hasRequired: cov.required > 0, findings: f.length });
   }
+  const expectedRejections = Object.keys(e.rejected ?? {});
+  // Duplicates: specs beyond acceptedCount must be dropped.
+  const duplicatesExpected = e.acceptedCount === undefined ? 0 : Math.max(0, out.output.tests.length - e.acceptedCount - expectedRejections.length);
+  const duplicatesDropped = e.acceptedCount === undefined ? 0 : Math.min(duplicatesExpected, Math.max(0, out.output.tests.length - out.accepted.length - expectedRejections.length));
   for (const r of ruleVsLabel) {
     add(`assertionRules:${r.scenarioId}`, 'reference', JSON.stringify(r.labelled) === JSON.stringify(r.predicted), `labelled [${r.labelled}] predicted [${r.predicted}]`);
   }
@@ -281,8 +298,40 @@ export async function evaluateGenerationCase(c: GenerationCase, provider: LlmPro
     assertionFindings: findings,
     ruleVsLabel,
     requiredAssertions: req,
+    specs,
+    rejections: { expected: expectedRejections.length + duplicatesExpected, rejected: countWhere(expectedRejections, (id) => !acceptedIds.includes(id)) + duplicatesDropped },
     usage: out.usage,
   };
+}
+
+/**
+ * Correctness by layer, kept apart: compiles (type-check), conforms (AST/lint),
+ * has the reference assertions, and matches the reference intent label. A spec
+ * can compile and still test the wrong thing.
+ */
+export function generationByLayer(results: GenerationResult[]) {
+  const rendered = results.flatMap((r) => r.rendered);
+  const specs = results.flatMap((r) => r.specs ?? []);
+  const layers = [...new Set([...rendered.map((r) => r.layer), ...specs.map((s) => s.layer)])].sort();
+  return Object.fromEntries(
+    layers.map((layer) => {
+      const rs = rendered.filter((r) => r.layer === layer);
+      const ss = specs.filter((s) => s.layer === layer);
+      const labelled = ss.filter((s) => s.intentLabel !== undefined);
+      return [
+        layer,
+        {
+          typescriptValidity: ratio(countWhere(rs, (r) => r.typecheckClean), rs.length),
+          conventionCompliance: ratio(countWhere(rs, (r) => r.conventionClean), rs.length),
+          requiredAssertionsMet: ratio(countWhere(ss, (s) => s.hasRequired && s.requiredMet), countWhere(ss, (s) => s.hasRequired)),
+          /** Labelled specs whose intent label is "correct" / labelled specs: the reference judgement, not the agent's. */
+          intentCorrectByReference: ratio(countWhere(labelled, (s) => s.intentLabel === 'correct'), labelled.length),
+          /** Of specs labelled incorrect, how many do the deterministic rules or required-assertion checks flag? */
+          incorrectIntentDetected: ratio(countWhere(labelled, (s) => s.intentLabel === 'incorrect' && (s.findings > 0 || (s.hasRequired && !s.requiredMet))), countWhere(labelled, (s) => s.intentLabel === 'incorrect')),
+        },
+      ];
+    }),
+  );
 }
 
 export function generationMetrics(results: GenerationResult[]) {

@@ -38,8 +38,12 @@ import { JUDGE_SYSTEM, judgeAssertions } from './semantic';
 import { METRIC_IMPLEMENTATION_VERSION, countWhere, ratio } from './metrics';
 import { ReportSchema, ratioMetric, renderSummary, valueMetric, type EvaluationReport, type Finding, type Gate, type Metric } from './report';
 import { compareReports, loadReport, renderComparison } from './compare';
+import { generationByLayer } from './evaluate';
+import { evaluateHealing } from './healing';
+import { evaluateGates, loadGateConfig } from './gates';
+import { HEAL_SYSTEM } from '../src/agent/prompts/heal';
 
-export type Mode = 'deterministic' | 'functional' | 'live';
+export type Mode = 'deterministic' | 'functional' | 'live' | 'healing';
 
 export interface RunOptions {
   mode: Mode;
@@ -52,6 +56,12 @@ export interface RunOptions {
   repeat?: number;
   approver?: string;
   suites?: string[];
+  /** Healing mode: restrict to some cases (by id). */
+  cases?: string[];
+  /** Pricing metadata file (default eval/pricing.json). */
+  pricing?: string;
+  /** Gate configuration file (default eval/gates.json). */
+  gates?: string;
   env?: NodeJS.ProcessEnv;
   now?: () => Date;
 }
@@ -66,7 +76,7 @@ function gitInfo() {
   }
 }
 
-const promptSha = () => createHash('sha256').update([PLAN_SYSTEM, GENERATE_SYSTEM, ANALYZE_SYSTEM, JUDGE_SYSTEM].join('\n\0\n')).digest('hex');
+const promptSha = () => createHash('sha256').update([PLAN_SYSTEM, GENERATE_SYSTEM, ANALYZE_SYSTEM, JUDGE_SYSTEM, HEAL_SYSTEM].join('\n\0\n')).digest('hex');
 
 function runId(mode: Mode, now: Date) {
   return `eval-${now.toISOString().replace(/[-:]/g, '').replace(/\.\d+Z$/, 'Z')}-${mode}-${Math.random().toString(36).slice(2, 8)}`;
@@ -80,6 +90,7 @@ const SRC = {
   failures: 'eval/dataset/failures/*.json via collectEvidence + classifyFailure',
   faults: 'eval/faults.ts fault catalogue',
   functional: 'eval/dataset/functional.json executed through the Phase 2 workflow',
+  healing: 'eval/dataset/healing.json through src/agent/healing on the local example app',
 };
 
 function planningSection(cases: Dataset['planning']['cases'], results: PlanningResult[], kind: 'deterministic' | 'measured') {
@@ -118,6 +129,17 @@ function generationSection(results: GenerationResult[], kind: 'deterministic' | 
     ratioMetric('generation.semantic.requiredAssertionsSatisfied', m.semantic.requiredAssertionsSatisfied, { kind, gate, source: SRC.generation, definition: 'Reference required assertions (target + exact expected value, not negated) present / required assertions.' }),
     ratioMetric('generation.semantic.specsWithoutAssertionFindings', m.semantic.specsWithoutAssertionFindings, { kind, gate, source: SRC.generation, definition: 'Accepted specs with no deterministic assertion-quality finding / accepted specs.' }),
   ];
+  const rejections = results.reduce((a, r) => ({ n: a.n + (r.rejections?.rejected ?? 0), d: a.d + (r.rejections?.expected ?? 0) }), { n: 0, d: 0 });
+  metrics.push(ratioMetric('generation.structural.unsupportedOrDuplicateRejected', ratio(rejections.n, rejections.d), { kind, gate, source: SRC.generation, definition: 'Specs the reference marks unsupported, duplicate, irrelevant or unsafe that the validators rejected / such specs.' }));
+  for (const [layer, lm] of Object.entries(generationByLayer(results))) {
+    const src = `${SRC.generation} (layer ${layer})`;
+    metrics.push(
+      ratioMetric(`generation.layer.${layer}.typescriptValidity`, lm.typescriptValidity, { kind, gate, source: src, definition: `Rendered ${layer} files with no TypeScript errors / rendered ${layer} files (compiles; says nothing about intent).` }),
+      ratioMetric(`generation.layer.${layer}.requiredAssertionsMet`, lm.requiredAssertionsMet, { kind, gate, source: src, definition: `Accepted ${layer} specs containing every reference assertion (status, body field or UI value) / accepted ${layer} specs with reference assertions.` }),
+      ratioMetric(`generation.layer.${layer}.intentCorrectByReference`, lm.intentCorrectByReference, { kind: 'reference-label', gate, source: src, definition: `Accepted ${layer} specs whose reference intent label is "correct" / labelled accepted ${layer} specs (reference judgement, independent of compiling or passing).` }),
+      ratioMetric(`generation.layer.${layer}.incorrectIntentDetected`, lm.incorrectIntentDetected, { kind: 'reference-label', gate, source: src, definition: `Specs labelled "incorrect" that the deterministic rules or the required-assertion check flag / specs labelled incorrect.` }),
+    );
+  }
   if (agreement.specsLabelled > 0) {
     metrics.push(ratioMetric('assertion.rules.exactAgreementWithLabels', agreement.exactAgreement, { kind: 'reference-label', gate, source: SRC.generation, definition: 'Specs where the set of rule findings equals the reference weakness labels / labelled specs.' }));
   }
@@ -173,8 +195,8 @@ async function faultSection(policy: Policy) {
   return { metrics, findings, detail: { results, metrics: m } };
 }
 
-function costLatencyMetrics(ms: WorkflowMeasurement[], kind: 'measured', mockModel: boolean) {
-  const s = summarizeCostLatency(ms, loadPricing());
+function costLatencyMetrics(ms: WorkflowMeasurement[], kind: 'measured', mockModel: boolean, pricingFile?: string) {
+  const s = summarizeCostLatency(ms, loadPricing(pricingFile));
   const insufficient = (n: number) => (n < 20 ? 'insufficient-data' : 'ok');
   const metrics: Metric[] = [
     valueMetric('cost.workflows', s.workflows, { unit: 'count', kind, source: 'workflow measurements', definition: 'Agent workflows measured in this run.' }),
@@ -185,6 +207,8 @@ function costLatencyMetrics(ms: WorkflowMeasurement[], kind: 'measured', mockMod
     valueMetric('latency.totalP90Ms', s.latencyMs.total.p90, { unit: 'ms', kind, higherIsBetter: false, status: s.latencyMs.total.n ? insufficient(s.latencyMs.total.n) : 'unavailable', source: 'runner wall-clock', definition: 'Nearest-rank 90th percentile of workflow wall-clock.' }),
     valueMetric('latency.modelMedianMs', mockModel ? null : s.latencyMs.model.median, { unit: 'ms', kind, higherIsBetter: false, status: mockModel ? 'not-run' : s.latencyMs.model.n ? insufficient(s.latencyMs.model.n) : 'unavailable', source: 'llm-usage.json latencyMs', definition: 'Median per-workflow model latency (sum over model steps, including retries and backoff).' }),
     valueMetric('latency.playwrightMedianMs', s.latencyMs.playwright.median, { unit: 'ms', kind, higherIsBetter: false, status: s.latencyMs.playwright.n ? insufficient(s.latencyMs.playwright.n) : 'unavailable', source: 'evidence.json startedAt/finishedAt', definition: 'Median Playwright runner wall-clock per executed workflow.' }),
+    valueMetric('latency.validationMedianMs', s.latencyMs.validation.median, { unit: 'ms', kind, higherIsBetter: false, status: s.latencyMs.validation.n ? insufficient(s.latencyMs.validation.n) : 'unavailable', source: 'manifest step timestamps (generate -> validate-artifacts)', definition: 'Median static-validation time (path, AST, type-check, lint) per workflow.' }),
+    valueMetric('latency.analysisMedianMs', s.latencyMs.analysis.median, { unit: 'ms', kind, higherIsBetter: false, status: s.latencyMs.analysis.n ? insufficient(s.latencyMs.analysis.n) : 'unavailable', source: 'manifest step timestamps (collect-evidence -> analyse-failures)', definition: 'Median failure-analysis time per workflow (rule-based; no model analysis in this mode).' }),
     valueMetric('cost.inputTokens', s.tokens.input, { unit: 'count', kind, source: 'provider usage', status: s.tokens.available ? 'ok' : 'unavailable', definition: 'Input tokens reported by the provider (unavailable if any call lacked usage data).' }),
     valueMetric('cost.outputTokens', s.tokens.output, { unit: 'count', kind, source: 'provider usage', status: s.tokens.available ? 'ok' : 'unavailable', definition: 'Output tokens reported by the provider.' }),
     valueMetric('cost.medianPerWorkflowUsd', s.cost.perWorkflowUsd?.median ?? null, { unit: 'usd', kind, higherIsBetter: false, status: s.cost.status === 'ok' ? insufficient(s.workflows) : 'unavailable', source: `eval/pricing.json (${s.cost.pricingEffectiveDate})`, definition: 'Median per-workflow cost = sum over calls of reported tokens x list price.' }),
@@ -241,6 +265,11 @@ async function functionalMode(dataset: Dataset, policy: Policy, opts: RunOptions
     count('functional.detection.inconclusive', det.inconclusive, 'Cases with no pass/fail outcome (not executed, inconclusive, rejected).', false),
     ratioMetric('functional.detection.recall', det.recall, { kind: 'measured', minDenominator: 10, source: SRCF, definition: 'TP / (TP + FN): share of relevant seeded defects detected by a failing test.' }),
     ratioMetric('functional.detection.falsePositiveRate', det.falsePositiveRate, { kind: 'measured', higherIsBetter: false, minDenominator: 10, source: SRCF, definition: 'FP / (FP + TN): share of defect-free cases where the test still failed.' }),
+    ratioMetric('functional.detection.precision', det.precision, { kind: 'measured', minDenominator: 10, source: SRCF, definition: 'TP / (TP + FP): share of test failures that point at a relevant seeded defect.' }),
+    ...Object.entries(m.detectionByLayer).flatMap(([layer, d]) => [
+      ratioMetric(`functional.layer.${layer}.recall`, d.recall, { kind: 'measured', minDenominator: 10, source: `${SRCF} (layer ${layer})`, definition: `TP / (TP + FN) for ${layer} tests.` }),
+      ratioMetric(`functional.layer.${layer}.falsePositiveRate`, d.falsePositiveRate, { kind: 'measured', higherIsBetter: false, minDenominator: 10, source: `${SRCF} (layer ${layer})`, definition: `FP / (FP + TN) for ${layer} tests.` }),
+    ]),
     count('functional.diagnosis.truePositives', dia.tp, 'Failed tests caused by a seeded defect that the analysis called product_behavior.', true),
     count('functional.diagnosis.falseNegatives', dia.fn, 'Failed tests caused by a seeded defect that the analysis did not call product_behavior.', false),
     count('functional.diagnosis.falsePositives', dia.fp, 'Failed tests with no defect that the analysis called product_behavior.', false),
@@ -249,7 +278,7 @@ async function functionalMode(dataset: Dataset, policy: Policy, opts: RunOptions
     ratioMetric('functional.passOnDefectFreeControl', m.functional.passOnDefectFreeControl, { kind: 'measured', gate: 'exact', source: SRCF, definition: 'Tests passing on the standard (defect-free) account / tests run on it.' }),
     ratioMetric('functional.falseNegativesFlaggedByAssertionRules', m.functional.falseNegativesFlaggedByAssertionRules, { kind: 'deterministic', gate: 'exact', source: SRCF, definition: 'False negatives whose test the deterministic assertion rules had flagged / false negatives.' }),
   ];
-  const cl = costLatencyMetrics(r.workflows.map((w) => w.measurement), 'measured', true);
+  const cl = costLatencyMetrics(r.workflows.map((w) => w.measurement), 'measured', true, opts.pricing);
   const findings: Finding[] = [
     ...m.functional.falsePositiveFailures.map((id): Finding => ({ type: 'false-positive-failure', id, detail: 'failed on a target where the behaviour under test is correct', source: 'measured' })),
     ...m.functional.falseNegatives.map((id): Finding => ({ type: 'false-negative', id, detail: 'passed although a relevant seeded defect is present', source: 'measured' })),
@@ -268,6 +297,58 @@ async function functionalMode(dataset: Dataset, policy: Policy, opts: RunOptions
     ],
     provider: { name: 'mock', model: 'pinned-dataset-specs', note: 'Executed tests are pinned, hand-written candidate specs (including deliberately weak and incorrect ones) run through the real Phase 2 pipeline against the demo target. They do not measure a model.' },
     refs: r.workflows.map((w) => `.agent/runs/${w.runId}`),
+  };
+}
+
+async function healingMode(dataset: Dataset, policy: Policy, opts: RunOptions) {
+  const approver = opts.approver ?? opts.env?.AGENT_EVAL_APPROVER ?? process.env.AGENT_EVAL_APPROVER ?? '';
+  const r = await evaluateHealing(dataset.healing.cases, { policy, approver, env: opts.env ?? process.env, functional: dataset.functional, cases: opts.cases });
+  const m = r.metrics;
+  const S = SRC.healing;
+  const rate = (id: string, v: typeof m.proposalRate, def: string, o: { hib?: boolean; gate?: Metric['gate'] } = {}) =>
+    ratioMetric(id, v, { kind: 'reference-label', gate: o.gate ?? 'exact', higherIsBetter: o.hib ?? true, source: S, definition: def });
+  const count = (id: string, v: number, def: string) => valueMetric(id, v, { unit: 'count', kind: 'reference-label', gate: 'exact', higherIsBetter: false, source: S, definition: def });
+  const usage = r.results.flatMap((x) => x.usage);
+  const tokens = usage.length > 0 && usage.every((u) => u.tokensAvailable);
+  const pricing = loadPricing(opts.pricing);
+  const metrics: Metric[] = [
+    rate('healing.outcomeAgreement', m.outcomeAgreement, 'Cases whose healing outcome equals the reference outcome / cases set up.'),
+    rate('healing.proposalRate', m.proposalRate, 'Proposals accepted for validation / attempts the deterministic gate let through (eligible).', { gate: 'none' }),
+    rate('healing.verifiedSuccessRate', m.verifiedSuccessRate, 'Verified patches equal to the reference repair / cases whose reference says a repair is expected (eligible, with ground truth). Insufficient-evidence and product-defect cases are reported separately. With recorded proposals this depends on how many recorded proposals are correct, so it describes the dataset, not a model.'),
+    rate('healing.correctProposalsVerified', m.correctProposalsVerified, 'Recorded proposals labelled correct that ended verified and equal to the reference repair / proposals labelled correct (does the guarded pipeline let good repairs through?).'),
+    rate('healing.incorrectHealingRate', m.incorrectHealingRate, 'Verified patches that are not the reference repair / verified patches.', { hib: false }),
+    rate('healing.incorrectProposalsBlocked', m.incorrectProposalsBlocked, 'Proposals labelled incorrect that did not end verified / proposals labelled incorrect.'),
+    rate('healing.regressionRate', m.regressionRate, 'Verified patches whose before/after regression run had new failures / verified patches.', { hib: false }),
+    rate('healing.intentViolationRate', m.intentViolationRate, 'Verified patches failing the independent patch-text intent check (assertion removed or rewritten, files outside the allowed areas) / verified patches.', { hib: false }),
+    rate('healing.falseHealingOfProductDefects', m.falseHealingOfProductDefects, 'Product-defect cases that ended verified or approved / product-defect cases.', { hib: false }),
+    rate('healing.productDefectsStoppedBeforeModel', m.productDefectsStoppedBeforeModel, 'Product-defect cases stopped by the deterministic gate before any model call / product-defect cases.'),
+    rate('healing.insufficientEvidenceCorrectlyRejected', m.insufficientEvidenceCorrectlyRejected, 'Cases the reference marks insufficient-evidence that ended insufficient_evidence / such cases.'),
+    rate('healing.manualInterventionRate', m.manualInterventionRate, 'Attempts that produced no verified patch, so a person must act without one / attempts set up. Every verified patch still needs a review.', { gate: 'none', hib: false }),
+    valueMetric('healing.reviewAcceptanceRate', null, { unit: 'ratio', kind: 'measured', status: 'unavailable', source: 'heal-approve decisions', definition: 'Verified patches a person approved / verified patches reviewed. No human review decisions exist in the evaluation.' }),
+    count('healing.unsafe.verifiedProductDefects', m.unsafe.verifiedProductDefects, 'Product-defect cases that ended with a verified or approved patch (must be 0).'),
+    count('healing.unsafe.intentViolations', m.unsafe.intentViolations, 'Verified patches that remove or rewrite an assertion according to the independent patch check (must be 0).'),
+    count('healing.unsafe.incorrectVerified', m.unsafe.incorrectVerified, 'Verified patches that are not the reference repair (must be 0).'),
+    valueMetric('healing.setupErrors', m.setupErrors, { unit: 'count', kind: 'measured', gate: 'exact', higherIsBetter: false, source: S, definition: 'Cases that could not be set up (e.g. the generated test did not fail); excluded from every rate.' }),
+    valueMetric('healing.attemptMedianMs', m.durationMs.median, { unit: 'ms', kind: 'measured', higherIsBetter: false, status: m.durationMs.n >= 20 ? 'ok' : m.durationMs.n ? 'insufficient-data' : 'unavailable', source: 'wall-clock per healing attempt', definition: 'Median wall-clock of one healing attempt (reproduction, gate, proposal, validation, verification, regression).' }),
+    valueMetric('healing.attemptP90Ms', m.durationMs.p90, { unit: 'ms', kind: 'measured', higherIsBetter: false, status: m.durationMs.n >= 20 ? 'ok' : m.durationMs.n ? 'insufficient-data' : 'unavailable', source: 'wall-clock per healing attempt', definition: 'Nearest-rank 90th percentile of healing-attempt wall-clock.' }),
+    valueMetric('healing.modelCalls', usage.reduce((n, u) => n + u.attempts, 0), { unit: 'count', kind: 'measured', source: 'heal-record usage', definition: 'Proposal-request attempts across all cases, including retries.' }),
+    valueMetric('healing.costPerAttemptUsd', null, {
+      unit: 'usd', kind: 'measured', higherIsBetter: false, status: 'unavailable', source: `pricing ${pricing.effectiveDate}`,
+      definition: tokens ? 'Total proposal cost / attempts.' : 'Unavailable: the recorded (mock) provider reports no token usage, so no cost is estimated.',
+    }),
+  ];
+  const findings: Finding[] = [
+    ...r.results.filter((x) => !x.outcomeMatchesReference).map((x): Finding => ({ type: 'healing-mismatch', id: x.id, detail: `expected ${x.expectedOutcome}, got ${x.outcome}${x.error ? `: ${x.error}` : ''}`, source: 'reference-label' })),
+    ...r.results.filter((x) => (x.verified && (!x.correctRepair || x.independentIntent?.ok === false)) || (x.cause === 'product-defect' && x.verified)).map((x): Finding => ({ type: 'unsafe-healing', id: x.id, detail: `verified patch is unsafe: correct=${x.correctRepair}, intent=${x.independentIntent?.detail ?? 'n/a'}`, source: 'reference-label' })),
+  ];
+  return {
+    metrics,
+    findings,
+    sections: { healing: { cases: r.results, metrics: m } },
+    summary: { casesEvaluated: r.results.length, passed: countWhere(r.results, (x) => x.outcomeMatchesReference), failed: countWhere(r.results, (x) => !x.outcomeMatchesReference && x.outcome !== 'error'), inconclusive: m.setupErrors },
+    gates: [gate('healing-cases-set-up', m.setupErrors === 0, `${m.setupErrors} case(s) could not be set up`)],
+    provider: { name: 'mock', model: 'recorded-heal-proposals', note: 'Proposals are recorded dataset replies (correct and deliberately wrong); everything else ran for real. These results measure the guarded pipeline, not how often a model proposes a good repair.' },
+    refs: [] as string[],
   };
 }
 
@@ -317,7 +398,7 @@ async function liveMode(dataset: Dataset, opts: RunOptions) {
   const p = planningSection(liveCases, last, 'measured');
   const g = generationSection(allGeneration, 'measured');
   const a = await analysisSection(dataset, provider);
-  const cl = costLatencyMetrics(measurements, 'measured', provider.name === 'mock');
+  const cl = costLatencyMetrics(measurements, 'measured', provider.name === 'mock', opts.pricing);
   // Variability across repeats: share of cases with the same outcome every time.
   const consistent = liveCases.filter((_c, i) => new Set(allPlanning.map((rs) => rs[i].outcome)).size === 1).length;
   const metrics: Metric[] = [...p.metrics, ...g.metrics, ...a.metrics, ...cl.metrics];
@@ -356,7 +437,11 @@ export async function runEvaluation(opts: RunOptions): Promise<{ report: Evaluat
   const id = runId(opts.mode, now);
   const policy = loadPolicy(REPO_ROOT);
   const dataset = loadDataset();
-  const result = opts.mode === 'deterministic' ? await deterministicMode(dataset, policy) : opts.mode === 'functional' ? await functionalMode(dataset, policy, opts) : await liveMode(dataset, opts);
+  const result =
+    opts.mode === 'deterministic' ? await deterministicMode(dataset, policy)
+    : opts.mode === 'functional' ? await functionalMode(dataset, policy, opts)
+    : opts.mode === 'healing' ? await healingMode(dataset, policy, opts)
+    : await liveMode(dataset, opts);
 
   // Invariant: AI judgments never gate.
   const metrics = result.metrics.map((m) => (m.kind === 'ai-judgment' ? { ...m, gate: 'none' as const } : m));
@@ -368,6 +453,7 @@ export async function runEvaluation(opts: RunOptions): Promise<{ report: Evaluat
     'Live-provider evaluation has not been run in this repository (no credentials); no model-quality, token or cost figures exist yet.',
   ];
   if (opts.mode === 'deterministic') limitations.push('Deterministic mode replays hand-written model outputs: it verifies the pipeline and the evaluator, not model quality.');
+  if (opts.mode === 'healing') limitations.push('Healing mode replays recorded proposals (correct and deliberately wrong); rates describe the guarded pipeline on 15 constructed cases, not model repair quality.', 'Failure modes come from example-app/server.ts variants; real-world drift and flakiness are more varied.', 'No human review decisions exist, so review acceptance is unavailable.');
   if (opts.mode === 'functional') limitations.push('Functional mode executes pinned hand-written candidate specs; detection rates describe those specs and the pipeline, not what a model would generate.', 'Functional runs use a 15 s test timeout (stricter than the policy) so stuck pages fail fast.');
 
   const report: EvaluationReport = {
@@ -384,7 +470,7 @@ export async function runEvaluation(opts: RunOptions): Promise<{ report: Evaluat
       provider: result.provider,
       judge: opts.judge ? { name: opts.judge.name, model: opts.judge.model } : null,
       metricVersion: METRIC_IMPLEMENTATION_VERSION,
-      config: { policyExecution: policy.execution, repeat: opts.repeat ?? 1, suites: opts.suites ?? 'all', baseline: opts.baseline ?? null },
+      config: { policyExecution: policy.execution, policyHealing: policy.healing, repeat: opts.repeat ?? 1, suites: opts.suites ?? 'all', cases: opts.cases ?? 'all', baseline: opts.baseline ?? null, pricing: opts.pricing ?? 'eval/pricing.json', gates: opts.gates ?? 'eval/gates.json' },
       target: dataset.functional.target,
       labelReview: dataset.labelReview,
       executionRefs: result.refs,
@@ -398,19 +484,26 @@ export async function runEvaluation(opts: RunOptions): Promise<{ report: Evaluat
         functionalReferenceOutcomes: dataset.functional.suites.reduce((n, s) => n + Object.values(s.variants).flat().length, 0),
         labelledFailures: dataset.failures.cases.filter((c) => c.label !== null).length,
         reportControls: dataset.failures.cases.filter((c) => c.label === null).length,
+        healingCases: dataset.healing.cases.length,
       },
     },
     metrics,
     sections: result.sections as Record<string, unknown>,
     findings: result.findings,
-    gates: [...result.gates],
+    // Configured threshold gates (eval/gates.json), safety gates included.
+    gates: [...evaluateGates(loadGateConfig(opts.gates), opts.mode, metrics), ...result.gates],
     limitations,
   };
 
   if (opts.baseline) {
     const base = loadReport(opts.baseline);
     const cmp = compareReports(base, report);
-    report.gates.push(gate('baseline-regression', cmp.gatedRegressions.length === 0, cmp.gatedRegressions.length === 0 ? `no gated regressions vs ${base.metadata.runId}` : cmp.gatedRegressions.map((c) => `${c.id}: ${c.before} -> ${c.after}`).join('; ')));
+    if (cmp.datasetChanged) {
+      // A new dataset version needs a new, reviewed baseline; changed metrics are listed in the comparison.
+      report.gates.push({ name: 'baseline-regression', status: 'not-applicable', detail: `dataset ${base.metadata.datasetVersion} -> ${report.metadata.datasetVersion}: rebaseline required; see sections.comparison` });
+    } else {
+      report.gates.push(gate('baseline-regression', cmp.gatedRegressions.length === 0, cmp.gatedRegressions.length === 0 ? `no gated regressions vs ${base.metadata.runId}` : cmp.gatedRegressions.map((c) => `${c.id}: ${c.before} -> ${c.after}`).join('; ')));
+    }
     report.sections.comparison = cmp;
   } else {
     report.gates.push({ name: 'baseline-regression', status: 'not-applicable', detail: 'no baseline given' });
@@ -443,6 +536,9 @@ async function main(): Promise<number> {
       suite: { type: 'string', multiple: true },
       compare: { type: 'boolean' },
       'judge-model': { type: 'string' },
+      case: { type: 'string', multiple: true },
+      pricing: { type: 'string' },
+      gates: { type: 'string' },
     },
   });
   if (values.compare) {
@@ -452,7 +548,7 @@ async function main(): Promise<number> {
     return cmp.gatedRegressions.length === 0 ? 0 : 1;
   }
   const mode = values.mode as Mode;
-  if (!['deterministic', 'functional', 'live'].includes(mode)) throw new Error(`unknown mode ${mode}`);
+  if (!['deterministic', 'functional', 'live', 'healing'].includes(mode)) throw new Error(`unknown mode ${mode}`);
   if (mode === 'live' && process.env.AGENT_LIVE_EVAL !== '1') {
     process.stderr.write('Set AGENT_LIVE_EVAL=1 to run the live evaluation (it calls a paid model API).\n');
     return 2;
@@ -464,6 +560,9 @@ async function main(): Promise<number> {
     outDir: values.out,
     repeat: values.repeat ? Number(values.repeat) : undefined,
     suites: values.suite,
+    cases: values.case,
+    pricing: values.pricing,
+    gates: values.gates,
     judge,
   });
   process.stdout.write(renderSummary(report).split('## Findings')[0]);

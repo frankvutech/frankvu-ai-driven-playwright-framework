@@ -2,6 +2,7 @@ import type { Requirement } from '../src/agent/domain/requirement';
 import type { Scenario } from '../src/agent/domain/plan';
 import type { Step, TestSpec } from '../src/agent/domain/testSpec';
 import type { AssertionWeakness } from './schema';
+import { API_CATALOG } from '../src/agent/generation/apiCatalog';
 
 /**
  * Deterministic assertion-quality rules over a candidate TestSpec. They detect
@@ -49,6 +50,65 @@ function traced(value: string | number, acText: string): boolean {
 }
 const numberWords: Record<number, string[]> = { 0: ['zero', 'no '], 1: ['one'], 2: ['two'], 3: ['three'], 4: ['four'], 5: ['five'], 6: ['six'] };
 
+type ApiAssertion = Extract<Step, { kind: 'expectStatus' | 'expectHeader' | 'expectBody' }>;
+
+export function describeApiAssertion(step: ApiAssertion): string {
+  switch (step.kind) {
+    case 'expectStatus':
+      return `expect(${step.response}.status()).toBe(${step.status})`;
+    case 'expectHeader':
+      return `expect(${step.response}.headers()["${step.header}"]).${step.matcher}(${JSON.stringify(step.expected)})`;
+    case 'expectBody': {
+      if (step.field === null) return `parseJson(${step.response}, ${step.schema})`;
+      const e = step.expected;
+      const expected = !e ? '' : e.kind === 'literal' ? JSON.stringify(e.value) : e.kind === 'ref' ? `${e.response}.${e.field}` : `text(${JSON.stringify(e.text)})`;
+      return `expect(${step.response}.${step.field})${step.negate ? '.not' : ''}.${step.matcher}(${expected})`;
+    }
+  }
+}
+
+const HTTP_STATUS = /\b[1-5]\d\d\b/g;
+
+/**
+ * API assertion rules. Every call must have its status checked. Body and
+ * criteria rules judge only the response under test: the response of the
+ * test's final assertion, when that assertion is an API one. In a combined test
+ * whose final assertion is in the UI, the API calls are setup.
+ */
+function apiFindings(spec: TestSpec, acText: string, add: (rule: AssertionWeakness, observed: string, weakness: string, evidence: string, uncertainty?: 'low' | 'medium') => void) {
+  const calls = spec.steps.filter((s): s is Extract<Step, { kind: 'apiCall' }> => s.kind === 'apiCall');
+  if (calls.length === 0) return;
+  const of = (r: string) => spec.steps.filter((s): s is ApiAssertion => (s.kind === 'expectStatus' || s.kind === 'expectHeader' || s.kind === 'expectBody') && s.response === r);
+  const statedStatuses = [...new Set(acText.match(HTTP_STATUS) ?? [])];
+  for (const call of calls) {
+    const asserted = of(call.saveAs);
+    const statuses = asserted.filter((a): a is Extract<Step, { kind: 'expectStatus' }> => a.kind === 'expectStatus');
+    const observed = asserted.map(describeApiAssertion).join('; ') || '(none)';
+    if (statuses.length === 0) {
+      add('AQ_API_NO_STATUS', observed, `the status of ${call.client}.${call.method} (${call.saveAs}) is never checked`, `no expectStatus on ${call.saveAs}`);
+      continue;
+    }
+    const errorCodeChecked = asserted.some((a) => a.kind === 'expectBody' && a.field === 'error.code' && !a.negate);
+    if (call.client !== 'posts' && statuses.some((st) => st.status >= 400) && !errorCodeChecked) {
+      add('AQ_API_ERROR_CODE_MISSING', observed, 'an error status is checked but not which error it is', `${call.saveAs} expects ${statuses.map((x) => x.status).join('/')} without error.code`, 'medium');
+    }
+  }
+  const finalAssertion = [...spec.steps].reverse().find((s) => ['expect', 'expectUrl', 'expectStatus', 'expectHeader', 'expectBody'].includes(s.kind));
+  if (!finalAssertion || !('response' in finalAssertion)) return;
+  const last = calls.find((c) => c.saveAs === finalAssertion.response);
+  if (!last) return;
+  const lastAsserted = of(last.saveAs);
+  const lastStatuses = lastAsserted.filter((a): a is Extract<Step, { kind: 'expectStatus' }> => a.kind === 'expectStatus');
+  const lastObserved = lastAsserted.map(describeApiAssertion).join('; ') || '(none)';
+  const untraced = lastStatuses.filter((st) => statedStatuses.length > 0 && !statedStatuses.includes(String(st.status)));
+  if (untraced.length > 0) {
+    add('AQ_API_STATUS_NOT_IN_CRITERIA', lastObserved, 'the expected status differs from the status the criteria state', `expects ${untraced.map((x) => x.status).join('/')}; criteria state ${statedStatuses.join('/')}`, 'medium');
+  }
+  if (lastStatuses.some((st) => st.status < 300) && API_CATALOG[last.client].methods[last.method]?.returns && !lastAsserted.some((a) => a.kind === 'expectBody' && a.field !== null)) {
+    add('AQ_API_BODY_UNCHECKED', lastObserved, 'a successful response is accepted without checking any body field', `${last.saveAs} (${last.client}.${last.method}) has no field assertion`, 'medium');
+  }
+}
+
 export function assertionFindings(spec: TestSpec, scenario: Scenario | undefined, requirement: Requirement): AssertionFinding[] {
   const acs = requirement.acceptanceCriteria.filter((ac) => scenario?.acceptanceCriteriaIds.includes(ac.id));
   const acText = acs.map((a) => a.text).join('\n');
@@ -67,10 +127,15 @@ export function assertionFindings(spec: TestSpec, scenario: Scenario | undefined
       uncertainty,
     });
 
-  // UI assertion rules. API assertions (expectStatus/Header/Body) are not scored by these rules yet.
+  apiFindings(spec, acText, (rule, observed, weakness, evidence, uncertainty = 'low') =>
+    findings.push({ scenarioId: spec.scenarioId, requirementId: spec.requirementId, rule, expectedBehavior: acText || '(no linked acceptance criteria)', observedAssertion: observed, weakness, evidence, method: 'deterministic-rule', uncertainty }),
+  );
+
+  // UI assertion rules (expect / expectUrl).
   const assertions = spec.steps.filter((s): s is Assertion => s.kind === 'expect' || s.kind === 'expectUrl');
+  const hasApiAssertions = spec.steps.some((s) => s.kind === 'expectStatus' || s.kind === 'expectHeader' || s.kind === 'expectBody');
   if (assertions.length === 0) {
-    add('AQ_MISSING', [], 'the test asserts nothing', 'no expect or expectUrl step');
+    if (!hasApiAssertions) add('AQ_MISSING', [], 'the test asserts nothing', 'no assertion step');
     return findings;
   }
 

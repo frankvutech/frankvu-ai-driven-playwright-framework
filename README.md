@@ -43,7 +43,8 @@ npm run test:agent                # agent unit tests (mock provider, fake runner
 npm run test:agent-integration    # real runs: agent workflow, guarded healing, promotion
 npm run test:eval                 # evaluation-system tests
 npm run eval                      # deterministic evaluation, gated against eval/baselines/
-AGENT_EVAL_APPROVER="Your Name" npm run eval:functional   # seeded-defect evaluation on the demo site
+AGENT_EVAL_APPROVER="Your Name" npm run eval:functional   # seeded defects: demo site + local example app
+AGENT_EVAL_APPROVER="Your Name" npm run eval:healing      # guarded healing on the local example app (safety gates)
 npm run agent -- generate --requirement examples/requirements/REQ-201-notes-api.json --provider mock --mock-replies examples/mock-replies/REQ-201.json
 npm run agent -- approve <runId> --approver "Your Name"     # interactive
 npm run agent -- execute <runId>
@@ -157,4 +158,4 @@ Every run writes:
 
 Traces of API calls include request headers, which can hold the example app's bearer tokens. Those tokens are random, live in memory and expire when the app stops. For real targets, use short-lived test credentials, and treat trace files from CI artifacts as sensitive.
 
-CI (`.github/workflows/playwright.yml`) lints and type-checks. It runs the framework self-tests and the agent and evaluation unit tests, then the baseline-gated deterministic evaluation. Next it runs the UI, API, UI + API integration and agent integration suites, the seeded-defect probe, and the baseline-gated functional evaluation. It uploads the results as the `playwright-evidence` artifact. Live model evaluation is a separate, manual workflow (`live-eval.yml`).
+CI (`.github/workflows/playwright.yml`) lints and type-checks. It runs the framework self-tests and the agent and evaluation unit tests, then the baseline-gated deterministic evaluation. Next it runs the UI, API, UI + API integration and agent integration suites, the seeded-defect probe, and the baseline-gated functional and healing evaluations. Threshold gates (including safety gates) are configured in `eval/gates.json`. It uploads the results as the `playwright-evidence` artifact. Live model evaluation is a separate, manual workflow (`live-eval.yml`).
