@@ -11,6 +11,15 @@ export default tseslint.config(
     ...playwright.configs['flat/recommended'],
   },
   {
+    // Deterministic test code must not depend on browser-exploration tooling
+    // (e.g. a future Playwright MCP integration). Such tools stay outside the
+    // test run and may only produce artifacts that go through normal review.
+    files: ['src/**/*.ts', 'tests/**/*.ts', 'example-app/**/*.ts'],
+    rules: {
+      'no-restricted-imports': ['error', { patterns: ['@playwright/mcp', '@playwright/mcp/*', '@modelcontextprotocol/*'] }],
+    },
+  },
+  {
     // Generated tests: stricter rules on top of the AST allowlist in
     // src/agent/validation/artifacts.ts.
     files: ['generated/**/*.ts'],

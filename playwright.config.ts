@@ -1,7 +1,27 @@
-import { defineConfig, devices } from '@playwright/test';
-import { env } from './src/config/env';
+import { defineConfig, devices, type Project } from '@playwright/test';
+import { env, type BrowserName } from './src/config/env';
 
 import { STANDARD_USER_STATE } from './src/config/auth';
+
+const BROWSER_DEVICES: Record<BrowserName, string> = {
+  chromium: 'Desktop Chrome',
+  firefox: 'Desktop Firefox',
+  webkit: 'Desktop Safari',
+};
+
+// One UI project per browser in UI_BROWSERS (default: chromium only).
+const uiProjects: Project[] = env.uiBrowsers.map((browser) => ({
+  name: `ui-${browser}`,
+  testDir: './tests/ui',
+  dependencies: ['setup'],
+  use: {
+    ...devices[BROWSER_DEVICES[browser]],
+    baseURL: env.uiBaseUrl,
+    // saucedemo exposes stable `data-test` attributes.
+    testIdAttribute: 'data-test',
+    storageState: STANDARD_USER_STATE,
+  },
+}));
 
 export default defineConfig({
   testDir: './tests',
@@ -26,6 +46,8 @@ export default defineConfig({
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     video: 'off',
+    actionTimeout: 10_000,
+    navigationTimeout: 15_000,
   },
 
   projects: [
@@ -35,18 +57,7 @@ export default defineConfig({
       testMatch: /.*\.setup\.ts/,
       use: { baseURL: env.uiBaseUrl, testIdAttribute: 'data-test' },
     },
-    {
-      name: 'ui-chromium',
-      testDir: './tests/ui',
-      dependencies: ['setup'],
-      use: {
-        ...devices['Desktop Chrome'],
-        baseURL: env.uiBaseUrl,
-        // saucedemo exposes stable `data-test` attributes.
-        testIdAttribute: 'data-test',
-        storageState: STANDARD_USER_STATE,
-      },
-    },
+    ...uiProjects,
     {
       // Unit tests for the AI Test Agent (src/agent). No network; the catalog test opens about:blank.
       name: 'agent-unit',
@@ -66,12 +77,26 @@ export default defineConfig({
       timeout: 120_000,
     },
     {
+      // API clients build their own request contexts (src/fixtures/api.ts);
+      // baseURL here only serves ad-hoc `request` calls.
       name: 'api',
       testDir: './tests/api',
       use: {
         baseURL: env.apiBaseUrl,
         extraHTTPHeaders: { Accept: 'application/json' },
       },
+    },
+    {
+      // UI + API workflows on the local example app (example-app/). The
+      // baseURL comes from the exampleAppUrl fixture, not from here.
+      name: 'integration',
+      testDir: './tests/integration',
+      use: { ...devices['Desktop Chrome'], testIdAttribute: 'data-test' },
+    },
+    {
+      // Framework self-tests (configuration parsing). No browser, no network.
+      name: 'framework-unit',
+      testDir: './tests/framework',
     },
   ],
 });
