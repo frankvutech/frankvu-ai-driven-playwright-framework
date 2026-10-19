@@ -28,7 +28,7 @@
   "preserveOutput": "always",
   "projects": [
    {
-    "outputDir": "<repo>/.relynx/runs/capture-setup/out",
+    "outputDir": "<repo>/.agent/runs/capture-setup/out",
     "repeatEach": 1,
     "retries": 0,
     "metadata": {
@@ -44,7 +44,7 @@
     "timeout": 30000
    },
    {
-    "outputDir": "<repo>/.relynx/runs/capture-setup/out",
+    "outputDir": "<repo>/.agent/runs/capture-setup/out",
     "repeatEach": 1,
     "retries": 0,
     "metadata": {
@@ -64,7 +64,7 @@
    {
     "grep": {},
     "grepInvert": null,
-    "outputDir": "<repo>/.relynx/runs/capture-setup/out",
+    "outputDir": "<repo>/.agent/runs/capture-setup/out",
     "repeatEach": 1,
     "retries": 0,
     "metadata": {
@@ -111,7 +111,7 @@
    [
     "json",
     {
-     "outputFile": "<repo>/.relynx/runs/capture-setup/report.json"
+     "outputFile": "<repo>/.agent/runs/capture-setup/report.json"
     }
    ]
   ],
@@ -180,17 +180,17 @@
           {
            "name": "screenshot",
            "contentType": "image/png",
-           "path": "<repo>/.relynx/runs/capture-setup/out/auth.setup.ts-sign-in-as-standard-user-setup/test-failed-1.png"
+           "path": "<repo>/.agent/runs/capture-setup/out/auth.setup.ts-sign-in-as-standard-user-setup/test-failed-1.png"
           },
           {
            "name": "error-context",
            "contentType": "text/markdown",
-           "path": "<repo>/.relynx/runs/capture-setup/out/auth.setup.ts-sign-in-as-standard-user-setup/error-context.md"
+           "path": "<repo>/.agent/runs/capture-setup/out/auth.setup.ts-sign-in-as-standard-user-setup/error-context.md"
           },
           {
            "name": "trace",
            "contentType": "application/zip",
-           "path": "<repo>/.relynx/runs/capture-setup/out/auth.setup.ts-sign-in-as-standard-user-setup/trace.zip"
+           "path": "<repo>/.agent/runs/capture-setup/out/auth.setup.ts-sign-in-as-standard-user-setup/trace.zip"
           }
          ],
          "errorLocation": {

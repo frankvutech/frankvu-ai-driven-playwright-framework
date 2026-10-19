@@ -171,7 +171,7 @@
    ],
    "labels": {
     "method": "author-judgment",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     }
@@ -262,7 +262,7 @@
    ],
    "labels": {
     "method": "author-judgment",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     }
@@ -327,7 +327,7 @@
    ],
    "labels": {
     "method": "author-judgment",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     }
@@ -399,7 +399,7 @@
    ],
    "labels": {
     "method": "author-judgment",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     }
@@ -466,7 +466,7 @@
    ],
    "labels": {
     "method": "author-judgment",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     }
@@ -498,7 +498,7 @@
    ],
    "labels": {
     "method": "author-judgment",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     }
@@ -540,11 +540,12 @@
     "error_handling"
    ],
    "labels": {
-    "method": "author-judgment",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "method": "constructed",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
-    }
+    },
+    "notes": "Provenance corrected in dataset 3.0.1 (2026-10-19): the outcome follows from how the case was built, so the method is constructed. Review status unchanged."
    },
    "liveApplicable": false
   },
@@ -593,11 +594,12 @@
     "error_handling"
    ],
    "labels": {
-    "method": "author-judgment",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "method": "constructed",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
-    }
+    },
+    "notes": "Provenance corrected in dataset 3.0.1 (2026-10-19): the outcome follows from how the case was built, so the method is constructed. Review status unchanged."
    },
    "liveApplicable": false
   },
@@ -749,11 +751,12 @@
     "traceability"
    ],
    "labels": {
-    "method": "author-judgment",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "method": "constructed",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
-    }
+    },
+    "notes": "Provenance corrected in dataset 3.0.1 (2026-10-19): the outcome follows from how the case was built, so the method is constructed. Review status unchanged."
    },
    "liveApplicable": false
   },
@@ -916,7 +919,7 @@
    ],
    "labels": {
     "method": "author-judgment",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     }
@@ -1072,11 +1075,12 @@
     "traceability"
    ],
    "labels": {
-    "method": "author-judgment",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "method": "constructed",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
-    }
+    },
+    "notes": "Provenance corrected in dataset 3.0.1 (2026-10-19): the outcome follows from how the case was built, so the method is constructed. Review status unchanged."
    },
    "liveApplicable": false
   },
@@ -1178,11 +1182,12 @@
     "traceability"
    ],
    "labels": {
-    "method": "author-judgment",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "method": "constructed",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
-    }
+    },
+    "notes": "Provenance corrected in dataset 3.0.1 (2026-10-19): the outcome follows from how the case was built, so the method is constructed. Review status unchanged."
    },
    "liveApplicable": false
   },
@@ -1334,11 +1339,12 @@
     "traceability"
    ],
    "labels": {
-    "method": "author-judgment",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "method": "constructed",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
-    }
+    },
+    "notes": "Provenance corrected in dataset 3.0.1 (2026-10-19): the outcome follows from how the case was built, so the method is constructed. Review status unchanged."
    },
    "liveApplicable": false
   },
@@ -1398,7 +1404,7 @@
    ],
    "labels": {
     "method": "author-judgment",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     }
@@ -1425,11 +1431,12 @@
     "structural"
    ],
    "labels": {
-    "method": "author-judgment",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "method": "constructed",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
-    }
+    },
+    "notes": "Provenance corrected in dataset 3.0.1 (2026-10-19): the outcome follows from how the case was built, so the method is constructed. Review status unchanged."
    },
    "liveApplicable": true
   },
@@ -1608,7 +1615,7 @@
    "requirementId": "REQ-206",
    "labels": {
     "method": "author-judgment",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     }
@@ -1732,7 +1739,7 @@
    "requirementId": "REQ-206",
    "labels": {
     "method": "author-judgment",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     }
@@ -1807,7 +1814,7 @@
    "requirementId": "REQ-208",
    "labels": {
     "method": "author-judgment",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     }
@@ -1877,7 +1884,7 @@
    "requirementId": "REQ-208",
    "labels": {
     "method": "author-judgment",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     }
@@ -1938,7 +1945,7 @@
    "requirementId": "REQ-209",
    "labels": {
     "method": "author-judgment",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     }
@@ -2034,7 +2041,7 @@
    "requirementId": "REQ-209",
    "labels": {
     "method": "author-judgment",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     }
@@ -2198,7 +2205,7 @@
    },
    "labels": {
     "method": "author-judgment",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     }
@@ -2292,7 +2299,7 @@
    },
    "labels": {
     "method": "constructed",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     }
@@ -2378,7 +2385,7 @@
    },
    "labels": {
     "method": "author-judgment",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     }
@@ -2475,7 +2482,7 @@
    },
    "labels": {
     "method": "author-judgment",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     }

@@ -28,7 +28,7 @@
   "preserveOutput": "always",
   "projects": [
    {
-    "outputDir": "<repo>/.relynx/runs/capture/out",
+    "outputDir": "<repo>/.agent/runs/capture/out",
     "repeatEach": 1,
     "retries": 0,
     "metadata": {
@@ -44,7 +44,7 @@
     "timeout": 30000
    },
    {
-    "outputDir": "<repo>/.relynx/runs/capture/out",
+    "outputDir": "<repo>/.agent/runs/capture/out",
     "repeatEach": 1,
     "retries": 0,
     "metadata": {
@@ -64,7 +64,7 @@
    {
     "grep": {},
     "grepInvert": null,
-    "outputDir": "<repo>/.relynx/runs/capture/out",
+    "outputDir": "<repo>/.agent/runs/capture/out",
     "repeatEach": 1,
     "retries": 0,
     "metadata": {
@@ -111,7 +111,7 @@
    [
     "json",
     {
-     "outputFile": "<repo>/.relynx/runs/capture/report.json"
+     "outputFile": "<repo>/.agent/runs/capture/report.json"
     }
    ]
   ],
@@ -242,17 +242,17 @@
           {
            "name": "screenshot",
            "contentType": "image/png",
-           "path": "<repo>/.relynx/runs/capture/out/capture-capture-assertion-not-from-requirement-agent-generated/test-failed-1.png"
+           "path": "<repo>/.agent/runs/capture/out/capture-capture-assertion-not-from-requirement-agent-generated/test-failed-1.png"
           },
           {
            "name": "error-context",
            "contentType": "text/markdown",
-           "path": "<repo>/.relynx/runs/capture/out/capture-capture-assertion-not-from-requirement-agent-generated/error-context.md"
+           "path": "<repo>/.agent/runs/capture/out/capture-capture-assertion-not-from-requirement-agent-generated/error-context.md"
           },
           {
            "name": "trace",
            "contentType": "application/zip",
-           "path": "<repo>/.relynx/runs/capture/out/capture-capture-assertion-not-from-requirement-agent-generated/trace.zip"
+           "path": "<repo>/.agent/runs/capture/out/capture-capture-assertion-not-from-requirement-agent-generated/trace.zip"
           }
          ],
          "errorLocation": {
@@ -336,17 +336,17 @@
           {
            "name": "screenshot",
            "contentType": "image/png",
-           "path": "<repo>/.relynx/runs/capture/out/capture-capture-product-defect-sort-agent-generated/test-failed-1.png"
+           "path": "<repo>/.agent/runs/capture/out/capture-capture-product-defect-sort-agent-generated/test-failed-1.png"
           },
           {
            "name": "error-context",
            "contentType": "text/markdown",
-           "path": "<repo>/.relynx/runs/capture/out/capture-capture-product-defect-sort-agent-generated/error-context.md"
+           "path": "<repo>/.agent/runs/capture/out/capture-capture-product-defect-sort-agent-generated/error-context.md"
           },
           {
            "name": "trace",
            "contentType": "application/zip",
-           "path": "<repo>/.relynx/runs/capture/out/capture-capture-product-defect-sort-agent-generated/trace.zip"
+           "path": "<repo>/.agent/runs/capture/out/capture-capture-product-defect-sort-agent-generated/trace.zip"
           }
          ],
          "errorLocation": {
@@ -430,17 +430,17 @@
           {
            "name": "screenshot",
            "contentType": "image/png",
-           "path": "<repo>/.relynx/runs/capture/out/capture-capture-locator-missing-agent-generated/test-failed-1.png"
+           "path": "<repo>/.agent/runs/capture/out/capture-capture-locator-missing-agent-generated/test-failed-1.png"
           },
           {
            "name": "error-context",
            "contentType": "text/markdown",
-           "path": "<repo>/.relynx/runs/capture/out/capture-capture-locator-missing-agent-generated/error-context.md"
+           "path": "<repo>/.agent/runs/capture/out/capture-capture-locator-missing-agent-generated/error-context.md"
           },
           {
            "name": "trace",
            "contentType": "application/zip",
-           "path": "<repo>/.relynx/runs/capture/out/capture-capture-locator-missing-agent-generated/trace.zip"
+           "path": "<repo>/.agent/runs/capture/out/capture-capture-locator-missing-agent-generated/trace.zip"
           }
          ],
          "errorLocation": {
@@ -524,17 +524,17 @@
           {
            "name": "screenshot",
            "contentType": "image/png",
-           "path": "<repo>/.relynx/runs/capture/out/capture-capture-environment-unreachable-agent-generated/test-failed-1.png"
+           "path": "<repo>/.agent/runs/capture/out/capture-capture-environment-unreachable-agent-generated/test-failed-1.png"
           },
           {
            "name": "error-context",
            "contentType": "text/markdown",
-           "path": "<repo>/.relynx/runs/capture/out/capture-capture-environment-unreachable-agent-generated/error-context.md"
+           "path": "<repo>/.agent/runs/capture/out/capture-capture-environment-unreachable-agent-generated/error-context.md"
           },
           {
            "name": "trace",
            "contentType": "application/zip",
-           "path": "<repo>/.relynx/runs/capture/out/capture-capture-environment-unreachable-agent-generated/trace.zip"
+           "path": "<repo>/.agent/runs/capture/out/capture-capture-environment-unreachable-agent-generated/trace.zip"
           }
          ],
          "errorLocation": {
@@ -618,17 +618,17 @@
           {
            "name": "screenshot",
            "contentType": "image/png",
-           "path": "<repo>/.relynx/runs/capture/out/capture-capture-slow-login-agent-generated/test-failed-1.png"
+           "path": "<repo>/.agent/runs/capture/out/capture-capture-slow-login-agent-generated/test-failed-1.png"
           },
           {
            "name": "error-context",
            "contentType": "text/markdown",
-           "path": "<repo>/.relynx/runs/capture/out/capture-capture-slow-login-agent-generated/error-context.md"
+           "path": "<repo>/.agent/runs/capture/out/capture-capture-slow-login-agent-generated/error-context.md"
           },
           {
            "name": "trace",
            "contentType": "application/zip",
-           "path": "<repo>/.relynx/runs/capture/out/capture-capture-slow-login-agent-generated/trace.zip"
+           "path": "<repo>/.agent/runs/capture/out/capture-capture-slow-login-agent-generated/trace.zip"
           }
          ],
          "errorLocation": {

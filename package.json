@@ -27,7 +27,7 @@
     "type": "git",
     "url": "git+https://github.com/frankvutech/frankvu-ai-driven-playwright-framework.git"
   },
-  "author": "",
+  "author": "Frank Vu",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/frankvutech/frankvu-ai-driven-playwright-framework/issues"

@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
   "metadata": {
-    "runId": "eval-20261019T121424Z-deterministic-nk3of9",
-    "timestamp": "2026-10-19T12:14:24.871Z",
+    "runId": "eval-20261019T151101Z-deterministic-l2a51c",
+    "timestamp": "2026-10-19T15:11:01.289Z",
     "mode": "deterministic",
-    "datasetVersion": "3.0.0",
-    "datasetSha256": "a24e52dd49b397259d7a1028ae83fdc40f63598f2cc008f3a0e289735a291324",
+    "datasetVersion": "3.0.1",
+    "datasetSha256": "633d6f67bd99ec6e86defd41416d27adcaf3f02b658bd043f54175d2dac0b395",
     "agent": {
-      "commit": "5215869940cfc6db78f5284a2b8f290bad51bb1a",
+      "commit": "e6bd5303ec669b9450f49bcb7999dcd8a37c1403",
       "dirty": true
     },
     "promptVersion": "3.0.0",
@@ -39,7 +39,7 @@
       "repeat": 1,
       "suites": "all",
       "cases": "all",
-      "baseline": null,
+      "baseline": "eval/baselines/deterministic.json",
       "pricing": "eval/pricing.json",
       "gates": "eval/gates.json"
     },
@@ -51,9 +51,9 @@
       "total": 104,
       "humanReviewed": 0,
       "byMethod": {
-        "constructed": 41,
+        "constructed": 56,
         "observed-controlled-variation": 14,
-        "author-judgment": 49
+        "author-judgment": 34
       }
     },
     "executionRefs": [],
@@ -710,7 +710,7 @@
     },
     {
       "id": "recovery.meanRecoveryLatencyMs",
-      "value": 22.5,
+      "value": 22,
       "unit": "ms",
       "kind": "measured",
       "higherIsBetter": false,
@@ -1300,7 +1300,7 @@
             "provider": "mock",
             "model": "mock",
             "attempts": 1,
-            "latencyMs": 0,
+            "latencyMs": 1,
             "inputTokens": 0,
             "outputTokens": 0,
             "tokensAvailable": false,
@@ -1464,7 +1464,7 @@
             "provider": "mock",
             "model": "mock",
             "attempts": 1,
-            "latencyMs": 1,
+            "latencyMs": 0,
             "inputTokens": 0,
             "outputTokens": 0,
             "tokensAvailable": false,
@@ -1735,7 +1735,7 @@
             "provider": "mock",
             "model": "mock",
             "attempts": 1,
-            "latencyMs": 1,
+            "latencyMs": 0,
             "inputTokens": 0,
             "outputTokens": 0,
             "tokensAvailable": false,
@@ -3956,7 +3956,7 @@
             "provider": "mock",
             "model": "mock",
             "attempts": 1,
-            "latencyMs": 0,
+            "latencyMs": 1,
             "inputTokens": 0,
             "outputTokens": 0,
             "tokensAvailable": false,
@@ -5216,7 +5216,7 @@
             "provider": "mock",
             "model": "mock",
             "attempts": 1,
-            "latencyMs": 1,
+            "latencyMs": 0,
             "inputTokens": 0,
             "outputTokens": 0,
             "tokensAvailable": false,
@@ -5703,7 +5703,7 @@
             "provider": "mock",
             "model": "mock",
             "attempts": 1,
-            "latencyMs": 1,
+            "latencyMs": 0,
             "inputTokens": 0,
             "outputTokens": 0,
             "tokensAvailable": false,
@@ -5922,7 +5922,7 @@
             "provider": "mock",
             "model": "mock",
             "attempts": 1,
-            "latencyMs": 1,
+            "latencyMs": 0,
             "inputTokens": 0,
             "outputTokens": 0,
             "tokensAvailable": false,
@@ -6099,7 +6099,7 @@
             "provider": "mock",
             "model": "mock",
             "attempts": 1,
-            "latencyMs": 1,
+            "latencyMs": 0,
             "inputTokens": 0,
             "outputTokens": 0,
             "tokensAvailable": false,
@@ -6192,7 +6192,7 @@
             "provider": "mock",
             "model": "mock",
             "attempts": 1,
-            "latencyMs": 0,
+            "latencyMs": 1,
             "inputTokens": 0,
             "outputTokens": 0,
             "tokensAvailable": false,
@@ -7420,7 +7420,7 @@
             "retries": 2,
             "recovered": false,
             "executions": 0,
-            "elapsedMs": 637,
+            "elapsedMs": 635,
             "limitMs": 1680
           },
           "checks": [
@@ -7446,7 +7446,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "637ms <= 1680ms"
+              "detail": "635ms <= 1680ms"
             },
             {
               "name": "noGenerationAfterFailure",
@@ -7467,7 +7467,7 @@
             "recovered": true,
             "recoveryLatencyMs": 12,
             "executions": 0,
-            "elapsedMs": 12,
+            "elapsedMs": 13,
             "limitMs": 1680
           },
           "checks": [
@@ -7493,7 +7493,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "12ms <= 1680ms"
+              "detail": "13ms <= 1680ms"
             },
             {
               "name": "noGenerationAfterFailure",
@@ -7512,7 +7512,7 @@
             "attempts": 3,
             "retries": 2,
             "recovered": true,
-            "recoveryLatencyMs": 33,
+            "recoveryLatencyMs": 32,
             "executions": 0,
             "elapsedMs": 33,
             "limitMs": 1680
@@ -7561,7 +7561,7 @@
             "retries": 2,
             "recovered": false,
             "executions": 0,
-            "elapsedMs": 32,
+            "elapsedMs": 34,
             "limitMs": 1680
           },
           "checks": [
@@ -7587,7 +7587,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "32ms <= 1680ms"
+              "detail": "34ms <= 1680ms"
             },
             {
               "name": "noGenerationAfterFailure",
@@ -7747,7 +7747,7 @@
             "recovered": false,
             "executions": 1,
             "evidencePreserved": true,
-            "elapsedMs": 7,
+            "elapsedMs": 4,
             "limitMs": 30000
           },
           "checks": [
@@ -7773,7 +7773,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "7ms <= 30000ms"
+              "detail": "4ms <= 30000ms"
             },
             {
               "name": "artifactStates",
@@ -7798,7 +7798,7 @@
             "recovered": false,
             "executions": 1,
             "evidencePreserved": true,
-            "elapsedMs": 342,
+            "elapsedMs": 385,
             "limitMs": 60000
           },
           "checks": [
@@ -7824,7 +7824,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "342ms <= 60000ms"
+              "detail": "385ms <= 60000ms"
             },
             {
               "name": "artifactStates",
@@ -7849,7 +7849,7 @@
             "recovered": false,
             "executions": 1,
             "evidencePreserved": true,
-            "elapsedMs": 2,
+            "elapsedMs": 5,
             "limitMs": 30000
           },
           "checks": [
@@ -7875,7 +7875,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "2ms <= 30000ms"
+              "detail": "5ms <= 30000ms"
             },
             {
               "name": "artifactStates",
@@ -7900,7 +7900,7 @@
             "recovered": false,
             "executions": 1,
             "evidencePreserved": true,
-            "elapsedMs": 1505,
+            "elapsedMs": 1509,
             "limitMs": 8500
           },
           "checks": [
@@ -7926,7 +7926,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "1505ms <= 8500ms"
+              "detail": "1509ms <= 8500ms"
             },
             {
               "name": "artifactStates",
@@ -7992,7 +7992,7 @@
             "recovered": false,
             "executions": 1,
             "evidencePreserved": true,
-            "elapsedMs": 2,
+            "elapsedMs": 3,
             "limitMs": 30000
           },
           "checks": [
@@ -8018,7 +8018,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "2ms <= 30000ms"
+              "detail": "3ms <= 30000ms"
             },
             {
               "name": "artifactStates",
@@ -8084,7 +8084,7 @@
             "recovered": false,
             "executions": 0,
             "evidencePreserved": false,
-            "elapsedMs": 0,
+            "elapsedMs": 1,
             "limitMs": 30000
           },
           "checks": [
@@ -8110,7 +8110,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "0ms <= 30000ms"
+              "detail": "1ms <= 30000ms"
             }
           ],
           "pass": true
@@ -8156,7 +8156,7 @@
             {
               "name": "errorClassification",
               "pass": true,
-              "detail": "generated/20261019T121442Z-REQ-101-8xvsz1/REQ-101-SC-01.spec.ts changed after approval (hash mismatch)"
+              "detail": "generated/20261019T151118Z-REQ-101-zr2i22/REQ-101-SC-01.spec.ts changed after approval (hash mismatch)"
             }
           ],
           "pass": true
@@ -8268,7 +8268,7 @@
             "recovered": false,
             "executions": 1,
             "evidencePreserved": true,
-            "elapsedMs": 3,
+            "elapsedMs": 2,
             "limitMs": 30000
           },
           "checks": [
@@ -8294,7 +8294,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "3ms <= 30000ms"
+              "detail": "2ms <= 30000ms"
             },
             {
               "name": "artifactStates",
@@ -8401,7 +8401,7 @@
             "finalStatus": "rejected",
             "recovered": false,
             "executions": 0,
-            "elapsedMs": 408,
+            "elapsedMs": 421,
             "limitMs": 60000
           },
           "checks": [
@@ -8418,7 +8418,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "408ms"
+              "detail": "421ms"
             }
           ],
           "pass": true
@@ -8435,7 +8435,7 @@
             "retries": 2,
             "recovered": false,
             "executions": 0,
-            "elapsedMs": 47,
+            "elapsedMs": 48,
             "limitMs": 3360
           },
           "checks": [
@@ -8462,7 +8462,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "47ms"
+              "detail": "48ms"
             }
           ],
           "pass": true
@@ -8478,7 +8478,7 @@
             "retries": 2,
             "recovered": false,
             "executions": 0,
-            "elapsedMs": 659,
+            "elapsedMs": 673,
             "limitMs": 31680
           },
           "checks": [
@@ -8503,7 +8503,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "659ms"
+              "detail": "673ms"
             },
             {
               "name": "boundedAttempts",
@@ -8522,7 +8522,7 @@
             "finalStatus": "insufficient_evidence",
             "recovered": false,
             "executions": 0,
-            "elapsedMs": 31,
+            "elapsedMs": 27,
             "limitMs": 31680
           },
           "checks": [
@@ -8547,7 +8547,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "31ms"
+              "detail": "27ms"
             },
             {
               "name": "noModelCall",
@@ -8568,7 +8568,7 @@
             "retries": 0,
             "recovered": false,
             "executions": 0,
-            "elapsedMs": 451,
+            "elapsedMs": 682,
             "limitMs": 31680
           },
           "checks": [
@@ -8593,7 +8593,7 @@
             {
               "name": "terminatesWithinLimit",
               "pass": true,
-              "detail": "451ms"
+              "detail": "682ms"
             }
           ],
           "pass": true
@@ -8616,7 +8616,7 @@
           "d": 2,
           "value": 1
         },
-        "meanRecoveryLatencyMs": 22.5,
+        "meanRecoveryLatencyMs": 22,
         "retriesOnRecoverable": [
           {
             "id": "FI-02",
@@ -8640,6 +8640,452 @@
         "duplicateExecutionPrevented": true,
         "neverPassedWithoutEvidence": true
       }
+    },
+    "comparison": {
+      "before": {
+        "runId": "eval-20261019T150309Z-deterministic-xl7lf1",
+        "datasetVersion": "3.0.1",
+        "commit": "e6bd5303ec669b9450f49bcb7999dcd8a37c1403",
+        "mode": "deterministic"
+      },
+      "after": {
+        "runId": "eval-20261019T151101Z-deterministic-l2a51c",
+        "datasetVersion": "3.0.1",
+        "commit": "e6bd5303ec669b9450f49bcb7999dcd8a37c1403",
+        "mode": "deterministic"
+      },
+      "comparable": true,
+      "datasetChanged": false,
+      "notes": [
+        "same dataset version but different content hash: the dataset was edited without a version bump"
+      ],
+      "changes": [
+        {
+          "id": "analysis.rules.accuracy",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 0.5652173913043478,
+          "after": 0.5652173913043478,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "analysis.rules.escalationOnInsufficientEvidence",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "analysis.rules.evidenceRelevance",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "analysis.rules.labelInTopOrAlternatives",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 0.8260869565217391,
+          "after": 0.8260869565217391,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "analysis.rules.macroRecall",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 0.5833333333333333,
+          "after": 0.5833333333333333,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "analysis.rules.uncertaintyIdentified",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 0.9090909090909091,
+          "after": 0.9090909090909091,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "analysis.rules.unsupportedRootCauseClaims",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "assertion.rules.exactAgreementWithLabels",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "evidence.falsePasses",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "evidence.phantomReferences",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "evidence.requirementAssociation",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "evidence.statusInterpretation",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "generation.layer.api.incorrectIntentDetected",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "generation.layer.api.intentCorrectByReference",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 0.6153846153846154,
+          "after": 0.6153846153846154,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "generation.layer.api.requiredAssertionsMet",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 0.6153846153846154,
+          "after": 0.6153846153846154,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "generation.layer.api.typescriptValidity",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "generation.layer.combined.incorrectIntentDetected",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": null,
+          "after": null,
+          "delta": null,
+          "direction": "unchanged"
+        },
+        {
+          "id": "generation.layer.combined.intentCorrectByReference",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "generation.layer.combined.requiredAssertionsMet",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "generation.layer.combined.typescriptValidity",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "generation.layer.ui.incorrectIntentDetected",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": null,
+          "after": null,
+          "delta": null,
+          "direction": "unchanged"
+        },
+        {
+          "id": "generation.layer.ui.intentCorrectByReference",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": null,
+          "after": null,
+          "delta": null,
+          "direction": "unchanged"
+        },
+        {
+          "id": "generation.layer.ui.requiredAssertionsMet",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 0.6,
+          "after": 0.6,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "generation.layer.ui.typescriptValidity",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "generation.semantic.requiredAssertionsSatisfied",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 0.6976744186046512,
+          "after": 0.6976744186046512,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "generation.semantic.specsWithoutAssertionFindings",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 0.5333333333333333,
+          "after": 0.5333333333333333,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "generation.structural.conventionCompliance",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "generation.structural.expectationsMet",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "generation.structural.schemaValidity",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 0.967741935483871,
+          "after": 0.967741935483871,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "generation.structural.traceability",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "generation.structural.typescriptValidity",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "generation.structural.unsupportedOrDuplicateRejected",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "planning.semantic.clarificationBehaviourCorrect",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 0.625,
+          "after": 0.625,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "planning.semantic.expectedScenarioCategoriesPresent",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 0.8333333333333334,
+          "after": 0.8333333333333334,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "planning.semantic.plansFreeOfProhibitedAssumptions",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 0.8,
+          "after": 0.8,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "planning.semantic.requiredCoverageMet",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 0.8,
+          "after": 0.8,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "planning.structural.ambiguityDetection",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "planning.structural.expectationsMet",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "planning.structural.outcomeAccuracy",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "planning.structural.scenarioTraceability",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 0.9166666666666666,
+          "after": 0.9166666666666666,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "planning.structural.unsupportedAssumptionRejection",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "recovery.errorClassificationCorrect",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "recovery.meanRecoveryLatencyMs",
+          "kind": "measured",
+          "gate": "none",
+          "before": 22.5,
+          "after": 22,
+          "delta": -0.5,
+          "direction": "inconclusive",
+          "reason": "latency has no confidence interval here"
+        },
+        {
+          "id": "recovery.recoverySuccess",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "recovery.scenariosMeetingExpectations",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "recovery.terminatedWithinLimits",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "recovery.unrecoverablePropagated",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        }
+      ],
+      "gatedRegressions": []
     }
   },
   "findings": [
@@ -8832,8 +9278,8 @@
     },
     {
       "name": "baseline-regression",
-      "status": "not-applicable",
-      "detail": "no baseline given"
+      "status": "pass",
+      "detail": "no gated regressions vs eval-20261019T150309Z-deterministic-xl7lf1"
     },
     {
       "name": "report-schema",
@@ -8842,7 +9288,7 @@
     }
   ],
   "limitations": [
-    "0 of 104 reference labels are human-reviewed; the rest are author-assigned (by the AI assistant that built the framework) and pending review.",
+    "0 of 104 reference labels are human-reviewed; the rest are assigned by the framework author, who also wrote the rules they score, and are pending review.",
     "Datasets are small: rates with fewer than 10 cases in the denominator are marked insufficient-data, and percentiles from fewer than 20 samples are not distributions.",
     "The test target is a public demo site with no version identifier; seeded defects are its intentionally broken accounts, verified by eval/probes/seeded-defects.ts.",
     "The failure classifier treats an expected value as coming from the requirement when it appears anywhere in the criterion text (substring), which can turn an incorrect assertion into a product_behavior diagnosis.",

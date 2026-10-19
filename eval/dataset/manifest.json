@@ -1,5 +1,5 @@
 {
-  "datasetVersion": "3.0.0",
+  "datasetVersion": "3.0.1",
   "description": "AI Test Agent evaluation dataset.",
   "files": {
     "planning": "planning.json",
@@ -29,6 +29,11 @@
       "version": "3.0.0",
       "date": "2026-10-19",
       "changes": "API and combined cases: 4 planning (PL-22..25), 12 generation (GE-20..31) with API required assertions and intent labels; notes-app functional suites FS-NOTESAPI and FS-NOTESUI with seeded defects D-NOTES-CREATE, D-NOTES-AUTHZ, D-NOTES-TITLELEN and the renamed-add-button drift variant; 15 healing cases (healing.json); real failure captures from the example app."
+    },
+    {
+      "version": "3.0.1",
+      "date": "2026-10-19",
+      "changes": "Label review follow-up (docs/PHASE3_LABEL_REVIEW.md), no reference outcome changed and no label marked human-reviewed: provenance method author-judgment -> constructed for PL-07, PL-08, PL-09, PL-11, PL-12, PL-13, PL-15 and GE-02..GE-09; FS-NOTESAPI suite note reworded to match execution evidence (SC-05 is caught via the cleanup fixture, not missed); relevance policy for defects on a test's execution path recorded on FS-NOTESAPI and FS-NOTESUI, as decided by Frank Vu. Attribution: every label author is now \"Frank Vu\" (the repository owner); review statuses are unchanged and still pending. Recorded captures: run paths renamed to .agent/ and the deliberately unresolvable test host renamed to agent-does-not-exist.invalid; statuses, error types and every other recorded value are unchanged."
     }
   ]
 }

@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
   "metadata": {
-    "runId": "eval-20261019T121447Z-functional-qqve2i",
-    "timestamp": "2026-10-19T12:14:47.583Z",
+    "runId": "eval-20261019T151124Z-functional-sobvh5",
+    "timestamp": "2026-10-19T15:11:24.847Z",
     "mode": "functional",
-    "datasetVersion": "3.0.0",
-    "datasetSha256": "a24e52dd49b397259d7a1028ae83fdc40f63598f2cc008f3a0e289735a291324",
+    "datasetVersion": "3.0.1",
+    "datasetSha256": "633d6f67bd99ec6e86defd41416d27adcaf3f02b658bd043f54175d2dac0b395",
     "agent": {
-      "commit": "5215869940cfc6db78f5284a2b8f290bad51bb1a",
+      "commit": "e6bd5303ec669b9450f49bcb7999dcd8a37c1403",
       "dirty": true
     },
     "promptVersion": "3.0.0",
@@ -39,7 +39,7 @@
       "repeat": 1,
       "suites": "all",
       "cases": "all",
-      "baseline": null,
+      "baseline": "eval/baselines/functional.json",
       "pricing": "eval/pricing.json",
       "gates": "eval/gates.json"
     },
@@ -51,29 +51,29 @@
       "total": 104,
       "humanReviewed": 0,
       "byMethod": {
-        "constructed": 41,
+        "constructed": 56,
         "observed-controlled-variation": 14,
-        "author-judgment": 49
+        "author-judgment": 34
       }
     },
     "executionRefs": [
-      ".agent/runs/20261019T121447Z-REQ-301-wkuc0u",
-      ".agent/runs/20261019T121447Z-REQ-301-368ah7",
-      ".agent/runs/20261019T121447Z-REQ-301-arhqnz",
-      ".agent/runs/20261019T121454Z-REQ-302-paifeh",
-      ".agent/runs/20261019T121458Z-REQ-302-ftybr1",
-      ".agent/runs/20261019T121459Z-REQ-302-nqhdxk",
-      ".agent/runs/20261019T121500Z-REQ-303-jkt2au",
-      ".agent/runs/20261019T121504Z-REQ-303-5kljyk",
-      ".agent/runs/20261019T121508Z-REQ-303-rgi33j",
-      ".agent/runs/20261019T121510Z-REQ-304-vwfb46",
-      ".agent/runs/20261019T121516Z-REQ-411-vk556c",
-      ".agent/runs/20261019T121518Z-REQ-411-6sim1g",
-      ".agent/runs/20261019T121518Z-REQ-411-79mzu6",
-      ".agent/runs/20261019T121519Z-REQ-411-5fj49l",
-      ".agent/runs/20261019T121521Z-REQ-412-ufpyfk",
-      ".agent/runs/20261019T121522Z-REQ-412-1gzdao",
-      ".agent/runs/20261019T121522Z-REQ-412-yui2m5"
+      ".agent/runs/20261019T151124Z-REQ-301-e7v41l",
+      ".agent/runs/20261019T151124Z-REQ-301-mg35gt",
+      ".agent/runs/20261019T151124Z-REQ-301-arn4w2",
+      ".agent/runs/20261019T151131Z-REQ-302-fxd3sk",
+      ".agent/runs/20261019T151135Z-REQ-302-a7dwfr",
+      ".agent/runs/20261019T151137Z-REQ-302-820fx8",
+      ".agent/runs/20261019T151138Z-REQ-303-42lvg7",
+      ".agent/runs/20261019T151142Z-REQ-303-fgbfeo",
+      ".agent/runs/20261019T151144Z-REQ-303-za63my",
+      ".agent/runs/20261019T151147Z-REQ-304-bjh4gy",
+      ".agent/runs/20261019T151153Z-REQ-411-ri3x47",
+      ".agent/runs/20261019T151155Z-REQ-411-80k3on",
+      ".agent/runs/20261019T151155Z-REQ-411-rh95au",
+      ".agent/runs/20261019T151156Z-REQ-411-5mhebz",
+      ".agent/runs/20261019T151158Z-REQ-412-2nfcij",
+      ".agent/runs/20261019T151159Z-REQ-412-k8tek7",
+      ".agent/runs/20261019T151159Z-REQ-412-bt3dh3"
     ],
     "repeat": 1
   },
@@ -449,7 +449,7 @@
     },
     {
       "id": "latency.totalMedianMs",
-      "value": 8108,
+      "value": 7941,
       "unit": "ms",
       "kind": "measured",
       "higherIsBetter": false,
@@ -460,7 +460,7 @@
     },
     {
       "id": "latency.totalP90Ms",
-      "value": 12977,
+      "value": 13263,
       "unit": "ms",
       "kind": "measured",
       "higherIsBetter": false,
@@ -482,7 +482,7 @@
     },
     {
       "id": "latency.playwrightMedianMs",
-      "value": 6935,
+      "value": 6954,
       "unit": "ms",
       "kind": "measured",
       "higherIsBetter": false,
@@ -493,7 +493,7 @@
     },
     {
       "id": "latency.validationMedianMs",
-      "value": 908,
+      "value": 876,
       "unit": "ms",
       "kind": "measured",
       "higherIsBetter": false,
@@ -1811,10 +1811,10 @@
         {
           "suiteId": "FS-SORT",
           "variant": "standard",
-          "runId": "20261019T121447Z-REQ-301-wkuc0u",
+          "runId": "20261019T151124Z-REQ-301-e7v41l",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261019T121447Z-REQ-301-wkuc0u",
+            "workflowId": "20261019T151124Z-REQ-301-e7v41l",
             "caseId": "FS-SORT/standard",
             "usage": [
               {
@@ -1840,22 +1840,22 @@
                 "outcome": "ok"
               }
             ],
-            "totalMs": 6394,
-            "playwrightMs": 4056,
+            "totalMs": 6671,
+            "playwrightMs": 4404,
             "succeeded": true,
             "phases": {
-              "validationMs": 2284,
-              "analysisMs": 1
+              "validationMs": 2215,
+              "analysisMs": 0
             }
           }
         },
         {
           "suiteId": "FS-SORT",
           "variant": "problem",
-          "runId": "20261019T121447Z-REQ-301-368ah7",
+          "runId": "20261019T151124Z-REQ-301-mg35gt",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261019T121447Z-REQ-301-368ah7",
+            "workflowId": "20261019T151124Z-REQ-301-mg35gt",
             "caseId": "FS-SORT/problem",
             "usage": [
               {
@@ -1881,11 +1881,11 @@
                 "outcome": "ok"
               }
             ],
-            "totalMs": 12309,
-            "playwrightMs": 9937,
+            "totalMs": 12503,
+            "playwrightMs": 10242,
             "succeeded": true,
             "phases": {
-              "validationMs": 1568,
+              "validationMs": 1440,
               "analysisMs": 2
             }
           }
@@ -1893,10 +1893,10 @@
         {
           "suiteId": "FS-SORT",
           "variant": "error",
-          "runId": "20261019T121447Z-REQ-301-arhqnz",
+          "runId": "20261019T151124Z-REQ-301-arn4w2",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261019T121447Z-REQ-301-arhqnz",
+            "workflowId": "20261019T151124Z-REQ-301-arn4w2",
             "caseId": "FS-SORT/error",
             "usage": [
               {
@@ -1922,11 +1922,11 @@
                 "outcome": "ok"
               }
             ],
-            "totalMs": 12977,
-            "playwrightMs": 10617,
+            "totalMs": 13263,
+            "playwrightMs": 10983,
             "succeeded": true,
             "phases": {
-              "validationMs": 942,
+              "validationMs": 943,
               "analysisMs": 1
             }
           }
@@ -1934,10 +1934,10 @@
         {
           "suiteId": "FS-CART",
           "variant": "standard",
-          "runId": "20261019T121454Z-REQ-302-paifeh",
+          "runId": "20261019T151131Z-REQ-302-fxd3sk",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261019T121454Z-REQ-302-paifeh",
+            "workflowId": "20261019T151131Z-REQ-302-fxd3sk",
             "caseId": "FS-CART/standard",
             "usage": [
               {
@@ -1945,7 +1945,7 @@
                 "provider": "mock",
                 "model": "mock",
                 "attempts": 1,
-                "latencyMs": 0,
+                "latencyMs": 1,
                 "inputTokens": 0,
                 "outputTokens": 0,
                 "tokensAvailable": false,
@@ -1963,11 +1963,11 @@
                 "outcome": "ok"
               }
             ],
-            "totalMs": 4048,
-            "playwrightMs": 3426,
+            "totalMs": 3477,
+            "playwrightMs": 2832,
             "succeeded": true,
             "phases": {
-              "validationMs": 600,
+              "validationMs": 592,
               "analysisMs": 1
             }
           }
@@ -1975,10 +1975,10 @@
         {
           "suiteId": "FS-CART",
           "variant": "problem",
-          "runId": "20261019T121458Z-REQ-302-ftybr1",
+          "runId": "20261019T151135Z-REQ-302-a7dwfr",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261019T121458Z-REQ-302-ftybr1",
+            "workflowId": "20261019T151135Z-REQ-302-a7dwfr",
             "caseId": "FS-CART/problem",
             "usage": [
               {
@@ -1986,7 +1986,7 @@
                 "provider": "mock",
                 "model": "mock",
                 "attempts": 1,
-                "latencyMs": 0,
+                "latencyMs": 1,
                 "inputTokens": 0,
                 "outputTokens": 0,
                 "tokensAvailable": false,
@@ -2004,22 +2004,22 @@
                 "outcome": "ok"
               }
             ],
-            "totalMs": 10155,
-            "playwrightMs": 9234,
+            "totalMs": 9625,
+            "playwrightMs": 9003,
             "succeeded": true,
             "phases": {
-              "validationMs": 893,
-              "analysisMs": 1
+              "validationMs": 584,
+              "analysisMs": 2
             }
           }
         },
         {
           "suiteId": "FS-CART",
           "variant": "error",
-          "runId": "20261019T121459Z-REQ-302-nqhdxk",
+          "runId": "20261019T151137Z-REQ-302-820fx8",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261019T121459Z-REQ-302-nqhdxk",
+            "workflowId": "20261019T151137Z-REQ-302-820fx8",
             "caseId": "FS-CART/error",
             "usage": [
               {
@@ -2045,22 +2045,22 @@
                 "outcome": "ok"
               }
             ],
-            "totalMs": 10695,
-            "playwrightMs": 9278,
+            "totalMs": 10535,
+            "playwrightMs": 9045,
             "succeeded": true,
             "phases": {
-              "validationMs": 1368,
-              "analysisMs": 2
+              "validationMs": 1462,
+              "analysisMs": 0
             }
           }
         },
         {
           "suiteId": "FS-CHECKOUT",
           "variant": "standard",
-          "runId": "20261019T121500Z-REQ-303-jkt2au",
+          "runId": "20261019T151138Z-REQ-303-42lvg7",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261019T121500Z-REQ-303-jkt2au",
+            "workflowId": "20261019T151138Z-REQ-303-42lvg7",
             "caseId": "FS-CHECKOUT/standard",
             "usage": [
               {
@@ -2086,22 +2086,22 @@
                 "outcome": "ok"
               }
             ],
-            "totalMs": 4123,
-            "playwrightMs": 3367,
+            "totalMs": 3880,
+            "playwrightMs": 3143,
             "succeeded": true,
             "phases": {
-              "validationMs": 728,
-              "analysisMs": 1
+              "validationMs": 709,
+              "analysisMs": 0
             }
           }
         },
         {
           "suiteId": "FS-CHECKOUT",
           "variant": "problem",
-          "runId": "20261019T121504Z-REQ-303-5kljyk",
+          "runId": "20261019T151142Z-REQ-303-fgbfeo",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261019T121504Z-REQ-303-5kljyk",
+            "workflowId": "20261019T151142Z-REQ-303-fgbfeo",
             "caseId": "FS-CHECKOUT/problem",
             "usage": [
               {
@@ -2127,11 +2127,11 @@
                 "outcome": "ok"
               }
             ],
-            "totalMs": 13526,
-            "playwrightMs": 12977,
+            "totalMs": 13798,
+            "playwrightMs": 13267,
             "succeeded": true,
             "phases": {
-              "validationMs": 526,
+              "validationMs": 495,
               "analysisMs": 1
             }
           }
@@ -2139,10 +2139,10 @@
         {
           "suiteId": "FS-CHECKOUT",
           "variant": "error",
-          "runId": "20261019T121508Z-REQ-303-rgi33j",
+          "runId": "20261019T151144Z-REQ-303-za63my",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261019T121508Z-REQ-303-rgi33j",
+            "workflowId": "20261019T151144Z-REQ-303-za63my",
             "caseId": "FS-CHECKOUT/error",
             "usage": [
               {
@@ -2150,7 +2150,7 @@
                 "provider": "mock",
                 "model": "mock",
                 "attempts": 1,
-                "latencyMs": 1,
+                "latencyMs": 0,
                 "inputTokens": 0,
                 "outputTokens": 0,
                 "tokensAvailable": false,
@@ -2168,11 +2168,11 @@
                 "outcome": "ok"
               }
             ],
-            "totalMs": 8366,
-            "playwrightMs": 7874,
+            "totalMs": 8957,
+            "playwrightMs": 8020,
             "succeeded": true,
             "phases": {
-              "validationMs": 472,
+              "validationMs": 876,
               "analysisMs": 0
             }
           }
@@ -2180,10 +2180,10 @@
         {
           "suiteId": "FS-LOGIN",
           "variant": "standard",
-          "runId": "20261019T121510Z-REQ-304-vwfb46",
+          "runId": "20261019T151147Z-REQ-304-bjh4gy",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261019T121510Z-REQ-304-vwfb46",
+            "workflowId": "20261019T151147Z-REQ-304-bjh4gy",
             "caseId": "FS-LOGIN/standard",
             "usage": [
               {
@@ -2209,11 +2209,11 @@
                 "outcome": "ok"
               }
             ],
-            "totalMs": 8920,
-            "playwrightMs": 7955,
+            "totalMs": 8380,
+            "playwrightMs": 7696,
             "succeeded": true,
             "phases": {
-              "validationMs": 908,
+              "validationMs": 663,
               "analysisMs": 1
             }
           }
@@ -2221,10 +2221,10 @@
         {
           "suiteId": "FS-NOTESAPI",
           "variant": "standard",
-          "runId": "20261019T121516Z-REQ-411-vk556c",
+          "runId": "20261019T151153Z-REQ-411-ri3x47",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261019T121516Z-REQ-411-vk556c",
+            "workflowId": "20261019T151153Z-REQ-411-ri3x47",
             "caseId": "FS-NOTESAPI/standard",
             "usage": [
               {
@@ -2243,18 +2243,18 @@
                 "provider": "mock",
                 "model": "mock",
                 "attempts": 1,
-                "latencyMs": 0,
+                "latencyMs": 1,
                 "inputTokens": 0,
                 "outputTokens": 0,
                 "tokensAvailable": false,
                 "outcome": "ok"
               }
             ],
-            "totalMs": 2417,
-            "playwrightMs": 1821,
+            "totalMs": 1682,
+            "playwrightMs": 994,
             "succeeded": true,
             "phases": {
-              "validationMs": 562,
+              "validationMs": 657,
               "analysisMs": 1
             }
           }
@@ -2262,10 +2262,10 @@
         {
           "suiteId": "FS-NOTESAPI",
           "variant": "broken-create",
-          "runId": "20261019T121518Z-REQ-411-6sim1g",
+          "runId": "20261019T151155Z-REQ-411-80k3on",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261019T121518Z-REQ-411-6sim1g",
+            "workflowId": "20261019T151155Z-REQ-411-80k3on",
             "caseId": "FS-NOTESAPI/broken-create",
             "usage": [
               {
@@ -2291,11 +2291,11 @@
                 "outcome": "ok"
               }
             ],
-            "totalMs": 4739,
-            "playwrightMs": 2964,
+            "totalMs": 3241,
+            "playwrightMs": 1771,
             "succeeded": true,
             "phases": {
-              "validationMs": 1742,
+              "validationMs": 1444,
               "analysisMs": 1
             }
           }
@@ -2303,10 +2303,10 @@
         {
           "suiteId": "FS-NOTESAPI",
           "variant": "auth-bypass",
-          "runId": "20261019T121518Z-REQ-411-79mzu6",
+          "runId": "20261019T151155Z-REQ-411-rh95au",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261019T121518Z-REQ-411-79mzu6",
+            "workflowId": "20261019T151155Z-REQ-411-rh95au",
             "caseId": "FS-NOTESAPI/auth-bypass",
             "usage": [
               {
@@ -2332,22 +2332,22 @@
                 "outcome": "ok"
               }
             ],
-            "totalMs": 2642,
-            "playwrightMs": 1606,
+            "totalMs": 3465,
+            "playwrightMs": 2507,
             "succeeded": true,
             "phases": {
-              "validationMs": 1011,
-              "analysisMs": 2
+              "validationMs": 926,
+              "analysisMs": 1
             }
           }
         },
         {
           "suiteId": "FS-NOTESAPI",
           "variant": "no-title-limit",
-          "runId": "20261019T121519Z-REQ-411-5fj49l",
+          "runId": "20261019T151156Z-REQ-411-5mhebz",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261019T121519Z-REQ-411-5fj49l",
+            "workflowId": "20261019T151156Z-REQ-411-5mhebz",
             "caseId": "FS-NOTESAPI/no-title-limit",
             "usage": [
               {
@@ -2373,22 +2373,22 @@
                 "outcome": "ok"
               }
             ],
-            "totalMs": 2809,
-            "playwrightMs": 2302,
+            "totalMs": 3489,
+            "playwrightMs": 2993,
             "succeeded": true,
             "phases": {
-              "validationMs": 485,
-              "analysisMs": 1
+              "validationMs": 472,
+              "analysisMs": 2
             }
           }
         },
         {
           "suiteId": "FS-NOTESUI",
           "variant": "standard",
-          "runId": "20261019T121521Z-REQ-412-ufpyfk",
+          "runId": "20261019T151158Z-REQ-412-2nfcij",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261019T121521Z-REQ-412-ufpyfk",
+            "workflowId": "20261019T151158Z-REQ-412-2nfcij",
             "caseId": "FS-NOTESUI/standard",
             "usage": [
               {
@@ -2407,29 +2407,29 @@
                 "provider": "mock",
                 "model": "mock",
                 "attempts": 1,
-                "latencyMs": 1,
+                "latencyMs": 0,
                 "inputTokens": 0,
                 "outputTokens": 0,
                 "tokensAvailable": false,
                 "outcome": "ok"
               }
             ],
-            "totalMs": 3979,
-            "playwrightMs": 2104,
+            "totalMs": 3975,
+            "playwrightMs": 2245,
             "succeeded": true,
             "phases": {
-              "validationMs": 1842,
-              "analysisMs": 0
+              "validationMs": 1703,
+              "analysisMs": 1
             }
           }
         },
         {
           "suiteId": "FS-NOTESUI",
           "variant": "broken-create",
-          "runId": "20261019T121522Z-REQ-412-1gzdao",
+          "runId": "20261019T151159Z-REQ-412-k8tek7",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261019T121522Z-REQ-412-1gzdao",
+            "workflowId": "20261019T151159Z-REQ-412-k8tek7",
             "caseId": "FS-NOTESUI/broken-create",
             "usage": [
               {
@@ -2455,22 +2455,22 @@
                 "outcome": "ok"
               }
             ],
-            "totalMs": 8108,
-            "playwrightMs": 6935,
+            "totalMs": 7941,
+            "playwrightMs": 6954,
             "succeeded": true,
             "phases": {
-              "validationMs": 1150,
-              "analysisMs": 0
+              "validationMs": 963,
+              "analysisMs": 1
             }
           }
         },
         {
           "suiteId": "FS-NOTESUI",
           "variant": "renamed-add-button",
-          "runId": "20261019T121522Z-REQ-412-yui2m5",
+          "runId": "20261019T151159Z-REQ-412-bt3dh3",
           "status": "executed",
           "measurement": {
-            "workflowId": "20261019T121522Z-REQ-412-yui2m5",
+            "workflowId": "20261019T151159Z-REQ-412-bt3dh3",
             "caseId": "FS-NOTESUI/renamed-add-button",
             "usage": [
               {
@@ -2489,19 +2489,19 @@
                 "provider": "mock",
                 "model": "mock",
                 "attempts": 1,
-                "latencyMs": 0,
+                "latencyMs": 1,
                 "inputTokens": 0,
                 "outputTokens": 0,
                 "tokensAvailable": false,
                 "outcome": "ok"
               }
             ],
-            "totalMs": 12462,
-            "playwrightMs": 11912,
+            "totalMs": 12441,
+            "playwrightMs": 11942,
             "succeeded": true,
             "phases": {
-              "validationMs": 528,
-              "analysisMs": 1
+              "validationMs": 480,
+              "analysisMs": 0
             }
           }
         }
@@ -2848,39 +2848,39 @@
         "latencyMs": {
           "total": {
             "n": 17,
-            "mean": 7568.764705882353,
-            "median": 8108,
-            "p90": 12977,
-            "max": 13526,
+            "mean": 7489.588235294118,
+            "median": 7941,
+            "p90": 13263,
+            "max": 13798,
             "sufficientForPercentiles": false
           },
           "model": {
             "n": 17,
-            "mean": 2.764705882352941,
-            "median": 0,
+            "mean": 2.8823529411764706,
+            "median": 1,
             "p90": 13,
             "max": 27,
             "sufficientForPercentiles": false
           },
           "playwright": {
             "n": 17,
-            "mean": 6374.411764705882,
-            "median": 6935,
-            "p90": 11912,
-            "max": 12977,
+            "mean": 6355.35294117647,
+            "median": 6954,
+            "p90": 11942,
+            "max": 13267,
             "sufficientForPercentiles": false
           },
           "validation": {
             "n": 17,
-            "mean": 1035.8235294117646,
-            "median": 908,
-            "p90": 1842,
-            "max": 2284,
+            "mean": 977.8823529411765,
+            "median": 876,
+            "p90": 1703,
+            "max": 2215,
             "sufficientForPercentiles": false
           },
           "analysis": {
             "n": 17,
-            "mean": 1,
+            "mean": 0.8823529411764706,
             "median": 1,
             "p90": 2,
             "max": 2,
@@ -2899,7 +2899,7 @@
       },
       "workflows": [
         {
-          "workflowId": "20261019T121447Z-REQ-301-wkuc0u",
+          "workflowId": "20261019T151124Z-REQ-301-e7v41l",
           "caseId": "FS-SORT/standard",
           "usage": [
             {
@@ -2925,16 +2925,16 @@
               "outcome": "ok"
             }
           ],
-          "totalMs": 6394,
-          "playwrightMs": 4056,
+          "totalMs": 6671,
+          "playwrightMs": 4404,
           "succeeded": true,
           "phases": {
-            "validationMs": 2284,
-            "analysisMs": 1
+            "validationMs": 2215,
+            "analysisMs": 0
           }
         },
         {
-          "workflowId": "20261019T121447Z-REQ-301-368ah7",
+          "workflowId": "20261019T151124Z-REQ-301-mg35gt",
           "caseId": "FS-SORT/problem",
           "usage": [
             {
@@ -2960,16 +2960,16 @@
               "outcome": "ok"
             }
           ],
-          "totalMs": 12309,
-          "playwrightMs": 9937,
+          "totalMs": 12503,
+          "playwrightMs": 10242,
           "succeeded": true,
           "phases": {
-            "validationMs": 1568,
+            "validationMs": 1440,
             "analysisMs": 2
           }
         },
         {
-          "workflowId": "20261019T121447Z-REQ-301-arhqnz",
+          "workflowId": "20261019T151124Z-REQ-301-arn4w2",
           "caseId": "FS-SORT/error",
           "usage": [
             {
@@ -2995,16 +2995,16 @@
               "outcome": "ok"
             }
           ],
-          "totalMs": 12977,
-          "playwrightMs": 10617,
+          "totalMs": 13263,
+          "playwrightMs": 10983,
           "succeeded": true,
           "phases": {
-            "validationMs": 942,
+            "validationMs": 943,
             "analysisMs": 1
           }
         },
         {
-          "workflowId": "20261019T121454Z-REQ-302-paifeh",
+          "workflowId": "20261019T151131Z-REQ-302-fxd3sk",
           "caseId": "FS-CART/standard",
           "usage": [
             {
@@ -3012,7 +3012,7 @@
               "provider": "mock",
               "model": "mock",
               "attempts": 1,
-              "latencyMs": 0,
+              "latencyMs": 1,
               "inputTokens": 0,
               "outputTokens": 0,
               "tokensAvailable": false,
@@ -3030,16 +3030,16 @@
               "outcome": "ok"
             }
           ],
-          "totalMs": 4048,
-          "playwrightMs": 3426,
+          "totalMs": 3477,
+          "playwrightMs": 2832,
           "succeeded": true,
           "phases": {
-            "validationMs": 600,
+            "validationMs": 592,
             "analysisMs": 1
           }
         },
         {
-          "workflowId": "20261019T121458Z-REQ-302-ftybr1",
+          "workflowId": "20261019T151135Z-REQ-302-a7dwfr",
           "caseId": "FS-CART/problem",
           "usage": [
             {
@@ -3047,7 +3047,7 @@
               "provider": "mock",
               "model": "mock",
               "attempts": 1,
-              "latencyMs": 0,
+              "latencyMs": 1,
               "inputTokens": 0,
               "outputTokens": 0,
               "tokensAvailable": false,
@@ -3065,16 +3065,16 @@
               "outcome": "ok"
             }
           ],
-          "totalMs": 10155,
-          "playwrightMs": 9234,
+          "totalMs": 9625,
+          "playwrightMs": 9003,
           "succeeded": true,
           "phases": {
-            "validationMs": 893,
-            "analysisMs": 1
+            "validationMs": 584,
+            "analysisMs": 2
           }
         },
         {
-          "workflowId": "20261019T121459Z-REQ-302-nqhdxk",
+          "workflowId": "20261019T151137Z-REQ-302-820fx8",
           "caseId": "FS-CART/error",
           "usage": [
             {
@@ -3100,16 +3100,16 @@
               "outcome": "ok"
             }
           ],
-          "totalMs": 10695,
-          "playwrightMs": 9278,
+          "totalMs": 10535,
+          "playwrightMs": 9045,
           "succeeded": true,
           "phases": {
-            "validationMs": 1368,
-            "analysisMs": 2
+            "validationMs": 1462,
+            "analysisMs": 0
           }
         },
         {
-          "workflowId": "20261019T121500Z-REQ-303-jkt2au",
+          "workflowId": "20261019T151138Z-REQ-303-42lvg7",
           "caseId": "FS-CHECKOUT/standard",
           "usage": [
             {
@@ -3135,16 +3135,16 @@
               "outcome": "ok"
             }
           ],
-          "totalMs": 4123,
-          "playwrightMs": 3367,
+          "totalMs": 3880,
+          "playwrightMs": 3143,
           "succeeded": true,
           "phases": {
-            "validationMs": 728,
-            "analysisMs": 1
+            "validationMs": 709,
+            "analysisMs": 0
           }
         },
         {
-          "workflowId": "20261019T121504Z-REQ-303-5kljyk",
+          "workflowId": "20261019T151142Z-REQ-303-fgbfeo",
           "caseId": "FS-CHECKOUT/problem",
           "usage": [
             {
@@ -3170,16 +3170,16 @@
               "outcome": "ok"
             }
           ],
-          "totalMs": 13526,
-          "playwrightMs": 12977,
+          "totalMs": 13798,
+          "playwrightMs": 13267,
           "succeeded": true,
           "phases": {
-            "validationMs": 526,
+            "validationMs": 495,
             "analysisMs": 1
           }
         },
         {
-          "workflowId": "20261019T121508Z-REQ-303-rgi33j",
+          "workflowId": "20261019T151144Z-REQ-303-za63my",
           "caseId": "FS-CHECKOUT/error",
           "usage": [
             {
@@ -3187,7 +3187,7 @@
               "provider": "mock",
               "model": "mock",
               "attempts": 1,
-              "latencyMs": 1,
+              "latencyMs": 0,
               "inputTokens": 0,
               "outputTokens": 0,
               "tokensAvailable": false,
@@ -3205,16 +3205,16 @@
               "outcome": "ok"
             }
           ],
-          "totalMs": 8366,
-          "playwrightMs": 7874,
+          "totalMs": 8957,
+          "playwrightMs": 8020,
           "succeeded": true,
           "phases": {
-            "validationMs": 472,
+            "validationMs": 876,
             "analysisMs": 0
           }
         },
         {
-          "workflowId": "20261019T121510Z-REQ-304-vwfb46",
+          "workflowId": "20261019T151147Z-REQ-304-bjh4gy",
           "caseId": "FS-LOGIN/standard",
           "usage": [
             {
@@ -3240,16 +3240,16 @@
               "outcome": "ok"
             }
           ],
-          "totalMs": 8920,
-          "playwrightMs": 7955,
+          "totalMs": 8380,
+          "playwrightMs": 7696,
           "succeeded": true,
           "phases": {
-            "validationMs": 908,
+            "validationMs": 663,
             "analysisMs": 1
           }
         },
         {
-          "workflowId": "20261019T121516Z-REQ-411-vk556c",
+          "workflowId": "20261019T151153Z-REQ-411-ri3x47",
           "caseId": "FS-NOTESAPI/standard",
           "usage": [
             {
@@ -3268,23 +3268,23 @@
               "provider": "mock",
               "model": "mock",
               "attempts": 1,
-              "latencyMs": 0,
+              "latencyMs": 1,
               "inputTokens": 0,
               "outputTokens": 0,
               "tokensAvailable": false,
               "outcome": "ok"
             }
           ],
-          "totalMs": 2417,
-          "playwrightMs": 1821,
+          "totalMs": 1682,
+          "playwrightMs": 994,
           "succeeded": true,
           "phases": {
-            "validationMs": 562,
+            "validationMs": 657,
             "analysisMs": 1
           }
         },
         {
-          "workflowId": "20261019T121518Z-REQ-411-6sim1g",
+          "workflowId": "20261019T151155Z-REQ-411-80k3on",
           "caseId": "FS-NOTESAPI/broken-create",
           "usage": [
             {
@@ -3310,16 +3310,16 @@
               "outcome": "ok"
             }
           ],
-          "totalMs": 4739,
-          "playwrightMs": 2964,
+          "totalMs": 3241,
+          "playwrightMs": 1771,
           "succeeded": true,
           "phases": {
-            "validationMs": 1742,
+            "validationMs": 1444,
             "analysisMs": 1
           }
         },
         {
-          "workflowId": "20261019T121518Z-REQ-411-79mzu6",
+          "workflowId": "20261019T151155Z-REQ-411-rh95au",
           "caseId": "FS-NOTESAPI/auth-bypass",
           "usage": [
             {
@@ -3345,16 +3345,16 @@
               "outcome": "ok"
             }
           ],
-          "totalMs": 2642,
-          "playwrightMs": 1606,
+          "totalMs": 3465,
+          "playwrightMs": 2507,
           "succeeded": true,
           "phases": {
-            "validationMs": 1011,
-            "analysisMs": 2
+            "validationMs": 926,
+            "analysisMs": 1
           }
         },
         {
-          "workflowId": "20261019T121519Z-REQ-411-5fj49l",
+          "workflowId": "20261019T151156Z-REQ-411-5mhebz",
           "caseId": "FS-NOTESAPI/no-title-limit",
           "usage": [
             {
@@ -3380,16 +3380,16 @@
               "outcome": "ok"
             }
           ],
-          "totalMs": 2809,
-          "playwrightMs": 2302,
+          "totalMs": 3489,
+          "playwrightMs": 2993,
           "succeeded": true,
           "phases": {
-            "validationMs": 485,
-            "analysisMs": 1
+            "validationMs": 472,
+            "analysisMs": 2
           }
         },
         {
-          "workflowId": "20261019T121521Z-REQ-412-ufpyfk",
+          "workflowId": "20261019T151158Z-REQ-412-2nfcij",
           "caseId": "FS-NOTESUI/standard",
           "usage": [
             {
@@ -3408,23 +3408,23 @@
               "provider": "mock",
               "model": "mock",
               "attempts": 1,
-              "latencyMs": 1,
+              "latencyMs": 0,
               "inputTokens": 0,
               "outputTokens": 0,
               "tokensAvailable": false,
               "outcome": "ok"
             }
           ],
-          "totalMs": 3979,
-          "playwrightMs": 2104,
+          "totalMs": 3975,
+          "playwrightMs": 2245,
           "succeeded": true,
           "phases": {
-            "validationMs": 1842,
-            "analysisMs": 0
+            "validationMs": 1703,
+            "analysisMs": 1
           }
         },
         {
-          "workflowId": "20261019T121522Z-REQ-412-1gzdao",
+          "workflowId": "20261019T151159Z-REQ-412-k8tek7",
           "caseId": "FS-NOTESUI/broken-create",
           "usage": [
             {
@@ -3450,16 +3450,16 @@
               "outcome": "ok"
             }
           ],
-          "totalMs": 8108,
-          "playwrightMs": 6935,
+          "totalMs": 7941,
+          "playwrightMs": 6954,
           "succeeded": true,
           "phases": {
-            "validationMs": 1150,
-            "analysisMs": 0
+            "validationMs": 963,
+            "analysisMs": 1
           }
         },
         {
-          "workflowId": "20261019T121522Z-REQ-412-yui2m5",
+          "workflowId": "20261019T151159Z-REQ-412-bt3dh3",
           "caseId": "FS-NOTESUI/renamed-add-button",
           "usage": [
             {
@@ -3478,22 +3478,363 @@
               "provider": "mock",
               "model": "mock",
               "attempts": 1,
-              "latencyMs": 0,
+              "latencyMs": 1,
               "inputTokens": 0,
               "outputTokens": 0,
               "tokensAvailable": false,
               "outcome": "ok"
             }
           ],
-          "totalMs": 12462,
-          "playwrightMs": 11912,
+          "totalMs": 12441,
+          "playwrightMs": 11942,
           "succeeded": true,
           "phases": {
-            "validationMs": 528,
-            "analysisMs": 1
+            "validationMs": 480,
+            "analysisMs": 0
           }
         }
       ]
+    },
+    "comparison": {
+      "before": {
+        "runId": "eval-20261019T150340Z-functional-we421n",
+        "datasetVersion": "3.0.1",
+        "commit": "e6bd5303ec669b9450f49bcb7999dcd8a37c1403",
+        "mode": "functional"
+      },
+      "after": {
+        "runId": "eval-20261019T151124Z-functional-sobvh5",
+        "datasetVersion": "3.0.1",
+        "commit": "e6bd5303ec669b9450f49bcb7999dcd8a37c1403",
+        "mode": "functional"
+      },
+      "comparable": true,
+      "datasetChanged": false,
+      "notes": [
+        "same dataset version but different content hash: the dataset was edited without a version bump"
+      ],
+      "changes": [
+        {
+          "id": "cost.inputTokens",
+          "kind": "measured",
+          "gate": "none",
+          "before": null,
+          "after": null,
+          "delta": null,
+          "direction": "unchanged"
+        },
+        {
+          "id": "cost.medianPerWorkflowUsd",
+          "kind": "measured",
+          "gate": "none",
+          "before": null,
+          "after": null,
+          "delta": null,
+          "direction": "unchanged"
+        },
+        {
+          "id": "cost.modelCalls",
+          "kind": "measured",
+          "gate": "none",
+          "before": 34,
+          "after": 34,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "cost.outputTokens",
+          "kind": "measured",
+          "gate": "none",
+          "before": null,
+          "after": null,
+          "delta": null,
+          "direction": "unchanged"
+        },
+        {
+          "id": "cost.perSuccessfulWorkflowUsd",
+          "kind": "measured",
+          "gate": "none",
+          "before": null,
+          "after": null,
+          "delta": null,
+          "direction": "unchanged"
+        },
+        {
+          "id": "cost.retryOverhead",
+          "kind": "measured",
+          "gate": "none",
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "cost.workflowFailureRate",
+          "kind": "measured",
+          "gate": "none",
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "cost.workflows",
+          "kind": "measured",
+          "gate": "none",
+          "before": 17,
+          "after": 17,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.agreementWithReference",
+          "kind": "measured",
+          "gate": "exact",
+          "before": 0.8548387096774194,
+          "after": 0.8548387096774194,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.detection.falseNegatives",
+          "kind": "measured",
+          "gate": "exact",
+          "before": 4,
+          "after": 4,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.detection.falsePositiveRate",
+          "kind": "measured",
+          "gate": "none",
+          "before": 0.13157894736842105,
+          "after": 0.13157894736842105,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.detection.falsePositives",
+          "kind": "measured",
+          "gate": "exact",
+          "before": 5,
+          "after": 5,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.detection.inconclusive",
+          "kind": "measured",
+          "gate": "exact",
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.detection.precision",
+          "kind": "measured",
+          "gate": "none",
+          "before": 0.8,
+          "after": 0.8,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.detection.recall",
+          "kind": "measured",
+          "gate": "none",
+          "before": 0.8333333333333334,
+          "after": 0.8333333333333334,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.detection.trueNegatives",
+          "kind": "measured",
+          "gate": "exact",
+          "before": 33,
+          "after": 33,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.detection.truePositives",
+          "kind": "measured",
+          "gate": "exact",
+          "before": 20,
+          "after": 20,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.diagnosis.falseNegatives",
+          "kind": "measured",
+          "gate": "exact",
+          "before": 11,
+          "after": 11,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.diagnosis.falsePositives",
+          "kind": "measured",
+          "gate": "exact",
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.diagnosis.trueNegatives",
+          "kind": "measured",
+          "gate": "exact",
+          "before": 5,
+          "after": 5,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.diagnosis.truePositives",
+          "kind": "measured",
+          "gate": "exact",
+          "before": 9,
+          "after": 9,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.falseNegativesFlaggedByAssertionRules",
+          "kind": "deterministic",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.layer.api.falsePositiveRate",
+          "kind": "measured",
+          "gate": "none",
+          "before": 0.16666666666666666,
+          "after": 0.16666666666666666,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.layer.api.recall",
+          "kind": "measured",
+          "gate": "none",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.layer.combined.falsePositiveRate",
+          "kind": "measured",
+          "gate": "none",
+          "before": 0.16666666666666666,
+          "after": 0.16666666666666666,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.layer.combined.recall",
+          "kind": "measured",
+          "gate": "none",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.layer.ui.falsePositiveRate",
+          "kind": "measured",
+          "gate": "none",
+          "before": 0.07142857142857142,
+          "after": 0.07142857142857142,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.layer.ui.recall",
+          "kind": "measured",
+          "gate": "none",
+          "before": 0.7333333333333333,
+          "after": 0.7333333333333333,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "functional.passOnDefectFreeControl",
+          "kind": "measured",
+          "gate": "exact",
+          "before": 0.9,
+          "after": 0.9,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "latency.analysisMedianMs",
+          "kind": "measured",
+          "gate": "none",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "latency.modelMedianMs",
+          "kind": "measured",
+          "gate": "none",
+          "before": null,
+          "after": null,
+          "delta": null,
+          "direction": "unchanged"
+        },
+        {
+          "id": "latency.playwrightMedianMs",
+          "kind": "measured",
+          "gate": "none",
+          "before": 6487,
+          "after": 6954,
+          "delta": 467,
+          "direction": "inconclusive",
+          "reason": "sample too small"
+        },
+        {
+          "id": "latency.totalMedianMs",
+          "kind": "measured",
+          "gate": "none",
+          "before": 7537,
+          "after": 7941,
+          "delta": 404,
+          "direction": "inconclusive",
+          "reason": "sample too small"
+        },
+        {
+          "id": "latency.totalP90Ms",
+          "kind": "measured",
+          "gate": "none",
+          "before": 13127,
+          "after": 13263,
+          "delta": 136,
+          "direction": "inconclusive",
+          "reason": "sample too small"
+        },
+        {
+          "id": "latency.validationMedianMs",
+          "kind": "measured",
+          "gate": "none",
+          "before": 563,
+          "after": 876,
+          "delta": 313,
+          "direction": "inconclusive",
+          "reason": "sample too small"
+        }
+      ],
+      "gatedRegressions": []
     }
   },
   "findings": [
@@ -3640,8 +3981,8 @@
     },
     {
       "name": "baseline-regression",
-      "status": "not-applicable",
-      "detail": "no baseline given"
+      "status": "pass",
+      "detail": "no gated regressions vs eval-20261019T150340Z-functional-we421n"
     },
     {
       "name": "report-schema",
@@ -3650,7 +3991,7 @@
     }
   ],
   "limitations": [
-    "0 of 104 reference labels are human-reviewed; the rest are author-assigned (by the AI assistant that built the framework) and pending review.",
+    "0 of 104 reference labels are human-reviewed; the rest are assigned by the framework author, who also wrote the rules they score, and are pending review.",
     "Datasets are small: rates with fewer than 10 cases in the denominator are marked insufficient-data, and percentiles from fewer than 20 samples are not distributions.",
     "The test target is a public demo site with no version identifier; seeded defects are its intentionally broken accounts, verified by eval/probes/seeded-defects.ts.",
     "The failure classifier treats an expected value as coming from the requirement when it appears anywhere in the criterion text (substring), which can turn an incorrect assertion into a product_behavior diagnosis.",

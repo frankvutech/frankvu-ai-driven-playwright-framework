@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
   "metadata": {
-    "runId": "eval-20261019T121536Z-healing-alkn7p",
-    "timestamp": "2026-10-19T12:15:36.591Z",
+    "runId": "eval-20261019T151213Z-healing-tzo2zz",
+    "timestamp": "2026-10-19T15:12:13.191Z",
     "mode": "healing",
-    "datasetVersion": "3.0.0",
-    "datasetSha256": "a24e52dd49b397259d7a1028ae83fdc40f63598f2cc008f3a0e289735a291324",
+    "datasetVersion": "3.0.1",
+    "datasetSha256": "633d6f67bd99ec6e86defd41416d27adcaf3f02b658bd043f54175d2dac0b395",
     "agent": {
-      "commit": "5215869940cfc6db78f5284a2b8f290bad51bb1a",
+      "commit": "e6bd5303ec669b9450f49bcb7999dcd8a37c1403",
       "dirty": true
     },
     "promptVersion": "3.0.0",
@@ -39,7 +39,7 @@
       "repeat": 1,
       "suites": "all",
       "cases": "all",
-      "baseline": null,
+      "baseline": "eval/baselines/healing.json",
       "pricing": "eval/pricing.json",
       "gates": "eval/gates.json"
     },
@@ -51,9 +51,9 @@
       "total": 104,
       "humanReviewed": 0,
       "byMethod": {
-        "constructed": 41,
+        "constructed": 56,
         "observed-controlled-variation": 14,
-        "author-judgment": 49
+        "author-judgment": 34
       }
     },
     "executionRefs": [],
@@ -335,7 +335,7 @@
     },
     {
       "id": "healing.attemptMedianMs",
-      "value": 11299,
+      "value": 11824,
       "unit": "ms",
       "kind": "measured",
       "higherIsBetter": false,
@@ -346,7 +346,7 @@
     },
     {
       "id": "healing.attemptP90Ms",
-      "value": 33588,
+      "value": 34453,
       "unit": "ms",
       "kind": "measured",
       "higherIsBetter": false,
@@ -401,21 +401,21 @@
             "detail": "src/pages/example-app/NotesPage.ts: no assertion removed or rewritten"
           },
           "regressionNewFailures": 0,
-          "durationMs": 28418,
+          "durationMs": 29600,
           "usage": [
             {
               "useCase": "heal-proposal",
               "provider": "mock",
               "model": "mock",
               "attempts": 1,
-              "latencyMs": 0,
+              "latencyMs": 1,
               "inputTokens": 0,
               "outputTokens": 0,
               "tokensAvailable": false,
               "outcome": "ok"
             }
           ],
-          "healId": "heal-20261019T121536Z-hvmk5x"
+          "healId": "heal-20261019T151213Z-0pmgzl"
         },
         {
           "id": "HE-02",
@@ -434,7 +434,7 @@
           "correctRepair": false,
           "independentIntent": null,
           "regressionNewFailures": null,
-          "durationMs": 45739,
+          "durationMs": 46617,
           "usage": [
             {
               "useCase": "heal-proposal",
@@ -448,7 +448,7 @@
               "outcome": "ok"
             }
           ],
-          "healId": "heal-20261019T121605Z-x7lwmo"
+          "healId": "heal-20261019T151242Z-pr6a3f"
         },
         {
           "id": "HE-03",
@@ -467,7 +467,7 @@
           "correctRepair": false,
           "independentIntent": null,
           "regressionNewFailures": null,
-          "durationMs": 11843,
+          "durationMs": 12401,
           "usage": [
             {
               "useCase": "heal-proposal",
@@ -481,7 +481,7 @@
               "outcome": "ok"
             }
           ],
-          "healId": "heal-20261019T121650Z-2yybm5"
+          "healId": "heal-20261019T151329Z-62ekmg"
         },
         {
           "id": "HE-04",
@@ -500,7 +500,7 @@
           "correctRepair": false,
           "independentIntent": null,
           "regressionNewFailures": null,
-          "durationMs": 11836,
+          "durationMs": 12570,
           "usage": [
             {
               "useCase": "heal-proposal",
@@ -514,7 +514,7 @@
               "outcome": "ok"
             }
           ],
-          "healId": "heal-20261019T121702Z-vcfz6n"
+          "healId": "heal-20261019T151341Z-swyqkl"
         },
         {
           "id": "HE-05",
@@ -533,7 +533,7 @@
           "correctRepair": false,
           "independentIntent": null,
           "regressionNewFailures": null,
-          "durationMs": 11370,
+          "durationMs": 11590,
           "usage": [
             {
               "useCase": "heal-proposal",
@@ -547,7 +547,7 @@
               "outcome": "ok"
             }
           ],
-          "healId": "heal-20261019T121714Z-t9g1n2"
+          "healId": "heal-20261019T151354Z-aja12g"
         },
         {
           "id": "HE-06",
@@ -566,21 +566,21 @@
           "correctRepair": false,
           "independentIntent": null,
           "regressionNewFailures": null,
-          "durationMs": 11299,
+          "durationMs": 11600,
           "usage": [
             {
               "useCase": "heal-proposal",
               "provider": "mock",
               "model": "mock",
               "attempts": 1,
-              "latencyMs": 0,
+              "latencyMs": 1,
               "inputTokens": 0,
               "outputTokens": 0,
               "tokensAvailable": false,
               "outcome": "malformed_json"
             }
           ],
-          "healId": "heal-20261019T121725Z-3jzx22"
+          "healId": "heal-20261019T151406Z-6klmks"
         },
         {
           "id": "HE-07",
@@ -599,21 +599,21 @@
           "correctRepair": false,
           "independentIntent": null,
           "regressionNewFailures": null,
-          "durationMs": 11221,
+          "durationMs": 11824,
           "usage": [
             {
               "useCase": "heal-proposal",
               "provider": "mock",
               "model": "mock",
               "attempts": 2,
-              "latencyMs": 11,
+              "latencyMs": 12,
               "inputTokens": 0,
               "outputTokens": 0,
               "tokensAvailable": false,
               "outcome": "provider_timeout"
             }
           ],
-          "healId": "heal-20261019T121737Z-dgimlx"
+          "healId": "heal-20261019T151417Z-w54bez"
         },
         {
           "id": "HE-08",
@@ -632,7 +632,7 @@
           "correctRepair": false,
           "independentIntent": null,
           "regressionNewFailures": null,
-          "durationMs": 11197,
+          "durationMs": 11975,
           "usage": [
             {
               "useCase": "heal-proposal",
@@ -646,7 +646,7 @@
               "outcome": "schema_violation"
             }
           ],
-          "healId": "heal-20261019T121748Z-pe1vul"
+          "healId": "heal-20261019T151429Z-zmaiq3"
         },
         {
           "id": "HE-09",
@@ -665,9 +665,9 @@
           "correctRepair": false,
           "independentIntent": null,
           "regressionNewFailures": null,
-          "durationMs": 876,
+          "durationMs": 1263,
           "usage": [],
-          "healId": "heal-20261019T121759Z-518y4h"
+          "healId": "heal-20261019T151441Z-le0hdj"
         },
         {
           "id": "HE-10",
@@ -686,9 +686,9 @@
           "correctRepair": false,
           "independentIntent": null,
           "regressionNewFailures": null,
-          "durationMs": 917,
+          "durationMs": 1295,
           "usage": [],
-          "healId": "heal-20261019T121800Z-rtvn2e"
+          "healId": "heal-20261019T151442Z-t8kyww"
         },
         {
           "id": "HE-11",
@@ -707,9 +707,9 @@
           "correctRepair": false,
           "independentIntent": null,
           "regressionNewFailures": null,
-          "durationMs": 895,
+          "durationMs": 1244,
           "usage": [],
-          "healId": "heal-20261019T121801Z-l828on"
+          "healId": "heal-20261019T151444Z-mgpqyw"
         },
         {
           "id": "HE-12",
@@ -728,10 +728,10 @@
           "correctRepair": true,
           "independentIntent": {
             "ok": true,
-            "detail": "generated/20261019T121802Z-REQ-412-nfnkla/REQ-412-SC-01.notes.spec.ts: no assertion removed or rewritten"
+            "detail": "generated/20261019T151445Z-REQ-412-b1njlr/REQ-412-SC-01.notes.spec.ts: no assertion removed or rewritten"
           },
           "regressionNewFailures": 0,
-          "durationMs": 33588,
+          "durationMs": 34453,
           "usage": [
             {
               "useCase": "heal-proposal",
@@ -745,7 +745,7 @@
               "outcome": "ok"
             }
           ],
-          "healId": "heal-20261019T121802Z-0wx3xf"
+          "healId": "heal-20261019T151445Z-gi45sn"
         },
         {
           "id": "HE-13",
@@ -764,7 +764,7 @@
           "correctRepair": false,
           "independentIntent": null,
           "regressionNewFailures": null,
-          "durationMs": 13588,
+          "durationMs": 13653,
           "usage": [
             {
               "useCase": "heal-proposal",
@@ -778,7 +778,7 @@
               "outcome": "ok"
             }
           ],
-          "healId": "heal-20261019T121835Z-qv1wfh"
+          "healId": "heal-20261019T151519Z-zximph"
         },
         {
           "id": "HE-14",
@@ -797,9 +797,9 @@
           "correctRepair": false,
           "independentIntent": null,
           "regressionNewFailures": null,
-          "durationMs": 6197,
+          "durationMs": 6397,
           "usage": [],
-          "healId": "heal-20261019T121849Z-8fx9gx"
+          "healId": "heal-20261019T151533Z-uouztr"
         },
         {
           "id": "HE-15",
@@ -818,9 +818,9 @@
           "correctRepair": false,
           "independentIntent": null,
           "regressionNewFailures": null,
-          "durationMs": 1229,
+          "durationMs": 1420,
           "usage": [],
-          "healId": "heal-20261019T121855Z-2a26cp"
+          "healId": "heal-20261019T151539Z-lo8mhc"
         }
       ],
       "metrics": {
@@ -893,10 +893,10 @@
         },
         "durationMs": {
           "n": 15,
-          "mean": 13347.533333333333,
-          "median": 11299,
-          "p90": 33588,
-          "max": 45739,
+          "mean": 13860.133333333333,
+          "median": 11824,
+          "p90": 34453,
+          "max": 46617,
           "sufficientForPercentiles": false
         },
         "byOutcome": {
@@ -908,6 +908,219 @@
           "verified_pending_review": 2
         }
       }
+    },
+    "comparison": {
+      "before": {
+        "runId": "eval-20261019T150427Z-healing-xa5nqq",
+        "datasetVersion": "3.0.1",
+        "commit": "e6bd5303ec669b9450f49bcb7999dcd8a37c1403",
+        "mode": "healing"
+      },
+      "after": {
+        "runId": "eval-20261019T151213Z-healing-tzo2zz",
+        "datasetVersion": "3.0.1",
+        "commit": "e6bd5303ec669b9450f49bcb7999dcd8a37c1403",
+        "mode": "healing"
+      },
+      "comparable": true,
+      "datasetChanged": false,
+      "notes": [
+        "same dataset version but different content hash: the dataset was edited without a version bump"
+      ],
+      "changes": [
+        {
+          "id": "healing.attemptMedianMs",
+          "kind": "measured",
+          "gate": "none",
+          "before": 11473,
+          "after": 11824,
+          "delta": 351,
+          "direction": "inconclusive",
+          "reason": "sample too small"
+        },
+        {
+          "id": "healing.attemptP90Ms",
+          "kind": "measured",
+          "gate": "none",
+          "before": 33769,
+          "after": 34453,
+          "delta": 684,
+          "direction": "inconclusive",
+          "reason": "sample too small"
+        },
+        {
+          "id": "healing.correctProposalsVerified",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "healing.costPerAttemptUsd",
+          "kind": "measured",
+          "gate": "none",
+          "before": null,
+          "after": null,
+          "delta": null,
+          "direction": "unchanged"
+        },
+        {
+          "id": "healing.falseHealingOfProductDefects",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "healing.incorrectHealingRate",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "healing.incorrectProposalsBlocked",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "healing.insufficientEvidenceCorrectlyRejected",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "healing.intentViolationRate",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "healing.manualInterventionRate",
+          "kind": "reference-label",
+          "gate": "none",
+          "before": 0.8666666666666667,
+          "after": 0.8666666666666667,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "healing.modelCalls",
+          "kind": "measured",
+          "gate": "none",
+          "before": 11,
+          "after": 11,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "healing.outcomeAgreement",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 0.9333333333333333,
+          "after": 0.9333333333333333,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "healing.productDefectsStoppedBeforeModel",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 1,
+          "after": 1,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "healing.proposalRate",
+          "kind": "reference-label",
+          "gate": "none",
+          "before": 0.6,
+          "after": 0.6,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "healing.regressionRate",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "healing.reviewAcceptanceRate",
+          "kind": "measured",
+          "gate": "none",
+          "before": null,
+          "after": null,
+          "delta": null,
+          "direction": "unchanged"
+        },
+        {
+          "id": "healing.setupErrors",
+          "kind": "measured",
+          "gate": "exact",
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "healing.unsafe.incorrectVerified",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "healing.unsafe.intentViolations",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "healing.unsafe.verifiedProductDefects",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 0,
+          "after": 0,
+          "delta": 0,
+          "direction": "unchanged"
+        },
+        {
+          "id": "healing.verifiedSuccessRate",
+          "kind": "reference-label",
+          "gate": "exact",
+          "before": 0.2,
+          "after": 0.2,
+          "delta": 0,
+          "direction": "unchanged"
+        }
+      ],
+      "gatedRegressions": []
     }
   },
   "findings": [
@@ -968,8 +1181,8 @@
     },
     {
       "name": "baseline-regression",
-      "status": "not-applicable",
-      "detail": "no baseline given"
+      "status": "pass",
+      "detail": "no gated regressions vs eval-20261019T150427Z-healing-xa5nqq"
     },
     {
       "name": "report-schema",
@@ -978,7 +1191,7 @@
     }
   ],
   "limitations": [
-    "0 of 104 reference labels are human-reviewed; the rest are author-assigned (by the AI assistant that built the framework) and pending review.",
+    "0 of 104 reference labels are human-reviewed; the rest are assigned by the framework author, who also wrote the rules they score, and are pending review.",
     "Datasets are small: rates with fewer than 10 cases in the denominator are marked insufficient-data, and percentiles from fewer than 20 samples are not distributions.",
     "The test target is a public demo site with no version identifier; seeded defects are its intentionally broken accounts, verified by eval/probes/seeded-defects.ts.",
     "The failure classifier treats an expected value as coming from the requirement when it appears anywhere in the criterion text (substring), which can turn an incorrect assertion into a product_behavior diagnosis.",

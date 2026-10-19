@@ -2,7 +2,7 @@
 
 Phase 3 measures the Phase 2 agent. It covers UI, API and combined test generation, assertion quality, false positives and false negatives, tool-failure recovery, guarded healing, cost and latency, and run-to-run comparison. This document describes what is measured, how each figure is calculated, where the reference labels come from, and what the numbers do and do not show.
 
-All results below come from the committed baselines (`eval/baselines/*.json`, dataset 3.0.0). Each was reproduced on at least one repeated run.
+All results below come from the committed baselines (`eval/baselines/*.json`, dataset 3.0.1). Each was reproduced on at least one repeated run. Dataset 3.0.1 changed only label metadata and notes relative to 3.0.0, so no result changed.
 
 ## 1. Principles
 
@@ -21,7 +21,7 @@ All results below come from the committed baselines (`eval/baselines/*.json`, da
   - `observed-controlled-variation`: verified by an independent probe.
   - `author-judgment`: an opinion.
 
-  Each label also has a review status. **0 of 95 labels are human-reviewed.** All were authored by the AI assistant that built the framework, and every report prints this count.
+  Each label also has a review status. **0 of 104 labels are human-reviewed.** All were authored by the framework author (Frank Vu), who also wrote the rules they score, and every report prints this count. An AI-agent review (recommendations only, nothing confirmed) is in [PHASE3_LABEL_REVIEW.md](PHASE3_LABEL_REVIEW.md).
 - **Compiling is not correctness.** Type-check and lint, execution, and reference intent are reported separately. A test is never counted as correct because it passes.
 - **Nothing is estimated silently.** With a mock provider, token counts, cost and model latency show as `unavailable` or `not-run`. Cost is computed only from provider-reported tokens.
 - **The model is replaced, not the pipeline.** Recorded outputs stand in for the model. Planning, rendering, validation, execution, evidence, analysis and healing all run for real.
@@ -71,7 +71,7 @@ Nothing in the evaluator can approve a release, apply a patch, or merge.
 
 Every mode accepts `--pricing <file>`, `--gates <file>` and `--baseline <report>`. Healing mode also accepts `--case HE-xx`.
 
-## 4. Dataset (version 3.0.0)
+## 4. Dataset (version 3.0.1)
 
 | File | Size | Content |
 |---|---|---|
@@ -162,7 +162,7 @@ Results:
 
 Definitions:
 
-- **Detection.** Positive class: *a relevant seeded defect exists for the behaviour under test*. Predicted positive: *the test failed*.
+- **Detection.** Positive class: *a relevant seeded defect exists on the test's execution path*, meaning in the behaviour under test or in a precondition the test exercises (for example, a test of note permissions that must first create a note). This policy was decided by Frank Vu on 2026-10-19. Predicted positive: *the test failed*.
   - A **false positive** is a failing test where the behaviour is correct, for example a stale locator or a wrong expectation.
   - A **false negative** is a passing test despite a relevant defect.
 - **Diagnosis.** Over failed tests only. Positive class: *the failure is caused by a seeded defect*. Predicted positive: *the analysis says `product_behavior`*.
@@ -343,7 +343,7 @@ No live model is needed. Live evaluation is the separate, manual `live-eval.yml`
 
 ## 7. Limitations
 
-- **0 of 95 labels are human-reviewed.** The intent labels, assertion-weakness labels and healing references were authored by the same AI assistant that built the rules they score. To review one, set `review: { status: "human-reviewed", reviewer, date }` and bump the version.
+- **0 of 104 labels are human-reviewed.** The open questions from the AI-agent label review are in [PHASE3_LABEL_REVIEW.md](PHASE3_LABEL_REVIEW.md). The intent labels, assertion-weakness labels and healing references were authored by the same author as the rules they score. To review one, set `review: { status: "human-reviewed", reviewer, date }` and bump the version.
 - **No live-model evaluation has been run.** There is no model-quality, token or cost data. Generation, planning and healing proposals are recorded stand-ins: they test the pipeline and the evaluator, and say nothing about how often a model produces good or bad output.
 - **Samples are small**: 23 labelled failures, 62 functional outcomes, 15 healing cases, 17 workflows. Rates below their minimum denominators are marked insufficient data. Nothing here supports a reliability claim.
 - **Test environment:**

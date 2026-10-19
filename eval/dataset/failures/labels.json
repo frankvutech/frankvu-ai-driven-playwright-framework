@@ -13,7 +13,7 @@
    "evidenceSufficient": true,
    "provenance": {
     "method": "constructed",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
@@ -32,7 +32,7 @@
    "evidenceSufficient": false,
    "provenance": {
     "method": "constructed",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
@@ -51,7 +51,7 @@
    "evidenceSufficient": false,
    "provenance": {
     "method": "constructed",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
@@ -70,7 +70,7 @@
    "evidenceSufficient": true,
    "provenance": {
     "method": "constructed",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
@@ -89,7 +89,7 @@
    "evidenceSufficient": false,
    "provenance": {
     "method": "constructed",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
@@ -108,7 +108,7 @@
    "evidenceSufficient": true,
    "provenance": {
     "method": "constructed",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
@@ -127,7 +127,7 @@
    "evidenceSufficient": null,
    "provenance": {
     "method": "constructed",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
@@ -146,7 +146,7 @@
    "evidenceSufficient": null,
    "provenance": {
     "method": "constructed",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
@@ -165,7 +165,7 @@
    "rationale": "problem_user cannot add this item (catalogued defect D-ADD); Playwright only reports a missing badge.",
    "provenance": {
     "method": "constructed",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
@@ -184,7 +184,7 @@
    "rationale": "error_user cannot finish orders (catalogued defect D-FINISH).",
    "provenance": {
     "method": "constructed",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
@@ -203,7 +203,7 @@
    "rationale": "The test expects 5 items; the criterion says six.",
    "provenance": {
     "method": "constructed",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
@@ -222,7 +222,7 @@
    "rationale": "The button \"Add all to cart\" does not exist on this site.",
    "provenance": {
     "method": "constructed",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
@@ -241,7 +241,7 @@
    "rationale": "The product \"Sauce Labs Hoodie\" is not in the catalogue: the test data is wrong.",
    "provenance": {
     "method": "constructed",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
@@ -260,7 +260,7 @@
    "rationale": "The host name does not resolve.",
    "provenance": {
     "method": "constructed",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
@@ -279,7 +279,7 @@
    "rationale": "Fails on the first attempt only, by construction.",
    "provenance": {
     "method": "constructed",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
@@ -298,7 +298,7 @@
    "rationale": "A generic error with no product or locator information.",
    "provenance": {
     "method": "constructed",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
@@ -317,7 +317,7 @@
    "rationale": "The account used for the session is locked, so the precondition (a signed-in session) never holds.",
    "provenance": {
     "method": "constructed",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
@@ -336,7 +336,7 @@
    "rationale": "Intended as a timeout capture but passed on 2026-10-18 (the glitch delay fit in 3 s). Kept as a passing control.",
    "provenance": {
     "method": "constructed",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
@@ -354,7 +354,7 @@
    "rationale": "The broken-create variant answers 500 to every create; the test's expectations follow the criterion.",
    "provenance": {
     "method": "observed-controlled-variation",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
@@ -373,7 +373,7 @@
    "rationale": "The auth-bypass variant returns another user's note with 200 where the criterion requires 403.",
    "provenance": {
     "method": "observed-controlled-variation",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
@@ -392,7 +392,7 @@
    "rationale": "The test expects 200 but the criterion states 201; the API is correct.",
    "provenance": {
     "method": "constructed",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
@@ -411,7 +411,7 @@
    "rationale": "The no-title-limit variant accepts a 121-character title (201) where the criterion requires 400.",
    "provenance": {
     "method": "observed-controlled-variation",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
@@ -430,7 +430,7 @@
    "rationale": "The test's own check is weak (content type only) and passes; the failure comes from the cleanup fixture, whose schema rejects the 121-character note the defective API stored. Root cause: the missing title validation.",
    "provenance": {
     "method": "observed-controlled-variation",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
@@ -449,7 +449,7 @@
    "rationale": "The submit button was renamed; the feature works, so the stale page-object locator is the cause.",
    "provenance": {
     "method": "observed-controlled-variation",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
@@ -468,7 +468,7 @@
    "rationale": "Submitting the form fails with 500, so the note never appears; the UI symptom is a missing element.",
    "provenance": {
     "method": "observed-controlled-variation",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
@@ -487,7 +487,7 @@
    "rationale": "The intermittent-slow-list variant reveals the list after 6 s; the 5 s assertion timed out on an element that was present but hidden.",
    "provenance": {
     "method": "observed-controlled-variation",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
@@ -506,7 +506,7 @@
    "rationale": "Control: unaffected by the create defect; must be parsed as passed and not analysed.",
    "provenance": {
     "method": "observed-controlled-variation",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },

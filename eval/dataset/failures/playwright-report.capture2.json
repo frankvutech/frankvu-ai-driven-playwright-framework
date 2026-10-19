@@ -30,7 +30,7 @@
   "preserveOutput": "always",
   "projects": [
    {
-    "outputDir": "<repo>/.relynx/runs/capture2/out",
+    "outputDir": "<repo>/.agent/runs/capture2/out",
     "repeatEach": 1,
     "retries": 1,
     "metadata": {
@@ -46,7 +46,7 @@
     "timeout": 30000
    },
    {
-    "outputDir": "<repo>/.relynx/runs/capture2/out",
+    "outputDir": "<repo>/.agent/runs/capture2/out",
     "repeatEach": 1,
     "retries": 1,
     "metadata": {
@@ -66,7 +66,7 @@
    {
     "grep": {},
     "grepInvert": null,
-    "outputDir": "<repo>/.relynx/runs/capture2/out",
+    "outputDir": "<repo>/.agent/runs/capture2/out",
     "repeatEach": 1,
     "retries": 1,
     "metadata": {
@@ -99,7 +99,7 @@
      "defaultBrowserType": "chromium",
      "baseURL": "https://www.saucedemo.com",
      "testIdAttribute": "data-test",
-     "storageState": "<repo>/.relynx/runs/capture2/session-state.json"
+     "storageState": "<repo>/.agent/runs/capture2/session-state.json"
     },
     "dependencies": [
      "agent-setup"
@@ -113,7 +113,7 @@
    [
     "json",
     {
-     "outputFile": "<repo>/.relynx/runs/capture2/report.json"
+     "outputFile": "<repo>/.agent/runs/capture2/report.json"
     }
    ]
   ],
@@ -244,17 +244,17 @@
           {
            "name": "screenshot",
            "contentType": "image/png",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-regression-add-to-cart-agent-generated/test-failed-1.png"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-regression-add-to-cart-agent-generated/test-failed-1.png"
           },
           {
            "name": "error-context",
            "contentType": "text/markdown",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-regression-add-to-cart-agent-generated/error-context.md"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-regression-add-to-cart-agent-generated/error-context.md"
           },
           {
            "name": "trace",
            "contentType": "application/zip",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-regression-add-to-cart-agent-generated/trace.zip"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-regression-add-to-cart-agent-generated/trace.zip"
           }
          ],
          "errorLocation": {
@@ -307,17 +307,17 @@
           {
            "name": "screenshot",
            "contentType": "image/png",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-regression-add-to-cart-agent-generated-retry1/test-failed-1.png"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-regression-add-to-cart-agent-generated-retry1/test-failed-1.png"
           },
           {
            "name": "error-context",
            "contentType": "text/markdown",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-regression-add-to-cart-agent-generated-retry1/error-context.md"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-regression-add-to-cart-agent-generated-retry1/error-context.md"
           },
           {
            "name": "trace",
            "contentType": "application/zip",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-regression-add-to-cart-agent-generated-retry1/trace.zip"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-regression-add-to-cart-agent-generated-retry1/trace.zip"
           }
          ],
          "errorLocation": {
@@ -401,17 +401,17 @@
           {
            "name": "screenshot",
            "contentType": "image/png",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-regression-finish-agent-generated/test-failed-1.png"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-regression-finish-agent-generated/test-failed-1.png"
           },
           {
            "name": "error-context",
            "contentType": "text/markdown",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-regression-finish-agent-generated/error-context.md"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-regression-finish-agent-generated/error-context.md"
           },
           {
            "name": "trace",
            "contentType": "application/zip",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-regression-finish-agent-generated/trace.zip"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-regression-finish-agent-generated/trace.zip"
           }
          ],
          "errorLocation": {
@@ -464,17 +464,17 @@
           {
            "name": "screenshot",
            "contentType": "image/png",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-regression-finish-agent-generated-retry1/test-failed-1.png"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-regression-finish-agent-generated-retry1/test-failed-1.png"
           },
           {
            "name": "error-context",
            "contentType": "text/markdown",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-regression-finish-agent-generated-retry1/error-context.md"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-regression-finish-agent-generated-retry1/error-context.md"
           },
           {
            "name": "trace",
            "contentType": "application/zip",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-regression-finish-agent-generated-retry1/trace.zip"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-regression-finish-agent-generated-retry1/trace.zip"
           }
          ],
          "errorLocation": {
@@ -558,17 +558,17 @@
           {
            "name": "screenshot",
            "contentType": "image/png",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-incorrect-assertion-count-agent-generated/test-failed-1.png"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-incorrect-assertion-count-agent-generated/test-failed-1.png"
           },
           {
            "name": "error-context",
            "contentType": "text/markdown",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-incorrect-assertion-count-agent-generated/error-context.md"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-incorrect-assertion-count-agent-generated/error-context.md"
           },
           {
            "name": "trace",
            "contentType": "application/zip",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-incorrect-assertion-count-agent-generated/trace.zip"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-incorrect-assertion-count-agent-generated/trace.zip"
           }
          ],
          "errorLocation": {
@@ -621,17 +621,17 @@
           {
            "name": "screenshot",
            "contentType": "image/png",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-incorrect-assertion-count-agent-generated-retry1/test-failed-1.png"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-incorrect-assertion-count-agent-generated-retry1/test-failed-1.png"
           },
           {
            "name": "error-context",
            "contentType": "text/markdown",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-incorrect-assertion-count-agent-generated-retry1/error-context.md"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-incorrect-assertion-count-agent-generated-retry1/error-context.md"
           },
           {
            "name": "trace",
            "contentType": "application/zip",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-incorrect-assertion-count-agent-generated-retry1/trace.zip"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-incorrect-assertion-count-agent-generated-retry1/trace.zip"
           }
          ],
          "errorLocation": {
@@ -712,17 +712,17 @@
           {
            "name": "screenshot",
            "contentType": "image/png",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-locator-click-timeout-agent-generated/test-failed-1.png"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-locator-click-timeout-agent-generated/test-failed-1.png"
           },
           {
            "name": "error-context",
            "contentType": "text/markdown",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-locator-click-timeout-agent-generated/error-context.md"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-locator-click-timeout-agent-generated/error-context.md"
           },
           {
            "name": "trace",
            "contentType": "application/zip",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-locator-click-timeout-agent-generated/trace.zip"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-locator-click-timeout-agent-generated/trace.zip"
           }
          ]
         },
@@ -767,17 +767,17 @@
           {
            "name": "screenshot",
            "contentType": "image/png",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-locator-click-timeout-agent-generated-retry1/test-failed-1.png"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-locator-click-timeout-agent-generated-retry1/test-failed-1.png"
           },
           {
            "name": "error-context",
            "contentType": "text/markdown",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-locator-click-timeout-agent-generated-retry1/error-context.md"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-locator-click-timeout-agent-generated-retry1/error-context.md"
           },
           {
            "name": "trace",
            "contentType": "application/zip",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-locator-click-timeout-agent-generated-retry1/trace.zip"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-locator-click-timeout-agent-generated-retry1/trace.zip"
           }
          ]
         }
@@ -831,7 +831,7 @@
             "column": 130,
             "line": 39
            },
-           "message": "Error: locator.click: Test timeout of 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByTestId('inventory-item').filter({ hasText: 'Sauce Labs Hoodie' }).getByRole('button', { name: 'Add to cart' })\u001b[22m\n\n\n  37 |   test.setTimeout(8_000);\n  38 |   await signIn(page, 'standard_user');\n> 39 |   await page.getByTestId('inventory-item').filter({ hasText: 'Sauce Labs Hoodie' }).getByRole('button', { name: 'Add to cart' }).click();\n     |                                                                                                                                  ^\n  40 | });\n  41 | test('environment-dns', ann('CAP-2-SC-06'), async ({ page }) => {\n  42 |   await page.goto('https://relynx-does-not-exist.invalid/');\n    at <repo>/generated/capture2/capture.spec.ts:39:130"
+           "message": "Error: locator.click: Test timeout of 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByTestId('inventory-item').filter({ hasText: 'Sauce Labs Hoodie' }).getByRole('button', { name: 'Add to cart' })\u001b[22m\n\n\n  37 |   test.setTimeout(8_000);\n  38 |   await signIn(page, 'standard_user');\n> 39 |   await page.getByTestId('inventory-item').filter({ hasText: 'Sauce Labs Hoodie' }).getByRole('button', { name: 'Add to cart' }).click();\n     |                                                                                                                                  ^\n  40 | });\n  41 | test('environment-dns', ann('CAP-2-SC-06'), async ({ page }) => {\n  42 |   await page.goto('https://agent-does-not-exist.invalid/');\n    at <repo>/generated/capture2/capture.spec.ts:39:130"
           }
          ],
          "stdout": [],
@@ -853,17 +853,17 @@
           {
            "name": "screenshot",
            "contentType": "image/png",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-test-data-unknown-product-agent-generated/test-failed-1.png"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-test-data-unknown-product-agent-generated/test-failed-1.png"
           },
           {
            "name": "error-context",
            "contentType": "text/markdown",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-test-data-unknown-product-agent-generated/error-context.md"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-test-data-unknown-product-agent-generated/error-context.md"
           },
           {
            "name": "trace",
            "contentType": "application/zip",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-test-data-unknown-product-agent-generated/trace.zip"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-test-data-unknown-product-agent-generated/trace.zip"
           }
          ]
         },
@@ -886,7 +886,7 @@
             "column": 130,
             "line": 39
            },
-           "message": "Error: locator.click: Test timeout of 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByTestId('inventory-item').filter({ hasText: 'Sauce Labs Hoodie' }).getByRole('button', { name: 'Add to cart' })\u001b[22m\n\n\n  37 |   test.setTimeout(8_000);\n  38 |   await signIn(page, 'standard_user');\n> 39 |   await page.getByTestId('inventory-item').filter({ hasText: 'Sauce Labs Hoodie' }).getByRole('button', { name: 'Add to cart' }).click();\n     |                                                                                                                                  ^\n  40 | });\n  41 | test('environment-dns', ann('CAP-2-SC-06'), async ({ page }) => {\n  42 |   await page.goto('https://relynx-does-not-exist.invalid/');\n    at <repo>/generated/capture2/capture.spec.ts:39:130"
+           "message": "Error: locator.click: Test timeout of 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByTestId('inventory-item').filter({ hasText: 'Sauce Labs Hoodie' }).getByRole('button', { name: 'Add to cart' })\u001b[22m\n\n\n  37 |   test.setTimeout(8_000);\n  38 |   await signIn(page, 'standard_user');\n> 39 |   await page.getByTestId('inventory-item').filter({ hasText: 'Sauce Labs Hoodie' }).getByRole('button', { name: 'Add to cart' }).click();\n     |                                                                                                                                  ^\n  40 | });\n  41 | test('environment-dns', ann('CAP-2-SC-06'), async ({ page }) => {\n  42 |   await page.goto('https://agent-does-not-exist.invalid/');\n    at <repo>/generated/capture2/capture.spec.ts:39:130"
           }
          ],
          "stdout": [],
@@ -908,17 +908,17 @@
           {
            "name": "screenshot",
            "contentType": "image/png",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-test-data-unknown-product-agent-generated-retry1/test-failed-1.png"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-test-data-unknown-product-agent-generated-retry1/test-failed-1.png"
           },
           {
            "name": "error-context",
            "contentType": "text/markdown",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-test-data-unknown-product-agent-generated-retry1/error-context.md"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-test-data-unknown-product-agent-generated-retry1/error-context.md"
           },
           {
            "name": "trace",
            "contentType": "application/zip",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-test-data-unknown-product-agent-generated-retry1/trace.zip"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-test-data-unknown-product-agent-generated-retry1/trace.zip"
           }
          ]
         }
@@ -959,14 +959,14 @@
          "status": "failed",
          "duration": 193,
          "error": {
-          "message": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://relynx-does-not-exist.invalid/\nCall log:\n\u001b[2m  - navigating to \"https://relynx-does-not-exist.invalid/\", waiting until \"load\"\u001b[22m\n",
-          "stack": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://relynx-does-not-exist.invalid/\nCall log:\n\u001b[2m  - navigating to \"https://relynx-does-not-exist.invalid/\", waiting until \"load\"\u001b[22m\n\n    at <repo>/generated/capture2/capture.spec.ts:42:14",
+          "message": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://agent-does-not-exist.invalid/\nCall log:\n\u001b[2m  - navigating to \"https://agent-does-not-exist.invalid/\", waiting until \"load\"\u001b[22m\n",
+          "stack": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://agent-does-not-exist.invalid/\nCall log:\n\u001b[2m  - navigating to \"https://agent-does-not-exist.invalid/\", waiting until \"load\"\u001b[22m\n\n    at <repo>/generated/capture2/capture.spec.ts:42:14",
           "location": {
            "file": "<repo>/generated/capture2/capture.spec.ts",
            "column": 14,
            "line": 42
           },
-          "snippet": "  40 | });\n  41 | test('environment-dns', ann('CAP-2-SC-06'), async ({ page }) => {\n> 42 |   await page.goto('https://relynx-does-not-exist.invalid/');\n     |              ^\n  43 | });\n  44 | test('test-timeout-slow-user', ann('CAP-2-SC-07'), async ({ page }) => {\n  45 |   test.setTimeout(3_000);"
+          "snippet": "  40 | });\n  41 | test('environment-dns', ann('CAP-2-SC-06'), async ({ page }) => {\n> 42 |   await page.goto('https://agent-does-not-exist.invalid/');\n     |              ^\n  43 | });\n  44 | test('test-timeout-slow-user', ann('CAP-2-SC-07'), async ({ page }) => {\n  45 |   test.setTimeout(3_000);"
          },
          "errors": [
           {
@@ -975,7 +975,7 @@
             "column": 14,
             "line": 42
            },
-           "message": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://relynx-does-not-exist.invalid/\nCall log:\n\u001b[2m  - navigating to \"https://relynx-does-not-exist.invalid/\", waiting until \"load\"\u001b[22m\n\n\n  40 | });\n  41 | test('environment-dns', ann('CAP-2-SC-06'), async ({ page }) => {\n> 42 |   await page.goto('https://relynx-does-not-exist.invalid/');\n     |              ^\n  43 | });\n  44 | test('test-timeout-slow-user', ann('CAP-2-SC-07'), async ({ page }) => {\n  45 |   test.setTimeout(3_000);\n    at <repo>/generated/capture2/capture.spec.ts:42:14"
+           "message": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://agent-does-not-exist.invalid/\nCall log:\n\u001b[2m  - navigating to \"https://agent-does-not-exist.invalid/\", waiting until \"load\"\u001b[22m\n\n\n  40 | });\n  41 | test('environment-dns', ann('CAP-2-SC-06'), async ({ page }) => {\n> 42 |   await page.goto('https://agent-does-not-exist.invalid/');\n     |              ^\n  43 | });\n  44 | test('test-timeout-slow-user', ann('CAP-2-SC-07'), async ({ page }) => {\n  45 |   test.setTimeout(3_000);\n    at <repo>/generated/capture2/capture.spec.ts:42:14"
           }
          ],
          "stdout": [],
@@ -997,17 +997,17 @@
           {
            "name": "screenshot",
            "contentType": "image/png",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-environment-dns-agent-generated/test-failed-1.png"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-environment-dns-agent-generated/test-failed-1.png"
           },
           {
            "name": "error-context",
            "contentType": "text/markdown",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-environment-dns-agent-generated/error-context.md"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-environment-dns-agent-generated/error-context.md"
           },
           {
            "name": "trace",
            "contentType": "application/zip",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-environment-dns-agent-generated/trace.zip"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-environment-dns-agent-generated/trace.zip"
           }
          ],
          "errorLocation": {
@@ -1022,14 +1022,14 @@
          "status": "failed",
          "duration": 182,
          "error": {
-          "message": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://relynx-does-not-exist.invalid/\nCall log:\n\u001b[2m  - navigating to \"https://relynx-does-not-exist.invalid/\", waiting until \"load\"\u001b[22m\n",
-          "stack": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://relynx-does-not-exist.invalid/\nCall log:\n\u001b[2m  - navigating to \"https://relynx-does-not-exist.invalid/\", waiting until \"load\"\u001b[22m\n\n    at <repo>/generated/capture2/capture.spec.ts:42:14",
+          "message": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://agent-does-not-exist.invalid/\nCall log:\n\u001b[2m  - navigating to \"https://agent-does-not-exist.invalid/\", waiting until \"load\"\u001b[22m\n",
+          "stack": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://agent-does-not-exist.invalid/\nCall log:\n\u001b[2m  - navigating to \"https://agent-does-not-exist.invalid/\", waiting until \"load\"\u001b[22m\n\n    at <repo>/generated/capture2/capture.spec.ts:42:14",
           "location": {
            "file": "<repo>/generated/capture2/capture.spec.ts",
            "column": 14,
            "line": 42
           },
-          "snippet": "  40 | });\n  41 | test('environment-dns', ann('CAP-2-SC-06'), async ({ page }) => {\n> 42 |   await page.goto('https://relynx-does-not-exist.invalid/');\n     |              ^\n  43 | });\n  44 | test('test-timeout-slow-user', ann('CAP-2-SC-07'), async ({ page }) => {\n  45 |   test.setTimeout(3_000);"
+          "snippet": "  40 | });\n  41 | test('environment-dns', ann('CAP-2-SC-06'), async ({ page }) => {\n> 42 |   await page.goto('https://agent-does-not-exist.invalid/');\n     |              ^\n  43 | });\n  44 | test('test-timeout-slow-user', ann('CAP-2-SC-07'), async ({ page }) => {\n  45 |   test.setTimeout(3_000);"
          },
          "errors": [
           {
@@ -1038,7 +1038,7 @@
             "column": 14,
             "line": 42
            },
-           "message": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://relynx-does-not-exist.invalid/\nCall log:\n\u001b[2m  - navigating to \"https://relynx-does-not-exist.invalid/\", waiting until \"load\"\u001b[22m\n\n\n  40 | });\n  41 | test('environment-dns', ann('CAP-2-SC-06'), async ({ page }) => {\n> 42 |   await page.goto('https://relynx-does-not-exist.invalid/');\n     |              ^\n  43 | });\n  44 | test('test-timeout-slow-user', ann('CAP-2-SC-07'), async ({ page }) => {\n  45 |   test.setTimeout(3_000);\n    at <repo>/generated/capture2/capture.spec.ts:42:14"
+           "message": "Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://agent-does-not-exist.invalid/\nCall log:\n\u001b[2m  - navigating to \"https://agent-does-not-exist.invalid/\", waiting until \"load\"\u001b[22m\n\n\n  40 | });\n  41 | test('environment-dns', ann('CAP-2-SC-06'), async ({ page }) => {\n> 42 |   await page.goto('https://agent-does-not-exist.invalid/');\n     |              ^\n  43 | });\n  44 | test('test-timeout-slow-user', ann('CAP-2-SC-07'), async ({ page }) => {\n  45 |   test.setTimeout(3_000);\n    at <repo>/generated/capture2/capture.spec.ts:42:14"
           }
          ],
          "stdout": [],
@@ -1060,17 +1060,17 @@
           {
            "name": "screenshot",
            "contentType": "image/png",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-environment-dns-agent-generated-retry1/test-failed-1.png"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-environment-dns-agent-generated-retry1/test-failed-1.png"
           },
           {
            "name": "error-context",
            "contentType": "text/markdown",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-environment-dns-agent-generated-retry1/error-context.md"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-environment-dns-agent-generated-retry1/error-context.md"
           },
           {
            "name": "trace",
            "contentType": "application/zip",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-environment-dns-agent-generated-retry1/trace.zip"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-environment-dns-agent-generated-retry1/trace.zip"
           }
          ],
          "errorLocation": {
@@ -1208,17 +1208,17 @@
           {
            "name": "screenshot",
            "contentType": "image/png",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-flaky-first-attempt-agent-generated/test-failed-1.png"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-flaky-first-attempt-agent-generated/test-failed-1.png"
           },
           {
            "name": "error-context",
            "contentType": "text/markdown",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-flaky-first-attempt-agent-generated/error-context.md"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-flaky-first-attempt-agent-generated/error-context.md"
           },
           {
            "name": "trace",
            "contentType": "application/zip",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-flaky-first-attempt-agent-generated/trace.zip"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-flaky-first-attempt-agent-generated/trace.zip"
           }
          ],
          "errorLocation": {
@@ -1325,17 +1325,17 @@
           {
            "name": "screenshot",
            "contentType": "image/png",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-insufficient-evidence-agent-generated/test-failed-1.png"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-insufficient-evidence-agent-generated/test-failed-1.png"
           },
           {
            "name": "error-context",
            "contentType": "text/markdown",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-insufficient-evidence-agent-generated/error-context.md"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-insufficient-evidence-agent-generated/error-context.md"
           },
           {
            "name": "trace",
            "contentType": "application/zip",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-insufficient-evidence-agent-generated/trace.zip"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-insufficient-evidence-agent-generated/trace.zip"
           }
          ],
          "errorLocation": {
@@ -1388,17 +1388,17 @@
           {
            "name": "screenshot",
            "contentType": "image/png",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-insufficient-evidence-agent-generated-retry1/test-failed-1.png"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-insufficient-evidence-agent-generated-retry1/test-failed-1.png"
           },
           {
            "name": "error-context",
            "contentType": "text/markdown",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-insufficient-evidence-agent-generated-retry1/error-context.md"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-insufficient-evidence-agent-generated-retry1/error-context.md"
           },
           {
            "name": "trace",
            "contentType": "application/zip",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-insufficient-evidence-agent-generated-retry1/trace.zip"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-insufficient-evidence-agent-generated-retry1/trace.zip"
           }
          ],
          "errorLocation": {
@@ -1482,17 +1482,17 @@
           {
            "name": "screenshot",
            "contentType": "image/png",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-auth-locked-session-agent-generated/test-failed-1.png"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-auth-locked-session-agent-generated/test-failed-1.png"
           },
           {
            "name": "error-context",
            "contentType": "text/markdown",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-auth-locked-session-agent-generated/error-context.md"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-auth-locked-session-agent-generated/error-context.md"
           },
           {
            "name": "trace",
            "contentType": "application/zip",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-auth-locked-session-agent-generated/trace.zip"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-auth-locked-session-agent-generated/trace.zip"
           }
          ],
          "errorLocation": {
@@ -1545,17 +1545,17 @@
           {
            "name": "screenshot",
            "contentType": "image/png",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-auth-locked-session-agent-generated-retry1/test-failed-1.png"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-auth-locked-session-agent-generated-retry1/test-failed-1.png"
           },
           {
            "name": "error-context",
            "contentType": "text/markdown",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-auth-locked-session-agent-generated-retry1/error-context.md"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-auth-locked-session-agent-generated-retry1/error-context.md"
           },
           {
            "name": "trace",
            "contentType": "application/zip",
-           "path": "<repo>/.relynx/runs/capture2/out/capture2-capture-auth-locked-session-agent-generated-retry1/trace.zip"
+           "path": "<repo>/.agent/runs/capture2/out/capture2-capture-auth-locked-session-agent-generated-retry1/trace.zip"
           }
          ],
          "errorLocation": {

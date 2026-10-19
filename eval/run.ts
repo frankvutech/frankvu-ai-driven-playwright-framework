@@ -446,7 +446,7 @@ export async function runEvaluation(opts: RunOptions): Promise<{ report: Evaluat
   // Invariant: AI judgments never gate.
   const metrics = result.metrics.map((m) => (m.kind === 'ai-judgment' ? { ...m, gate: 'none' as const } : m));
   const limitations = [
-    `${dataset.labelReview.humanReviewed} of ${dataset.labelReview.total} reference labels are human-reviewed; the rest are author-assigned (by the AI assistant that built the framework) and pending review.`,
+    `${dataset.labelReview.humanReviewed} of ${dataset.labelReview.total} reference labels are human-reviewed; the rest are assigned by the framework author, who also wrote the rules they score, and are pending review.`,
     'Datasets are small: rates with fewer than 10 cases in the denominator are marked insufficient-data, and percentiles from fewer than 20 samples are not distributions.',
     'The test target is a public demo site with no version identifier; seeded defects are its intentionally broken accounts, verified by eval/probes/seeded-defects.ts.',
     'The failure classifier treats an expected value as coming from the requirement when it appears anywhere in the criterion text (substring), which can turn an incorrect assertion into a product_behavior diagnosis.',

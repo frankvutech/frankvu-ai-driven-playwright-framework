@@ -345,7 +345,7 @@
    },
    "labels": {
     "method": "observed-controlled-variation",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
@@ -696,7 +696,7 @@
    },
    "labels": {
     "method": "observed-controlled-variation",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
@@ -932,7 +932,7 @@
    },
    "labels": {
     "method": "observed-controlled-variation",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
@@ -1097,7 +1097,7 @@
    },
    "labels": {
     "method": "observed-controlled-variation",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
@@ -1694,14 +1694,14 @@
      }
     ]
    },
-   "notes": "SC-05 is deliberately weak (checks only the content type) and SC-06 deliberately wrong (expects 200 where the criteria say 201): they show a false negative and false-positive failures. SC-03 and SC-06 create a note first, so broken-create makes them fail too; that failure exposes the seeded defect, so it is counted as relevant.",
+   "notes": "SC-05 is deliberately weak (checks only the content type) and SC-06 deliberately wrong (expects 200 where the criteria say 201). SC-06 fails on every defect-free variant (false-positive failures). SC-05 was intended as a false negative under no-title-limit, but the cleanup fixture's schema check rejects the stored 121-character note, so the test fails there: a true positive caught by cleanup, not by its own assertion (see failure case F-20). SC-03 and SC-06 create a note first, so broken-create makes them fail too; a defect on the test's execution path counts as relevant.",
    "labels": {
     "method": "observed-controlled-variation",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
-    "notes": "relevantDefect follows the defect catalog; eval/probes/seeded-defects.ts verifies each example-app variant independently of the agent's tests."
+    "notes": "relevantDefect follows the defect catalog; eval/probes/seeded-defects.ts verifies each example-app variant independently of the agent's tests. Relevance policy decided by Frank Vu on 2026-10-19: a seeded defect on the test's execution path (the behaviour under test or a precondition the test exercises) counts as relevant. This records the policy only; the label's review status is still pending."
    }
   },
   {
@@ -2052,11 +2052,11 @@
    "notes": "renamed-add-button is UI drift, not a product defect: the feature works, so a failing test there is a false-positive failure caused by a stale locator.",
    "labels": {
     "method": "observed-controlled-variation",
-    "author": "Claude (AI assistant that implemented the framework), at the user's request",
+    "author": "Frank Vu",
     "review": {
      "status": "pending"
     },
-    "notes": "Variants are deterministic failure modes of example-app/server.ts; relevantDefect follows the defect catalog."
+    "notes": "Variants are deterministic failure modes of example-app/server.ts; relevantDefect follows the defect catalog. Relevance policy decided by Frank Vu on 2026-10-19: a seeded defect on the test's execution path (the behaviour under test or a precondition the test exercises) counts as relevant. This records the policy only; the label's review status is still pending."
    }
   }
  ]

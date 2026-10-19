@@ -26,7 +26,7 @@ test('deterministic run: all gates pass, report validates, metadata is complete'
   expect(ReportSchema.safeParse(JSON.parse(readFileSync(path.join(dir, 'report.json'), 'utf8'))).success).toBe(true);
   expect(readFileSync(path.join(dir, 'summary.md'), 'utf8')).toContain('## Limitations');
   expect(report.gates.filter((g) => g.status === 'fail')).toEqual([]);
-  expect(report.metadata).toMatchObject({ mode: 'deterministic', datasetVersion: '3.0.0', promptVersion: '3.0.0', metricVersion: '3.0.0', provider: { name: 'mock' } });
+  expect(report.metadata).toMatchObject({ mode: 'deterministic', datasetVersion: '3.0.1', promptVersion: '3.0.0', metricVersion: '3.0.0', provider: { name: 'mock' } });
   expect(report.metadata.agent.commit).toMatch(/^[0-9a-f]{40}$|^unknown$/);
   // Deterministic, fixed-input metrics are pinned exactly; timing is not gated.
   const byId = Object.fromEntries(report.metrics.map((m) => [m.id, m]));
