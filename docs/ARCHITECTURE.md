@@ -30,8 +30,8 @@ The example app is about 300 lines of Node `http` with no dependencies. It keeps
 | 4 | Setup, teardown, auth, test-data cleanup | `src/fixtures/{test,api,integration}.ts`, `tests/setup/auth.setup.ts` |
 | 5 | Configuration | `src/config/env.ts` (validated), `.env.example`, `playwright.config.ts` |
 | 6 | Test data | `src/data/*` (constants and one builder) |
-| 7 | Execution and reporting | Playwright Test runner and built-in reporters (no custom runner) |
-| 8 | Structured execution evidence | `test-results/results.json`, `test-results/junit.xml`, `playwright-report/`, traces, screenshots |
+| 7 | Execution and reporting | Playwright Test runner with built-in reporters and the Allure Playwright reporter (no custom runner) |
+| 8 | Structured execution evidence | `test-results/results.json`, `test-results/junit.xml`, `playwright-report/`, `allure-results/`, traces, screenshots |
 
 ## Patterns implemented
 
@@ -60,7 +60,7 @@ The example app is about 300 lines of Node `http` with no dependencies. It keeps
 - **Generic HTTP wrapper or repository abstraction**: none. Clients are thin, and per-resource methods call `request.get/post/put/patch/delete`.
 - **Factory / Strategy / DI container / service locator / singletons**: none.
 - **Browser-tool or MCP interface**: none (see below).
-- **Additional reporters (Allure etc.)**: none. The built-in HTML, JSON and JUnit reporters plus traces cover the requirements.
+- **Allure reporting**: `allure-playwright` runs alongside Playwright's built-in HTML, JSON and JUnit reporters. The local `allure` CLI builds or serves an HTML view from `allure-results/`; it does not replace Playwright's runner or determine test outcomes.
 - **dotenv**: none. `node:util` `parseEnv` reads `.env`.
 
 ## Configuration

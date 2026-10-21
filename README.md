@@ -23,6 +23,7 @@ npm run test:api          # API: JSONPlaceholder + example app
 npm run test:integration  # UI + API workflows on the example app
 npm run test:framework    # framework self-tests (config validation), no network
 npm run report            # open the last HTML report
+npm run report:allure:serve # create and open an Allure report from the latest test results
 ```
 
 `npm test` runs **every** project, including the Phase 2/3 agent and evaluation tests below.
@@ -153,8 +154,12 @@ Conventions:
 Every run writes:
 
 - `playwright-report/`: HTML report with traces and screenshots for failures (`trace: retain-on-failure`, `screenshot: only-on-failure`)
+- `allure-results/`: Allure raw result files from the primary Playwright config. Generate a static report with `npm run report:allure`, open it with `npm run report:allure:open`, or use `npm run report:allure:serve` to generate and serve the latest results.
+- `allure-report/`: generated Allure HTML report. CI uploads both the raw results and the generated report as part of `playwright-evidence`.
 - `test-results/results.json`: machine-readable results
 - `test-results/junit.xml`: for CI dashboards
+
+Allure is an additional view; Playwright Test remains the execution and pass/fail authority. Allure artifacts may contain the same screenshots, traces, and test details as the existing Playwright artifacts, so treat CI downloads as sensitive.
 
 Traces of API calls include request headers, which can hold the example app's bearer tokens. Those tokens are random, live in memory and expire when the app stops. For real targets, use short-lived test credentials, and treat trace files from CI artifacts as sensitive.
 

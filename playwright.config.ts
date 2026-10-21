@@ -40,6 +40,16 @@ export default defineConfig({
     ['html', { open: 'never', outputFolder: 'playwright-report' }],
     ['json', { outputFile: 'test-results/results.json' }],
     ['junit', { outputFile: 'test-results/junit.xml' }],
+    [
+      'allure-playwright',
+      {
+        resultsDir: 'allure-results',
+        environmentInfo: {
+          node_version: process.version,
+          os_platform: process.platform,
+        },
+      },
+    ],
   ],
 
   use: {
